@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans bg-white text-slate-800 antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-brand-blue;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-brand-magenta hover:bg-opacity-90 transition duration-300 shadow-sm;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-brand-blue text-base font-medium rounded-full text-brand-blue hover:bg-brand-blue hover:text-white transition duration-300;
+  }
+}

@@ -1,0 +1,299 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div x-data="{ selectedProduct: null }"
+    x-init="$watch('selectedProduct', val => { document.body.style.overflow = val ? 'hidden' : '' })">
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full overflow-hidden">
+        <!-- Swiper Container -->
+        <div class="swiper hero-slider w-full h-full absolute inset-0 z-0">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide relative">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=2000"
+                        alt="Fiber Optics Network" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide relative">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000"
+                        alt="Global Export and Import" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide relative">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
+                        alt="Electronics Products" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="swiper-slide relative">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000"
+                        alt="Global Connectivity" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
+                </div>
+            </div>
+
+            <!-- Swiper Controls -->
+            <div class="swiper-pagination !bottom-10"></div>
+            <div class="swiper-button-prev !text-white/70 hover:!text-white after:!text-3xl ml-4"></div>
+            <div class="swiper-button-next !text-white/70 hover:!text-white after:!text-3xl mr-4"></div>
+        </div>
+
+        <!-- Hero Content Overlay (Static) -->
+        <div class="absolute inset-0 z-10 flex items-center pt-20 pointer-events-none">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <div class="max-w-3xl" data-aos="fade-up" data-aos-duration="1000">
+                    <span
+                        class="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur border border-white/20 text-brand-gold font-medium tracking-wide text-sm mb-6 pointer-events-auto">Premium
+                        Tech Devices</span>
+                    <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-4 leading-tight">
+                        Innovation in Every <span class="text-brand-magenta">Device.</span>
+                    </h1>
+                    <p class="text-base md:text-lg text-white/90 mb-8 max-w-2xl font-light leading-relaxed">
+                        Industry-leading smart home electronics and premium tech devices, engineered for seamless
+                        connectivity and everyday convenience.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 pointer-events-auto">
+                        <a href="#products" class="btn-primary">Explore Products</a>
+                        <a href="{% url 'core:contact' %}"
+                            class="btn-outline !border-white !text-white hover:!bg-white hover:!text-brand-blue">Contact
+                            Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="py-20 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-10 items-center">
+                <div class="w-full lg:w-1/2 relative" data-aos="fade-right">
+                    <div class="aspect-[4/3] rounded-3xl overflow-hidden relative z-10 border-4 border-brand-cream">
+                        <img src="{% static 'core/images/core_values_1785335815859.png' %}" alt="Rope manufacturing"
+                            class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <div class="mb-10" data-aos="fade-up">
+                        <h2 class="text-2xl md:text-3xl font-display font-bold mb-3">Our Core Values</h2>
+                        <p class="text-slate-600 text-base">The principles that drive our manufacturing excellence and
+                            global partnerships.</p>
+                    </div>
+                    <div class="space-y-4">
+                        {% for value in values %}
+                        <div class="bg-brand-cream p-5 rounded-2xl hover:-translate-y-1 transition-transform duration-300 flex gap-5"
+                            data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+                            <div
+                                class="w-10 h-10 shrink-0 bg-white rounded-xl flex items-center justify-center text-brand-blue shadow-sm">
+                                <i data-lucide="{{ value.icon }}" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-display font-bold mb-1">{{ value.title }}</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">{{ value.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission / Vision -->
+    <section class="py-20 md:py-24 bg-brand-blue text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div data-aos="fade-right">
+                    <span class="text-brand-gold font-medium tracking-wide uppercase text-xs mb-3 block">Our
+                        Mission</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-5 leading-tight text-white">Forging the
+                        strongest connections worldwide.</h2>
+                    <p class="text-white/80 text-base leading-relaxed mb-6">
+                        For over two decades, Tianjin Fiber Net has been at the forefront of industrial rope
+                        manufacturing. We combine traditional craftsmanship with advanced material science to deliver
+                        products that perform flawlessly under extreme conditions.
+                    </p>
+                    <div class="flex flex-wrap gap-8 border-t border-white/20 pt-6 mt-6">
+                        <div>
+                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">20+</div>
+                            <div class="text-white/60 text-xs">Years Experience</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">50+</div>
+                            <div class="text-white/60 text-xs">Countries Served</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">100%</div>
+                            <div class="text-white/60 text-xs">Quality Assured</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative" data-aos="fade-left">
+                    <div class="aspect-[4/3] rounded-3xl overflow-hidden relative z-10 border-4 border-white/10">
+                        <img src="{% static 'core/images/mission_1785335827120.png' %}" alt="Manufacturing process"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <!-- Decorative element -->
+                    <div
+                        class="absolute -bottom-10 -right-10 w-full h-full border-2 border-brand-magenta rounded-3xl z-0 pointer-events-none">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 md:py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6" data-aos="fade-up">
+                <div class="max-w-2xl">
+                    <span class="text-brand-magenta font-medium tracking-wide uppercase text-xs mb-3 block">Featured
+                        Catalog</span>
+                    <h2 class="text-2xl md:text-4xl font-display font-bold">Industrial Grade Products</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
+                {% for product in products %}
+                <!-- Premium Product Card -->
+                <a href="{% url 'core:product_detail' product.slug %}" class="group relative flex flex-col p-4 rounded-3xl transition-all duration-500 border border-transparent hover:border-red-500 hover:shadow-xl hover:bg-white hover:-translate-y-1"
+                    data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+
+                    <div
+                        class="relative w-full aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden mb-5 bg-slate-100 transition-colors duration-300 shadow-sm group-hover:shadow-md">
+                        {% if product.main_image %}
+                        <img src="{{ product.main_image.url }}" alt="{{ product.name }}"
+                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                        {% else %}
+                        <div class="w-full h-full flex items-center justify-center text-slate-400 text-sm">No Image
+                        </div>
+                        {% endif %}
+
+                        <!-- Floating Action Button -->
+                        <div
+                            class="absolute bottom-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-brand-blue opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out shadow-lg">
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 transition-transform duration-300 group-hover:rotate-45"></i>
+                        </div>
+
+                        <!-- Badge -->
+                        <div
+                            class="absolute top-4 left-4 px-3 py-1.5 bg-white/95 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-slate-800 rounded-lg border border-white/50 shadow-sm transition-transform duration-500 group-hover:-translate-y-1">
+                            {{ product.category.name }}
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col flex-grow px-1">
+                        <h3 class="text-lg font-display font-bold text-slate-900 group-hover:text-brand-magenta transition-colors whitespace-nowrap overflow-hidden text-ellipsis mb-2"
+                            title="{{ product.name }}">{{ product.name }}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-0 line-clamp-2">{{ product.description|truncatewords:12 }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-10 items-start">
+                <div class="w-full lg:w-1/2" data-aos="fade-right">
+                    <div class="mb-10">
+                        <h2 class="text-2xl md:text-3xl font-display font-bold mb-3">Frequently Asked Questions</h2>
+                        <p class="text-slate-600 text-base">Everything you need to know about our smart devices and
+                            policies.</p>
+                    </div>
+                    <div
+                        class="aspect-video rounded-3xl overflow-hidden relative shadow-lg border border-slate-200 hidden lg:block group">
+                        <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=800"
+                            alt="Tech FAQ"
+                            class="w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover:scale-[1.03]">
+                        <div class="absolute inset-0 bg-brand-blue/10"></div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 space-y-3" data-aos="fade-left" x-data="{ activeAccordion: null }">
+                    {% for faq in faqs %}
+                    <div class="border border-slate-200 rounded-2xl overflow-hidden transition-colors duration-300"
+                        :class="{'bg-brand-cream': activeAccordion === {{ forloop.counter }}, 'bg-white': activeAccordion !== {{ forloop.counter }}}">
+                        <button
+                            @click="activeAccordion = (activeAccordion === {{ forloop.counter }} ? null : {{ forloop.counter }})"
+                            class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                            <span class="font-display font-semibold text-base text-brand-blue transition-colors"
+                                :class="{'text-brand-magenta': activeAccordion === {{ forloop.counter }}}">{{ faq.question }}</span>
+                            <div class="shrink-0 w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
+                                :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === {{ forloop.counter }}}">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </div>
+                        </button>
+                        <div x-show="activeAccordion === {{ forloop.counter }}" x-collapse.duration.700ms>
+                            <div class="px-6 pb-6 text-slate-600 leading-relaxed text-sm">
+                                {{ faq.answer }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Include Modal -->
+    {% include 'core/partials/product_modal.html' %}
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Will be initialized in main.js, but adding inline here to ensure it works if main.js delays
+    document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper('.hero-slider', {
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            speed: 2500, // Cinematic slow slide
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            // Ken Burns subtle zoom effect on active slide image
+            on: {
+                slideChangeTransitionStart: function () {
+                    if (this.slides && this.slides.length > 0) {
+                        const activeSlide = this.slides[this.activeIndex];
+                        if (activeSlide) {
+                            const activeImage = activeSlide.querySelector('img');
+                            if (activeImage) {
+                                activeImage.style.transform = 'scale(1.05)';
+                                activeImage.style.transition = 'transform 5s ease-out';
+                            }
+                        }
+
+                        const prevSlide = this.slides[this.previousIndex];
+                        if (prevSlide) {
+                            const prevImage = prevSlide.querySelector('img');
+                            if (prevImage) {
+                                prevImage.style.transform = 'scale(1)';
+                                prevImage.style.transition = 'none';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
