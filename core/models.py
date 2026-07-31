@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 class ContactMessage(models.Model):
     name = models.CharField(max_length=100)
@@ -37,7 +38,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
-    description = models.TextField()
+    description = RichTextField()
     main_image = models.ImageField(upload_to='products/main/')
     
     # We will just parse these features line by line in the template or use a simple Textfield

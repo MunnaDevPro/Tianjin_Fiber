@@ -56,7 +56,7 @@
                     <div class="w-16 h-1 bg-brand-copper mb-6"></div>
 
                     <div class="prose prose-base text-slate-600 mb-8 leading-relaxed">
-                        {{ product.description|linebreaks }}
+                        {{ product.description|safe }}
                     </div>
 
                     {% if product.get_features_list %}

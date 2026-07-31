@@ -73,7 +73,7 @@ VALUES = [
     },
     {
         "title": "Sustainable Manufacturing",
-        "description": "Committed to eco-friendly processes and natural fibers, minimizing our environmental footprint.",
+        "description": "Committed to eco-friendly processes and natural materials, minimizing our environmental footprint.",
         "icon": "leaf"
     },
     {
@@ -85,44 +85,48 @@ VALUES = [
 
 FAQS = [
     {
-        "question": "What is the warranty period for your smart devices?",
-        "answer": "All our smart electronics come with a standard 12-month manufacturer's warranty that covers any hardware defects. Extended warranty options are also available at checkout."
+        "question": "Are you a trading company or a direct manufacturer?",
+        "answer": "We are a direct source factory located in Tianjin, China. We handle everything from raw material processing to final product manufacturing, ensuring the best wholesale prices and quality control."
     },
     {
-        "question": "Are these devices compatible with Apple HomeKit and Google Assistant?",
-        "answer": "Yes! Our entire smart home lineup is fully compatible with major voice assistants, including Amazon Alexa, Google Assistant, and Apple HomeKit for seamless integration."
+        "question": "Can I get a custom size or color for shade nets and tarpaulins?",
+        "answer": "Yes, absolutely! We specialize in OEM and ODM orders. We can customize the dimensions, colors, GSM (grams per square meter), and packaging according to your specific requirements."
     },
     {
-        "question": "Do I need a separate hub to control the smart lighting?",
-        "answer": "No additional hub is required. Our smart LED strips and bulbs connect directly to your home's 2.4GHz Wi-Fi network and can be controlled via our free mobile app."
+        "question": "What is your minimum order quantity (MOQ)?",
+        "answer": "Our MOQ typically depends on the specific product and customization requirements, but generally starts at 1,000 square meters for bulk orders. Contact our sales team for exact details."
     },
     {
-        "question": "What is the typical shipping time for online orders?",
-        "answer": "We process most orders within 24 hours. Standard shipping takes 3-5 business days, while expedited shipping options are available for 1-2 day delivery."
+        "question": "Do you provide free samples before bulk ordering?",
+        "answer": "Yes, we provide free small-sized samples for quality checking. You only need to cover the international express shipping cost, which can be refunded in your first bulk order."
     },
     {
-        "question": "Is my data secure when using your smart home app?",
-        "answer": "Absolutely. We employ bank-level AES-256 encryption to ensure all your personal data and device usage statistics remain completely private and secure."
+        "question": "What is your production lead time?",
+        "answer": "For standard products, our lead time is 7-15 days. For large or customized orders, it usually takes 20-30 days after receiving the deposit, depending on the production schedule."
+    },
+    {
+        "question": "Dummy Question 1: How does the order process work?",
+        "answer": "This is a dummy answer for the first dummy question. The order process typically involves confirming the product specifications, receiving a quotation, and placing a deposit."
     }
 ]
 
 SERVICES = [
     {
-        "title": "Custom Rope Manufacturing",
-        "description": "Tailor-made ropes with specific tensile strengths, diameters, and material blends (natural or synthetic) for specialized industrial applications. Our state-of-the-art facilities ensure every meter of rope passes rigorous quality control tests, guaranteeing maximum durability and safety in the most demanding environments.",
+        "title": "Custom Agricultural Nets",
+        "description": "Tailor-made shade nets and insect nets with specific shading rates, dimensions, and UV protection for specialized agricultural applications. Our state-of-the-art looms ensure uniform mesh sizes.",
         "icon": "settings",
-        "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+        "image": "/static/core/images/mission_1785335827120.png"
     },
     {
-        "title": "Bulk Netting Production",
-        "description": "High-volume production of safety and utility netting, featuring knotless designs for superior strength and durability. Whether you require heavy-duty cargo nets or specialized agricultural netting, our advanced loom technology provides consistent mesh sizes and exceptional load-bearing capabilities.",
+        "title": "Heavy-Duty Tarpaulin Production",
+        "description": "High-volume production of PE and PVC tarpaulins featuring heat-sealed seams and reinforced edges for superior strength and durability. Perfect for logistics, construction, and outdoor protection.",
         "icon": "layers",
-        "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800"
+        "image": "/static/core/images/product_marine_1785335849170.png"
     },
     {
-        "title": "Global Logistics Support",
-        "description": "End-to-end supply chain solutions, ensuring your products arrive safely and on time, anywhere in the world. We handle complex customs documentation, provide real-time tracking, and partner with premium freight networks to offer seamless port-to-door delivery across all continents.",
+        "title": "Global Cross-Border Supply",
+        "description": "End-to-end supply chain solutions, ensuring your products arrive safely and on time, anywhere in the world. We handle complex customs documentation and partner with premium freight networks.",
         "icon": "truck",
-        "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
+        "image": "/static/core/images/media__1785335738975.png"
     }
 ]
