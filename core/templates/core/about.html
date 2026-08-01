@@ -5,41 +5,60 @@
 
 {% block content %}
 <!-- Page Header -->
-<div class="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden bg-brand-blue">
+<div class="pt-32 pb-32 md:pt-40 md:pb-48 relative overflow-hidden bg-brand-blue">
     <!-- Background Image & Gradient Overlay -->
     <div class="absolute inset-0 z-0">
-        <img src="{% static 'core/images/media__1785335738975.png' %}" alt="About Header Background"
-            class="w-full h-full object-cover opacity-50 mix-blend-overlay">
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/80 to-transparent"></div>
-        <div class="absolute inset-0 bg-brand-blue/40 backdrop-blur-[2px]"></div>
+        <!-- Using a perfect industrial/corporate modern image -->
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?q=80&w=2070&auto=format&fit=crop"
+            alt="About Header Background" class="w-full h-full object-cover opacity-50 mix-blend-overlay">
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/80 to-brand-blue/50"></div>
+        <div class="absolute inset-0 bg-brand-blue/20" style="backdrop-filter: blur(2px);"></div>
     </div>
 
     <!-- Decorative Glowing Orbs -->
     <div
-        class="absolute top-0 right-0 w-96 h-96 bg-brand-magenta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3">
+        class="absolute top-0 right-0 w-96 h-96 bg-brand-magenta/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3">
     </div>
     <div
         class="absolute bottom-0 left-0 w-72 h-72 bg-brand-gold/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3">
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center pb-16 md:pb-28"
+        data-aos="fade-up">
+
+
 
         <!-- Modern Heading -->
-        <h1
-            class="text-5xl md:text-7xl font-display font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg">
-            Our <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-white drop-shadow-none">Story</span>
+        <h1 class="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tight leading-tight drop-shadow-2xl max-w-5xl"
+            style="line-height: 1.1;">
+            Building the Future of <br class="hidden md:block" />
+            <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-white pb-2 inline-block">Global
+                Manufacturing</span>
         </h1>
 
         <!-- Subtitle -->
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
-            Decades of manufacturing excellence, woven into every single product we deliver to the global market.
+        <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-light mb-0">
+            With decades of unwavering commitment to excellence, we weave innovation and traditional craftsmanship into
+            every product that reaches the global market.
         </p>
+
+
     </div>
+
+    <!-- Elegant Bottom Curve Divider -->
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10" style="transform: translateY(1px);">
+        <svg class="relative block w-full h-[40px] md:h-[70px]" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+
 </div>
 
 <!-- Story Section -->
-<section class="py-16 md:py-20 bg-white">
+<section id="story" class="py-16 md:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div class="lg:col-span-7 pr-0 xl:pr-10" data-aos="fade-right">
@@ -206,34 +225,207 @@
     </div>
 </section>
 
+<!-- Team Section -->
+<style>
+    .team-slider-item {
+        transition: width 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.7s ease-out;
+        width: 130px;
+        opacity: 0.7;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        border-radius: 1rem;
+    }
+
+    .team-slider-item:hover {
+        opacity: 1;
+    }
+
+    .team-slider-item.is-active {
+        width: 280px;
+        opacity: 1;
+        cursor: default;
+    }
+
+    .team-slider-img {
+        height: 320px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 1rem;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .team-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(4, 47, 26, 0.2);
+        transition: background-color 0.7s ease-out;
+        border-radius: 1rem;
+        pointer-events: none;
+    }
+
+    .team-slider-item.is-active .team-overlay {
+        background-color: transparent;
+    }
+
+    .team-info-container {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(15px);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Premium Glassmorphism effect */
+        background: linear-gradient(to top, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.4));
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        padding: 1.25rem 1rem;
+        /* Reduced padding for mobile */
+        box-sizing: border-box;
+    }
+
+    .team-slider-item.is-active .team-info-container {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    @media (min-width: 768px) {
+        .team-slider-item {
+            width: 185px;
+        }
+
+        .team-slider-item.is-active {
+            width: 380px;
+        }
+
+        .team-slider-img {
+            height: 400px;
+        }
+
+        .team-info-container {
+            width: 380px;
+            padding: 1.5rem 1.5rem;
+            /* Larger padding for desktop */
+        }
+    }
+</style>
+
+<section id="team" class="py-16 md:py-24 bg-white relative overflow-hidden border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-10 md:mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-brand-blue mb-4">Meet Our Team Member</h2>
+        <p class="text-slate-600 max-w-2xl text-sm md:text-base">Our experienced professionals bring decades of industry
+            expertise to deliver the best solutions for our global partners.</p>
+    </div>
+
+    <!-- Alpine Accordion Slider -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div x-data="teamSlider()" class="relative overflow-hidden w-full pb-24">
+            <div class="flex transition-transform ease-out"
+                :style="`transform: translateX(-${offset}px); gap: ${gap}px; transition-duration: ${isTransitioning ? '700ms' : '0ms'}`"
+                @transitionend="onTransitionEnd">
+
+                <template x-for="(member, index) in displayMembers" :key="member.uniqueId">
+                    <div class="flex-shrink-0 team-slider-item relative"
+                        :style="`transition-duration: ${isTransitioning ? '700ms' : '0ms'}`"
+                        :class="activeIndex === index ? 'is-active' : ''"
+                        @click="if(activeIndex !== index) { activeIndex = index; updateOffset(true); lucideRefresh(); }">
+
+                        <!-- Image container -->
+                        <div class="relative w-full">
+                            <img :src="member.image" :alt="member.name" class="team-slider-img">
+                            <!-- Overlay for inactive -->
+                            <div class="team-overlay"></div>
+                        </div>
+
+                        <!-- Info details (Below image) -->
+                        <div class="team-info-container">
+                            <div class="flex items-center justify-between w-full gap-2 md:gap-4">
+                                <div class="flex flex-col min-w-0 overflow-hidden" style="flex: 1;">
+                                    <h3 class="text-[15px] md:text-[22px] font-display font-bold text-white leading-tight whitespace-nowrap overflow-hidden text-ellipsis"
+                                        x-text="member.name" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);"></h3>
+                                    <p class="text-[10px] md:text-[13px] font-medium text-brand-gold mt-1 md:mt-1.5 tracking-wide uppercase whitespace-nowrap overflow-hidden text-ellipsis"
+                                        x-text="member.role" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);"></p>
+                                </div>
+                                <div class="flex items-center gap-1.5 md:gap-2 text-white flex-shrink-0">
+                                    <!-- Mail -->
+                                    <a href="#"
+                                        class="flex-shrink-0 w-6 h-6 md:w-9 md:h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-white transition-all duration-300 border border-white/20 hover:scale-110">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="w-3 h-3 md:w-4 md:h-4">
+                                            <rect width="20" height="16" x="2" y="4" rx="2" />
+                                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                        </svg>
+                                    </a>
+                                    <!-- X (Twitter) -->
+                                    <a href="#"
+                                        class="flex-shrink-0 w-6 h-6 md:w-9 md:h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-white transition-all duration-300 border border-white/20 hover:scale-110">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 md:w-4 md:h-4">
+                                            <path
+                                                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                                        </svg>
+                                    </a>
+                                    <!-- LinkedIn -->
+                                    <a href="#"
+                                        class="flex-shrink-0 w-6 h-6 md:w-9 md:h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-white transition-all duration-300 border border-white/20 hover:scale-110">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="w-3 h-3 md:w-4 md:h-4">
+                                            <path
+                                                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                            <rect width="4" height="12" x="2" y="9" />
+                                            <circle cx="4" cy="4" r="2" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Testimonial Section -->
-<section class="py-16 md:py-20 bg-[#F8F9FA] relative overflow-hidden">
-
-    <div class="max-w-5xl w-full mx-auto px-6 lg:px-8 relative z-10" x-data="testimonialCarousel()"
-        x-init="startAutoplay()">
-
-        <div class="flex flex-col lg:flex-row justify-center items-start gap-8 lg:gap-10 w-full mx-auto">
+<section class="py-16 md:py-20 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10" x-data="testimonialCarousel()" x-init="startAutoplay()">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             <!-- Left Side: Title & Cards -->
-            <div class="flex flex-col w-full lg:w-[400px]">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-10 text-[#111] leading-tight"
-                    style="margin-bottom: 2.5rem;">What Our Clients Say About Us</h2>
+            <div class="flex flex-col" data-aos="fade-right">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-10 text-brand-blue leading-tight">
+                    What Our Clients Say About Us
+                </h2>
 
-                <div class="relative w-full" style="height: 330px; min-height: 330px;">
+                <div class="relative w-full max-w-[340px] mx-auto lg:mx-0" style="height: 330px;">
                     <template x-for="(testimonial, index) in testimonials" :key="testimonial.id">
-                        <div class="absolute transition-all duration-700 ease-in-out bg-white flex items-center rounded-2xl border border-slate-200 shadow-sm p-3 px-4 gap-3 w-[340px]"
-                            :style="getStyle(index)">
-                            <div class="relative flex-shrink-0 w-16 h-16">
+                        <div class="absolute transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] flex items-center rounded-full gap-5 w-max"
+                            style="padding: 12px 48px 12px 24px;" :style="getStyle(index)"
+                            :class="currentIndex === index ? 'bg-white shadow-2xl' : 'bg-slate-50/80'">
+                            <div class="relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20">
                                 <div
-                                    class="absolute inset-0 bg-brand-gold rounded-xl transform translate-x-1.5 translate-y-1.5 opacity-30">
+                                    class="absolute inset-0 bg-brand-gold rounded-full transform translate-x-1 translate-y-1 opacity-20">
                                 </div>
                                 <img :src="testimonial.image" :alt="testimonial.name"
-                                    class="relative rounded-xl object-cover border-2 border-white shadow-sm z-10 w-full h-full">
+                                    class="relative rounded-full object-cover border-[3px] border-white shadow-sm z-10 w-full h-full">
                             </div>
                             <div class="flex flex-col justify-center">
-                                <h4 class="font-display font-bold text-brand-blue leading-tight mb-1"
-                                    style="font-size: 17px;" x-text="testimonial.name"></h4>
-                                <p class="text-brand-magenta/80 font-medium leading-none" style="font-size: 13px;"
+                                <h4 class="font-display font-bold text-slate-900 leading-tight mb-1 text-[17px] md:text-[19px]"
+                                    x-text="testimonial.name"></h4>
+                                <p class="text-brand-magenta font-bold tracking-wider uppercase leading-none text-[10px] md:text-[11px]"
                                     x-text="testimonial.role"></p>
                             </div>
                         </div>
@@ -242,36 +434,40 @@
             </div>
 
             <!-- Right Side: Text & Controls -->
-            <div class="flex flex-col pt-4 w-full lg:w-[480px]">
+            <div class="flex flex-col" data-aos="fade-left">
+                <!-- Quote Icon -->
+                <div class="text-brand-gold/30 mb-6">
+                    <svg class="w-12 h-12 md:w-16 md:h-16" fill="currentColor" viewBox="0 0 32 32">
+                        <path
+                            d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8.4c.5-2 2.3-3.6 4.6-3.6V8zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-5.6c.5-2 2.3-3.6 4.6-3.6V8z" />
+                    </svg>
+                </div>
 
-                <!-- Spacer to align text with the cards container on desktop -->
-                <div class="hidden lg:block" style="height: 120px;"></div>
-
-                <div class="relative" style="min-height: 120px;">
+                <div class="relative min-h-[160px] md:min-h-[140px]">
                     <template x-for="(testimonial, index) in testimonials" :key="testimonial.id">
-                        <div x-show="currentIndex === index" x-transition:enter="transition ease-out duration-700"
-                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                        <div x-show="currentIndex === index"
+                            x-transition:enter="transition ease-out duration-500 delay-150"
+                            x-transition:enter-start="opacity-0 translate-y-4"
+                            x-transition:enter-end="opacity-100 translate-y-0"
                             x-transition:leave="transition ease-in duration-300 absolute top-0 left-0 w-full"
-                            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                            class="text-gray-700 font-medium leading-relaxed"
-                            style="font-size: 15px; max-width: 480px;">
-                            <p x-text="testimonial.text" class="m-0"></p>
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 -translate-y-4"
+                            class="text-slate-600 text-lg md:text-xl italic leading-relaxed">
+                            "<span x-text="testimonial.text"></span>"
                         </div>
                     </template>
                 </div>
 
-                <div class="flex items-center gap-3 relative" style="margin-top: 1.5rem;">
+                <div class="flex items-center gap-3 mt-8">
                     <button @click="prev()" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
-                        style="background-color: #f3f4f6; color: #4b5563; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #e5e7eb; cursor: pointer; transition: all 0.3s;"
-                        onmouseover="this.style.backgroundColor='#e5e7eb'; this.style.color='#111827'"
-                        onmouseout="this.style.backgroundColor='#f3f4f6'; this.style.color='#4b5563'">
-                        <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
+                        class="w-10 h-10 rounded-full flex items-center justify-center bg-white text-brand-blue border-[0.5px] border-brand-blue/30 shadow-sm hover:border-brand-blue hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
+                        <i data-lucide="chevron-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"
+                            stroke-width="1.5"></i>
                     </button>
                     <button @click="next()" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
-                        style="background-color: #042F1A; color: #ffffff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(4, 47, 26, 0.3); transition: all 0.3s;"
-                        onmouseover="this.style.backgroundColor='#064224'; this.style.transform='translateY(-1px)'"
-                        onmouseout="this.style.backgroundColor='#042F1A'; this.style.transform='translateY(0)'">
-                        <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
+                        class="w-10 h-10 rounded-full flex items-center justify-center bg-brand-blue text-white shadow-md hover:bg-brand-blue/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group">
+                        <i data-lucide="chevron-right"
+                            class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
                     </button>
                 </div>
             </div>
@@ -332,7 +528,7 @@
                     return 'transform: translate3d(30px, 0px, 0) scale(0.92); opacity: 0.6; z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.03);';
                 } else if (diff === 0) {
                     // Active middle card
-                    return 'transform: translate3d(0px, 110px, 0) scale(1); opacity: 1; z-index: 30; box-shadow: 0 20px 40px -10px rgba(4, 47, 26, 0.12); border-color: #cbd5e1;';
+                    return 'transform: translate3d(0px, 110px, 0) scale(1); opacity: 1; z-index: 30; box-shadow: 0 20px 40px -10px rgba(4, 47, 26, 0.12);';
                 } else if (diff === 1) {
                     // Bottom card
                     return 'transform: translate3d(30px, 220px, 0) scale(0.92); opacity: 0.6; z-index: 20; box-shadow: 0 4px 20px rgba(0,0,0,0.03);';
@@ -363,6 +559,103 @@
                 if (this.interval) {
                     clearInterval(this.interval);
                     this.interval = null;
+                }
+            },
+
+            lucideRefresh() {
+                setTimeout(() => {
+                    if (window.lucide) {
+                        window.lucide.createIcons();
+                    }
+                }, 50);
+            }
+        }));
+
+        Alpine.data('teamSlider', () => ({
+            members: [
+                {
+                    name: 'Cameron Williamson',
+                    role: 'Expertise In Business Law',
+                    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop'
+                },
+                {
+                    name: 'Jacob Jones',
+                    role: 'Corporate Litigation',
+                    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop'
+                },
+                {
+                    name: 'Savannah Nguyen',
+                    role: 'Intellectual Property',
+                    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop'
+                },
+                {
+                    name: 'Ralph Edwards',
+                    role: 'Real Estate Law',
+                    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop'
+                },
+                {
+                    name: 'Dianne Russell',
+                    role: 'Employment Law',
+                    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop'
+                }
+            ],
+            displayMembers: [],
+            activeIndex: 0,
+            offset: 0,
+            isTransitioning: false,
+            itemWidth: 160,
+            gap: 24,
+
+            init() {
+                this.updateDimensions();
+                window.addEventListener('resize', () => this.updateDimensions());
+
+                let idCounter = 0;
+                const set1 = this.members.map(m => ({ ...m, uniqueId: idCounter++ }));
+                const set2 = this.members.map(m => ({ ...m, uniqueId: idCounter++ }));
+                const set3 = this.members.map(m => ({ ...m, uniqueId: idCounter++ }));
+                this.displayMembers = [...set1, ...set2, ...set3];
+
+                this.activeIndex = this.members.length;
+
+                // Initial offset without animation
+                setTimeout(() => {
+                    this.updateOffset(false);
+                    this.lucideRefresh();
+                }, 50);
+
+                setInterval(() => {
+                    this.next();
+                }, 4000);
+            },
+
+            updateDimensions() {
+                if (window.innerWidth < 768) {
+                    this.itemWidth = 130;
+                    this.gap = 16;
+                } else {
+                    this.itemWidth = 185;
+                    this.gap = 24;
+                }
+                this.updateOffset(false);
+            },
+
+            updateOffset(animate = true) {
+                this.isTransitioning = animate;
+                this.offset = this.activeIndex * (this.itemWidth + this.gap);
+            },
+
+            next() {
+                this.activeIndex++;
+                this.updateOffset(true);
+                this.lucideRefresh();
+            },
+
+            onTransitionEnd() {
+                if (this.activeIndex >= this.members.length * 2) {
+                    this.isTransitioning = false;
+                    this.activeIndex -= this.members.length;
+                    this.updateOffset(false);
                 }
             },
 
