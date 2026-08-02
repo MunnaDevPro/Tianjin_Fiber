@@ -42,6 +42,9 @@ class ProductDetailView(DetailView):
 class AboutView(TemplateView):
     template_name = 'core/about.html'
 
+class CertificatesView(TemplateView):
+    template_name = 'core/certificates.html'
+
 class ServicesView(TemplateView):
     template_name = 'core/services.html'
     

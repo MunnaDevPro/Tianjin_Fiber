@@ -4,18 +4,42 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="relative bg-brand-blue text-white py-32 md:py-40 overflow-hidden">
+<section class="relative bg-brand-blue text-white pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-36 overflow-hidden flex items-center min-h-[40vh] md:min-h-[50vh]">
     <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000" alt="{{ category.name }}"
-            class="w-full h-full object-cover opacity-20">
+        {% if category.hero_image %}
+            <img src="{{ category.hero_image.url }}" alt="{{ category.name }}" class="w-full h-full object-cover opacity-20">
+        {% else %}
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
+                alt="{{ category.name }}" class="w-full h-full object-cover opacity-20">
+        {% endif %}
         <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/90 via-brand-blue/80 to-brand-blue/95"></div>
     </div>
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <h1 class="text-4xl md:text-6xl font-display font-bold mb-6 text-white tracking-wide shadow-sm" data-aos="fade-up">{{ category.name }}</h1>
-        <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light" data-aos="fade-up" data-aos-delay="100">
-            {{ category.hero_text }}
-        </p>
+    <!-- Content -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+            
+            <!-- Spacer to maintain layout balance after removing breadcrumb -->
+            <div class="h-10 md:h-12 mb-8"></div>
+
+            <!-- Main Title -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 text-white tracking-tight leading-[1.15] md:leading-[1.1] drop-shadow-md" data-aos="fade-up" data-aos-delay="100">
+                {{ category.name }}
+            </h1>
+            
+            <!-- Subtitle / Hero Text -->
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed md:leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                {{ category.hero_text }}
+            </p>
+            
+        </div>
+    </div>
+    
+    <!-- Elegant Bottom Curve Divider -->
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10" style="transform: translateY(1px);">
+        <svg class="relative block w-full h-[40px] md:h-[70px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" fill="#f8f9fa"></path>
+        </svg>
     </div>
 </section>
 
@@ -24,7 +48,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {% for product in category.products.all %}
-            <a href="{% url 'core:product_detail' product.slug %}" class="group relative flex flex-col"
+            <a href="{% url 'core:product_detail' product.slug %}" class="group relative flex flex-col p-4 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all duration-300 hover:-translate-y-1"
                 data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
 
                 <div
@@ -52,7 +76,7 @@
                 <div class="flex flex-col flex-grow px-1">
                     <h3 class="text-base font-semibold text-slate-900 group-hover:text-brand-magenta transition-colors whitespace-nowrap overflow-hidden text-ellipsis mb-1"
                         title="{{ product.name }}">{{ product.name }}</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-0 line-clamp-2">{{ product.description|truncatewords:12 }}</p>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-0 line-clamp-2">{{ product.description|striptags|truncatewords:12 }}</p>
                 </div>
             </a>
             {% empty %}

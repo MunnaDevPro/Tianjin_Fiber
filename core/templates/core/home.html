@@ -13,10 +13,12 @@
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         margin: 0 6px !important;
     }
+
     .hero-slider .swiper-pagination-bullet:hover {
         background-color: rgba(255, 255, 255, 0.8);
         transform: scale(1.2);
     }
+
     .hero-slider .swiper-pagination-bullet-active {
         width: 36px;
         background-color: #ffffff;
@@ -65,26 +67,26 @@
         </div>
 
         <!-- Hero Content Overlay (Static) -->
-        <div class="absolute inset-0 z-10 flex items-center pt-20 pointer-events-none">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="absolute inset-0 z-10 flex items-center pt-16 md:pt-20 pointer-events-none">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div class="max-w-3xl" data-aos="fade-up" data-aos-duration="1000">
                     <div
-                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 border border-white/20 mb-6">
+                        class="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-black/40 border border-white/20 mb-4 md:mb-6">
                         <i data-lucide="shield-check" style="width: 14px; height: 14px;"
                             class="text-brand-gold shrink-0"></i>
                         <span
-                            class="text-white text-xs sm:text-sm font-semibold tracking-wider uppercase leading-none pt-[1px]">Global
+                            class="text-white text-[10px] sm:text-xs md:text-sm font-semibold tracking-wider uppercase leading-none pt-[1px]">Global
                             Source Manufacturer</span>
                     </div>
 
                     <h1
-                        class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
                         Uncompromising <span class="text-brand-magenta">Quality.</span><br />
                         Engineered to <span class="text-brand-gold">Protect.</span>
                     </h1>
 
                     <p
-                        class="text-base sm:text-lg lg:text-xl text-white/90 mb-10 max-w-2xl font-light leading-relaxed drop-shadow-md">
+                        class="text-sm sm:text-base md:text-lg text-white/90 mb-6 md:mb-10 max-w-2xl font-light leading-relaxed drop-shadow-md">
                         Direct from our 50,000 sqm production facility. We supply industry-leading shade nets,
                         heavy-duty tarpaulins, and agricultural covers to partners in over 50 countries.
                     </p>
@@ -341,7 +343,7 @@
                     </div>
                     <!-- Decorative element -->
                     <div
-                        class="absolute -bottom-10 -right-10 w-full h-full border-2 border-brand-magenta rounded-3xl z-0 pointer-events-none">
+                        class="hidden md:block absolute -bottom-10 -right-10 w-full h-full border-2 border-brand-magenta rounded-3xl z-0 pointer-events-none">
                     </div>
                 </div>
             </div>
@@ -420,7 +422,8 @@
                             @click="activeAccordion = (activeAccordion === {{ forloop.counter }} ? null : {{ forloop.counter }})"
                             class="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none">
                             <span class="font-display font-semibold text-sm text-brand-blue transition-colors"
-                                :class="{'text-brand-magenta': activeAccordion === {{ forloop.counter }}}">{{ faq.question }}</span>
+                                :class="{'text-brand-magenta': activeAccordion === {{ forloop.counter }}}">{{
+                                faq.question }}</span>
                             <div class="shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
                                 :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === {{ forloop.counter }}}">
                                 <i data-lucide="chevron-down" class="w-4 h-4"></i>
