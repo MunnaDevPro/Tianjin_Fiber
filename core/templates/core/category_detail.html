@@ -4,79 +4,117 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="relative bg-brand-blue text-white pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-36 overflow-hidden flex items-center min-h-[40vh] md:min-h-[50vh]">
+<section
+    class="relative bg-brand-blue text-white pt-28 pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24 overflow-hidden flex items-center min-h-[30vh] md:min-h-[40vh]">
     <div class="absolute inset-0 z-0">
         {% if category.hero_image %}
-            <img src="{{ category.hero_image.url }}" alt="{{ category.name }}" class="w-full h-full object-cover opacity-20">
+        <img src="{{ category.hero_image.url }}" alt="{{ category.name }}"
+            class="w-full h-full object-cover opacity-20">
         {% else %}
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
-                alt="{{ category.name }}" class="w-full h-full object-cover opacity-20">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
+            alt="{{ category.name }}" class="w-full h-full object-cover opacity-20">
         {% endif %}
         <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/90 via-brand-blue/80 to-brand-blue/95"></div>
     </div>
 
     <!-- Content -->
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mt-6 md:mt-8 pb-4">
         <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
-            
-            <!-- Spacer to maintain layout balance after removing breadcrumb -->
-            <div class="h-10 md:h-12 mb-8"></div>
 
             <!-- Main Title -->
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 text-white tracking-tight leading-[1.15] md:leading-[1.1] drop-shadow-md" data-aos="fade-up" data-aos-delay="100">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-4 md:mb-6 text-white tracking-tight leading-[1.15] md:leading-[1.1] drop-shadow-md"
+                data-aos="fade-up" data-aos-delay="100">
                 {{ category.name }}
             </h1>
-            
+
             <!-- Subtitle / Hero Text -->
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed md:leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed md:leading-relaxed"
+                data-aos="fade-up" data-aos-delay="200">
                 {{ category.hero_text }}
             </p>
-            
+
+            <!-- Scroll Down Indicator -->
+            <div class="mt-8 md:mt-10 cursor-pointer group flex flex-col items-center opacity-70 hover:opacity-100 transition-all duration-500"
+                onclick="document.getElementById('products-section').scrollIntoView({behavior: 'smooth'})">
+                <span
+                    class="text-[11px] font-semibold tracking-[0.4em] uppercase mb-3 text-white/80 group-hover:text-white transition-colors">Scroll</span>
+
+                <!-- Mouse Frame -->
+                <div
+                    class="w-[20px] h-[34px] rounded-full border-2 border-white/80 flex justify-center pt-2 relative overflow-hidden backdrop-blur-md transition-all duration-500 mb-2">
+                    <!-- Single Dropping Dot -->
+                    <div class="w-1 h-1 rounded-full bg-white animate-scroll-drop"></div>
+                </div>
+
+                <!-- Three Chevrons -->
+                <div class="flex flex-col items-center -space-y-3">
+                    <svg class="w-4 h-4 text-white/80 animate-chevron-fade" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7">
+                        </path>
+                    </svg>
+                    <svg class="w-4 h-4 text-white/80 animate-chevron-fade" style="animation-delay: 0.2s" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7">
+                        </path>
+                    </svg>
+                    <svg class="w-4 h-4 text-white/80 animate-chevron-fade" style="animation-delay: 0.4s" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
         </div>
     </div>
-    
+
     <!-- Elegant Bottom Curve Divider -->
     <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10" style="transform: translateY(1px);">
-        <svg class="relative block w-full h-[40px] md:h-[70px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg class="relative block w-full h-[40px] md:h-[70px]" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" fill="#f8f9fa"></path>
         </svg>
     </div>
 </section>
 
 <!-- Products Section -->
-<section class="py-24 bg-brand-cream relative">
+<section id="products-section" class="py-24 bg-brand-cream relative">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6">
             {% for product in category.products.all %}
-            <a href="{% url 'core:product_detail' product.slug %}" class="group relative flex flex-col p-4 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all duration-300 hover:-translate-y-1"
+            <a href="{% url 'core:product_detail' product.slug %}" class="group relative flex flex-col bg-slate-900 rounded-3xl border border-slate-700/50 hover:border-brand-copper/50 hover:shadow-xl hover:shadow-brand-copper/10 transition-all duration-500 overflow-hidden"
                 data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
 
                 <div
-                    class="relative w-full aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-slate-100 transition-colors duration-300">
+                    class="relative w-full aspect-[4/3] md:aspect-square overflow-hidden bg-slate-50">
                     {% if product.main_image %}
                     <img src="{{ product.main_image.url }}" alt="{{ product.name }}"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     {% else %}
                     <div class="w-full h-full flex items-center justify-center text-slate-400 text-sm">No Image</div>
                     {% endif %}
 
-                    <!-- Floating Action Button -->
+                    <!-- Overlay on Hover -->
+                    <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    <!-- Floating Action Button with Tilted Arrow -->
                     <div
-                        class="absolute bottom-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-slate-800 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border border-slate-100">
-                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        class="absolute bottom-4 right-4 w-10 h-10 bg-slate-900 shadow-lg rounded-full flex items-center justify-center text-white opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 z-10">
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 transform group-hover:rotate-12 transition-transform duration-300"></i>
                     </div>
 
                     <!-- Badge -->
                     <div
-                        class="absolute top-3 left-3 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-[10px] font-bold uppercase tracking-wider text-slate-800 rounded-lg border border-slate-100">
+                        class="absolute top-4 left-4 px-3 py-1.5 bg-slate-900/90 backdrop-blur-sm text-[10px] font-black uppercase tracking-widest text-white rounded-lg shadow-sm">
                         {{ category.name }}
                     </div>
                 </div>
 
-                <div class="flex flex-col flex-grow px-1">
-                    <h3 class="text-base font-semibold text-slate-900 group-hover:text-brand-magenta transition-colors whitespace-nowrap overflow-hidden text-ellipsis mb-1"
+                <div class="flex flex-col flex-grow p-6">
+                    <h3 class="text-lg font-bold text-white group-hover:text-brand-copper transition-colors line-clamp-1 mb-2"
                         title="{{ product.name }}">{{ product.name }}</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-0 line-clamp-2">{{ product.description|striptags|truncatewords:12 }}</p>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-0 line-clamp-2 font-medium">{{ product.description|striptags|truncatewords:15 }}</p>
                 </div>
             </a>
             {% empty %}

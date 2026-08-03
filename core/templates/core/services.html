@@ -74,8 +74,7 @@
                     </div>
                 </div>
                 <div class="w-full lg:w-7/12 lg:px-4">
-                    <h2 class="text-2xl lg:text-3xl font-display font-bold text-brand-blue mb-4 leading-tight">{{
-                        service.title }}</h2>
+                    <h2 class="text-2xl lg:text-3xl font-display font-bold text-brand-blue mb-4 leading-tight">{{ service.title }}</h2>
                     <p class="text-base text-slate-600 leading-relaxed mb-8 max-w-xl">{{ service.description }}</p>
                     <a href="{% url 'core:contact' %}"
                         class="inline-flex items-center gap-2 font-medium text-brand-magenta hover:text-brand-blue transition-colors group text-sm uppercase tracking-wide">
@@ -89,16 +88,347 @@
     </div>
 </section>
 
+<!-- Step by Step Process Section -->
+<style>
+    .step-process-section {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+        background-color: #ffffff;
+        position: relative;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: 'Outfit', 'Nunito', 'Segoe UI', sans-serif !important;
+    }
+
+    .step-icon-circle {
+        width: 80px;
+        /* Shrunk further */
+        height: 80px;
+        /* Shrunk further */
+        flex-shrink: 0;
+        border-radius: 9999px;
+        background-color: #ffffff;
+        border: 2px solid #1a4674;
+        /* Same professional blue border for all icons */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10;
+        transition: all 0.5s ease;
+        /* Slow motion transition */
+        margin-bottom: 1.5rem;
+    }
+
+    .step-item-wrapper:hover .step-icon-circle,
+    .step-icon-circle.hover-active {
+        background-color: #1a4674;
+        /* Blue background on hover */
+        border-color: #1a4674;
+        box-shadow: 0 20px 25px -5px rgba(26, 70, 116, 0.25), 0 10px 10px -5px rgba(26, 70, 116, 0.1);
+        transform: translateY(-6px);
+    }
+
+    .step-icon-circle i,
+    .step-icon-circle svg {
+        width: 28px !important;
+        /* Shrunk icon */
+        height: 28px !important;
+        /* Shrunk icon */
+        color: #1a4674;
+        /* Blue icon color for all */
+        stroke-width: 1.5px !important;
+        /* Thinner stroke looks much more professional */
+        transition: all 0.5s ease;
+        /* Slow motion transition */
+    }
+
+    .step-item-wrapper:hover .step-icon-circle i,
+    .step-item-wrapper:hover .step-icon-circle svg,
+    .step-icon-circle.hover-active i,
+    .step-icon-circle.hover-active svg {
+        color: #ffffff !important;
+        /* Icon turns white on blue background */
+        transform: scale(1.1);
+    }
+
+    .step-text-container {
+        width: 100%;
+        max-width: 260px;
+        /* Fluid responsive width */
+        background-color: #ffffff;
+        padding: 0 1rem;
+        position: relative;
+        z-index: 10;
+    }
+
+    .step-heading {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.02em;
+        font-family: 'Outfit', 'Nunito', 'Segoe UI', sans-serif !important;
+    }
+
+    .step-desc {
+        color: #64748b;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        letter-spacing: 0.01em;
+        font-family: 'Outfit', 'Nunito', 'Segoe UI', sans-serif !important;
+    }
+
+    .snake-line-upper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 250px;
+        right: -80px;
+        border-top: 2px solid #1a4674;
+        border-right: 2px solid #1a4674;
+        border-bottom: 2px solid #1a4674;
+        border-top-right-radius: 80px;
+        border-bottom-right-radius: 80px;
+    }
+
+    .snake-line-lower {
+        position: absolute;
+        left: -80px;
+        right: 0;
+        top: 248px;
+        bottom: 0;
+        border-top: 2px solid #1a4674;
+        border-left: 2px solid #1a4674;
+        border-bottom: 2px solid #1a4674;
+        border-top-left-radius: 80px;
+        border-bottom-left-radius: 80px;
+    }
+
+    @media (min-width: 1024px) {
+        .row-1-container {
+            height: 240px;
+        }
+
+        .row-2-container {
+            height: 80px;
+        }
+
+        .snake-line-container {
+            display: block;
+        }
+
+        .mobile-line-container {
+            display: none;
+        }
+
+        .spacer-160 {
+            height: 160px;
+            display: block;
+        }
+
+        .desktop-row-2-text {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .mobile-text-wrapper {
+            display: none;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .snake-line-container {
+            display: none;
+        }
+
+        .mobile-line-container {
+            display: block;
+        }
+
+        .spacer-160 {
+            display: none;
+        }
+
+        .row-1-container,
+        .row-2-container {
+            height: auto;
+        }
+
+        .step-icon-circle {
+            margin-bottom: 1rem;
+        }
+
+        .desktop-row-2-text {
+            display: none;
+        }
+
+        .mobile-text-wrapper {
+            display: block;
+            margin-top: 1.5rem;
+        }
+    }
+</style>
+
+<section class="step-process-section">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="mb-16 md:mb-24 flex flex-col items-start" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-magenta/10 border border-brand-magenta/20 mb-6">
+                <i data-lucide="git-commit" class="w-4 h-4 text-brand-magenta"></i>
+                <span class="text-xs md:text-sm font-bold tracking-[0.15em] text-brand-magenta uppercase">
+                    Step By Step Process
+                </span>
+            </div>
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-brand-blue leading-[1.15] tracking-tight mb-4">
+                Our Comprehensive <br class="hidden md:block"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-magenta to-brand-blue">
+                    Manufacturing
+                </span>
+            </h2>
+            <p class="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl">
+                We follow a rigorous methodology to ensure every product meets the highest standards of quality, durability, and performance.
+            </p>
+        </div>
+
+        <!-- Timeline Container -->
+        <div style="position: relative;">
+            <!-- Mobile Line -->
+            <div class="mobile-line-container"
+                style="position: absolute; left: 50%; top: 40px; bottom: 8rem; width: 2px; transform: translateX(-50%); background: linear-gradient(to bottom, #1a4674, #1a4674 70%, transparent); z-index: 0;">
+            </div>
+
+            <!-- Desktop Snake Line -->
+            <div class="snake-line-container"
+                style="position: absolute; z-index: 0; pointer-events: none; top: 40px; bottom: 40px; left: 16.666%; right: 16.666%;">
+                <div class="snake-line-upper"></div>
+                <div class="snake-line-lower"></div>
+            </div>
+
+            <!-- Grid Row 1 (Icons + Text) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-20 lg:gap-y-0 mb-20 lg:mb-0 text-center relative row-1-container"
+                style="z-index: 10;">
+                <!-- Item 1 -->
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="0">
+                    <div class="step-icon-circle">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div class="step-text-container">
+                        <h3 class="step-heading">Consultation</h3>
+                        <p class="step-desc">Understanding your specific fiber and netting requirements for optimal solutions.</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="150">
+                    <div class="step-icon-circle">
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <div class="step-text-container">
+                        <h3 class="step-heading">Engineering</h3>
+                        <p class="step-desc">Designing custom specifications tailored to your project's unique tensile needs.</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-icon-circle">
+                        <i data-lucide="factory"></i>
+                    </div>
+                    <div class="step-text-container">
+                        <h3 class="step-heading">Production</h3>
+                        <p class="step-desc">State-of-the-art manufacturing using premium materials and advanced weaving techniques.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vertical spacer for desktop (middle section of snake line) -->
+            <div class="spacer-160"></div>
+
+            <!-- Grid Row 2 (Icons ONLY) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-20 lg:gap-y-0 text-center relative row-2-container"
+                style="z-index: 10;">
+                <!-- Item 4 -->
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="450">
+                    <div class="step-icon-circle" id="circle-4" style="margin-bottom: 0;">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <!-- Mobile Text -->
+                    <div class="mobile-text-wrapper step-text-container">
+                        <h3 class="step-heading">Quality Control</h3>
+                        <p class="step-desc">Rigorous testing procedures to ensure maximum durability, strength, and safety.</p>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="600">
+                    <div class="step-icon-circle" id="circle-5" style="margin-bottom: 0;">
+                        <i data-lucide="truck"></i>
+                    </div>
+                    <!-- Mobile Text -->
+                    <div class="mobile-text-wrapper step-text-container">
+                        <h3 class="step-heading">Delivery</h3>
+                        <p class="step-desc">Efficient logistics and careful packaging for secure and timely global shipping.</p>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="750">
+                    <div class="step-icon-circle" id="circle-6" style="margin-bottom: 0;">
+                        <i data-lucide="headphones"></i>
+                    </div>
+                    <!-- Mobile Text -->
+                    <div class="mobile-text-wrapper step-text-container">
+                        <h3 class="step-heading">Support</h3>
+                        <p class="step-desc">Dedicated after-sales service providing maintenance guidance and continuous support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Row 2 Text (Desktop ONLY) -->
+        <div class="desktop-row-2-text">
+            <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="450"
+                onmouseenter="document.getElementById('circle-4').classList.add('hover-active')"
+                onmouseleave="document.getElementById('circle-4').classList.remove('hover-active')">
+                <div class="step-text-container">
+                    <h3 class="step-heading">Quality Control</h3>
+                    <p class="step-desc">Rigorous testing procedures to ensure maximum durability, strength, and safety.</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="600"
+                onmouseenter="document.getElementById('circle-5').classList.add('hover-active')"
+                onmouseleave="document.getElementById('circle-5').classList.remove('hover-active')">
+                <div class="step-text-container">
+                    <h3 class="step-heading">Delivery</h3>
+                    <p class="step-desc">Efficient logistics and careful packaging for secure and timely global shipping.</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="750"
+                onmouseenter="document.getElementById('circle-6').classList.add('hover-active')"
+                onmouseleave="document.getElementById('circle-6').classList.remove('hover-active')">
+                <div class="step-text-container">
+                    <h3 class="step-heading">Support</h3>
+                    <p class="step-desc">Dedicated after-sales service providing maintenance guidance and continuous support.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Call to Action -->
-<section class="py-20 md:py-24 relative text-center bg-white border-t border-slate-100 overflow-hidden">
+<section class="pt-10 pb-20 md:pt-12 md:pb-24 relative text-center bg-white border-t border-slate-100 overflow-hidden">
     <div class="max-w-3xl mx-auto px-6 relative z-10" data-aos="zoom-in">
         <h2 class="text-3xl md:text-4xl font-display font-bold mb-6 text-brand-blue">Need a Custom Specification?</h2>
         <p class="text-slate-600 mb-10 text-lg leading-relaxed">Our engineering team can develop customized rope and
             netting solutions to meet your exact tensile strength and environmental requirements.</p>
-        <a href="{% url 'core:contact' %}"
-            class="btn-primary bg-brand-blue hover:bg-brand-blue/90 shadow-xl inline-flex items-center gap-2">
-            Contact Engineering <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
+        <div class="pb-4 md:pb-0">
+            <a href="{% url 'core:contact' %}"
+                class="btn-primary bg-brand-blue hover:bg-brand-blue/90 shadow-xl inline-flex items-center gap-2">
+                Contact Engineering <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
     </div>
 </section>
 {% endblock %}

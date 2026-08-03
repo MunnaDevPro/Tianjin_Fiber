@@ -113,20 +113,20 @@ FAQS = [
 SERVICES = [
     {
         "title": "Custom Agricultural Nets",
-        "description": "Tailor-made shade nets and insect nets with specific shading rates, dimensions, and UV protection for specialized agricultural applications. Our state-of-the-art looms ensure uniform mesh sizes.",
+        "description": "Tailor-made shade nets and insect nets with specific shading rates, dimensions, and UV protection for specialized agricultural applications. Our state-of-the-art looms ensure uniform mesh sizes. We also offer custom anti-bird and anti-hail nets designed to protect your crops from extreme weather conditions, ultimately maximizing your agricultural yield and ensuring long-lasting performance.",
         "icon": "settings",
-        "image": "/static/core/images/mission_1785335827120.png"
+        "image": "/static/core/images/ag_net.webp"
     },
     {
         "title": "Heavy-Duty Tarpaulin Production",
-        "description": "High-volume production of PE and PVC tarpaulins featuring heat-sealed seams and reinforced edges for superior strength and durability. Perfect for logistics, construction, and outdoor protection.",
+        "description": "High-volume production of PE and PVC tarpaulins featuring heat-sealed seams and reinforced edges for superior strength and durability. Perfect for logistics, construction, and outdoor protection. Each tarpaulin is rigorously tested for water resistance, tear strength, and UV stability, providing reliable coverage in the harshest environments. Available in customizable colors, weights, and eyelet spacing to meet your exact specifications.",
         "icon": "layers",
-        "image": "/static/core/images/product_marine_1785335849170.png"
+        "image": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200"
     },
     {
         "title": "Global Cross-Border Supply",
-        "description": "End-to-end supply chain solutions, ensuring your products arrive safely and on time, anywhere in the world. We handle complex customs documentation and partner with premium freight networks.",
+        "description": "End-to-end supply chain solutions, ensuring your products arrive safely and on time, anywhere in the world. We handle complex customs documentation and partner with premium freight networks. Our dedicated logistics team provides real-time tracking updates and personalized support, minimizing transit times and reducing shipping costs. We guarantee a seamless procurement experience from our factory floor directly to your warehouse.",
         "icon": "truck",
-        "image": "/static/core/images/media__1785335738975.png"
+        "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=1200"
     }
 ]
