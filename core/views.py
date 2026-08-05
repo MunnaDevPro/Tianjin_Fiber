@@ -14,8 +14,8 @@ class HomeView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Fetching a few featured products for home page, or just all of them
-        context['products'] = Product.objects.all()[:8]
+        # Fetching all products for client-side pagination
+        context['products'] = Product.objects.all()
         context['values'] = VALUES
         context['faqs'] = FAQS
         return context
@@ -52,6 +52,9 @@ class ServicesView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['services'] = SERVICES
         return context
+
+class FactoryView(TemplateView):
+    template_name = 'core/factory.html'
 
 class ContactView(View):
     def get(self, request):

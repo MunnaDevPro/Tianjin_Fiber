@@ -7,6 +7,12 @@
     <title>{% block title %}Tianbao | Tianjin Fiber Net Hemp Rope Manufacturing Co., Ltd.{% endblock %}</title>
     <meta name="description" content="Premium industrial grade natural hemp rope and netting solutions.">
     
+    <!-- Favicon -->
+    {% if site_settings and site_settings.logo %}
+    <link rel="icon" href="{{ site_settings.logo.url }}">
+    <link rel="apple-touch-icon" href="{{ site_settings.logo.url }}">
+    {% endif %}
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

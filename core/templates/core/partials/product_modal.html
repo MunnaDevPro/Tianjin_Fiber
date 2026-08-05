@@ -35,9 +35,9 @@
         <div class="w-full md:w-1/2 bg-slate-100 h-64 md:h-auto relative" x-data="{ activeImageIndex: 0 }">
             <template x-if="selectedProduct">
                 <div class="h-full w-full">
-                    <img :src="selectedProduct.image" :alt="selectedProduct.name" class="w-full h-full object-cover" x-show="activeImageIndex === 0">
+                    <img :src="selectedProduct.image" :alt="selectedProduct.name" class="w-full h-full object-cover" x-show="activeImageIndex === 0" loading="lazy">
                     <template x-for="(thumb, index) in selectedProduct.thumbnails">
-                        <img :src="thumb" :alt="selectedProduct.name" class="w-full h-full object-cover" x-show="activeImageIndex === index + 1">
+                        <img :src="thumb" :alt="selectedProduct.name" class="w-full h-full object-cover" x-show="activeImageIndex === index + 1" loading="lazy">
                     </template>
                 </div>
             </template>
@@ -46,11 +46,11 @@
                 <template x-if="selectedProduct">
                     <div class="flex gap-2 p-2 bg-white/80 backdrop-blur rounded-full">
                         <button @click="activeImageIndex = 0" class="w-12 h-12 rounded-full overflow-hidden border-2 transition-colors" :class="activeImageIndex === 0 ? 'border-brand-magenta' : 'border-transparent'">
-                            <img :src="selectedProduct.image" class="w-full h-full object-cover">
+                            <img :src="selectedProduct.image" class="w-full h-full object-cover" loading="lazy">
                         </button>
                         <template x-for="(thumb, index) in selectedProduct.thumbnails">
                             <button @click="activeImageIndex = index + 1" class="w-12 h-12 rounded-full overflow-hidden border-2 transition-colors" :class="activeImageIndex === index + 1 ? 'border-brand-magenta' : 'border-transparent'">
-                                <img :src="thumb" class="w-full h-full object-cover">
+                                <img :src="thumb" class="w-full h-full object-cover" loading="lazy">
                             </button>
                         </template>
                     </div>

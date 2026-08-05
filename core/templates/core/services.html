@@ -5,11 +5,11 @@
 
 {% block content %}
 <!-- Page Header -->
-<div class="pt-32 pb-24 md:pt-40 md:pb-32 relative overflow-hidden bg-brand-blue">
+<div class="pt-24 pb-16 md:pt-32 md:pb-20 relative overflow-hidden bg-brand-blue">
     <!-- Background Image & Gradient Overlay -->
     <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
-            alt="Services Header Background" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+            alt="Services Header Background" class="w-full h-full object-cover opacity-40 mix-blend-overlay" fetchpriority="high">
         <div class="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/90 to-brand-blue/70"></div>
         <div class="absolute inset-0 bg-brand-blue/20" style="backdrop-filter: blur(2px);"></div>
     </div>
@@ -22,11 +22,11 @@
         class="absolute bottom-0 left-0 w-80 h-80 bg-brand-magenta/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4">
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center pb-8 md:pb-12"
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center pb-4 md:pb-8"
         data-aos="fade-up">
 
         <!-- Spacer to maintain layout balance after removing badge -->
-        <div class="h-10 md:h-12 mb-8"></div>
+        <div class="h-4 md:h-6 mb-4"></div>
 
         <!-- Modern Heading -->
         <h1
@@ -58,12 +58,12 @@
         <div class="space-y-16 md:space-y-20">
             {% for service in services %}
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center {% if forloop.counter|divisibleby:2 %}lg:flex-row-reverse{% endif %}"
-                data-aos="fade-up">
+                {% if service.title != 'Custom Agricultural Nets' %}data-aos="fade-up"{% endif %}>
                 <div class="w-full lg:w-5/12 relative">
                     <div
                         class="aspect-video rounded-3xl overflow-hidden shadow-xl relative group border-4 border-white">
                         <img src="{{ service.image }}" alt="{{ service.title }}"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out">
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out" loading="lazy">
                         <div
                             class="absolute inset-0 bg-brand-blue/10 group-hover:bg-transparent transition-colors duration-500">
                         </div>
@@ -279,20 +279,23 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <!-- Section Header -->
         <div class="mb-16 md:mb-24 flex flex-col items-start" data-aos="fade-up">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-magenta/10 border border-brand-magenta/20 mb-6">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-magenta/10 border border-brand-magenta/20 mb-6">
                 <i data-lucide="git-commit" class="w-4 h-4 text-brand-magenta"></i>
                 <span class="text-xs md:text-sm font-bold tracking-[0.15em] text-brand-magenta uppercase">
                     Step By Step Process
                 </span>
             </div>
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-brand-blue leading-[1.15] tracking-tight mb-4">
-                Our Comprehensive <br class="hidden md:block"/>
+            <h2
+                class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-brand-blue leading-[1.15] tracking-tight mb-4">
+                Our Comprehensive <br class="hidden md:block" />
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-magenta to-brand-blue">
                     Manufacturing
                 </span>
             </h2>
             <p class="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl">
-                We follow a rigorous methodology to ensure every product meets the highest standards of quality, durability, and performance.
+                We follow a rigorous methodology to ensure every product meets the highest standards of quality,
+                durability, and performance.
             </p>
         </div>
 
@@ -320,7 +323,8 @@
                     </div>
                     <div class="step-text-container">
                         <h3 class="step-heading">Consultation</h3>
-                        <p class="step-desc">Understanding your specific fiber and netting requirements for optimal solutions.</p>
+                        <p class="step-desc">Understanding your specific fiber and netting requirements for optimal
+                            solutions.</p>
                     </div>
                 </div>
                 <!-- Item 2 -->
@@ -330,7 +334,8 @@
                     </div>
                     <div class="step-text-container">
                         <h3 class="step-heading">Engineering</h3>
-                        <p class="step-desc">Designing custom specifications tailored to your project's unique tensile needs.</p>
+                        <p class="step-desc">Designing custom specifications tailored to your project's unique tensile
+                            needs.</p>
                     </div>
                 </div>
                 <!-- Item 3 -->
@@ -340,7 +345,8 @@
                     </div>
                     <div class="step-text-container">
                         <h3 class="step-heading">Production</h3>
-                        <p class="step-desc">State-of-the-art manufacturing using premium materials and advanced weaving techniques.</p>
+                        <p class="step-desc">State-of-the-art manufacturing using premium materials and advanced weaving
+                            techniques.</p>
                     </div>
                 </div>
             </div>
@@ -359,7 +365,8 @@
                     <!-- Mobile Text -->
                     <div class="mobile-text-wrapper step-text-container">
                         <h3 class="step-heading">Quality Control</h3>
-                        <p class="step-desc">Rigorous testing procedures to ensure maximum durability, strength, and safety.</p>
+                        <p class="step-desc">Rigorous testing procedures to ensure maximum durability, strength, and
+                            safety.</p>
                     </div>
                 </div>
                 <!-- Item 5 -->
@@ -370,7 +377,8 @@
                     <!-- Mobile Text -->
                     <div class="mobile-text-wrapper step-text-container">
                         <h3 class="step-heading">Delivery</h3>
-                        <p class="step-desc">Efficient logistics and careful packaging for secure and timely global shipping.</p>
+                        <p class="step-desc">Efficient logistics and careful packaging for secure and timely global
+                            shipping.</p>
                     </div>
                 </div>
                 <!-- Item 6 -->
@@ -381,7 +389,8 @@
                     <!-- Mobile Text -->
                     <div class="mobile-text-wrapper step-text-container">
                         <h3 class="step-heading">Support</h3>
-                        <p class="step-desc">Dedicated after-sales service providing maintenance guidance and continuous support.</p>
+                        <p class="step-desc">Dedicated after-sales service providing maintenance guidance and continuous
+                            support.</p>
                     </div>
                 </div>
             </div>
@@ -394,7 +403,8 @@
                 onmouseleave="document.getElementById('circle-4').classList.remove('hover-active')">
                 <div class="step-text-container">
                     <h3 class="step-heading">Quality Control</h3>
-                    <p class="step-desc">Rigorous testing procedures to ensure maximum durability, strength, and safety.</p>
+                    <p class="step-desc">Rigorous testing procedures to ensure maximum durability, strength, and safety.
+                    </p>
                 </div>
             </div>
             <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="600"
@@ -402,7 +412,8 @@
                 onmouseleave="document.getElementById('circle-5').classList.remove('hover-active')">
                 <div class="step-text-container">
                     <h3 class="step-heading">Delivery</h3>
-                    <p class="step-desc">Efficient logistics and careful packaging for secure and timely global shipping.</p>
+                    <p class="step-desc">Efficient logistics and careful packaging for secure and timely global
+                        shipping.</p>
                 </div>
             </div>
             <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="750"
@@ -410,7 +421,8 @@
                 onmouseleave="document.getElementById('circle-6').classList.remove('hover-active')">
                 <div class="step-text-container">
                     <h3 class="step-heading">Support</h3>
-                    <p class="step-desc">Dedicated after-sales service providing maintenance guidance and continuous support.</p>
+                    <p class="step-desc">Dedicated after-sales service providing maintenance guidance and continuous
+                        support.</p>
                 </div>
             </div>
         </div>

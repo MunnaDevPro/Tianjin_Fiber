@@ -5,12 +5,12 @@
 
 {% block content %}
 <!-- Page Header -->
-<div class="pt-32 pb-24 md:pt-40 md:pb-32 relative overflow-hidden bg-brand-blue">
+<div class="pt-32 pb-16 md:pt-40 md:pb-20 relative overflow-hidden bg-brand-blue">
     <!-- Background Image & Gradient Overlay -->
     <div class="absolute inset-0 z-0">
         <!-- Using a perfect industrial/corporate modern image -->
         <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?q=80&w=2070&auto=format&fit=crop"
-            alt="About Header Background" class="w-full h-full object-cover opacity-50 mix-blend-overlay">
+            alt="About Header Background" class="w-full h-full object-cover opacity-50 mix-blend-overlay" fetchpriority="high">
         <div class="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/80 to-brand-blue/50"></div>
         <div class="absolute inset-0 bg-brand-blue/20" style="backdrop-filter: blur(2px);"></div>
     </div>
@@ -23,7 +23,7 @@
         class="absolute bottom-0 left-0 w-72 h-72 bg-brand-gold/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3">
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center pb-8 md:pb-16"
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center pb-4 md:pb-8"
         data-aos="fade-up">
 
 
@@ -152,13 +152,101 @@
                 </div>
                 <div class="aspect-[4/3] rounded-3xl overflow-hidden relative z-10 border-4 border-white shadow-2xl">
                     <img src="{% static 'core/images/mission_1785335827120.png' %}" alt="Our Mission"
-                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Manufacturing Excellence Section -->
+<section class="py-12 md:py-16 bg-slate-900 text-white relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 z-0">
+        <img src="{% static 'core/images/factory/mmexport1785429932891.jpg.jpeg' %}" alt="Factory Equipment" class="w-full h-full object-cover opacity-20 mix-blend-luminosity" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/70"></div>
+    </div>
+    
+    <!-- Floating particles/orbs -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-brand-magenta/15 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-0"></div>
+    <div class="absolute bottom-0 left-0 w-72 h-72 bg-brand-gold/15 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            
+            <div data-aos="fade-right">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 mb-4">
+                    <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+                    <span class="text-[11px] font-bold tracking-widest uppercase text-white/90 pt-[1px]">Global Standard</span>
+                </div>
+                
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 leading-tight drop-shadow-lg">
+                    Engineering <span class="text-brand-gold">Excellence</span> at Scale
+                </h2>
+                
+                <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-6 font-light">
+                    Our factory spans over 50,000 square meters and runs on top-tier machinery. Since we handle everything in-house—from raw materials to the finished product—we have full control over quality and can easily meet large order demands on time.
+                </p>
+                
+                <div class="flex flex-row justify-between sm:justify-start gap-2 sm:gap-8 border-t border-white/20 pt-6">
+                    <div class="text-center sm:text-left">
+                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">500<span class="text-brand-magenta">+</span></div>
+                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">Monthly<br class="block sm:hidden"> Tons</div>
+                    </div>
+                    <div class="w-px bg-white/20 self-stretch my-2 sm:my-0"></div>
+                    <div class="text-center sm:text-left">
+                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">100<span class="text-brand-magenta">%</span></div>
+                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">QC<br class="block sm:hidden"> Passed</div>
+                    </div>
+                    <div class="w-px bg-white/20 self-stretch my-2 sm:my-0"></div>
+                    <div class="text-center sm:text-left">
+                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">50<span class="text-brand-magenta">+</span></div>
+                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">Countries</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div data-aos="fade-left" class="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+                <!-- Quality Card 1 -->
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3 sm:p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-blue border border-brand-blue/50 flex items-center justify-center text-brand-gold mb-2 sm:mb-4 shadow-lg shrink-0">
+                        <i data-lucide="shield-check" class="w-4 h-4 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h4 class="text-sm sm:text-lg font-display font-bold text-white mb-1 sm:mb-2 leading-tight sm:leading-normal">ISO 9001 Certified</h4>
+                    <p class="text-[10px] sm:text-sm text-slate-400 leading-snug sm:leading-relaxed font-light mb-0">Internationally recognized quality management systems.</p>
+                </div>
+                
+                <!-- Quality Card 2 -->
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3 sm:p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-blue border border-brand-blue/50 flex items-center justify-center text-brand-gold mb-2 sm:mb-4 shadow-lg shrink-0">
+                        <i data-lucide="sun" class="w-4 h-4 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h4 class="text-sm sm:text-lg font-display font-bold text-white mb-1 sm:mb-2 leading-tight sm:leading-normal">UV Resistance</h4>
+                    <p class="text-[10px] sm:text-sm text-slate-400 leading-snug sm:leading-relaxed font-light mb-0">Advanced stabilization technology for maximum product lifespan.</p>
+                </div>
+                
+                <!-- Quality Card 3 -->
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3 sm:p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-blue border border-brand-blue/50 flex items-center justify-center text-brand-gold mb-2 sm:mb-4 shadow-lg shrink-0">
+                        <i data-lucide="leaf" class="w-4 h-4 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h4 class="text-sm sm:text-lg font-display font-bold text-white mb-1 sm:mb-2 leading-tight sm:leading-normal">Eco-Friendly</h4>
+                    <p class="text-[10px] sm:text-sm text-slate-400 leading-snug sm:leading-relaxed font-light mb-0">Sustainable practices in our natural fiber production lines.</p>
+                </div>
+                
+                <!-- Quality Card 4 -->
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3 sm:p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-blue border border-brand-blue/50 flex items-center justify-center text-brand-gold mb-2 sm:mb-4 shadow-lg shrink-0">
+                        <i data-lucide="globe" class="w-4 h-4 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h4 class="text-sm sm:text-lg font-display font-bold text-white mb-1 sm:mb-2 leading-tight sm:leading-normal">Global Logistics</h4>
+                    <p class="text-[10px] sm:text-sm text-slate-400 leading-snug sm:leading-relaxed font-light mb-0">Seamless export processing to over 50 countries worldwide.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
 
 <!-- Team Section -->
 <style>
@@ -274,7 +362,7 @@
 
                         <!-- Image container -->
                         <div class="relative w-full">
-                            <img :src="member.image" :alt="member.name" class="team-slider-img">
+                            <img :src="member.image" :alt="member.name" class="team-slider-img" loading="lazy">
                             <!-- Overlay for inactive -->
                             <div class="team-overlay"></div>
                         </div>
@@ -357,7 +445,7 @@
                                     class="absolute inset-0 bg-brand-gold rounded-full transform translate-x-1 translate-y-1 opacity-20">
                                 </div>
                                 <img :src="testimonial.image" :alt="testimonial.name"
-                                    class="relative rounded-full object-cover border-[3px] border-white shadow-sm z-10 w-full h-full">
+                                    class="relative rounded-full object-cover border-[3px] border-white shadow-sm z-10 w-full h-full" loading="lazy">
                             </div>
                             <div class="flex flex-col justify-center">
                                 <h4 class="font-display font-bold text-slate-900 leading-tight mb-1 text-[17px] md:text-[19px]"

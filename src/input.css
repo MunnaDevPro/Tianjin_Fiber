@@ -10,6 +10,11 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display text-brand-blue;
   }
+
+  /* Alpine.js FOUC prevention — x-cloak elements hidden until Alpine initializes */
+  [x-cloak] {
+    display: none !important;
+  }
 }
 
 @layer components {
@@ -18,5 +23,28 @@
   }
   .btn-outline {
     @apply inline-flex items-center justify-center px-6 py-3 border-2 border-brand-blue text-base font-medium rounded-full text-brand-blue hover:bg-brand-blue hover:text-white transition duration-300;
+  }
+
+  /* Navbar FOUC fix — default sizes before Alpine.js loads */
+  .navbar-logo-img {
+    @apply h-14 md:h-16 w-auto object-contain transition-all duration-500;
+  }
+  .navbar-logo-fallback {
+    @apply w-14 h-14 md:w-16 md:h-16 text-xl md:text-2xl;
+  }
+  .navbar-brand-name {
+    @apply text-2xl md:text-[28px] font-display font-bold tracking-tight leading-[1.1] text-brand-blue transition-all duration-500;
+  }
+  .navbar-brand-sub {
+    @apply text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase mt-0.5 text-slate-500 transition-all duration-500;
+  }
+}
+
+@layer utilities {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
