@@ -7,19 +7,30 @@
     <title>{% block title %}Tianbao | Tianjin Fiber Net Hemp Rope Manufacturing Co., Ltd.{% endblock %}</title>
     <meta name="description" content="Premium industrial grade natural hemp rope and netting solutions.">
     
+    <!-- DNS Prefetch & Preconnect for external CDNs -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
     <!-- Favicon -->
-    {% if site_settings and site_settings.logo %}
-    <link rel="icon" href="{{ site_settings.logo.url }}">
-    <link rel="apple-touch-icon" href="{{ site_settings.logo.url }}">
+    {% if navbar and navbar.logo %}
+    <link rel="icon" href="{{ navbar.logo.url }}">
+    <link rel="apple-touch-icon" href="{{ navbar.logo.url }}">
     {% endif %}
     
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- FontAwesome 6 Brands & Solids -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -33,7 +44,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://unpkg.com/lucide@latest"></script>
     
     {% block extra_head %}{% endblock %}
 </head>

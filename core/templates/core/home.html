@@ -26,13 +26,13 @@
     }
 
     /* ============================================
-       PRODUCTS SECTION — Premium Dark Design
+       PRODUCTS SECTION — Premium Light Design
        ============================================ */
     .products-section {
         position: relative;
         padding: 80px 0 100px;
         overflow: hidden;
-        background: linear-gradient(135deg, #0b1120 0%, #0f1e3a 50%, #0b1120 100%);
+        background: #ffffff;
     }
     .products-section::before {
         content: '';
@@ -41,7 +41,7 @@
         left: 20%;
         width: 500px;
         height: 500px;
-        background: radial-gradient(circle, rgba(26,70,116,0.35) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(26,70,116,0.05) 0%, transparent 70%);
         border-radius: 50%;
         pointer-events: none;
     }
@@ -60,8 +60,8 @@
         gap: 8px;
         padding: 6px 16px;
         border-radius: 999px;
-        background: rgba(26, 70, 116, 0.25);
-        border: 1px solid rgba(26, 70, 116, 0.4);
+        background: rgba(26, 70, 116, 0.08);
+        border: 1px solid rgba(26, 70, 116, 0.15);
         margin-bottom: 16px;
     }
     .products-label-dot {
@@ -80,13 +80,13 @@
         font-weight: 700;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: #c0964b;
+        color: #1a4674;
     }
     .products-title {
         font-family: 'Playfair Display', serif;
         font-size: clamp(28px, 4vw, 48px);
         font-weight: 700;
-        color: #ffffff;
+        color: #1e293b;
         line-height: 1.2;
         margin: 0 0 12px;
     }
@@ -97,7 +97,7 @@
         background-clip: text;
     }
     .products-subtitle {
-        color: #94a3b8;
+        color: #64748b;
         font-size: 15px;
         line-height: 1.7;
         max-width: 480px;
@@ -117,9 +117,9 @@
         gap: 8px;
         padding: 12px 24px;
         border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.2);
-        background: rgba(255,255,255,0.05);
-        color: #ffffff;
+        border: 1px solid rgba(26,70,116,0.2);
+        background: rgba(26,70,116,0.05);
+        color: #1a4674;
         font-size: 13px;
         font-weight: 600;
         text-decoration: none;
@@ -128,10 +128,10 @@
         white-space: nowrap;
     }
     .products-view-all:hover {
-        background: #ffffff;
-        color: #1a4674;
-        border-color: #ffffff;
-        box-shadow: 0 8px 30px rgba(255,255,255,0.1);
+        background: #1a4674;
+        color: #ffffff;
+        border-color: #1a4674;
+        box-shadow: 0 8px 30px rgba(26,70,116,0.15);
         transform: translateY(-1px);
     }
     .products-view-all svg {
@@ -176,15 +176,16 @@
         border-radius: 16px;
         overflow: hidden;
         text-decoration: none;
-        background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
-        border: 1px solid rgba(255,255,255,0.09);
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.45s ease, border-color 0.3s ease;
         padding: 10px 10px 0 10px;
     }
     .prod-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 24px 60px rgba(26,70,116,0.35);
-        border-color: rgba(192,150,75,0.35);
+        box-shadow: 0 24px 60px rgba(26,70,116,0.12);
+        border-color: rgba(26,70,116,0.35);
     }
     /* Shimmer overlay on hover */
     .prod-card-shimmer {
@@ -194,7 +195,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease;
-        background: linear-gradient(135deg, rgba(192,150,75,0.12) 0%, transparent 50%, rgba(26,70,116,0.12) 100%);
+        background: linear-gradient(135deg, rgba(26,70,116,0.05) 0%, transparent 50%, rgba(26,70,116,0.05) 100%);
         z-index: 2;
     }
     .prod-card:hover .prod-card-shimmer { opacity: 1; }
@@ -204,7 +205,7 @@
         width: 100%;
         padding-top: 68%; /* ~10:7 ratio */
         overflow: hidden;
-        background: #1e293b;
+        background: #f1f5f9;
         border-radius: 10px;
     }
     .prod-img-wrap img {
@@ -223,7 +224,7 @@
     .prod-img-fade {
         position: absolute;
         inset: 0;
-        background: linear-gradient(to top, rgba(11,17,32,0.92) 0%, rgba(11,17,32,0.15) 45%, transparent 100%);
+        background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.0) 45%, transparent 100%);
         pointer-events: none;
     }
     /* Category badge */
@@ -236,7 +237,7 @@
         gap: 6px;
         padding: 5px 12px;
         border-radius: 999px;
-        background: rgba(26,70,116,0.75);
+        background: rgba(26,70,116,0.85);
         border: 1px solid rgba(255,255,255,0.18);
         backdrop-filter: blur(8px);
         font-size: 9px;
@@ -264,8 +265,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, #c0964b, #f3c76a);
-        box-shadow: 0 4px 16px rgba(192,150,75,0.55);
+        background: linear-gradient(135deg, #1a4674, #2a5a91);
+        box-shadow: 0 4px 16px rgba(26,70,116,0.3);
         opacity: 0;
         transform: translateY(10px);
         transition: opacity 0.35s ease, transform 0.35s ease;
@@ -286,7 +287,7 @@
     .prod-name {
         font-size: 15px;
         font-weight: 700;
-        color: #f1f5f9;
+        color: #1e293b;
         line-height: 1.35;
         display: -webkit-box;
         -webkit-line-clamp: 1;
@@ -295,10 +296,10 @@
         margin: 0;
         transition: color 0.3s ease;
     }
-    .prod-card:hover .prod-name { color: #c0964b; }
+    .prod-card:hover .prod-name { color: #1a4674; }
     .prod-desc {
         font-size: 12px;
-        color: #94a3b8;
+        color: #64748b;
         line-height: 1.65;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -312,33 +313,33 @@
         justify-content: space-between;
         margin-top: auto;
         padding-top: 12px;
-        border-top: 1px solid rgba(255,255,255,0.07);
+        border-top: 1px solid rgba(0,0,0,0.06);
     }
     .prod-footer-label {
         font-size: 10px;
         font-weight: 600;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: rgba(192,150,75,0.65);
+        color: rgba(26,70,116,0.85);
     }
     .prod-footer-icon {
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        background: rgba(255,255,255,0.06);
+        background: rgba(0,0,0,0.04);
         display: flex;
         align-items: center;
         justify-content: center;
         transition: background 0.3s ease;
     }
     .prod-card:hover .prod-footer-icon {
-        background: rgba(192,150,75,0.2);
+        background: rgba(26,70,116,0.15);
     }
     .prod-footer-icon svg {
         color: #64748b;
         transition: color 0.3s ease;
     }
-    .prod-card:hover .prod-footer-icon svg { color: #c0964b; }
+    .prod-card:hover .prod-footer-icon svg { color: #1a4674; }
     /* Bottom CTA */
     .products-cta-wrap {
         display: flex;
@@ -426,30 +427,28 @@
                         <i data-lucide="shield-check" style="width: 14px; height: 14px;"
                             class="text-brand-gold shrink-0"></i>
                         <span
-                            class="text-white text-[10px] sm:text-xs md:text-sm font-semibold tracking-wider uppercase leading-none pt-[1px]">Global
-                            Source Manufacturer</span>
+                            class="text-white text-[10px] sm:text-xs md:text-sm font-semibold tracking-wider uppercase leading-none pt-[1px]">{{ hero.badge_text|default:'Global Source Manufacturer' }}</span>
                     </div>
 
                     <h1
                         class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
-                        Uncompromising <span class="text-brand-magenta">Quality.</span><br />
-                        Engineered to <span class="text-brand-gold">Protect.</span>
+                        {{ hero.title_black|default:'Uncompromising' }} <span class="text-brand-magenta">{{ hero.title_magenta|default:'Quality.' }}</span><br />
+                        {{ hero.title_prefix|default:'Engineered to' }} <span class="text-brand-gold">{{ hero.title_gold|default:'Protect.' }}</span>
                     </h1>
 
                     <p
                         class="text-sm sm:text-base md:text-lg text-white/90 mb-6 md:mb-10 max-w-2xl font-light leading-relaxed drop-shadow-md">
-                        Direct from our 50,000 sqm production facility. We supply industry-leading shade nets,
-                        heavy-duty tarpaulins, and agricultural covers to partners in over 50 countries.
+                        {{ hero.subtitle|default:'Direct from our 50,000 sqm production facility. We supply industry-leading shade nets, heavy-duty tarpaulins, and agricultural covers to partners in over 50 countries.' }}
                     </p>
 
                     <div class="flex flex-row pointer-events-auto gap-2 sm:gap-4 w-full sm:w-auto">
-                        <a href="#products" class="btn-primary flex items-center justify-center group font-medium rounded-full shadow-lg shadow-brand-magenta/30 hover:shadow-brand-magenta/50 transition-all duration-300 whitespace-nowrap !px-3 !py-2 sm:!px-[22px] sm:!py-[8px] !text-[11px] sm:!text-[14px] !gap-1.5 sm:!gap-2 flex-1 sm:flex-none">
-                            Explore Products
+                        <a href="{{ hero.primary_cta_link|default:'#products' }}" class="btn-primary flex items-center justify-center group font-medium rounded-full shadow-lg shadow-brand-magenta/30 hover:shadow-brand-magenta/50 transition-all duration-300 whitespace-nowrap !px-3 !py-2 sm:!px-[22px] sm:!py-[8px] !text-[11px] sm:!text-[14px] !gap-1.5 sm:!gap-2 flex-1 sm:flex-none">
+                            {{ hero.primary_cta_text|default:'Explore Products' }}
                             <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1"></i>
                         </a>
-                        <a href="{% url 'core:contact' %}" class="flex items-center justify-center group border border-white/50 bg-white/10 text-white hover:bg-white hover:text-brand-blue hover:border-white rounded-full font-medium backdrop-blur-md transition-all duration-300 shadow-sm whitespace-nowrap !px-3 !py-2 sm:!px-[22px] sm:!py-[8px] !text-[11px] sm:!text-[14px] !gap-1.5 sm:!gap-2 flex-1 sm:flex-none">
-                            Request a Quote
-                            <i data-lucide="mail" class="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:scale-110"></i>
+                        <a href="{{ hero.secondary_cta_link|default:'/contact/' }}" class="flex items-center justify-center group border border-white/50 bg-white/10 text-white hover:bg-white hover:text-brand-blue hover:border-white rounded-full font-medium backdrop-blur-md transition-all duration-300 shadow-sm whitespace-nowrap !px-3 !py-2 sm:!px-[22px] sm:!py-[8px] !text-[11px] sm:!text-[14px] !gap-1.5 sm:!gap-2 flex-1 sm:flex-none">
+                            {{ hero.secondary_cta_text|default:'Request a Quote' }}
+                            <i data-lucide="message-square" class="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:scale-110"></i>
                         </a>
                     </div>
                 </div>
@@ -501,23 +500,39 @@
                         <!-- Top Left (Wide on desktop, full on mobile) -->
                         <div
                             class="col-span-12 sm:col-span-7 row-span-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm border-[2px] border-white group">
+                            {% if factory.img_top_left %}
+                            <img src="{{ factory.img_top_left.url }}"
+                                alt="Factory Floor"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            {% else %}
                             <img src="{% static 'core/images/factory/mmexport1785429930232.jpg.jpeg' %}"
                                 alt="Factory Floor"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            {% endif %}
                         </div>
 
                         <!-- Top Right (Narrow on desktop, half on mobile) -->
                         <div
                             class="col-span-6 sm:col-span-5 row-span-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm border-[2px] border-white group">
+                            {% if factory.img_top_right %}
+                            <img src="{{ factory.img_top_right.url }}" alt="Warehouse"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            {% else %}
                             <img src="{% static 'core/images/factory/mmexport1785429935561.jpg.jpeg' %}" alt="Warehouse"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            {% endif %}
                         </div>
 
                         <!-- Bottom Left (Narrow on desktop, half on mobile) -->
                         <div
                             class="col-span-6 sm:col-span-5 row-span-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm border-[2px] border-white group">
+                            {% if factory.img_bottom_left %}
+                            <img src="{{ factory.img_bottom_left.url }}" alt="Machinery"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            {% else %}
                             <img src="{% static 'core/images/factory/mmexport1785429932891.jpg.jpeg' %}" alt="Machinery"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            {% endif %}
                         </div>
 
                         <!-- Bottom Right Blue Box (Wide on desktop, full on mobile) -->
@@ -528,10 +543,9 @@
                                 class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full blur-2xl transform scale-150">
                             </div>
                             <span
-                                class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-brand-gold mb-1 relative z-10">100%</span>
+                                class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-brand-gold mb-1 relative z-10">{{ factory.box_percentage|default:'100%' }}</span>
                             <span
-                                class="text-[10px] sm:text-xs lg:text-sm font-medium leading-tight relative z-10">Quality
-                                Inspected Before Shipping</span>
+                                class="text-[10px] sm:text-xs lg:text-sm font-medium leading-tight relative z-10">{{ factory.box_text|default:'Quality Inspected Before Shipping' }}</span>
                         </div>
                     </div>
 
@@ -552,19 +566,22 @@
             <div class="flex flex-col-reverse lg:flex-row gap-8 items-center">
                 <div class="w-full lg:w-1/2 relative" data-aos="fade-right">
                     <div class="aspect-[4/3] rounded-2xl overflow-hidden relative z-10 border-4 border-brand-cream">
+                        {% if values_section.image %}
+                        <img src="{{ values_section.image.url }}" alt="Rope manufacturing"
+                            class="w-full h-full object-cover" loading="lazy">
+                        {% else %}
                         <img src="{% static 'core/images/core_values_1785335815859.png' %}" alt="Rope manufacturing"
                             class="w-full h-full object-cover" loading="lazy">
+                        {% endif %}
                     </div>
                 </div>
                 <div class="w-full lg:w-1/2">
                     <div class="mb-6" data-aos="fade-up">
-                        <h2 class="text-2xl md:text-3xl font-display font-bold mb-2">Our Core Values</h2>
-                        <p class="text-slate-600 text-sm md:text-base">The principles that drive our manufacturing
-                            excellence and
-                            global partnerships.</p>
+                        <h2 class="text-2xl md:text-3xl font-display font-bold mb-2">{{ values_section.title|default:'Our Core Values' }}</h2>
+                        <p class="text-slate-600 text-sm md:text-base">{{ values_section.description|default:'The principles that drive our manufacturing excellence and global partnerships.' }}</p>
                     </div>
                     <div class="space-y-3">
-                        {% for value in values %}
+                        {% for value in values_section.items.all %}
                         <div class="bg-brand-cream p-4 rounded-xl hover:-translate-y-1 transition-transform duration-300 flex gap-4"
                             data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
                             <div
@@ -574,6 +591,37 @@
                             <div>
                                 <h3 class="text-base font-display font-bold mb-1">{{ value.title }}</h3>
                                 <p class="text-slate-600 text-xs leading-relaxed">{{ value.description }}</p>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="bg-brand-cream p-4 rounded-xl hover:-translate-y-1 transition-transform duration-300 flex gap-4"
+                            data-aos="fade-up" data-aos-delay="100">
+                            <div class="w-10 h-10 shrink-0 bg-white border border-brand-blue/20 rounded-lg flex items-center justify-center text-brand-blue">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-display font-bold mb-1">Uncompromising Quality</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed">We adhere to the highest international standards in every single roll of netting we produce.</p>
+                            </div>
+                        </div>
+                        <div class="bg-brand-cream p-4 rounded-xl hover:-translate-y-1 transition-transform duration-300 flex gap-4"
+                            data-aos="fade-up" data-aos-delay="200">
+                            <div class="w-10 h-10 shrink-0 bg-white border border-brand-blue/20 rounded-lg flex items-center justify-center text-brand-blue">
+                                <i data-lucide="leaf" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-display font-bold mb-1">Sustainable Manufacturing</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed">Committed to eco-friendly practices and sustainable materials in our production process.</p>
+                            </div>
+                        </div>
+                        <div class="bg-brand-cream p-4 rounded-xl hover:-translate-y-1 transition-transform duration-300 flex gap-4"
+                            data-aos="fade-up" data-aos-delay="300">
+                            <div class="w-10 h-10 shrink-0 bg-white border border-brand-blue/20 rounded-lg flex items-center justify-center text-brand-blue">
+                                <i data-lucide="globe" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-display font-bold mb-1">Global Reach</h3>
+                                <p class="text-slate-600 text-xs leading-relaxed">Trusted by partners in over 50 countries with a robust logistics network.</p>
                             </div>
                         </div>
                         {% endfor %}
@@ -591,12 +639,23 @@
                 <div class="w-full lg:w-1/2" data-aos="fade-right">
                     <div class="mb-8">
 
-                        <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 text-brand-blue">Why Choose Us</h2>
-                        <p class="text-slate-600 text-base md:text-lg">We don't just manufacture products; we build
-                            lasting partnerships based on trust, quality, and sustainable practices.</p>
+                        <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 text-brand-blue">{{ factory.title|default:'Why Choose Us' }}</h2>
+                        <p class="text-slate-600 text-base md:text-lg">{{ factory.description|default:"We don't just manufacture products; we build lasting partnerships based on trust, quality, and sustainable practices." }}</p>
                     </div>
 
                     <div class="space-y-2">
+                        {% for feature in factory.features.all %}
+                        <div class="flex gap-4 p-4 rounded-2xl hover:bg-white transition-colors">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 bg-brand-blue rounded-full flex items-center justify-center text-brand-gold">
+                                <i data-lucide="{{ feature.icon }}"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-blue mb-1">{{ feature.title }}</h3>
+                                <p class="text-sm text-slate-600">{{ feature.description }}</p>
+                            </div>
+                        </div>
+                        {% empty %}
                         <div class="flex gap-4 p-4 rounded-2xl hover:bg-white transition-colors">
                             <div
                                 class="flex-shrink-0 w-12 h-12 bg-brand-blue rounded-full flex items-center justify-center text-brand-gold">
@@ -630,6 +689,7 @@
                                     fiber production lines.</p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -640,8 +700,13 @@
                         </div>
                         <div
                             class="aspect-[4/3] md:aspect-square rounded-3xl overflow-hidden relative shadow-xl border-4 border-white">
+                            {% if values_section.image %}
+                            <img src="{{ values_section.image.url }}" alt="Core Values"
+                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy">
+                            {% else %}
                             <img src="{% static 'core/images/core_values_1785335815859.png' %}" alt="Core Values"
                                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy">
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -656,32 +721,34 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div data-aos="fade-right">
 
-                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-5 leading-tight text-white">Forging the
-                        strongest connections worldwide.</h2>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-5 leading-tight text-white">{{ mission.title|default:'Forging the strongest connections worldwide.' }}</h2>
                     <p class="text-white/80 text-base leading-relaxed mb-6">
-                        For over two decades, Tianjin Fiber Net has been at the forefront of industrial rope
-                        manufacturing. We combine traditional craftsmanship with advanced material science to deliver
-                        products that perform flawlessly under extreme conditions.
+                        {{ mission.description|default:'For over two decades, Tianjin Fiber Net has been at the forefront of industrial rope manufacturing. We combine traditional craftsmanship with advanced material science to deliver products that perform flawlessly under extreme conditions.' }}
                     </p>
                     <div class="flex flex-wrap gap-8 border-t border-white/20 pt-6 mt-6">
                         <div>
-                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">20+</div>
-                            <div class="text-white/60 text-xs">Years Experience</div>
+                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">{{ mission.stat1_number|default:'20+' }}</div>
+                            <div class="text-white/60 text-xs">{{ mission.stat1_text|default:'Years Experience' }}</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">50+</div>
-                            <div class="text-white/60 text-xs">Countries Served</div>
+                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">{{ mission.stat2_number|default:'50+' }}</div>
+                            <div class="text-white/60 text-xs">{{ mission.stat2_text|default:'Countries Served' }}</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">100%</div>
-                            <div class="text-white/60 text-xs">Quality Assured</div>
+                            <div class="text-3xl font-display font-bold text-brand-gold mb-1">{{ mission.stat3_number|default:'100%' }}</div>
+                            <div class="text-white/60 text-xs">{{ mission.stat3_text|default:'Quality Assured' }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="relative" data-aos="fade-left">
                     <div class="aspect-video rounded-3xl overflow-hidden relative z-10 border-4 border-white/10">
+                        {% if mission.image %}
+                        <img src="{{ mission.image.url }}" alt="Manufacturing process"
+                            class="w-full h-full object-cover" loading="lazy">
+                        {% else %}
                         <img src="{% static 'core/images/mission_1785335827120.png' %}" alt="Manufacturing process"
                             class="w-full h-full object-cover" loading="lazy">
+                        {% endif %}
                     </div>
                     <!-- Decorative element -->
                     <div
@@ -764,6 +831,207 @@
                         </div>
                     </div>
                 </a>
+                {% empty %}
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1542314831-c6a420325160?auto=format&fit=crop&q=80&w=600" alt="Industrial Safety Net" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Industrial Nets</span>
+                            <span class="sm:hidden">Industrial</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="Heavy Duty Safety Net">Heavy Duty Safety Net</h3>
+                        <p class="prod-desc">Premium high-tensile safety netting for construction and logistics.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1595853035070-59a39fe84de3?auto=format&fit=crop&q=80&w=600" alt="Agriculture Shade Net" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Agricultural Nets</span>
+                            <span class="sm:hidden">Agricultural</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="UV Protected Shade Net">UV Protected Shade Net</h3>
+                        <p class="prod-desc">Durable agricultural shading solutions offering high UV protection.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=600" alt="Marine Rope" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Marine Ropes</span>
+                            <span class="sm:hidden">Marine</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="Commercial Mooring Rope">Commercial Mooring Rope</h3>
+                        <p class="prod-desc">High-strength marine grade ropes built for saltwater resilience.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1541888086225-ee5ca50325b3?auto=format&fit=crop&q=80&w=600" alt="Cargo Net" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Logistics Solutions</span>
+                            <span class="sm:hidden">Logistics</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="Container Cargo Net">Container Cargo Net</h3>
+                        <p class="prod-desc">Secure transportation nets designed to hold heavy loads securely.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1595853035070-59a39fe84de3?auto=format&fit=crop&q=80&w=600" alt="Premium Window Screens" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Home Solutions</span>
+                            <span class="sm:hidden">Home</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="Premium Window Screens">Premium Window Screens</h3>
+                        <p class="prod-desc">Durable and high-visibility screening for residential comfort.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=600" alt="Portable Plastic Adapter" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Accessories</span>
+                            <span class="sm:hidden">Accessory</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="Portable Plastic Adapter">Portable Plastic Adapter</h3>
+                        <p class="prod-desc">High quality portable solutions for everyday convenience.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&q=80&w=600" alt="Smart Thermostat" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Smart Devices</span>
+                            <span class="sm:hidden">Smart</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="Smart Thermostat">Smart Thermostat</h3>
+                        <p class="prod-desc">Control your environment precisely with our smart systems.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="prod-card" data-aos="fade-up">
+                    <div class="prod-card-shimmer"></div>
+                    <div class="prod-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600" alt="Noise Cancelling Headphones" loading="lazy">
+                        <div class="prod-img-fade"></div>
+                        <div class="prod-badge">
+                            <span class="prod-badge-dot"></span>
+                            <span class="hidden sm:inline">Audio</span>
+                            <span class="sm:hidden">Audio</span>
+                        </div>
+                        <div class="prod-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </div>
+                    </div>
+                    <div class="prod-body">
+                        <h3 class="prod-name" title="Noise Cancelling Headphones">Noise Cancelling Headphones</h3>
+                        <p class="prod-desc">Enjoy crystal clear audio without external disturbances.</p>
+                        <div class="prod-footer">
+                            <span class="prod-footer-label">See More</span>
+                            <div class="prod-footer-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
                 {% endfor %}
                 </div>
 
@@ -772,16 +1040,16 @@
                     <!-- Prev Button -->
                     <button @click="if(currentPage > 1) { currentPage--; document.getElementById('products').scrollIntoView({behavior: 'smooth'}) }" 
                             :disabled="currentPage === 1"
-                            :class="currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-brand-copper hover:text-white'"
-                            class="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 text-white/50 border border-white/10 transition-all duration-300">
+                            :class="currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-brand-blue hover:text-white hover:border-brand-blue'"
+                            class="w-10 h-10 rounded-full flex items-center justify-center bg-white text-slate-500 border border-slate-200 transition-all duration-300 shadow-sm">
                         <i data-lucide="chevron-left" class="w-5 h-5"></i>
                     </button>
                     
                     <!-- Page Numbers -->
                     <template x-for="page in Math.ceil(totalItems / itemsPerPage)" :key="page">
                         <button @click="currentPage = page; document.getElementById('products').scrollIntoView({behavior: 'smooth'})" 
-                                :class="currentPage === page ? 'bg-brand-copper text-white shadow-[0_0_15px_rgba(192,150,75,0.4)] border-transparent' : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/10 hover:text-white'"
-                                class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border transition-all duration-300" 
+                                :class="currentPage === page ? 'bg-brand-blue text-white shadow-md border-brand-blue' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-brand-blue'"
+                                class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border transition-all duration-300 shadow-sm" 
                                 x-text="page">
                         </button>
                     </template>
@@ -789,8 +1057,8 @@
                     <!-- Next Button -->
                     <button @click="if(currentPage < Math.ceil(totalItems / itemsPerPage)) { currentPage++; document.getElementById('products').scrollIntoView({behavior: 'smooth'}) }" 
                             :disabled="currentPage === Math.ceil(totalItems / itemsPerPage)"
-                            :class="currentPage === Math.ceil(totalItems / itemsPerPage) ? 'opacity-30 cursor-not-allowed' : 'hover:bg-brand-copper hover:text-white'"
-                            class="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 text-white/50 border border-white/10 transition-all duration-300">
+                            :class="currentPage === Math.ceil(totalItems / itemsPerPage) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-brand-blue hover:text-white hover:border-brand-blue'"
+                            class="w-10 h-10 rounded-full flex items-center justify-center bg-white text-slate-500 border border-slate-200 transition-all duration-300 shadow-sm">
                         <i data-lucide="chevron-right" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -844,6 +1112,115 @@
                         <div x-show="activeAccordion === {{ forloop.counter }}" x-collapse.duration.700ms>
                             <div class="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
                                 {{ faq.answer }}
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="border border-slate-200 rounded-xl overflow-hidden transition-colors duration-300"
+                        :class="{'bg-brand-cream': activeAccordion === 1, 'bg-white': activeAccordion !== 1}">
+                        <button
+                            @click="activeAccordion = (activeAccordion === 1 ? null : 1)"
+                            class="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none">
+                            <span class="font-display font-semibold text-sm text-brand-blue transition-colors"
+                                :class="{'text-brand-magenta': activeAccordion === 1}">What is your Minimum Order Quantity (MOQ)?</span>
+                            <div class="shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
+                                :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === 1}">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </div>
+                        </button>
+                        <div x-show="activeAccordion === 1" x-collapse.duration.700ms>
+                            <div class="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+                                As a source manufacturer, our standard MOQ is typically one 20ft container (approx. 5-7 tons depending on the product). However, we can accommodate smaller trial orders for new clients. Please contact our sales team to discuss your specific needs.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden transition-colors duration-300"
+                        :class="{'bg-brand-cream': activeAccordion === 2, 'bg-white': activeAccordion !== 2}">
+                        <button
+                            @click="activeAccordion = (activeAccordion === 2 ? null : 2)"
+                            class="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none">
+                            <span class="font-display font-semibold text-sm text-brand-blue transition-colors"
+                                :class="{'text-brand-magenta': activeAccordion === 2}">Do you offer custom sizes and colors (OEM/ODM)?</span>
+                            <div class="shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
+                                :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === 2}">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </div>
+                        </button>
+                        <div x-show="activeAccordion === 2" x-collapse.duration.700ms>
+                            <div class="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+                                Yes, absolutely. With our in-house production lines, we can customize mesh size, weight per square meter (GSM), color, width, length, and even specialized UV or flame-retardant treatments.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden transition-colors duration-300"
+                        :class="{'bg-brand-cream': activeAccordion === 3, 'bg-white': activeAccordion !== 3}">
+                        <button
+                            @click="activeAccordion = (activeAccordion === 3 ? null : 3)"
+                            class="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none">
+                            <span class="font-display font-semibold text-sm text-brand-blue transition-colors"
+                                :class="{'text-brand-magenta': activeAccordion === 3}">What is your standard production lead time?</span>
+                            <div class="shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
+                                :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === 3}">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </div>
+                        </button>
+                        <div x-show="activeAccordion === 3" x-collapse.duration.700ms>
+                            <div class="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+                                Standard lead time is 15-25 days for a 40HQ container after receiving the deposit. Custom specifications may require an additional 5-7 days. We always strive to meet your urgent project deadlines.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden transition-colors duration-300"
+                        :class="{'bg-brand-cream': activeAccordion === 4, 'bg-white': activeAccordion !== 4}">
+                        <button
+                            @click="activeAccordion = (activeAccordion === 4 ? null : 4)"
+                            class="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none">
+                            <span class="font-display font-semibold text-sm text-brand-blue transition-colors"
+                                :class="{'text-brand-magenta': activeAccordion === 4}">Are your packaging and manufacturing sustainable and green?</span>
+                            <div class="shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
+                                :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === 4}">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </div>
+                        </button>
+                        <div x-show="activeAccordion === 4" x-collapse.duration.700ms>
+                            <div class="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+                                Yes, we prioritize sustainable manufacturing practices and utilize eco-friendly materials wherever possible to minimize environmental impact.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden transition-colors duration-300"
+                        :class="{'bg-brand-cream': activeAccordion === 5, 'bg-white': activeAccordion !== 5}">
+                        <button
+                            @click="activeAccordion = (activeAccordion === 5 ? null : 5)"
+                            class="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none">
+                            <span class="font-display font-semibold text-sm text-brand-blue transition-colors"
+                                :class="{'text-brand-magenta': activeAccordion === 5}">Can I get a custom order created for my specific needs?</span>
+                            <div class="shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
+                                :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === 5}">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </div>
+                        </button>
+                        <div x-show="activeAccordion === 5" x-collapse.duration.700ms>
+                            <div class="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+                                Absolutely! Our team specializes in custom designs. You can request specific dimensions, tensile strengths, and colors tailored exactly to your requirements.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden transition-colors duration-300"
+                        :class="{'bg-brand-cream': activeAccordion === 6, 'bg-white': activeAccordion !== 6}">
+                        <button
+                            @click="activeAccordion = (activeAccordion === 6 ? null : 6)"
+                            class="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none">
+                            <span class="font-display font-semibold text-sm text-brand-blue transition-colors"
+                                :class="{'text-brand-magenta': activeAccordion === 6}">Do you provide tracking info for international shipping?</span>
+                            <div class="shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-all duration-300"
+                                :class="{'rotate-180 bg-brand-blue text-white': activeAccordion === 6}">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </div>
+                        </button>
+                        <div x-show="activeAccordion === 6" x-collapse.duration.700ms>
+                            <div class="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+                                Yes, once your order is dispatched, we provide comprehensive tracking information so you can monitor the logistics of your shipment globally.
                             </div>
                         </div>
                     </div>

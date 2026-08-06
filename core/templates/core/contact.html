@@ -69,15 +69,14 @@
 <!-- Page Header -->
 <div class="pt-40 pb-24 md:pt-48 md:pb-32 text-white relative overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
+        <img src="{% if contact_settings and contact_settings.bg_image %}{{ contact_settings.bg_image.url }}{% else %}https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000{% endif %}"
             alt="Contact Header Background" class="w-full h-full object-cover" fetchpriority="high">
         <div class="absolute inset-0 bg-brand-blue/90 mix-blend-multiply"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/80 to-transparent"></div>
     </div>
     <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10" data-aos="fade-up">
-        <h1 class="text-4xl md:text-6xl font-display font-bold mb-6 text-white">Professional Enquiry</h1>
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">Reach out for custom quotes, technical
-            specifications, or global logistics support. Our team is ready to assist you.</p>
+        <h1 class="text-4xl md:text-6xl font-display font-bold mb-6 text-white">{{ contact_settings.title|default:"Professional Enquiry" }}</h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">{{ contact_settings.subtitle|default:"Reach out for custom quotes, technical specifications, or global logistics support. Our team is ready to assist you." }}</p>
     </div>
 </div>
 
@@ -114,8 +113,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-bold text-brand-blue mb-1">Headquarters</h4>
-                                <p class="text-slate-600 leading-relaxed">123 Industrial Ave,<br>Tianjin Free Trade
-                                    Zone,<br>China 300000</p>
+                                <p class="text-slate-600 leading-relaxed">{{ contact_settings.address|default:"123 Industrial Ave,<br>Tianjin Free Trade Zone,<br>China 300000"|safe }}</p>
                             </div>
                         </div>
 
@@ -126,8 +124,8 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-bold text-brand-blue mb-1">Global Sales</h4>
-                                <p class="text-slate-600 leading-relaxed">+86 123 4567 890<br><span
-                                        class="text-sm text-slate-400">Mon-Fri, 9am-6pm (CST)</span></p>
+                                <p class="text-slate-600 leading-relaxed">{{ contact_settings.phone|default:"+86 123 4567 890" }}<br><span
+                                        class="text-sm text-slate-400">{{ contact_settings.business_hours|default:"Mon-Fri, 9am-6pm (CST)" }}</span></p>
                             </div>
                         </div>
 
@@ -138,8 +136,8 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-bold text-brand-blue mb-1">Direct Email</h4>
-                                <a href="mailto:sales@tianjinfiber.com"
-                                    class="text-brand-blue hover:text-brand-gold font-medium transition-colors">sales@tianjinfiber.com</a>
+                                <a href="mailto:{{ contact_settings.email|default:'sales@tianjinfiber.com' }}"
+                                    class="text-brand-blue hover:text-brand-gold font-medium transition-colors">{{ contact_settings.email|default:"sales@tianjinfiber.com" }}</a>
                                 <p class="text-sm text-slate-400 mt-1">We reply within 24 hours</p>
                             </div>
                         </div>
@@ -230,6 +228,11 @@
                     partners and clients from all over the world.</p>
             </div>
 
+            {% if contact_settings.map_iframe %}
+            <div class="w-full rounded-2xl overflow-hidden shadow-lg h-[500px]">
+                {{ contact_settings.map_iframe|safe }}
+            </div>
+            {% else %}
             <div class="map-container relative h-[500px] w-full z-0 group">
                 <!-- Map div -->
                 <div id="office-map" class="w-full h-full"></div>
@@ -252,6 +255,7 @@
                     </a>
                 </div>
             </div>
+            {% endif %}
         </div>
 
     </div>

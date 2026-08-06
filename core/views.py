@@ -1,26 +1,31 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.views import View
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm
-from .data import PRODUCTS, VALUES, FAQS, SERVICES
-
-from .models import Category, Product
+from products.models import Category, Product
+from home.models import HomeHero, HomeFactory, HomeValues, HomeMission
+from about.models import AboutHeader, AboutStory, AboutExcellence, TeamMember, Testimonial
+from services.models import ServicesHeader, ServiceItem, ProcessSection, ServicesCTA
+from certificates.models import CertificatesHeader, Certificate, CertificatesCTA
+from factory.models import FactoryHeader, FactoryGallerySection, FactoryVideoSection, FactoryCTA
+from contactapp.models import ContactPageSettings
 
 class HomeView(TemplateView):
     template_name = 'core/home.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Fetching all products for client-side pagination
-        context['products'] = Product.objects.all()
-        context['values'] = VALUES
-        context['faqs'] = FAQS
+        context['hero'] = HomeHero.objects.first()
+        context['factory'] = HomeFactory.objects.first()
+        context['values_section'] = HomeValues.objects.first()
+        context['mission'] = HomeMission.objects.first()
+        
+        # We need products for the carousel, let's just get active ones
+        context['products'] = Product.objects.filter(is_active=True)
         return context
-
-from django.views.generic import DetailView
 
 class CategoryDetailView(DetailView):
     model = Category
@@ -34,27 +39,65 @@ class ProductDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Fetch related products from same category, excluding the current product
         context['related_products'] = Product.objects.filter(
-            category=self.object.category
+            category=self.object.category,
+            is_active=True
         ).exclude(id=self.object.id)[:4]
         return context
+
 class AboutView(TemplateView):
     template_name = 'core/about.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = AboutHeader.objects.first()
+        context['story'] = AboutStory.objects.first()
+        context['excellence'] = AboutExcellence.objects.first()
+        context['team'] = TeamMember.objects.filter(is_active=True)
+        context['testimonials'] = Testimonial.objects.filter(is_active=True)
+        return context
 
 class CertificatesView(TemplateView):
     template_name = 'core/certificates.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = CertificatesHeader.objects.first()
+        context['certificates'] = Certificate.objects.filter(is_active=True)
+        context['cta'] = CertificatesCTA.objects.first()
+        return context
 
 class ServicesView(TemplateView):
     template_name = 'core/services.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['services'] = SERVICES
+        context['header'] = ServicesHeader.objects.first()
+        context['services'] = ServiceItem.objects.filter(is_active=True)
+        context['process'] = ProcessSection.objects.first()
+        context['cta'] = ServicesCTA.objects.first()
         return context
 
 class FactoryView(TemplateView):
     template_name = 'core/factory.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = FactoryHeader.objects.first()
+        context['gallery'] = FactoryGallerySection.objects.first()
+        if context['gallery']:
+            context['images'] = context['gallery'].images.filter(is_active=True)
+        else:
+            context['images'] = []
+            
+        context['videos_section'] = FactoryVideoSection.objects.first()
+        if context['videos_section']:
+            context['videos'] = context['videos_section'].videos.filter(is_active=True)
+        else:
+            context['videos'] = []
+            
+        context['cta'] = FactoryCTA.objects.first()
+        return context
 
 class ContactView(View):
     def get(self, request):
@@ -66,25 +109,20 @@ class ContactView(View):
             data = json.loads(request.body)
             form = ContactForm(data)
         except json.JSONDecodeError:
-            # Fallback if form-data is used instead of JSON
             form = ContactForm(request.POST)
 
         if form.is_valid():
             contact_msg = form.save()
-            
-            # Attempt to send email
             try:
                 send_mail(
                     subject=f"New Contact: {contact_msg.subject}",
                     message=f"Name: {contact_msg.name}\nEmail: {contact_msg.email}\nPhone: {contact_msg.phone}\n\nMessage:\n{contact_msg.message}",
                     from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.DEFAULT_FROM_EMAIL], # Send to self
-                    fail_silently=True, # Prevent crashes if email backend isn't setup
+                    recipient_list=[settings.DEFAULT_FROM_EMAIL],
+                    fail_silently=True,
                 )
             except Exception:
-                pass # Email fail shouldn't break UI
-                
+                pass
             return JsonResponse({'success': True, 'message': 'Thank you! Your message has been sent.'})
         
         return JsonResponse({'success': False, 'errors': form.errors}, status=400)
-

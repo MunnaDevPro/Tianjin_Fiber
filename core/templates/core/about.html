@@ -26,23 +26,16 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center pb-4 md:pb-8"
         data-aos="fade-up">
 
-
-
         <!-- Modern Heading -->
         <h1 class="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tight leading-tight drop-shadow-2xl max-w-5xl"
             style="line-height: 1.1;">
-            Building the Future of <br class="hidden md:block" />
-            <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-white pb-2 inline-block">Global
-                Manufacturing</span>
+            {{ header.title|default:'Building the Future of <br class="hidden md:block" /> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-white pb-2 inline-block">Global Manufacturing</span>'|safe }}
         </h1>
 
         <!-- Subtitle -->
         <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-light mb-0">
-            With decades of unwavering commitment to excellence, we weave innovation and traditional craftsmanship into
-            every product that reaches the global market.
+            {{ header.subtitle|default:'With decades of unwavering commitment to excellence, we weave innovation and traditional craftsmanship into every product that reaches the global market.' }}
         </p>
-
 
     </div>
 
@@ -62,17 +55,24 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div class="lg:col-span-7 pr-0 xl:pr-10" data-aos="fade-right">
-                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 text-brand-blue leading-tight">A Legacy of
-                    <span class="text-brand-magenta">Strength</span>
-                </h2>
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 text-brand-blue leading-tight">{{ story.title|default:'A Legacy of' }} <span class="text-brand-magenta">{{ story.title_highlight|default:'Strength' }}</span></h2>
                 <p class="text-slate-600 text-sm md:text-[15px] leading-relaxed mb-8">
-                    Founded in the industrial heart of Tianjin, our company began with a simple mission: to manufacture
-                    the most reliable natural fiber ropes in the market. Over the years, we have evolved from a local
-                    supplier to a global manufacturing powerhouse, blending traditional rope-making techniques with
-                    modern material science.
+                    {{ story.description|default:'Founded in the industrial heart of Tianjin, our company began with a simple mission: to manufacture the most reliable natural fiber ropes in the market. Over the years, we have evolved from a local supplier to a global manufacturing powerhouse, blending traditional rope-making techniques with modern material science.' }}
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
+                    {% for point in story.points.all %}
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="flex-shrink-0 w-9 h-9 bg-brand-cream rounded-xl flex items-center justify-center text-brand-blue shadow-sm border border-brand-blue/40">
+                            <i data-lucide="{{ point.icon }}" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-[15px] text-brand-blue mb-1 leading-none pt-0.5">{{ point.title }}</h4>
+                            <p class="text-[13px] text-slate-500 leading-relaxed">{{ point.description }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
                     <div class="flex items-start gap-3">
                         <div
                             class="flex-shrink-0 w-9 h-9 bg-brand-cream rounded-xl flex items-center justify-center text-brand-blue shadow-sm border border-brand-blue/40">
@@ -121,28 +121,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="flex items-start gap-3">
-                        <div
-                            class="flex-shrink-0 w-9 h-9 bg-brand-cream rounded-xl flex items-center justify-center text-brand-blue shadow-sm border border-brand-blue/40">
-                            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-display font-bold text-[15px] text-brand-blue mb-1 leading-none pt-0.5">
-                                Custom Solutions</h4>
-                            <p class="text-[13px] text-slate-500 leading-relaxed">Tailored dimensions and specs.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div
-                            class="flex-shrink-0 w-9 h-9 bg-brand-cream rounded-xl flex items-center justify-center text-brand-blue shadow-sm border border-brand-blue/40">
-                            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-display font-bold text-[15px] text-brand-blue mb-1 leading-none pt-0.5">20+
-                                Years Exp.</h4>
-                            <p class="text-[13px] text-slate-500 leading-relaxed">Proven manufacturing excellence.</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="lg:col-span-5 relative max-w-lg mx-auto w-full lg:max-w-none" data-aos="fade-left">
@@ -151,8 +130,13 @@
                     class="absolute inset-0 bg-brand-gold rounded-3xl transform translate-x-3 translate-y-3 -z-10 opacity-30">
                 </div>
                 <div class="aspect-[4/3] rounded-3xl overflow-hidden relative z-10 border-4 border-white shadow-2xl">
+                    {% if story.image %}
+                    <img src="{{ story.image.url }}" alt="Our Mission"
+                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy">
+                    {% else %}
                     <img src="{% static 'core/images/mission_1785335827120.png' %}" alt="Our Mission"
                         class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy">
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -181,32 +165,41 @@
                 </div>
                 
                 <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 leading-tight drop-shadow-lg">
-                    Engineering <span class="text-brand-gold">Excellence</span> at Scale
+                    {{ excellence.title|default:'Engineering' }} <span class="text-brand-gold">{{ excellence.title_highlight|default:'Excellence' }}</span> {{ excellence.title_suffix|default:'at Scale' }}
                 </h2>
                 
                 <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-6 font-light">
-                    Our factory spans over 50,000 square meters and runs on top-tier machinery. Since we handle everything in-house—from raw materials to the finished product—we have full control over quality and can easily meet large order demands on time.
+                    {{ excellence.description|default:'Our factory spans over 50,000 square meters and runs on top-tier machinery. Since we handle everything in-house—from raw materials to the finished product—we have full control over quality and can easily meet large order demands on time.' }}
                 </p>
                 
                 <div class="flex flex-row justify-between sm:justify-start gap-2 sm:gap-8 border-t border-white/20 pt-6">
                     <div class="text-center sm:text-left">
-                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">500<span class="text-brand-magenta">+</span></div>
-                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">Monthly<br class="block sm:hidden"> Tons</div>
+                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">{{ excellence.stat1_number|default:'500+' }}</div>
+                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">{{ excellence.stat1_text|default:'Monthly<br class="block sm:hidden"> Tons'|safe }}</div>
                     </div>
                     <div class="w-px bg-white/20 self-stretch my-2 sm:my-0"></div>
                     <div class="text-center sm:text-left">
-                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">100<span class="text-brand-magenta">%</span></div>
-                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">QC<br class="block sm:hidden"> Passed</div>
+                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">{{ excellence.stat2_number|default:'100%' }}</div>
+                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">{{ excellence.stat2_text|default:'QC<br class="block sm:hidden"> Passed'|safe }}</div>
                     </div>
                     <div class="w-px bg-white/20 self-stretch my-2 sm:my-0"></div>
                     <div class="text-center sm:text-left">
-                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">50<span class="text-brand-magenta">+</span></div>
-                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">Countries</div>
+                        <div class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1 drop-shadow-md">{{ excellence.stat3_number|default:'50+' }}</div>
+                        <div class="text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-wider sm:tracking-widest leading-tight">{{ excellence.stat3_text|default:'Countries' }}</div>
                     </div>
                 </div>
             </div>
             
             <div data-aos="fade-left" class="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+                {% for card in excellence.cards.all %}
+                <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3 sm:p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-blue border border-brand-blue/50 flex items-center justify-center text-brand-gold mb-2 sm:mb-4 shadow-lg shrink-0">
+                        <i data-lucide="{{ card.icon }}" class="w-4 h-4 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h4 class="text-sm sm:text-lg font-display font-bold text-white mb-1 sm:mb-2 leading-tight sm:leading-normal">{{ card.title }}</h4>
+                    <p class="text-[10px] sm:text-sm text-slate-400 leading-snug sm:leading-relaxed font-light mb-0">{{ card.description }}</p>
+                </div>
+                {% empty %}
                 <!-- Quality Card 1 -->
                 <div class="bg-white/5 backdrop-blur-md border border-white/10 p-3 sm:p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex flex-col">
                     <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-blue border border-brand-blue/50 flex items-center justify-center text-brand-gold mb-2 sm:mb-4 shadow-lg shrink-0">
@@ -242,6 +235,7 @@
                     <h4 class="text-sm sm:text-lg font-display font-bold text-white mb-1 sm:mb-2 leading-tight sm:leading-normal">Global Logistics</h4>
                     <p class="text-[10px] sm:text-sm text-slate-400 leading-snug sm:leading-relaxed font-light mb-0">Seamless export processing to over 50 countries worldwide.</p>
                 </div>
+                {% endfor %}
             </div>
             
         </div>
@@ -435,7 +429,7 @@
                 </h2>
 
                 <div class="relative w-full max-w-[340px] mx-auto lg:mx-0" style="height: 320px;">
-                    <template x-for="(testimonial, index) in testimonials" :key="testimonial.id">
+                    <template x-for="(testimonial, index) in testimonials" :key="index">
                         <div class="absolute transition-all duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)] flex items-center rounded-full gap-5 w-max cursor-pointer"
                             style="padding: 12px 48px 12px 24px;" :style="getStyle(index)"
                             :class="currentIndex === index ? 'bg-white shadow-2xl' : 'bg-slate-50/80 hover:bg-slate-100'"
@@ -445,7 +439,10 @@
                                     class="absolute inset-0 bg-brand-gold rounded-full transform translate-x-1 translate-y-1 opacity-20">
                                 </div>
                                 <img :src="testimonial.image" :alt="testimonial.name"
-                                    class="relative rounded-full object-cover border-[3px] border-white shadow-sm z-10 w-full h-full" loading="lazy">
+                                    class="relative rounded-full object-cover border-[3px] border-white shadow-sm z-10 w-full h-full" loading="lazy"
+                                    x-show="testimonial.image">
+                                <div class="relative rounded-full border-[3px] border-white shadow-sm z-10 w-full h-full bg-brand-blue text-white flex items-center justify-center font-bold text-2xl"
+                                    x-show="!testimonial.image" x-text="testimonial.name.charAt(0)"></div>
                             </div>
                             <div class="flex flex-col justify-center">
                                 <h4 class="font-display font-bold text-slate-900 leading-tight mb-1 text-[17px] md:text-[19px]"
@@ -512,34 +509,23 @@
             interval: null,
             isPaused: false,
             testimonials: [
+                {% for t in testimonials %}
+                {
+                    id: {{ t.id }},
+                    name: '{{ t.name|escapejs }}',
+                    role: '{{ t.role|escapejs }}',
+                    image: '{% if t.image %}{{ t.image.url }}{% else %}''{% endif %}',
+                    text: '{{ t.text|escapejs }}'
+                }{% if not forloop.last %},{% endif %}
+                {% empty %}
                 {
                     id: 1,
                     name: 'Marvin McKinney',
                     role: 'President of Sales',
                     image: 'https://i.pravatar.cc/150?img=11',
                     text: 'The quality of natural fiber ropes we received exceeded our expectations. They have been instrumental in improving our operations. I highly recommend them to anyone looking for durable products.'
-                },
-                {
-                    id: 2,
-                    name: 'Jerome Bell',
-                    role: 'Nursing Assistant',
-                    image: 'https://i.pravatar.cc/150?img=5',
-                    text: 'I highly recommend Titan Law Firm. They are knowledgeable, responsive, and genuinely care about their clients. Every question I had was answered promptly and thoroughly.'
-                },
-                {
-                    id: 3,
-                    name: 'Courtney Henry',
-                    role: 'Marketing Coordinator',
-                    image: 'https://i.pravatar.cc/150?img=68',
-                    text: 'Working with them has been an absolute pleasure. Their attention to detail and commitment to excellence is unmatched. We look forward to continuing our partnership for years to come.'
-                },
-                {
-                    id: 4,
-                    name: 'Esther Howard',
-                    role: 'Logistics Manager',
-                    image: 'https://i.pravatar.cc/150?img=44',
-                    text: 'Their customer service is outstanding. We had a tight deadline and they delivered our custom order ahead of schedule without compromising on quality.'
                 }
+                {% endfor %}
             ],
 
             getStyle(index) {
@@ -615,6 +601,13 @@
 
         Alpine.data('teamSlider', () => ({
             members: [
+                {% for m in team %}
+                {
+                    name: '{{ m.name|escapejs }}',
+                    role: '{{ m.role|escapejs }}',
+                    image: '{% if m.image %}{{ m.image.url }}{% else %}''{% endif %}'
+                }{% if not forloop.last %},{% endif %}
+                {% empty %}
                 {
                     name: 'Cameron Williamson',
                     role: 'Expertise In Business Law',
@@ -624,22 +617,8 @@
                     name: 'Jacob Jones',
                     role: 'Corporate Litigation',
                     image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop'
-                },
-                {
-                    name: 'Savannah Nguyen',
-                    role: 'Intellectual Property',
-                    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop'
-                },
-                {
-                    name: 'Ralph Edwards',
-                    role: 'Real Estate Law',
-                    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop'
-                },
-                {
-                    name: 'Dianne Russell',
-                    role: 'Employment Law',
-                    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop'
                 }
+                {% endfor %}
             ],
             displayMembers: [],
             activeIndex: 0,

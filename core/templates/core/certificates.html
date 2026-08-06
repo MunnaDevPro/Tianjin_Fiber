@@ -20,13 +20,11 @@
 
 
             <h1 class="text-4xl md:text-6xl font-display font-bold text-white leading-tight mb-6 drop-shadow-lg">
-                Certified <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-brand-magenta to-pink-400 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">Excellence</span>
+                {{ header.title|default:'Certified <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-brand-magenta to-pink-400 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">Excellence</span>'|safe }}
             </h1>
 
             <p class="text-lg md:text-xl text-white leading-relaxed max-w-2xl mx-auto font-light">
-                Explore our portfolio of international certifications. A testament to our unwavering commitment to
-                quality, sustainability, and industrial safety in every fiber we produce.
+                {{ header.subtitle|default:'Explore our portfolio of international certifications. A testament to our unwavering commitment to quality, sustainability, and industrial safety in every fiber we produce.' }}
             </p>
         </div>
     </div>
@@ -75,7 +73,26 @@
 
         <!-- Gallery Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 md:gap-12">
+            {% for cert in certificates %}
+            <div @click="openModal('{% if cert.image %}{{ cert.image.url }}{% endif %}', '{{ cert.title|escapejs }}')"
+                class="cursor-pointer group relative rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-8 border-white hover:-translate-y-2"
+                data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+                <div class="aspect-[3/4] relative overflow-hidden bg-slate-100 flex items-center justify-center">
+                    <img src="{% if cert.image %}{{ cert.image.url }}{% endif %}"
+                        alt="{{ cert.title }}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out" loading="lazy">
 
+                    <!-- Glassmorphism Hover Overlay -->
+                    <div
+                        class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center text-center p-6">
+                        <div
+                            class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-4 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out border border-white/30">
+                            <i data-lucide="maximize-2" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
             <!-- Certificate 1 -->
             <div @click="openModal('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=1200', 'ISO 9001:2015')"
                 class="cursor-pointer group relative rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-8 border-white hover:-translate-y-2"
@@ -133,64 +150,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Certificate 4 -->
-            <div @click="openModal('https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&q=80&w=1200', 'ISO 45001')"
-                class="cursor-pointer group relative rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-8 border-white hover:-translate-y-2"
-                data-aos="fade-up" data-aos-delay="100">
-                <div class="aspect-[3/4] relative overflow-hidden bg-slate-100 flex items-center justify-center">
-                    <img src="https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&q=80&w=800"
-                        alt="Safety Certificate"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out" loading="lazy">
-
-                    <div
-                        class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center text-center p-6">
-                        <div
-                            class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-4 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out border border-white/30">
-                            <i data-lucide="maximize-2" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Certificate 5 -->
-            <div @click="openModal('https://images.unsplash.com/photo-1629904853716-f0bc54eea481?auto=format&fit=crop&q=80&w=1200', 'SGS Certified')"
-                class="cursor-pointer group relative rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-8 border-white hover:-translate-y-2"
-                data-aos="fade-up" data-aos-delay="200">
-                <div class="aspect-[3/4] relative overflow-hidden bg-slate-100 flex items-center justify-center">
-                    <img src="https://images.unsplash.com/photo-1629904853716-f0bc54eea481?auto=format&fit=crop&q=80&w=800"
-                        alt="Excellence Award"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out" loading="lazy">
-
-                    <div
-                        class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center text-center p-6">
-                        <div
-                            class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-4 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out border border-white/30">
-                            <i data-lucide="maximize-2" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Certificate 6 -->
-            <div @click="openModal('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200', 'TÜV SÜD')"
-                class="cursor-pointer group relative rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-8 border-white hover:-translate-y-2"
-                data-aos="fade-up" data-aos-delay="300">
-                <div class="aspect-[3/4] relative overflow-hidden bg-slate-100 flex items-center justify-center">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800"
-                        alt="Export Certificate"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out" loading="lazy">
-
-                    <div
-                        class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center text-center p-6">
-                        <div
-                            class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-4 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out border border-white/30">
-                            <i data-lucide="maximize-2" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
 
@@ -247,18 +207,18 @@
     <div class="absolute bottom-0 left-0 w-72 h-72 bg-brand-blue/5 rounded-full filter blur-[80px] opacity-60 pointer-events-none"></div>
 
     <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center relative z-10" data-aos="fade-up">
-        <h2 class="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-3 tracking-tight">Need Details About Our Standards?</h2>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-3 tracking-tight">{{ cta.title|default:'Need Details About Our Standards?' }}</h2>
         <p class="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto font-normal">
-            Our team is happy to provide full documentation and detailed compliance reports for any of our certifications.
+            {{ cta.description|default:'Our team is happy to provide full documentation and detailed compliance reports for any of our certifications.' }}
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-[220px] mx-auto sm:max-w-none sm:w-auto">
-            <a href="{% url 'core:contact' %}"
+            <a href="{{ cta.btn1_link|default:'/contact/' }}"
                 class="flex justify-center items-center py-2 px-6 text-sm bg-[#0B1121] text-white hover:bg-brand-magenta rounded-full shadow hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto font-medium">
-                Request Documents
+                {{ cta.btn1_text|default:'Request Documents' }}
             </a>
-            <a href="{% url 'core:services' %}"
+            <a href="{{ cta.btn2_link|default:'/services/' }}"
                 class="flex justify-center items-center py-2 px-6 text-sm bg-white text-slate-700 border border-slate-200 hover:border-slate-800 hover:text-slate-900 hover:bg-slate-50 rounded-full shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto font-medium">
-                Back to Services
+                {{ cta.btn2_text|default:'Back to Services' }}
             </a>
         </div>
     </div>

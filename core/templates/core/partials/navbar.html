@@ -6,12 +6,12 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between items-center">
         <!-- Logo -->
         <a href="{% url 'core:home' %}" class="flex items-center gap-1.5 md:gap-3 z-50 group">
-            {% if site_settings and site_settings.logo %}
+            {% if navbar and navbar.logo %}
             <div class="flex-shrink-0 relative">
                 <div
                     class="absolute inset-0 bg-brand-blue/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 </div>
-                <img src="{{ site_settings.logo.url }}" alt="Tianbao Logo"
+                <img src="{{ navbar.logo.url }}" alt="{{ navbar.logo_alt|default:'Tianbao Logo' }}"
                     class="navbar-logo-img"
                     :class="scrolled ? 'h-10 md:h-12 lg:h-14' : 'h-12 md:h-14 lg:h-16'" fetchpriority="high">
             </div>
@@ -136,11 +136,11 @@
 
         <!-- CTA Button Desktop -->
         <div class="hidden md:block ml-4">
-            <a href="{% url 'core:contact' %}"
+            <a href="{{ navbar.cta_link|default:'/contact/' }}"
                 class="relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 bg-brand-blue rounded-full overflow-hidden group hover:shadow-[0_8px_25px_rgba(30,58,138,0.3)]">
                 <span
                     class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
-                <span class="relative z-10 flex items-center gap-2">Contact Us <i data-lucide="arrow-right"
+                <span class="relative z-10 flex items-center gap-2">{{ navbar.cta_text|default:'Contact Us' }} <i data-lucide="arrow-right"
                         class="w-4 h-4"></i></span>
                 <div
                     class="absolute inset-0 w-full h-full bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 rounded-full">
@@ -210,9 +210,9 @@
             class="font-display text-2xl transition-all duration-300 relative px-6 py-2 rounded-full hover:bg-slate-50 {% if request.resolver_match.url_name == 'factory' %}text-brand-blue font-bold bg-slate-50/80{% else %}text-slate-600 hover:text-brand-blue{% endif %}">Factory</a>
 
         <div class="mt-4">
-            <a href="{% url 'core:contact' %}" @click="mobileMenuOpen = false"
+            <a href="{{ navbar.cta_link|default:'/contact/' }}" @click="mobileMenuOpen = false"
                 class="relative inline-flex items-center justify-center px-8 py-3.5 text-lg font-bold text-white transition-all duration-300 bg-brand-blue rounded-full overflow-hidden shadow-lg shadow-brand-blue/20">
-                <span class="relative z-10 flex items-center gap-2">Contact Us <i data-lucide="arrow-right"
+                <span class="relative z-10 flex items-center gap-2">{{ navbar.cta_text|default:'Contact Us' }} <i data-lucide="arrow-right"
                         class="w-5 h-5"></i></span>
             </a>
         </div>

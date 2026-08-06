@@ -37,6 +37,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,11 +45,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+    'imagekit',
+    'rest_framework',
     'core',
+    'seo',
+    'navigation',
+    'products',
+    'home',
+    'about',
+    'services',
+    'certificates',
+    'factory',
+    'contactapp',
+    'api',
+    'blog',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -70,8 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.context_processors.site_settings',
-                'core.context_processors.categories_processor',
+                'core.context_processors.global_settings',
             ],
         },
     },
@@ -168,3 +182,17 @@ CKEDITOR_CONFIGS = {
         'height': 300,
     }
 }
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'tianbao-portfolio-cache',
+    }
+}
+
+try:
+    from .jazzmin_settings import *
+except ImportError:
+    pass
+

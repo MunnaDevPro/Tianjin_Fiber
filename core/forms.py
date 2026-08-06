@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactMessage
+from contactapp.models import ContactMessage
 
 class ContactForm(forms.ModelForm):
     class Meta:
