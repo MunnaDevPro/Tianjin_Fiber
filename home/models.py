@@ -22,10 +22,16 @@ class HomeHero(SingletonModel):
         verbose_name = "Home Hero Section"
         verbose_name_plural = "Home Hero Section"
 
+    def __str__(self):
+        return "Home Hero Configuration"
+
 class HeroSlide(BaseSection):
     hero = models.ForeignKey(HomeHero, related_name='slides', on_delete=models.CASCADE)
     image = ProcessedImageField(upload_to='home/hero/', processors=[ResizeToFill(1920, 1080)], format='WEBP', options={'quality': 80})
     alt_text = models.CharField(max_length=100, default="Hero Slide")
+
+    def __str__(self):
+        return self.alt_text
 
 class HomeFactory(SingletonModel):
     title = models.CharField(max_length=200, default="State-of-the-art Production Facilities")
@@ -42,11 +48,17 @@ class HomeFactory(SingletonModel):
         verbose_name = "Home Factory Section"
         verbose_name_plural = "Home Factory Section"
 
+    def __str__(self):
+        return self.title
+
 class HomeFactoryFeature(BaseSection):
     factory = models.ForeignKey(HomeFactory, related_name='features', on_delete=models.CASCADE)
     icon = models.CharField(max_length=50, default="factory")
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
 
 class HomeValues(SingletonModel):
     title = models.CharField(max_length=200, default="Our Core Values")
@@ -57,11 +69,17 @@ class HomeValues(SingletonModel):
         verbose_name = "Home Values Section"
         verbose_name_plural = "Home Values Section"
 
+    def __str__(self):
+        return self.title
+
 class HomeValueItem(BaseSection):
     values_section = models.ForeignKey(HomeValues, related_name='items', on_delete=models.CASCADE)
     icon = models.CharField(max_length=50, default="shield")
     title = models.CharField(max_length=100)
     description = models.TextField()
+
+    def __str__(self):
+        return self.title
 
 class HomeMission(SingletonModel):
     title = models.CharField(max_length=200, default="Forging the strongest connections worldwide.")
@@ -80,3 +98,6 @@ class HomeMission(SingletonModel):
     class Meta:
         verbose_name = "Home Mission Section"
         verbose_name_plural = "Home Mission Section"
+
+    def __str__(self):
+        return self.title

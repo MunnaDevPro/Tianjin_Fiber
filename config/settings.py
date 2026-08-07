@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'contactapp',
     'api',
     'blog',
+    'activitylog',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'activitylog.middleware.UserSessionTrackingMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -78,7 +80,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,6 +88,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.global_settings',
+                'core.context_processors.admin_dashboard_metrics',
             ],
         },
     },
@@ -162,8 +165,14 @@ STORAGES = {
     },
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = env.int('EMAIL_PORT', default=587)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER', default='webmaster@localhost')
+EMAIL_RECIPIENT = env('EMAIL_RECIPIENT', default='munnahowlader06@gmail.com')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

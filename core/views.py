@@ -114,15 +114,34 @@ class ContactView(View):
         if form.is_valid():
             contact_msg = form.save()
             try:
-                send_mail(
-                    subject=f"New Contact: {contact_msg.subject}",
-                    message=f"Name: {contact_msg.name}\nEmail: {contact_msg.email}\nPhone: {contact_msg.phone}\n\nMessage:\n{contact_msg.message}",
+                from django.core.mail import EmailMultiAlternatives
+                from django.template.loader import render_to_string
+                import datetime
+
+                recipient = getattr(settings, 'EMAIL_RECIPIENT', 'munnahowlader06@gmail.com')
+                subject = f"New Contact/Quote: {contact_msg.subject}"
+                
+                context = {
+                    'contact': contact_msg,
+                    'current_year': datetime.datetime.now().year
+                }
+                
+                html_content = render_to_string('core/emails/contact_email.html', context)
+                text_content = f"Name: {contact_msg.name}\nEmail: {contact_msg.email}\nPhone: {contact_msg.phone}\nSubject: {contact_msg.subject}\n\nMessage:\n{contact_msg.message}"
+                
+                email = EmailMultiAlternatives(
+                    subject=subject,
+                    body=text_content,
                     from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.DEFAULT_FROM_EMAIL],
-                    fail_silently=True,
+                    to=[recipient],
                 )
-            except Exception:
-                pass
+                email.attach_alternative(html_content, "text/html")
+                email.send(fail_silently=False)
+            except Exception as e:
+                print(f"Error sending email: {e}")
             return JsonResponse({'success': True, 'message': 'Thank you! Your message has been sent.'})
         
         return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+
+def custom_page_not_found_view(request, exception=None):
+    return render(request, '404.html', status=404)

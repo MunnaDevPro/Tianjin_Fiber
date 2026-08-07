@@ -22,8 +22,13 @@ from django.conf.urls.static import static
 from django.urls import re_path
 from django.views.static import serve
 
+from core import views as core_views
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('dashboard/', admin.site.urls),
     path('', include('core.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^.*$', core_views.custom_page_not_found_view),
 ]
+
+handler404 = 'core.views.custom_page_not_found_view'

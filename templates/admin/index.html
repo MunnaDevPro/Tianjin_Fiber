@@ -1,0 +1,349 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container-fluid animate-fade-in px-2">
+
+    <!-- Top Compact Header & KPI Metrics -->
+    <div class="row align-items-center mb-3">
+        <div class="col-md-4 mb-2 mb-md-0">
+            <h1 class="welcome-title text-primary m-0" style="font-size: 1.6rem !important;">CMS Analytics Dashboard
+            </h1>
+            <p class="text-muted small m-0">Real-time overview of your website content and contact activity.</p>
+        </div>
+        <div class="col-md-8 text-md-right">
+            <a href="/" target="_blank" class="btn-view-site">
+                <i class="fas fa-external-link-alt"></i> View Live Site
+            </a>
+        </div>
+    </div>
+
+    <!-- Compact KPI Grid -->
+    <div class="metric-grid mb-4"
+        style="grid-template-columns: repeat(4, 1fr) !important; display: grid; gap: 0.75rem;">
+        <a href="{% url 'admin:products_product_changelist' %}" class="metric-card metric-blue py-2 px-3"
+            style="min-height: auto !important; border-radius: 0.75rem !important;">
+            <div class="metric-content">
+                <span class="metric-label" style="font-size: 0.7rem !important;">Total Products</span>
+                <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_products|default:"0" }}</span>
+            </div>
+            <div class="metric-icon-wrapper" style="width: 2.2rem; height: 2.2rem; font-size: 1rem;">
+                <i class="fas fa-box"></i>
+            </div>
+        </a>
+        <a href="{% url 'admin:contactapp_contactmessage_changelist' %}" class="metric-card metric-green py-2 px-3"
+            style="min-height: auto !important; border-radius: 0.75rem !important;">
+            <div class="metric-content">
+                <span class="metric-label" style="font-size: 0.7rem !important;">Messages</span>
+                <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_messages|default:"0" }}</span>
+            </div>
+            <div class="metric-icon-wrapper" style="width: 2.2rem; height: 2.2rem; font-size: 1rem;">
+                <i class="fas fa-envelope"></i>
+            </div>
+        </a>
+        <a href="{% url 'admin:certificates_certificate_changelist' %}" class="metric-card metric-amber py-2 px-3"
+            style="min-height: auto !important; border-radius: 0.75rem !important;">
+            <div class="metric-content">
+                <span class="metric-label" style="font-size: 0.7rem !important;">Certificates</span>
+                <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_certificates|default:"0" }}</span>
+            </div>
+            <div class="metric-icon-wrapper" style="width: 2.2rem; height: 2.2rem; font-size: 1rem;">
+                <i class="fas fa-award"></i>
+            </div>
+        </a>
+        <a href="{% url 'admin:auth_user_changelist' %}" class="metric-card metric-purple py-2 px-3"
+            style="min-height: auto !important; border-radius: 0.75rem !important;">
+            <div class="metric-content">
+                <span class="metric-label" style="font-size: 0.7rem !important;">Staff Users</span>
+                <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_users|default:"0" }}</span>
+            </div>
+            <div class="metric-icon-wrapper" style="width: 2.2rem; height: 2.2rem; font-size: 1rem;">
+                <i class="fas fa-users-cog"></i>
+            </div>
+        </a>
+    </div>
+
+    <!-- Analytics Charts Row -->
+    <div class="row mb-3">
+        <!-- Products Distribution Chart -->
+        <div class="col-lg-6 col-md-12 mb-3">
+            <div class="card custom-card m-0" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-2 px-3" style="background: transparent !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
+                            class="fas fa-chart-pie text-primary mr-1"></i> Products Category Distribution</h5>
+                </div>
+                <div class="custom-card-body d-flex align-items-center justify-content-center p-3"
+                    style="min-height: 220px; height: 220px;">
+                    {% if admin_metrics.category_data %}
+                    <canvas id="categoryChart" style="max-height: 190px; width: 100%;"></canvas>
+                    {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-chart-pie fa-2x mb-2 text-gray-300"></i>
+                        <p class="small mb-0">No category statistics available.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Metrics Growth Comparison -->
+        <div class="col-lg-6 col-md-12 mb-3">
+            <div class="card custom-card m-0" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-2 px-3" style="background: transparent !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
+                            class="fas fa-chart-bar text-success mr-1"></i> Database Contents Summary</h5>
+                </div>
+                <div class="custom-card-body d-flex align-items-center justify-content-center p-3"
+                    style="min-height: 220px; height: 220px;">
+                    <canvas id="metricsSummaryChart" style="max-height: 190px; width: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details, Inquiries & Quick Actions -->
+    <div class="row">
+        <!-- Recent Contact Messages -->
+        <div class="col-lg-7 col-md-12 mb-3">
+            <div class="card custom-card m-0 h-100" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-2 px-3 d-flex justify-content-between align-items-center"
+                    style="background: transparent !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
+                            class="fas fa-comment-alt text-success mr-1"></i> Recent Inquiries</h5>
+                    <a href="{% url 'admin:contactapp_contactmessage_changelist' %}"
+                        class="btn btn-xs btn-outline-primary rounded-pill py-0 px-2" style="font-size: 0.75rem;">View
+                        All</a>
+                </div>
+                <div class="custom-card-body p-0">
+                    <div class="custom-table-container">
+                        <table class="custom-table table-sm">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Sender
+                                    </th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Subject
+                                    </th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Date
+                                    </th>
+                                    <th class="text-right"
+                                        style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for msg in admin_metrics.recent_messages %}
+                                <tr>
+                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
+                                        <span class="font-weight-bold">{{ msg.name }}</span>
+                                        <div class="text-muted" style="font-size: 0.75rem;">{{ msg.email }}</div>
+                                    </td>
+                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">{{ msg.subject|truncatechars:35 }}</td>
+                                    <td class="text-muted"
+                                        style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">{{ msg.created_at|date:"M d, Y" }}</td>
+                                    <td class="text-right" style="padding: 0.6rem 1rem !important;">
+                                        <a href="{% url 'admin:contactapp_contactmessage_change' msg.id %}"
+                                            class="btn btn-xs btn-primary rounded-pill px-2 py-0"
+                                            style="font-size: 0.75rem; background: #1a4674 !important; border: none !important;">View</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted py-4">
+                                        <i class="fas fa-inbox fa-2x mb-1 text-gray-300"></i>
+                                        <p class="small mb-0">No messages received yet.</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions & System Info Grid -->
+        <div class="col-lg-5 col-md-12 mb-3">
+            <!-- Quick Actions Card -->
+            <div class="card custom-card m-0" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-2 px-3" style="background: transparent !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
+                            class="fas fa-rocket text-indigo mr-1"></i> Quick Actions</h5>
+                </div>
+                <div class="custom-card-body p-3">
+                    <div class="quick-actions-grid"
+                        style="grid-template-columns: repeat(3, 1fr) !important; gap: 0.5rem !important;">
+                        <a href="{% url 'admin:products_product_add' %}" class="quick-action-btn p-2"
+                            style="border-radius: 0.5rem !important;">
+                            <i class="fas fa-plus-circle mb-1" style="font-size: 1.1rem !important;"></i>
+                            <span style="font-size: 0.75rem !important;">Add Product</span>
+                        </a>
+                        <a href="{% url 'admin:certificates_certificate_add' %}" class="quick-action-btn p-2"
+                            style="border-radius: 0.5rem !important;">
+                            <i class="fas fa-certificate mb-1" style="font-size: 1.1rem !important;"></i>
+                            <span style="font-size: 0.75rem !important;">Add Certificate</span>
+                        </a>
+                        <a href="{% url 'admin:home_homehero_changelist' %}" class="quick-action-btn p-2"
+                            style="border-radius: 0.5rem !important;">
+                            <i class="fas fa-home mb-1" style="font-size: 1.1rem !important;"></i>
+                            <span style="font-size: 0.75rem !important;">Hero Settings</span>
+                        </a>
+                        <a href="{% url 'admin:about_aboutheader_changelist' %}" class="quick-action-btn p-2"
+                            style="border-radius: 0.5rem !important;">
+                            <i class="fas fa-info-circle mb-1" style="font-size: 1.1rem !important;"></i>
+                            <span style="font-size: 0.75rem !important;">About Config</span>
+                        </a>
+                        <a href="{% url 'admin:navigation_navbar_changelist' %}" class="quick-action-btn p-2"
+                            style="border-radius: 0.5rem !important;">
+                            <i class="fas fa-compass mb-1" style="font-size: 1.1rem !important;"></i>
+                            <span style="font-size: 0.75rem !important;">Edit Navbar</span>
+                        </a>
+                        <a href="{% url 'admin:navigation_footer_changelist' %}" class="quick-action-btn p-2"
+                            style="border-radius: 0.5rem !important;">
+                            <i class="fas fa-shoe-prints mb-1" style="font-size: 1.1rem !important;"></i>
+                            <span style="font-size: 0.75rem !important;">Edit Footer</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js and Custom Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function initCharts() {
+        // Doughnut Chart: Products Category Distribution
+        {% if admin_metrics.category_data %}
+        const catCanvas = document.getElementById('categoryChart');
+        if (catCanvas) {
+            const catCtx = catCanvas.getContext('2d');
+            const catLabels = [{% for item in admin_metrics.category_data %}"{{ item.name|safe }}",{% endfor %}];
+            const catData = [{% for item in admin_metrics.category_data %}{{ item.count }},{% endfor %}];
+            
+            new Chart(catCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: catLabels,
+                    datasets: [{
+                        label: 'Products',
+                        data: catData,
+                        backgroundColor: [
+                            '#1a4674',  /* Deep Blue */
+                            '#c0964b',  /* Gold */
+                            '#b71a4c',  /* Magenta */
+                            '#1e5287',  /* Secondary Blue */
+                            '#e0a96d',  /* Secondary Gold */
+                            '#d16a8a'   /* Secondary Magenta */
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeOutBack'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    family: "'Plus Jakarta Sans', sans-serif",
+                                    size: 10,
+                                    weight: '500'
+                                },
+                                color: '#475569',
+                                boxWidth: 10
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+        }
+        {% endif %}
+
+        // Bar Chart: Database Contents Summary
+        const sumCanvas = document.getElementById('metricsSummaryChart');
+        if (sumCanvas) {
+            const sumCtx = sumCanvas.getContext('2d');
+            new Chart(sumCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Products', 'Blog Posts', 'Messages', 'Certificates', 'Users'],
+                    datasets: [{
+                        label: 'Items in System',
+                        data: [
+                            {{ admin_metrics.total_products|default:"0" }},
+                            {{ admin_metrics.total_posts|default:"0" }},
+                            {{ admin_metrics.total_messages|default:"0" }},
+                            {{ admin_metrics.total_certificates|default:"0" }},
+                            {{ admin_metrics.total_users|default:"0" }}
+                        ],
+                        backgroundColor: [
+                            '#1a4674',  /* Products (Blue) */
+                            '#b71a4c',  /* Posts (Magenta) */
+                            '#10b981',  /* Messages (Green) */
+                            '#c0964b',  /* Certificates (Gold) */
+                            '#8b5cf6'   /* Users (Purple) */
+                        ],
+                        borderRadius: 4,
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1400,
+                        easing: 'easeOutBack'
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9'
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Plus Jakarta Sans', sans-serif",
+                                    size: 9
+                                },
+                                color: '#64748b'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Plus Jakarta Sans', sans-serif",
+                                    size: 9,
+                                    weight: '500'
+                                },
+                                color: '#64748b'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        initCharts();
+    } else {
+        document.addEventListener("DOMContentLoaded", initCharts);
+    }
+</script>
+{% endblock %}

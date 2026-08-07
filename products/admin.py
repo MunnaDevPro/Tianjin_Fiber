@@ -41,7 +41,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'is_active', 'order', 'main_image_preview')
+    list_display = ('main_image_preview', 'name', 'category', 'is_active', 'order')
+    list_display_links = ('main_image_preview', 'name')
     list_editable = ('is_active', 'order')
     list_filter = ('category', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
@@ -65,6 +66,6 @@ class ProductAdmin(admin.ModelAdmin):
 
     def main_image_preview(self, obj):
         if obj.main_image:
-            return format_html('<img src="{}" width="100" />', obj.main_image.url)
+            return format_html('<img src="{}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0;" />', obj.main_image.url)
         return ""
     main_image_preview.short_description = 'Image'

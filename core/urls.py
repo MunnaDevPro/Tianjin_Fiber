@@ -12,4 +12,5 @@ urlpatterns = [
     path('product/<slug:slug>/', views.ProductDetailView.as_view(), name='product_detail'),
     path('certificates/', views.CertificatesView.as_view(), name='certificates'),
     path('factory/', views.FactoryView.as_view(), name='factory'),
+    path('404/', views.custom_page_not_found_view, name='test_404'),
 ]

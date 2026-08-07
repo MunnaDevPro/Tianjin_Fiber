@@ -8,9 +8,15 @@ class CertificatesHeader(SingletonModel):
     subtitle = models.TextField()
     bg_image = ProcessedImageField(upload_to='certificates/', processors=[ResizeToFill(1920, 1080)], format='WEBP', null=True, blank=True)
 
+    def __str__(self):
+        return self.title
+
 class Certificate(BaseSection):
     title = models.CharField(max_length=100)
     image = ProcessedImageField(upload_to='certificates/gallery/', processors=[ResizeToFill(800, 1200)], format='WEBP')
+
+    def __str__(self):
+        return self.title
     
 class CertificatesCTA(SingletonModel):
     title = models.CharField(max_length=200, default="Need Details About Our Standards?")
@@ -19,3 +25,6 @@ class CertificatesCTA(SingletonModel):
     btn1_link = models.CharField(max_length=200, default="/contact/")
     btn2_text = models.CharField(max_length=50, default="Back to Services")
     btn2_link = models.CharField(max_length=200, default="/services/")
+
+    def __str__(self):
+        return self.title

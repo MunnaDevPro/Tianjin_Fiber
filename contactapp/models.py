@@ -14,6 +14,9 @@ class ContactPageSettings(SingletonModel):
     business_hours = models.TextField(default="Mon-Fri: 9:00 AM - 6:00 PM")
     map_iframe = models.TextField(blank=True, help_text="Google Maps iframe embed code")
 
+    def __str__(self):
+        return "Contact Page Settings"
+
 class ContactMessage(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
