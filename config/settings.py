@@ -33,6 +33,20 @@ DEBUG = env('DEBUG', default=True)
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+# Auto-populate CSRF_TRUSTED_ORIGINS from ALLOWED_HOSTS
+for host in ALLOWED_HOSTS:
+    if host and host != '*' and not host.startswith('.'):
+        # Handle port numbers if any
+        if ':' in host:
+            CSRF_TRUSTED_ORIGINS.append(f"https://{host}")
+            CSRF_TRUSTED_ORIGINS.append(f"http://{host}")
+        else:
+            CSRF_TRUSTED_ORIGINS.append(f"https://{host}")
+            CSRF_TRUSTED_ORIGINS.append(f"http://{host}")
+            CSRF_TRUSTED_ORIGINS.append(f"https://*.{host}")
+
+
 
 # Application definition
 
