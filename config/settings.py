@@ -34,6 +34,13 @@ DEBUG = env('DEBUG', default=True)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+
+# Auto-populate CSRF_TRUSTED_ORIGINS from RENDER_EXTERNAL_HOSTNAME
+render_host = env('RENDER_EXTERNAL_HOSTNAME', default=None)
+if render_host:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{render_host}")
+    CSRF_TRUSTED_ORIGINS.append(f"https://*.{render_host}")
+
 # Auto-populate CSRF_TRUSTED_ORIGINS from ALLOWED_HOSTS
 for host in ALLOWED_HOSTS:
     if host and host != '*' and not host.startswith('.'):
@@ -45,6 +52,14 @@ for host in ALLOWED_HOSTS:
             CSRF_TRUSTED_ORIGINS.append(f"https://{host}")
             CSRF_TRUSTED_ORIGINS.append(f"http://{host}")
             CSRF_TRUSTED_ORIGINS.append(f"https://*.{host}")
+
+# Explicitly add the known production domain
+CSRF_TRUSTED_ORIGINS.append("https://tianjin-fiber.onrender.com")
+
+# Trust the X-Forwarded-Proto header from the reverse proxy (Render)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 
 
 
