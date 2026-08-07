@@ -17,11 +17,20 @@
     }
 },
 {
-    "model": "sessions.session",
-    "pk": "n71puon1bes2pfm93k01fbg71pn0y27n",
+    "model": "auth.user",
     "fields": {
-        "session_data": ".eJxVjLEOgzAMRP8lcxU5JIG4Y3e-ARnbFNoqSASmqv9ekBja8e69u7fpaFvHbiu6dJOYq3Hm8tv1xE_NB5AH5ftsec7rMvX2UOxJi21n0dftdP8ORirjvk6OQQGJ2CfBAeuoXMXaQ2TYA7oAoB5dkkgVqhsaDOAlDE0CoTqazxfIuzbv:1wrggB:lX2BMM-9l1YlqidVLEEZWSFlL46Xb8Bb3H8jCeIYHlE",
-        "expire_date": "2026-08-19T18:49:27.805Z"
+        "password": "pbkdf2_sha256$1000000$LKj5JSuayW86R54oLGo5SK$M5F511h68T3N+NOS8UssBeVpAcJf43dhK0WPeJtnSsQ=",
+        "last_login": "2026-08-07T12:37:48.731Z",
+        "is_superuser": true,
+        "username": "tianbao",
+        "first_name": "",
+        "last_name": "",
+        "email": "tianbao@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-08-07T11:40:13.489Z",
+        "groups": [],
+        "user_permissions": []
     }
 },
 {
@@ -40,7 +49,7 @@
     "fields": {
         "logo": "navigation/logo_CplahHD.webp",
         "about_text": "Premium industrial-grade natural hemp rope and netting solutions. Manufactured for maximum durability in harsh environments, trusted by global industries since 1995.",
-        "copyright_text": "⌐ 2026 Tianjin Fiber Net. All Rights Reserved.",
+        "copyright_text": "© 2026 Tianjin Fiber Net. All Rights Reserved.",
         "address": "",
         "email": "info@tianjinfibernet.com",
         "phone": "+86 123 4567 8900"
@@ -142,6 +151,94 @@
         "slug": "marine-industrial-ropes",
         "hero_text": "High-tensile natural and synthetic ropes engineered for extreme environments.",
         "hero_image": "categories/marine-industrial-ropes_Z7ix94q.webp",
+        "hero_image_alt": "Category Hero Image"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 11,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 11,
+        "name": "Sport & Cargo Netting",
+        "slug": "sport-cargo-netting",
+        "hero_text": "High-durability barrier netting for sports facilities and cargo restraint.",
+        "hero_image": "categories/industrial-nets_k9y2UKA.webp",
+        "hero_image_alt": "Category Hero Image"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 12,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 12,
+        "name": "Geotechnical & Shade Nets",
+        "slug": "geotechnical-shade-nets",
+        "hero_text": "Premium ground stabilization and heavy-duty environmental shade nets.",
+        "hero_image": "categories/industrial-nets_k9y2UKA.webp",
+        "hero_image_alt": "Category Hero Image"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 15,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 13,
+        "name": "Aquaculture & Fishing Nets",
+        "slug": "aquaculture-fishing-nets",
+        "hero_text": "High-grade commercial netting solutions for marine aquaculture and open water fishing.",
+        "hero_image": "categories/industrial-nets_k9y2UKA.webp",
+        "hero_image_alt": "Category Hero Image"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 16,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 14,
+        "name": "Safety & Fall Arrest Nets",
+        "slug": "safety-fall-arrest-nets",
+        "hero_text": "Certified fall arrest and debris containment netting systems engineered for construction safety.",
+        "hero_image": "categories/industrial-nets_k9y2UKA.webp",
         "hero_image_alt": "Category Hero Image"
     }
 },
@@ -287,6 +384,102 @@
         "main_image": "products/main/natural-biodegradable-sisal-rope_2293Ctv.webp",
         "main_image_alt": "Product Image",
         "features": "100% natural agave fibers\nFully biodegradable and non-toxic\nExcellent grip & knot retention\nPerfect for agricultural ties and crafts"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 10,
+        "category": 11,
+        "name": "Golf Driving Range Barrier",
+        "slug": "golf-driving-range-barrier",
+        "description": "<p>Heavy-duty, high-impact barrier netting designed for golf courses and driving ranges to contain high-velocity balls safely.</p>",
+        "main_image": "products/main/safety-fall-protection-netting_It8knCC.webp",
+        "main_image_alt": "Product Image",
+        "features": "UV-Resistant Polymer\nDouble-Lock Border Mesh\nWeatherproof Netting"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 11,
+        "category": 11,
+        "name": "Heavy-Duty Truck Cargo Net",
+        "slug": "heavy-duty-truck-cargo-net",
+        "description": "<p>Premium grade cargo containment netting for trucks, trailers, and shipping containers to secure loads during transit.</p>",
+        "main_image": "products/main/safety-fall-protection-netting_It8knCC.webp",
+        "main_image_alt": "Product Image",
+        "features": "High Tensile Strength\nReinforced Webbing Borders\nIncludes Cargo Snap Hooks"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 12,
+        "category": 12,
+        "name": "Soil Erosion Control Netting",
+        "slug": "soil-erosion-control-netting",
+        "description": "<p>Eco-friendly, high-stability geotechnical netting designed for hillside soil stabilization, landscaping, and erosion control.</p>",
+        "main_image": "products/main/safety-fall-protection-netting_It8knCC.webp",
+        "main_image_alt": "Product Image",
+        "features": "100% Biodegradable Fibers\nHigh Moisture Retention\nReduces Surface Runoff"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+        "meta_title": "",
+        "meta_description": "",
+        "meta_keywords": "",
+        "canonical_url": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "robots_index": true,
+        "robots_follow": true,
+        "is_active": true,
+        "order": 13,
+        "category": 12,
+        "name": "Commercial Greenhouse Shade Net",
+        "slug": "commercial-greenhouse-shade-net",
+        "description": "<p>High-efficiency thermal shade netting providing 75% sun block to protect commercial greenhouse crops from heat and sunburn.</p>",
+        "main_image": "products/main/safety-fall-protection-netting_It8knCC.webp",
+        "main_image_alt": "Product Image",
+        "features": "75% Sun Block Rating\nTear-Resistant Knitted Weave\nReduces Water Consumption"
     }
 },
 {
@@ -826,7 +1019,7 @@
     "fields": {
         "title": "State-of-the-Art Manufacturing",
         "subtitle": "Explore our advanced manufacturing facilities where precision meets scale. We leverage cutting-edge technology to produce the highest quality nets and ropes.",
-        "bg_image": "factory/factory_header_lMYxtqV.webp"
+        "bg_image": "factory/factory_header_xbmI7ab.webp"
     }
 },
 {
@@ -839,80 +1032,80 @@
 },
 {
     "model": "factory.factoryimage",
-    "pk": 7,
+    "pk": 13,
     "fields": {
         "is_active": true,
         "order": 0,
         "gallery": 1,
         "title": "High-Speed Weaving Looms",
         "description": "Our state-of-the-art weaving looms operate around the clock to produce robust and consistent netting patterns with high precision and anti-fray weave.",
-        "image": "factory/gallery/gallery_thumb_0_rrR1cE0.webp",
-        "image_full": "factory/gallery/full/gallery_full_0_OmQ6Vih.webp"
+        "image": "factory/gallery/gallery_thumb_0_6hP4CrA.webp",
+        "image_full": "factory/gallery/full/gallery_full_0_Klb7ilw.webp"
     }
 },
 {
     "model": "factory.factoryimage",
-    "pk": 8,
+    "pk": 14,
     "fields": {
         "is_active": true,
         "order": 1,
         "gallery": 1,
         "title": "Automated Monofilament Extrusion",
         "description": "Raw polymers are melted, blended with UV stabilizers, and extruded into extremely fine, high-strength monofilaments that form the base of our products.",
-        "image": "factory/gallery/gallery_thumb_1_uoskkP6.webp",
-        "image_full": "factory/gallery/full/gallery_full_1_dEugCHh.webp"
+        "image": "factory/gallery/gallery_thumb_1_rChGFY5.webp",
+        "image_full": "factory/gallery/full/gallery_full_1_EAlaiQK.webp"
     }
 },
 {
     "model": "factory.factoryimage",
-    "pk": 9,
+    "pk": 15,
     "fields": {
         "is_active": true,
         "order": 2,
         "gallery": 1,
         "title": "Tensile Strength Testing Lab",
         "description": "Every production batch undergoes strict load testing in our laboratory to certify break strength, elasticity, and compliance with safety standards.",
-        "image": "factory/gallery/gallery_thumb_2_x5Z3RM8.webp",
-        "image_full": "factory/gallery/full/gallery_full_2_oqzD3ZX.webp"
+        "image": "factory/gallery/gallery_thumb_2_2A2rYs2.webp",
+        "image_full": "factory/gallery/full/gallery_full_2_CU1wMqt.webp"
     }
 },
 {
     "model": "factory.factoryimage",
-    "pk": 10,
+    "pk": 16,
     "fields": {
         "is_active": true,
         "order": 3,
         "gallery": 1,
         "title": "Raw Materials Warehouse",
         "description": "We store premium quality virgin HDPE and high-grade fibers in our climate-controlled warehouse to ensure absolute consistency in our raw supplies.",
-        "image": "factory/gallery/gallery_thumb_3_wiot9z9.webp",
-        "image_full": "factory/gallery/full/gallery_full_3_O9rBbPT.webp"
+        "image": "factory/gallery/gallery_thumb_3_tZS4H9e.webp",
+        "image_full": "factory/gallery/full/gallery_full_3_GO7fHZg.webp"
     }
 },
 {
     "model": "factory.factoryimage",
-    "pk": 11,
+    "pk": 17,
     "fields": {
         "is_active": true,
         "order": 4,
         "gallery": 1,
         "title": "Precision Heat Sealing Lines",
         "description": "Heavy-duty tarpaulins and custom agriculture netting sizes are heat-sealed and bordered with reinforced grommets for maximum longevity.",
-        "image": "factory/gallery/gallery_thumb_4_RM7T2nM.webp",
-        "image_full": "factory/gallery/full/gallery_full_4_VDOqzGz.webp"
+        "image": "factory/gallery/gallery_thumb_4_AUiXwqS.webp",
+        "image_full": "factory/gallery/full/gallery_full_4_y6JifM4.webp"
     }
 },
 {
     "model": "factory.factoryimage",
-    "pk": 12,
+    "pk": 18,
     "fields": {
         "is_active": true,
         "order": 5,
         "gallery": 1,
         "title": "Global Logistics & Packaging",
         "description": "Finished netting and rope rolls are compressed, shrink-wrapped, and securely palletized for container shipping to our partners worldwide.",
-        "image": "factory/gallery/gallery_thumb_5_FsjZz4k.webp",
-        "image_full": "factory/gallery/full/gallery_full_5_Vjwk9t8.webp"
+        "image": "factory/gallery/gallery_thumb_5_DvQe5jT.webp",
+        "image_full": "factory/gallery/full/gallery_full_5_NIWn0ji.webp"
     }
 },
 {
@@ -925,53 +1118,53 @@
 },
 {
     "model": "factory.factoryvideo",
-    "pk": 5,
+    "pk": 9,
     "fields": {
         "is_active": true,
         "order": 0,
         "video_section": 1,
         "title": "Extrusion & Spinning Lines",
         "description": "Raw polymers are melted and extruded into high-strength monofilaments. This critical step ensures the foundational durability of all our netting products.",
-        "youtube_url": "https://youtu.be/fNxjNFiwxiA?si=d2cUnH9VAty_0Bbd",
+        "youtube_url": "https://www.youtube.com/embed/T07Ib_nTPoE",
         "video_file": ""
     }
 },
 {
     "model": "factory.factoryvideo",
-    "pk": 6,
+    "pk": 10,
     "fields": {
         "is_active": true,
         "order": 1,
         "video_section": 1,
         "title": "Automated Net Weaving Technology",
         "description": "Watch our heavy-duty German knitting machines weave thousands of fibers simultaneously into robust agricultural and safety nets.",
-        "youtube_url": "https://www.youtube.com/watch?v=fNxjNFiwxiA",
+        "youtube_url": "https://www.youtube.com/embed/V6vCae7P9t0",
         "video_file": ""
     }
 },
 {
     "model": "factory.factoryvideo",
-    "pk": 7,
+    "pk": 11,
     "fields": {
         "is_active": true,
         "order": 2,
         "video_section": 1,
         "title": "Tensile Stress Testing Procedures",
         "description": "Witness the strict testing procedures in our QC lab where ropes and nets are pulled to their limits to certify safety thresholds.",
-        "youtube_url": "https://youtu.be/oXQm2Tgpebg?si=Hg9a7KKcdO1I77vh",
+        "youtube_url": "https://www.youtube.com/embed/2_N1X8Jb9_8",
         "video_file": ""
     }
 },
 {
     "model": "factory.factoryvideo",
-    "pk": 8,
+    "pk": 12,
     "fields": {
         "is_active": true,
         "order": 3,
         "video_section": 1,
         "title": "Logistics, Packing & Container Loading",
         "description": "See how our global shipping team packs, compresses, and loads bulk orders securely onto container trucks for ports.",
-        "youtube_url": "https://youtu.be/P7fi4hP_y80?si=hoxP4cd7hd8CLUfN",
+        "youtube_url": "https://www.youtube.com/embed/J7i_lIuT2W8",
         "video_file": ""
     }
 },
@@ -997,384 +1190,6 @@
         "phone": "+86 123 4567 8900",
         "business_hours": "Mon-Fri: 9:00 AM - 6:00 PM",
         "map_iframe": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 1,
-    "fields": {
-        "action_time": "2026-08-05T18:54:39.781Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "home",
-            "homemission"
-        ],
-        "object_id": "1",
-        "object_repr": "HomeMission object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Description\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 2,
-    "fields": {
-        "action_time": "2026-08-05T18:57:16.129Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "home",
-            "homevalues"
-        ],
-        "object_id": "1",
-        "object_repr": "HomeValues object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 3,
-    "fields": {
-        "action_time": "2026-08-05T18:58:18.148Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "home",
-            "homevalues"
-        ],
-        "object_id": "1",
-        "object_repr": "HomeValues object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"added\": {\"name\": \"home value item\", \"object\": \"HomeValueItem object (1)\"}}, {\"added\": {\"name\": \"home value item\", \"object\": \"HomeValueItem object (2)\"}}, {\"added\": {\"name\": \"home value item\", \"object\": \"HomeValueItem object (3)\"}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 4,
-    "fields": {
-        "action_time": "2026-08-06T16:36:40.925Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "about",
-            "aboutstory"
-        ],
-        "object_id": "1",
-        "object_repr": "AboutStory object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 5,
-    "fields": {
-        "action_time": "2026-08-06T16:38:06.131Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "about",
-            "aboutstory"
-        ],
-        "object_id": "1",
-        "object_repr": "AboutStory object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"added\": {\"name\": \"about story point\", \"object\": \"AboutStoryPoint object (1)\"}}, {\"added\": {\"name\": \"about story point\", \"object\": \"AboutStoryPoint object (2)\"}}, {\"added\": {\"name\": \"about story point\", \"object\": \"AboutStoryPoint object (3)\"}}, {\"added\": {\"name\": \"about story point\", \"object\": \"AboutStoryPoint object (4)\"}}, {\"added\": {\"name\": \"about story point\", \"object\": \"AboutStoryPoint object (5)\"}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 6,
-    "fields": {
-        "action_time": "2026-08-06T16:48:55.550Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "about",
-            "aboutstory"
-        ],
-        "object_id": "1",
-        "object_repr": "AboutStory object (1)",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 7,
-    "fields": {
-        "action_time": "2026-08-06T16:57:13.090Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "about",
-            "aboutexcellence"
-        ],
-        "object_id": "1",
-        "object_repr": "AboutExcellence object (1)",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 8,
-    "fields": {
-        "action_time": "2026-08-06T17:08:55.818Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "about",
-            "aboutexcellence"
-        ],
-        "object_id": "1",
-        "object_repr": "AboutExcellence object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Title\", \"Title suffix\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 9,
-    "fields": {
-        "action_time": "2026-08-06T17:09:09.138Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "about",
-            "aboutexcellence"
-        ],
-        "object_id": "1",
-        "object_repr": "AboutExcellence object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Title\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 10,
-    "fields": {
-        "action_time": "2026-08-06T19:36:49.759Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "factory",
-            "factoryvideosection"
-        ],
-        "object_id": "1",
-        "object_repr": "FactoryVideoSection object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"name\": \"factory video\", \"object\": \"FactoryVideo object (6)\", \"fields\": [\"Youtube url\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 11,
-    "fields": {
-        "action_time": "2026-08-06T19:41:50.803Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "factory",
-            "factoryvideosection"
-        ],
-        "object_id": "1",
-        "object_repr": "FactoryVideoSection object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"name\": \"factory video\", \"object\": \"FactoryVideo object (7)\", \"fields\": [\"Youtube url\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 12,
-    "fields": {
-        "action_time": "2026-08-06T19:42:44.099Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "factory",
-            "factoryvideosection"
-        ],
-        "object_id": "1",
-        "object_repr": "FactoryVideoSection object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"name\": \"factory video\", \"object\": \"FactoryVideo object (8)\", \"fields\": [\"Youtube url\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 13,
-    "fields": {
-        "action_time": "2026-08-06T19:50:46.043Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "contactapp",
-            "contactpagesettings"
-        ],
-        "object_id": "1",
-        "object_repr": "ContactPageSettings object (1)",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 14,
-    "fields": {
-        "action_time": "2026-08-06T19:51:03.845Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "contactapp",
-            "contactpagesettings"
-        ],
-        "object_id": "1",
-        "object_repr": "ContactPageSettings object (1)",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Subtitle\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 15,
-    "fields": {
-        "action_time": "2026-08-06T19:54:02.313Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "navigation",
-            "footer"
-        ],
-        "object_id": "1",
-        "object_repr": "Footer Configuration",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 16,
-    "fields": {
-        "action_time": "2026-08-06T19:57:01.813Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "navigation",
-            "sociallink"
-        ],
-        "object_id": "1",
-        "object_repr": "Facebook",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 17,
-    "fields": {
-        "action_time": "2026-08-06T19:59:44.908Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "navigation",
-            "sociallink"
-        ],
-        "object_id": "2",
-        "object_repr": "Twitter",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 18,
-    "fields": {
-        "action_time": "2026-08-06T20:00:09.426Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "navigation",
-            "sociallink"
-        ],
-        "object_id": "2",
-        "object_repr": "Twitter",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 19,
-    "fields": {
-        "action_time": "2026-08-06T20:00:46.318Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "navigation",
-            "navbar"
-        ],
-        "object_id": "1",
-        "object_repr": "Navbar Configuration",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 20,
-    "fields": {
-        "action_time": "2026-08-06T20:01:38.343Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "navigation",
-            "footer"
-        ],
-        "object_id": "1",
-        "object_repr": "Footer Configuration",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 21,
-    "fields": {
-        "action_time": "2026-08-06T20:01:55.816Z",
-        "user": [
-            "admin"
-        ],
-        "content_type": [
-            "navigation",
-            "footer"
-        ],
-        "object_id": "1",
-        "object_repr": "Footer Configuration",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
     }
 }
 ]
