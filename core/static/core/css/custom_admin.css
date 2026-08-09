@@ -1634,3 +1634,100 @@ ul.nav-sidebar {
     right: 0 !important;
     left: auto !important;
 }
+
+/* -------------------------------------------------------------
+   CUSTOM DASHBOARD ANIMATIONS, HOVERS & MICRO-INTERACTIONS
+   ------------------------------------------------------------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+    opacity: 0;
+    animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glassmorphic elements & shadow layers */
+.custom-welcome-banner {
+    background: linear-gradient(135deg, #0d233a 0%, #1a4674 60%, #1e5287 100%) !important;
+    box-shadow: 0 10px 25px -5px rgba(26, 70, 116, 0.35) !important;
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.metric-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+}
+
+/* Metric Hover colors & icon wiggle */
+.metric-card:hover {
+    box-shadow: 0 12px 22px -5px rgba(13, 35, 58, 0.1) !important;
+    background: #ffffff !important;
+    border-color: rgba(26, 70, 116, 0.3) !important;
+}
+
+.metric-card:hover .metric-icon-wrapper {
+    transform: rotate(8deg) scale(1.12);
+}
+
+.metric-icon-wrapper {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hover Rows styling for custom tables */
+.hover-row {
+    transition: all 0.2s ease;
+}
+
+.hover-row:hover {
+    background-color: #f8fafc !important;
+}
+
+/* Quick Action Button Interactive Enhancements */
+.quick-action-btn {
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-action-btn:hover {
+    border-color: #c0964b !important;
+    box-shadow: 0 6px 12px rgba(192, 150, 75, 0.12) !important;
+}
+
+/* System info layout transitions */
+.system-info-list div {
+    transition: all 0.2s ease;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.35rem;
+}
+
+.system-info-list div:hover {
+    padding-left: 8px !important;
+    background-color: rgba(241, 245, 249, 0.85);
+}

@@ -4,25 +4,26 @@
 {% block content %}
 <div class="container-fluid animate-fade-in px-2">
 
-    <!-- Top Compact Header & KPI Metrics -->
-    <div class="row align-items-center mb-3">
-        <div class="col-md-4 mb-2 mb-md-0">
-            <h1 class="welcome-title text-primary m-0" style="font-size: 1.6rem !important;">CMS Analytics Dashboard
-            </h1>
-            <p class="text-muted small m-0">Real-time overview of your website content and contact activity.</p>
-        </div>
-        <div class="col-md-8 text-md-right">
-            <a href="/" target="_blank" class="btn-view-site">
-                <i class="fas fa-external-link-alt"></i> View Live Site
-            </a>
+    <!-- Premium Dashboard Hero Welcome Banner -->
+    <div class="custom-welcome-banner mb-4">
+        <div class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+            <div>
+                <span class="welcome-badge"><i class="fas fa-sparkles mr-1"></i> Quick Overview</span>
+                <h1 class="welcome-title text-white m-0">Welcome back to UK Portfolio CMS</h1>
+                <p class="welcome-text text-white-50 m-0 mt-1">Easily update your website contents, blog posts, factory specifications, certificates, and check active contact inquiries.</p>
+            </div>
+            <div class="welcome-actions mt-3 mt-md-0">
+                <a href="/" target="_blank" class="btn btn-light btn-view-site text-primary font-weight-bold shadow-sm">
+                    <i class="fas fa-external-link-alt mr-1"></i> View Live Site
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Compact KPI Grid -->
-    <div class="metric-grid mb-4"
-        style="grid-template-columns: repeat(4, 1fr) !important; display: grid; gap: 0.75rem;">
-        <a href="{% url 'admin:products_product_changelist' %}" class="metric-card metric-blue py-2 px-3"
-            style="min-height: auto !important; border-radius: 0.75rem !important;">
+    <!-- 6-Metric KPI Grid with sequential animation delays -->
+    <div class="metric-grid mb-4" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important; display: grid; gap: 1rem;">
+        <!-- Products -->
+        <a href="{% url 'admin:products_product_changelist' %}" class="metric-card metric-blue py-2 px-3 animate-slide-up" style="animation-delay: 0.05s; min-height: auto !important; border-radius: 0.75rem !important;">
             <div class="metric-content">
                 <span class="metric-label" style="font-size: 0.7rem !important;">Total Products</span>
                 <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_products|default:"0" }}</span>
@@ -31,8 +32,9 @@
                 <i class="fas fa-box"></i>
             </div>
         </a>
-        <a href="{% url 'admin:contactapp_contactmessage_changelist' %}" class="metric-card metric-green py-2 px-3"
-            style="min-height: auto !important; border-radius: 0.75rem !important;">
+
+        <!-- Messages -->
+        <a href="{% url 'admin:contactapp_contactmessage_changelist' %}" class="metric-card metric-green py-2 px-3 animate-slide-up" style="animation-delay: 0.15s; min-height: auto !important; border-radius: 0.75rem !important;">
             <div class="metric-content">
                 <span class="metric-label" style="font-size: 0.7rem !important;">Messages</span>
                 <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_messages|default:"0" }}</span>
@@ -41,8 +43,9 @@
                 <i class="fas fa-envelope"></i>
             </div>
         </a>
-        <a href="{% url 'admin:certificates_certificate_changelist' %}" class="metric-card metric-amber py-2 px-3"
-            style="min-height: auto !important; border-radius: 0.75rem !important;">
+
+        <!-- Certificates -->
+        <a href="{% url 'admin:certificates_certificate_changelist' %}" class="metric-card metric-amber py-2 px-3 animate-slide-up" style="animation-delay: 0.2s; min-height: auto !important; border-radius: 0.75rem !important;">
             <div class="metric-content">
                 <span class="metric-label" style="font-size: 0.7rem !important;">Certificates</span>
                 <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_certificates|default:"0" }}</span>
@@ -51,8 +54,20 @@
                 <i class="fas fa-award"></i>
             </div>
         </a>
-        <a href="{% url 'admin:auth_user_changelist' %}" class="metric-card metric-purple py-2 px-3"
-            style="min-height: auto !important; border-radius: 0.75rem !important;">
+
+        <!-- Services -->
+        <a href="{% url 'admin:services_serviceitem_changelist' %}" class="metric-card metric-cyan py-2 px-3 animate-slide-up" style="animation-delay: 0.25s; min-height: auto !important; border-radius: 0.75rem !important; border-left: 4px solid #06b6d4 !important;">
+            <div class="metric-content">
+                <span class="metric-label" style="font-size: 0.7rem !important;">Services</span>
+                <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_services|default:"0" }}</span>
+            </div>
+            <div class="metric-icon-wrapper" style="width: 2.2rem; height: 2.2rem; font-size: 1rem; background: #ecfeff !important; color: #06b6d4 !important;">
+                <i class="fas fa-hands-helping"></i>
+            </div>
+        </a>
+
+        <!-- Staff Users -->
+        <a href="{% url 'admin:auth_user_changelist' %}" class="metric-card metric-purple py-2 px-3 animate-slide-up" style="animation-delay: 0.3s; min-height: auto !important; border-radius: 0.75rem !important;">
             <div class="metric-content">
                 <span class="metric-label" style="font-size: 0.7rem !important;">Staff Users</span>
                 <span class="metric-value" style="font-size: 1.4rem !important;">{{ admin_metrics.total_users|default:"0" }}</span>
@@ -64,18 +79,16 @@
     </div>
 
     <!-- Analytics Charts Row -->
-    <div class="row mb-3">
+    <div class="row mb-4">
         <!-- Products Distribution Chart -->
         <div class="col-lg-6 col-md-12 mb-3">
-            <div class="card custom-card m-0" style="border-radius: 0.75rem !important;">
-                <div class="custom-card-header py-2 px-3" style="background: transparent !important;">
-                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
-                            class="fas fa-chart-pie text-primary mr-1"></i> Products Category Distribution</h5>
+            <div class="card custom-card m-0 shadow-sm border-0 animate-fade-in" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-2 px-3" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-chart-pie text-primary mr-1"></i> Products Category Distribution</h5>
                 </div>
-                <div class="custom-card-body d-flex align-items-center justify-content-center p-3"
-                    style="min-height: 220px; height: 220px;">
+                <div class="custom-card-body d-flex align-items-center justify-content-center p-3" style="min-height: 230px; height: 230px;">
                     {% if admin_metrics.category_data %}
-                    <canvas id="categoryChart" style="max-height: 190px; width: 100%;"></canvas>
+                    <canvas id="categoryChart" style="max-height: 200px; width: 100%;"></canvas>
                     {% else %}
                     <div class="text-center text-muted py-4">
                         <i class="fas fa-chart-pie fa-2x mb-2 text-gray-300"></i>
@@ -88,68 +101,55 @@
 
         <!-- Database Metrics Growth Comparison -->
         <div class="col-lg-6 col-md-12 mb-3">
-            <div class="card custom-card m-0" style="border-radius: 0.75rem !important;">
-                <div class="custom-card-header py-2 px-3" style="background: transparent !important;">
-                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
-                            class="fas fa-chart-bar text-success mr-1"></i> Database Contents Summary</h5>
+            <div class="card custom-card m-0 shadow-sm border-0 animate-fade-in" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-2 px-3" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-chart-bar text-success mr-1"></i> Database Contents Summary</h5>
                 </div>
-                <div class="custom-card-body d-flex align-items-center justify-content-center p-3"
-                    style="min-height: 220px; height: 220px;">
-                    <canvas id="metricsSummaryChart" style="max-height: 190px; width: 100%;"></canvas>
+                <div class="custom-card-body d-flex align-items-center justify-content-center p-3" style="min-height: 230px; height: 230px;">
+                    <canvas id="metricsSummaryChart" style="max-height: 200px; width: 100%;"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Details, Inquiries & Quick Actions -->
+    <!-- Main Content Grid -->
     <div class="row">
-        <!-- Recent Contact Messages -->
-        <div class="col-lg-7 col-md-12 mb-3">
-            <div class="card custom-card m-0 h-100" style="border-radius: 0.75rem !important;">
-                <div class="custom-card-header py-2 px-3 d-flex justify-content-between align-items-center"
-                    style="background: transparent !important;">
-                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
-                            class="fas fa-comment-alt text-success mr-1"></i> Recent Inquiries</h5>
-                    <a href="{% url 'admin:contactapp_contactmessage_changelist' %}"
-                        class="btn btn-xs btn-outline-primary rounded-pill py-0 px-2" style="font-size: 0.75rem;">View
-                        All</a>
+        <!-- Tables column (Left) -->
+        <div class="col-lg-8 col-md-12">
+            <!-- Recent Contact Messages -->
+            <div class="card custom-card shadow-sm border-0 mb-4 animate-fade-in" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-3 px-3 d-flex justify-content-between align-items-center" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-comment-alt text-success mr-1"></i> Recent Contact Messages</h5>
+                    <a href="{% url 'admin:contactapp_contactmessage_changelist' %}" class="btn btn-xs btn-outline-primary rounded-pill py-1 px-3" style="font-size: 0.75rem;">View All</a>
                 </div>
                 <div class="custom-card-body p-0">
                     <div class="custom-table-container">
-                        <table class="custom-table table-sm">
+                        <table class="custom-table table-sm mb-0">
                             <thead>
                                 <tr>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Sender
-                                    </th>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Subject
-                                    </th>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Date
-                                    </th>
-                                    <th class="text-right"
-                                        style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Action
-                                    </th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Sender</th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Subject</th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Date</th>
+                                    <th class="text-right" style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for msg in admin_metrics.recent_messages %}
-                                <tr>
+                                <tr class="hover-row">
                                     <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
-                                        <span class="font-weight-bold">{{ msg.name }}</span>
+                                        <span class="font-weight-bold" style="color: #1e293b;">{{ msg.name }}</span>
                                         <div class="text-muted" style="font-size: 0.75rem;">{{ msg.email }}</div>
                                     </td>
-                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">{{ msg.subject|truncatechars:35 }}</td>
-                                    <td class="text-muted"
-                                        style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">{{ msg.created_at|date:"M d, Y" }}</td>
+                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #475569;">{{ msg.subject|truncatechars:45 }}</td>
+                                    <td class="text-muted" style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">{{ msg.created_at|date:"M d, Y" }}</td>
                                     <td class="text-right" style="padding: 0.6rem 1rem !important;">
-                                        <a href="{% url 'admin:contactapp_contactmessage_change' msg.id %}"
-                                            class="btn btn-xs btn-primary rounded-pill px-2 py-0"
-                                            style="font-size: 0.75rem; background: #1a4674 !important; border: none !important;">View</a>
+                                        <a href="{% url 'admin:contactapp_contactmessage_change' msg.id %}" class="btn btn-xs btn-primary rounded-pill px-3 py-1" style="font-size: 0.72rem; background: #1a4674 !important; border: none !important; box-shadow: 0 2px 4px rgba(26, 70, 116, 0.15);">View Details</a>
                                     </td>
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="4" class="text-center text-muted py-4">
-                                        <i class="fas fa-inbox fa-2x mb-1 text-gray-300"></i>
+                                    <td colspan="4" class="text-center text-muted py-5">
+                                        <i class="fas fa-inbox fa-3x mb-2 text-gray-200"></i>
                                         <p class="small mb-0">No messages received yet.</p>
                                     </td>
                                 </tr>
@@ -159,52 +159,43 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <!-- Quick Actions & System Info Grid -->
-        <div class="col-lg-5 col-md-12 mb-3">
+        <!-- Sidebar Grid column (Right) -->
+        <div class="col-lg-4 col-md-12">
             <!-- Quick Actions Card -->
-            <div class="card custom-card m-0" style="border-radius: 0.75rem !important;">
-                <div class="custom-card-header py-2 px-3" style="background: transparent !important;">
-                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i
-                            class="fas fa-rocket text-indigo mr-1"></i> Quick Actions</h5>
+            <div class="card custom-card shadow-sm border-0 mb-4 animate-fade-in" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-3 px-3" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-rocket text-indigo mr-1"></i> Quick Admin Actions</h5>
                 </div>
                 <div class="custom-card-body p-3">
-                    <div class="quick-actions-grid"
-                        style="grid-template-columns: repeat(3, 1fr) !important; gap: 0.5rem !important;">
-                        <a href="{% url 'admin:products_product_add' %}" class="quick-action-btn p-2"
-                            style="border-radius: 0.5rem !important;">
+                    <div class="quick-actions-grid" style="grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem !important;">
+                        <a href="{% url 'admin:products_product_add' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
                             <i class="fas fa-plus-circle mb-1" style="font-size: 1.1rem !important;"></i>
                             <span style="font-size: 0.75rem !important;">Add Product</span>
                         </a>
-                        <a href="{% url 'admin:certificates_certificate_add' %}" class="quick-action-btn p-2"
-                            style="border-radius: 0.5rem !important;">
+
+                        <a href="{% url 'admin:certificates_certificate_add' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
                             <i class="fas fa-certificate mb-1" style="font-size: 1.1rem !important;"></i>
                             <span style="font-size: 0.75rem !important;">Add Certificate</span>
                         </a>
-                        <a href="{% url 'admin:home_homehero_changelist' %}" class="quick-action-btn p-2"
-                            style="border-radius: 0.5rem !important;">
+                        <a href="{% url 'admin:home_homehero_changelist' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
                             <i class="fas fa-home mb-1" style="font-size: 1.1rem !important;"></i>
                             <span style="font-size: 0.75rem !important;">Hero Settings</span>
                         </a>
-                        <a href="{% url 'admin:about_aboutheader_changelist' %}" class="quick-action-btn p-2"
-                            style="border-radius: 0.5rem !important;">
-                            <i class="fas fa-info-circle mb-1" style="font-size: 1.1rem !important;"></i>
-                            <span style="font-size: 0.75rem !important;">About Config</span>
-                        </a>
-                        <a href="{% url 'admin:navigation_navbar_changelist' %}" class="quick-action-btn p-2"
-                            style="border-radius: 0.5rem !important;">
+                        <a href="{% url 'admin:navigation_navbar_changelist' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
                             <i class="fas fa-compass mb-1" style="font-size: 1.1rem !important;"></i>
                             <span style="font-size: 0.75rem !important;">Edit Navbar</span>
                         </a>
-                        <a href="{% url 'admin:navigation_footer_changelist' %}" class="quick-action-btn p-2"
-                            style="border-radius: 0.5rem !important;">
+                        <a href="{% url 'admin:navigation_footer_changelist' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
                             <i class="fas fa-shoe-prints mb-1" style="font-size: 1.1rem !important;"></i>
                             <span style="font-size: 0.75rem !important;">Edit Footer</span>
                         </a>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -232,9 +223,11 @@
                             '#1a4674',  /* Deep Blue */
                             '#c0964b',  /* Gold */
                             '#b71a4c',  /* Magenta */
-                            '#1e5287',  /* Secondary Blue */
+                            '#0d9488',  /* Teal */
+                            '#8b5cf6',  /* Purple */
                             '#e0a96d',  /* Secondary Gold */
-                            '#d16a8a'   /* Secondary Magenta */
+                            '#06b6d4',  /* Cyan */
+                            '#f43f5e'   /* Rose */
                         ],
                         borderColor: '#ffffff',
                         borderWidth: 2,
@@ -244,8 +237,15 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     animation: {
-                        duration: 1500,
-                        easing: 'easeOutBack'
+                        duration: 1400,
+                        easing: 'easeOutBack',
+                        delay: (context) => {
+                            let delay = 0;
+                            if (context.type === 'data' && context.mode === 'default') {
+                                delay = context.dataIndex * 120;
+                            }
+                            return delay;
+                        }
                     },
                     plugins: {
                         legend: {
@@ -253,15 +253,15 @@
                             labels: {
                                 font: {
                                     family: "'Plus Jakarta Sans', sans-serif",
-                                    size: 10,
+                                    size: 9,
                                     weight: '500'
                                 },
                                 color: '#475569',
-                                boxWidth: 10
+                                boxWidth: 8
                             }
                         }
                     },
-                    cutout: '65%'
+                    cutout: '70%'
                 }
             });
         }
@@ -274,24 +274,24 @@
             new Chart(sumCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Products', 'Blog Posts', 'Messages', 'Certificates', 'Users'],
+                    labels: ['Products', 'Messages', 'Certificates', 'Services', 'Users'],
                     datasets: [{
-                        label: 'Items in System',
+                        label: 'System Items',
                         data: [
                             {{ admin_metrics.total_products|default:"0" }},
-                            {{ admin_metrics.total_posts|default:"0" }},
                             {{ admin_metrics.total_messages|default:"0" }},
                             {{ admin_metrics.total_certificates|default:"0" }},
+                            {{ admin_metrics.total_services|default:"0" }},
                             {{ admin_metrics.total_users|default:"0" }}
                         ],
                         backgroundColor: [
-                            '#1a4674',  /* Products (Blue) */
-                            '#b71a4c',  /* Posts (Magenta) */
-                            '#10b981',  /* Messages (Green) */
-                            '#c0964b',  /* Certificates (Gold) */
-                            '#8b5cf6'   /* Users (Purple) */
+                            '#1a4674',  /* Products */
+                            '#10b981',  /* Messages */
+                            '#c0964b',  /* Certificates */
+                            '#06b6d4',  /* Services */
+                            '#8b5cf6'   /* Users */
                         ],
-                        borderRadius: 4,
+                        borderRadius: 6,
                         borderWidth: 0,
                     }]
                 },
@@ -300,7 +300,14 @@
                     maintainAspectRatio: false,
                     animation: {
                         duration: 1400,
-                        easing: 'easeOutBack'
+                        easing: 'easeOutBack',
+                        delay: (context) => {
+                            let delay = 0;
+                            if (context.type === 'data' && context.mode === 'default') {
+                                delay = context.dataIndex * 120;
+                            }
+                            return delay;
+                        }
                     },
                     plugins: {
                         legend: {
