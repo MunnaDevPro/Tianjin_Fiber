@@ -88,6 +88,7 @@ INSTALLED_APPS = [
     'contactapp',
     'api',
     'blog',
+    'customers',
     'activitylog',
 ]
 

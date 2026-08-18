@@ -41,6 +41,7 @@ class FactoryVideo(BaseSection):
     description = models.TextField()
     youtube_url = models.URLField(null=True, blank=True)
     video_file = models.FileField(upload_to='factory/videos/', null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='factory/videos/thumbnails/', null=True, blank=True, help_text="Cover thumbnail image for the video player")
 
     def __str__(self):
         return self.title

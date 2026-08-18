@@ -58,6 +58,9 @@ JAZZMIN_SETTINGS = {
 
         # Security
         "activitylog.UserSession": "fas fa-user-shield",
+        
+        # Customers
+        "customers.Customer": "fas fa-users",
     },
     "custom_links": {
         "home": [{
@@ -66,7 +69,7 @@ JAZZMIN_SETTINGS = {
             "icon": "fas fa-home"
         }]
     },
-    "order_with_respect_to": ["navigation", "home", "about", "products", "services", "factory", "certificates", "contactapp", "activitylog", "seo", "auth"],
+    "order_with_respect_to": ["navigation", "home", "about", "products", "services", "factory", "certificates", "customers", "contactapp", "activitylog", "seo", "auth"],
     "custom_css": "core/css/custom_admin.css",
     "custom_js": "core/js/custom_admin.js",
 }

@@ -26,6 +26,7 @@ from core import views as core_views
 
 urlpatterns = [
     path('dashboard/', admin.site.urls),
+    path('dashboard/customers/', include('customers.urls')),
     path('', include('core.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^.*$', core_views.custom_page_not_found_view),

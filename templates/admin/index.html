@@ -76,6 +76,17 @@
                 <i class="fas fa-users-cog"></i>
             </div>
         </a>
+
+        <!-- Customers -->
+        <a href="{% url 'admin:customers_customer_changelist' %}" class="metric-card py-2 px-3 animate-slide-up" style="animation-delay: 0.35s; min-height: auto !important; border-radius: 0.75rem !important; border-left: 4px solid #f59e0b !important;">
+            <div class="metric-content">
+                <span class="metric-label" style="font-size: 0.7rem !important; color: #475569;">Total Customers</span>
+                <span id="metricTotalCustomers" class="metric-value" style="font-size: 1.4rem !important; color: #1e293b;">{{ admin_metrics.total_customers|default:"0" }}</span>
+            </div>
+            <div class="metric-icon-wrapper" style="width: 2.2rem; height: 2.2rem; font-size: 1rem; background: #fffbeb !important; color: #d97706 !important;">
+                <i class="fas fa-users"></i>
+            </div>
+        </a>
     </div>
 
     <!-- Analytics Charts Row -->
@@ -160,6 +171,69 @@
                 </div>
             </div>
 
+            <!-- Recent Customers -->
+            <div class="card custom-card shadow-sm border-0 mb-4 animate-fade-in" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-3 px-3 d-flex justify-content-between align-items-center" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-users text-warning mr-1"></i> Recent Customers</h5>
+                    <div>
+                        <button type="button" class="btn btn-xs btn-primary rounded-pill py-1 px-3 mr-2" style="font-size: 0.75rem; background: #1a4674 !important; border: none !important;" data-toggle="modal" data-target="#addCustomerModal">
+                            <i class="fas fa-plus mr-1"></i> Add Customer
+                        </button>
+                        <a href="{% url 'admin:customers_customer_changelist' %}" class="btn btn-xs btn-outline-primary rounded-pill py-1 px-3" style="font-size: 0.75rem;">View All</a>
+                    </div>
+                </div>
+                <div class="custom-card-body p-0">
+                    <div class="custom-table-container">
+                        <table class="custom-table table-sm mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Photo</th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Customer</th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Contact</th>
+                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Address</th>
+                                    <th class="text-right" style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                {% for customer in admin_metrics.recent_customers %}
+                                <tr class="hover-row">
+                                    <td style="padding: 0.6rem 1rem !important;">
+                                        {% if customer.photo %}
+                                        <img src="{{ customer.photo.url }}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 1px solid #e2e8f0;" alt="{{ customer.full_name }}">
+                                        {% else %}
+                                        <div style="width: 40px; height: 40px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #4a5568; font-weight: bold; font-size: 0.9rem;">
+                                            {{ customer.full_name|slice:":1"|upper }}
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
+                                        <span class="font-weight-bold" style="color: #1e293b;">{{ customer.full_name }}</span>
+                                        <div class="text-muted" style="font-size: 0.75rem;">@{{ customer.name }}</div>
+                                    </td>
+                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #475569;">
+                                        {{ customer.phone_number }}
+                                    </td>
+                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #64748b;">
+                                        {{ customer.address|truncatechars:35 }}
+                                    </td>
+                                    <td class="text-right" style="padding: 0.6rem 1rem !important;">
+                                        <a href="{% url 'admin:customers_customer_change' customer.id %}" class="btn btn-xs btn-primary rounded-pill px-3 py-1" style="font-size: 0.72rem; background: #1a4674 !important; border: none !important; box-shadow: 0 2px 4px rgba(26, 70, 116, 0.15);">Edit</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr id="noCustomersRow">
+                                    <td colspan="5" class="text-center text-muted py-5">
+                                        <i class="fas fa-users fa-3x mb-2 text-gray-200"></i>
+                                        <p class="small mb-0">No customers registered yet.</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Sidebar Grid column (Right) -->
@@ -192,10 +266,69 @@
                             <i class="fas fa-shoe-prints mb-1" style="font-size: 1.1rem !important;"></i>
                             <span style="font-size: 0.75rem !important;">Edit Footer</span>
                         </a>
+                        <button type="button" class="quick-action-btn p-2 border-0 bg-transparent w-100" style="border-radius: 0.5rem !important; outline: none;" data-toggle="modal" data-target="#addCustomerModal">
+                            <i class="fas fa-user-plus mb-1" style="font-size: 1.1rem !important; color: #f59e0b;"></i>
+                            <span style="font-size: 0.75rem !important; display: block; line-height: 1;">Add Customer</span>
+                        </button>
                     </div>
                 </div>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Add Customer Modal -->
+<div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 1rem !important; overflow: hidden;">
+            <div class="modal-header border-0 text-white p-3" style="background: linear-gradient(135deg, #1a4674 0%, #1e293b 100%);">
+                <h5 class="modal-title font-weight-bold" id="addCustomerModalLabel"><i class="fas fa-user-plus mr-2 text-warning"></i> Add New Customer</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="addCustomerForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body p-4 bg-light">
+                    <div id="customerFormError" class="alert alert-danger d-none shadow-sm" style="border-radius: 0.5rem;"></div>
+                    
+                    <div class="form-group mb-3">
+                        <label class="small text-muted font-weight-bold" for="id_name">Name / Username</label>
+                        <input type="text" name="name" id="id_name" class="form-control border-0 shadow-sm" style="border-radius: 0.5rem;" required placeholder="e.g. johndoe">
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label class="small text-muted font-weight-bold" for="id_full_name">Full Name</label>
+                        <input type="text" name="full_name" id="id_full_name" class="form-control border-0 shadow-sm" style="border-radius: 0.5rem;" required placeholder="e.g. John Doe">
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label class="small text-muted font-weight-bold" for="id_phone_number">Phone Number</label>
+                        <input type="text" name="phone_number" id="id_phone_number" class="form-control border-0 shadow-sm" style="border-radius: 0.5rem;" required placeholder="e.g. +1 234 567 890">
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label class="small text-muted font-weight-bold" for="id_address">Address</label>
+                        <textarea name="address" id="id_address" class="form-control border-0 shadow-sm" style="border-radius: 0.5rem; min-height: 80px;" required placeholder="Full Address..."></textarea>
+                    </div>
+                    
+                    <div class="form-group mb-0">
+                        <label class="small text-muted font-weight-bold" for="id_photo">Customer Photo</label>
+                        <div class="custom-file shadow-sm" style="border-radius: 0.5rem; overflow: hidden;">
+                            <input type="file" name="photo" id="id_photo" class="custom-file-input border-0" accept="image/*">
+                            <label class="custom-file-label border-0 text-muted" for="id_photo" style="border-radius: 0.5rem;">Choose photo...</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 bg-white">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-dismiss="modal" style="font-weight: 500;">Cancel</button>
+                    <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm" style="background: #1a4674 !important; border: none !important; font-weight: bold;">
+                        <span class="spinner-border spinner-border-sm d-none mr-2" id="submitSpinner" role="status" aria-hidden="true"></span>
+                        Save Customer
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -274,7 +407,7 @@
             new Chart(sumCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Products', 'Messages', 'Certificates', 'Services', 'Users'],
+                    labels: ['Products', 'Messages', 'Certificates', 'Services', 'Users', 'Customers'],
                     datasets: [{
                         label: 'System Items',
                         data: [
@@ -282,14 +415,16 @@
                             {{ admin_metrics.total_messages|default:"0" }},
                             {{ admin_metrics.total_certificates|default:"0" }},
                             {{ admin_metrics.total_services|default:"0" }},
-                            {{ admin_metrics.total_users|default:"0" }}
+                            {{ admin_metrics.total_users|default:"0" }},
+                            {{ admin_metrics.total_customers|default:"0" }}
                         ],
                         backgroundColor: [
                             '#1a4674',  /* Products */
                             '#10b981',  /* Messages */
                             '#c0964b',  /* Certificates */
                             '#06b6d4',  /* Services */
-                            '#8b5cf6'   /* Users */
+                            '#8b5cf6',  /* Users */
+                            '#f59e0b'   /* Customers */
                         ],
                         borderRadius: 6,
                         borderWidth: 0,
@@ -352,5 +487,104 @@
     } else {
         document.addEventListener("DOMContentLoaded", initCharts);
     }
+
+    // Dynamic customer submission AJAX
+    document.addEventListener("DOMContentLoaded", function() {
+        const fileInput = document.getElementById('id_photo');
+        if (fileInput) {
+            fileInput.addEventListener('change', function(e) {
+                const fileName = e.target.files[0] ? e.target.files[0].name : "Choose photo...";
+                const label = e.target.nextElementSibling;
+                if (label) label.textContent = fileName;
+            });
+        }
+
+        const form = document.getElementById('addCustomerForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const errorDiv = document.getElementById('customerFormError');
+                const spinner = document.getElementById('submitSpinner');
+                
+                errorDiv.classList.add('d-none');
+                errorDiv.textContent = '';
+                spinner.classList.remove('d-none');
+                
+                const formData = new FormData(form);
+                
+                fetch("{% url 'customers:add_customer_ajax' %}", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(errData => { throw errData; });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    spinner.classList.add('d-none');
+                    if (data.status === 'success') {
+                        // Close modal
+                        $('#addCustomerModal').modal('hide');
+                        form.reset();
+                        if (fileInput) {
+                            fileInput.nextElementSibling.textContent = "Choose photo...";
+                        }
+                        
+                        // Increment total customer counter metrics
+                        const counter = document.getElementById('metricTotalCustomers');
+                        if (counter) {
+                            counter.textContent = parseInt(counter.textContent || 0) + 1;
+                        }
+                        
+                        // Prepend new row to customer table
+                        const tbody = document.getElementById('customersTableBody');
+                        const noCustomersRow = document.getElementById('noCustomersRow');
+                        if (noCustomersRow) {
+                            noCustomersRow.remove();
+                        }
+                        
+                        const photoHtml = data.customer.photo_url 
+                            ? `<img src="${data.customer.photo_url}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 1px solid #e2e8f0;" alt="${data.customer.full_name}">`
+                            : `<div style="width: 40px; height: 40px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #4a5568; font-weight: bold; font-size: 0.9rem;">${data.customer.full_name.charAt(0).toUpperCase()}</div>`;
+                        
+                        const editUrl = `/dashboard/customers/customer/${data.customer.id}/change/`;
+                        
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover-row animate-fade-in';
+                        tr.innerHTML = `
+                            <td style="padding: 0.6rem 1rem !important;">${photoHtml}</td>
+                            <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
+                                <span class="font-weight-bold" style="color: #1e293b;">${data.customer.full_name}</span>
+                                <div class="text-muted" style="font-size: 0.75rem;">@${data.customer.name}</div>
+                            </td>
+                            <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #475569;">${data.customer.phone_number}</td>
+                            <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #64748b;">${data.customer.address}</td>
+                            <td class="text-right" style="padding: 0.6rem 1rem !important;">
+                                <a href="${editUrl}" class="btn btn-xs btn-primary rounded-pill px-3 py-1" style="font-size: 0.72rem; background: #1a4674 !important; border: none !important; box-shadow: 0 2px 4px rgba(26, 70, 116, 0.15);">Edit</a>
+                            </td>
+                        `;
+                        
+                        tbody.insertBefore(tr, tbody.firstChild);
+                    }
+                })
+                .catch(error => {
+                    spinner.classList.add('d-none');
+                    let errorMsg = 'An error occurred. Please try again.';
+                    if (error && error.errors) {
+                        errorMsg = Object.entries(error.errors).map(([field, err]) => `${field}: ${err}`).join('<br>');
+                    } else if (error && error.message) {
+                        errorMsg = error.message;
+                    }
+                    errorDiv.innerHTML = errorMsg;
+                    errorDiv.classList.remove('d-none');
+                });
+            });
+        }
+    });
 </script>
 {% endblock %}

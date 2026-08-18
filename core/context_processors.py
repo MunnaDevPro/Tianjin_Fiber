@@ -51,6 +51,7 @@ def admin_dashboard_metrics(request):
         from contactapp.models import ContactMessage
         from certificates.models import Certificate
         from activitylog.models import UserSession
+        from customers.models import Customer
         
         # Try importing from optional modules safely
         try:
@@ -64,21 +65,23 @@ def admin_dashboard_metrics(request):
             total_team_members = TeamMember.objects.count()
         except ImportError:
             total_team_members = 0
-
+ 
         total_products = Product.objects.count()
         total_messages = ContactMessage.objects.count()
         total_certificates = Certificate.objects.count()
         total_users = User.objects.count()
-
+        total_customers = Customer.objects.count()
+ 
         recent_messages = list(ContactMessage.objects.order_by('-created_at')[:5])
-
+        recent_customers = list(Customer.objects.order_by('-created_at')[:5])
+ 
         category_data = []
         for cat in Category.objects.all():
             category_data.append({
                 'name': cat.name,
                 'count': cat.products.count()
             })
-
+ 
         # Gather System Info
         db_engine = settings.DATABASES.get('default', {}).get('ENGINE', '').split('.')[-1]
         system_info = {
@@ -88,7 +91,7 @@ def admin_dashboard_metrics(request):
             'db_engine': db_engine.upper() if db_engine else 'SQLITE',
             'debug_mode': settings.DEBUG,
         }
-
+ 
         return {
             'admin_metrics': {
                 'total_products': total_products,
@@ -97,7 +100,9 @@ def admin_dashboard_metrics(request):
                 'total_users': total_users,
                 'total_services': total_services,
                 'total_team_members': total_team_members,
+                'total_customers': total_customers,
                 'recent_messages': recent_messages,
+                'recent_customers': recent_customers,
                 'category_data': category_data,
                 'system_info': system_info,
             }
