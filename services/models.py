@@ -43,3 +43,31 @@ class ServicesCTA(SingletonModel):
 
     def __str__(self):
         return self.title
+
+class BusinessModelSection(SingletonModel):
+    title = models.CharField(max_length=200, default="OEM & ODM Solutions")
+    subtitle = models.TextField(default="Whether you have your own unique product design or want to leverage our existing high-quality manufacturing lines under your own brand, we offer flexible models to suit your business needs.")
+
+    def __str__(self):
+        return self.title
+
+class BusinessModelItem(BaseSection):
+    section = models.ForeignKey(BusinessModelSection, related_name='items', on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=100) # e.g. OEM
+    full_name = models.CharField(max_length=200) # e.g. Original Equipment Manufacturer
+    quote = models.CharField(max_length=200) # e.g. "Your Design, Our Manufacturing"
+    description = models.TextField()
+    icon = models.CharField(max_length=50, default="briefcase")
+    features = models.TextField(help_text="Format: Key: Value, one per line. E.g. Design: Yours", blank=True)
+    color_theme = models.CharField(max_length=50, choices=[('blue', 'Blue'), ('magenta', 'Magenta')], default='blue')
+
+    def __str__(self):
+        return self.title
+        
+    def get_features_list(self):
+        feature_list = []
+        for line in self.features.split('\n'):
+            if ':' in line:
+                key, val = line.split(':', 1)
+                feature_list.append({"key": key.strip(), "value": val.strip()})
+        return feature_list

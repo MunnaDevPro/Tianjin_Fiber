@@ -3,7 +3,7 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
-<section class="pt-24 pb-12 md:pt-28 md:pb-16 bg-slate-50 relative">
+<section class="pt-24 pb-6 md:pt-28 md:pb-8 bg-slate-50 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <style>
@@ -76,30 +76,7 @@
                             </button>
                             {% endfor %}
 
-                            <!-- STATIC DEMO IMAGES -->
-                            <button
-                                @click="mainImage = 'https://images.unsplash.com/photo-1530628314541-69e061ff34fa?auto=format&fit=crop&q=80&w=800'"
-                                class="relative aspect-square rounded-xl overflow-hidden border-2 focus:outline-none transition-all duration-300 hover:shadow-md"
-                                :class="mainImage === 'https://images.unsplash.com/photo-1530628314541-69e061ff34fa?auto=format&fit=crop&q=80&w=800' ? 'border-brand-copper shadow-md' : 'border-slate-100 hover:border-slate-300'">
-                                <img src="https://images.unsplash.com/photo-1530628314541-69e061ff34fa?auto=format&fit=crop&q=80&w=800"
-                                    class="w-full h-full object-cover" loading="lazy">
-                            </button>
 
-                            <button
-                                @click="mainImage = 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800'"
-                                class="relative aspect-square rounded-xl overflow-hidden border-2 focus:outline-none transition-all duration-300 hover:shadow-md"
-                                :class="mainImage === 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800' ? 'border-brand-copper shadow-md' : 'border-slate-100 hover:border-slate-300'">
-                                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800"
-                                    class="w-full h-full object-cover" loading="lazy">
-                            </button>
-
-                            <button
-                                @click="mainImage = 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=800'"
-                                class="relative aspect-square rounded-xl overflow-hidden border-2 focus:outline-none transition-all duration-300 hover:shadow-md"
-                                :class="mainImage === 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=800' ? 'border-brand-copper shadow-md' : 'border-slate-100 hover:border-slate-300'">
-                                <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=800"
-                                    class="w-full h-full object-cover" loading="lazy">
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -120,13 +97,13 @@
 
                     <!-- Product Title -->
                     <h1
-                        class="hidden lg:block text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900 mb-4 leading-[1.15] tracking-tight">
+                        class="hidden lg:block text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900 mb-2 leading-[1.15] tracking-tight">
                         {{ product.name }}
                     </h1>
 
                     <!-- Elegant Divider -->
                     <div
-                        class="hidden lg:block h-1 w-16 bg-gradient-to-r from-brand-copper to-brand-magenta rounded-full mb-6">
+                        class="hidden lg:block h-1 w-16 bg-gradient-to-r from-brand-copper to-brand-magenta rounded-full mb-3">
                     </div>
 
                     <!-- Description -->

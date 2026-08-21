@@ -71,11 +71,13 @@ class ServicesView(TemplateView):
     template_name = 'core/services.html'
     
     def get_context_data(self, **kwargs):
+        from services.models import BusinessModelSection
         context = super().get_context_data(**kwargs)
         context['header'] = ServicesHeader.objects.first()
         context['services'] = ServiceItem.objects.filter(is_active=True)
         context['process'] = ProcessSection.objects.first()
         context['cta'] = ServicesCTA.objects.first()
+        context['business_models'] = BusinessModelSection.objects.first()
         return context
 
 class FactoryView(TemplateView):

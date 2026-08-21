@@ -16,11 +16,13 @@ def add_customer_ajax(request):
             'message': 'Customer added successfully!',
             'customer': {
                 'id': customer.id,
-                'name': customer.name,
-                'full_name': customer.full_name,
-                'phone_number': customer.phone_number,
-                'address': customer.address,
-                'photo_url': customer.photo.url if customer.photo else None,
+                'customer_id': customer.customer_id,
+                'company_name': customer.company_name,
+                'contact_person': customer.contact_person,
+                'email': customer.email or '',
+                'phone': customer.phone or '',
+                'customer_type': customer.customer_type,
+                'status': customer.status,
                 'created_at': customer.created_at.strftime('%b %d, %Y'),
             }
         })

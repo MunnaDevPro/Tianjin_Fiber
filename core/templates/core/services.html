@@ -9,7 +9,8 @@
     <!-- Background Image & Gradient Overlay -->
     <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000"
-            alt="Services Header Background" class="w-full h-full object-cover opacity-40 mix-blend-overlay" fetchpriority="high">
+            alt="Services Header Background" class="w-full h-full object-cover opacity-40 mix-blend-overlay"
+            fetchpriority="high">
         <div class="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/90 to-brand-blue/70"></div>
         <div class="absolute inset-0 bg-brand-blue/20" style="backdrop-filter: blur(2px);"></div>
     </div>
@@ -56,12 +57,13 @@
         <div class="space-y-16 md:space-y-20">
             {% for service in services %}
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center {% if forloop.counter|divisibleby:2 %}lg:flex-row-reverse{% endif %}"
-                {% if service.title != 'Custom Agricultural Nets' %}data-aos="fade-up"{% endif %}>
+                {% if service.title != 'Custom Agricultural Nets' %}data-aos="fade-up" {% endif %}>
                 <div class="w-full lg:w-5/12 relative">
                     <div
                         class="aspect-video rounded-3xl overflow-hidden shadow-xl relative group border-4 border-white">
                         <img src="{% if service.image %}{{ service.image.url }}{% endif %}" alt="{{ service.title }}"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out" loading="lazy">
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out"
+                            loading="lazy">
                         <div
                             class="absolute inset-0 bg-brand-blue/10 group-hover:bg-transparent transition-colors duration-500">
                         </div>
@@ -85,17 +87,30 @@
             <!-- Default Service 1 -->
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
                 <div class="w-full lg:w-5/12 relative">
-                    <div class="aspect-video rounded-3xl overflow-hidden shadow-xl relative group border-4 border-white">
-                        <img src="https://images.unsplash.com/photo-1595853035070-59a39fe84de3?auto=format&fit=crop&q=80&w=1000" alt="Custom Agricultural Nets" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out" loading="lazy">
-                        <div class="absolute inset-0 bg-brand-blue/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                    <div
+                        class="aspect-video rounded-3xl overflow-hidden shadow-xl relative group border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1595853035070-59a39fe84de3?auto=format&fit=crop&q=80&w=1000"
+                            alt="Custom Agricultural Nets"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out"
+                            loading="lazy">
+                        <div
+                            class="absolute inset-0 bg-brand-blue/10 group-hover:bg-transparent transition-colors duration-500">
+                        </div>
                     </div>
-                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-cream rounded-full -z-10 blur-2xl opacity-70"></div>
+                    <div
+                        class="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-cream rounded-full -z-10 blur-2xl opacity-70">
+                    </div>
                 </div>
                 <div class="w-full lg:w-7/12 lg:px-4">
-                    <h2 class="text-2xl lg:text-3xl font-display font-bold text-brand-blue mb-4 leading-tight">Custom Agricultural Nets</h2>
-                    <p class="text-base text-slate-600 leading-relaxed mb-8 max-w-xl">High-durability shading and bird protection nets designed specifically for modern agriculture. Engineered to withstand harsh UV exposure and extreme weather conditions.</p>
-                    <a href="{% url 'core:contact' %}" class="inline-flex items-center gap-2 font-medium text-brand-magenta hover:text-brand-blue transition-colors group text-sm uppercase tracking-wide">
-                        Discuss your project <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    <h2 class="text-2xl lg:text-3xl font-display font-bold text-brand-blue mb-4 leading-tight">Custom
+                        Agricultural Nets</h2>
+                    <p class="text-base text-slate-600 leading-relaxed mb-8 max-w-xl">High-durability shading and bird
+                        protection nets designed specifically for modern agriculture. Engineered to withstand harsh UV
+                        exposure and extreme weather conditions.</p>
+                    <a href="{% url 'core:contact' %}"
+                        class="inline-flex items-center gap-2 font-medium text-brand-magenta hover:text-brand-blue transition-colors group text-sm uppercase tracking-wide">
+                        Discuss your project <i data-lucide="arrow-right"
+                            class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
@@ -103,21 +118,113 @@
             <!-- Default Service 2 -->
             <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 items-center" data-aos="fade-up">
                 <div class="w-full lg:w-5/12 relative">
-                    <div class="aspect-video rounded-3xl overflow-hidden shadow-xl relative group border-4 border-white">
-                        <img src="https://images.unsplash.com/photo-1542314831-c6a420325160?auto=format&fit=crop&q=80&w=1000" alt="Industrial Safety Nets" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out" loading="lazy">
-                        <div class="absolute inset-0 bg-brand-blue/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                    <div
+                        class="aspect-video rounded-3xl overflow-hidden shadow-xl relative group border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1542314831-c6a420325160?auto=format&fit=crop&q=80&w=1000"
+                            alt="Industrial Safety Nets"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[800ms] ease-out"
+                            loading="lazy">
+                        <div
+                            class="absolute inset-0 bg-brand-blue/10 group-hover:bg-transparent transition-colors duration-500">
+                        </div>
                     </div>
-                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-cream rounded-full -z-10 blur-2xl opacity-70"></div>
+                    <div
+                        class="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-cream rounded-full -z-10 blur-2xl opacity-70">
+                    </div>
                 </div>
                 <div class="w-full lg:w-7/12 lg:px-4">
-                    <h2 class="text-2xl lg:text-3xl font-display font-bold text-brand-blue mb-4 leading-tight">Industrial Safety Nets</h2>
-                    <p class="text-base text-slate-600 leading-relaxed mb-8 max-w-xl">Heavy-duty fall protection and cargo securing nets. Certified to international safety standards, providing reliable performance in construction and logistics.</p>
-                    <a href="{% url 'core:contact' %}" class="inline-flex items-center gap-2 font-medium text-brand-magenta hover:text-brand-blue transition-colors group text-sm uppercase tracking-wide">
-                        Discuss your project <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    <h2 class="text-2xl lg:text-3xl font-display font-bold text-brand-blue mb-4 leading-tight">
+                        Industrial Safety Nets</h2>
+                    <p class="text-base text-slate-600 leading-relaxed mb-8 max-w-xl">Heavy-duty fall protection and
+                        cargo securing nets. Certified to international safety standards, providing reliable performance
+                        in construction and logistics.</p>
+                    <a href="{% url 'core:contact' %}"
+                        class="inline-flex items-center gap-2 font-medium text-brand-magenta hover:text-brand-blue transition-colors group text-sm uppercase tracking-wide">
+                        Discuss your project <i data-lucide="arrow-right"
+                            class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
             {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- OEM & ODM Manufacturing Models -->
+<section class="py-12 md:py-16 bg-[#f8fafc] relative overflow-hidden border-y border-slate-200">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center max-w-4xl mx-auto mb-12" data-aos="fade-up">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 mb-6">
+                <div class="w-2 h-2 rounded-full bg-brand-magenta animate-pulse"></div>
+                <span class="text-[10px] md:text-xs font-bold tracking-[0.2em] text-brand-blue uppercase">Global
+                    Manufacturing Partnership</span>
+            </div>
+            <h2
+                class="text-3xl md:text-4xl font-display font-extrabold text-brand-blue leading-[1.1] tracking-tight mb-4">
+                {{ business_models.title|default:"OEM & ODM Solutions" }}
+            </h2>
+            <p class="text-slate-600 text-base leading-relaxed max-w-3xl mx-auto">
+                {{ business_models.subtitle|default:"Partner with us for world-class manufacturing capabilities. Whether you are an established global brand requiring precise adherence to custom blueprints, or a growing distributor looking to private-label our proven product lines, we have a specialized division ready to scale your business." }}
+            </p>
+        </div>
+
+        <!-- Cards Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            {% for item in business_models.items.all %}
+            <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-[0_15px_40px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all duration-500 relative group overflow-hidden flex flex-col h-full"
+                data-aos="fade-up" data-aos-delay="{{ forloop.counter }}00">
+
+                <!-- Card Header -->
+                <div class="flex items-start justify-between mb-6 relative z-10">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-blue to-brand-blue/80 text-white shadow-brand-blue/30 shadow-lg flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                            <i data-lucide="{{ item.icon }}" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-brand-blue font-display tracking-tight">{{ item.title }}</h3>
+                            <p class="text-[11px] font-semibold text-brand-blue uppercase tracking-[0.1em] mt-0.5">{{ item.full_name }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote / Core Philosophy -->
+                <div class="mb-6 relative z-10 bg-slate-50 rounded-xl p-4 border-l-4 border-brand-blue">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="quote" class="w-5 h-5 text-brand-blue/40 flex-shrink-0"></i>
+                        <p class="text-base font-bold text-brand-blue italic">"{{ item.quote }}"</p>
+                    </div>
+                </div>
+
+                <!-- Main Description -->
+                <p class="text-slate-600 text-sm leading-relaxed mb-8 relative z-10 flex-grow">
+                    {{ item.description }}
+                </p>
+
+                <!-- Features List -->
+                <div class="relative z-10 bg-white border border-slate-100 rounded-xl p-5 shadow-sm">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Key Advantages</h4>
+                    <ul class="space-y-3">
+                        {% for feature in item.get_features_list %}
+                        <li class="flex items-start gap-2.5">
+                            <div
+                                class="mt-0.5 w-4 h-4 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
+                            </div>
+                            <span class="text-sm text-slate-700 leading-relaxed"><strong class="text-brand-blue">{{ feature.key }}:</strong> {{ feature.value }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% empty %}
+            <p>No business models defined.</p>
+            {% endfor %}
+
         </div>
     </div>
 </section>
@@ -320,8 +427,7 @@
                     Step By Step Process
                 </span>
             </div>
-            <h2
-                class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-brand-blue leading-[1.15] tracking-tight mb-4">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-brand-blue leading-[1.15] tracking-tight mb-4">
                 {{ process.title|default:'Our Comprehensive <br class="hidden md:block" /> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-magenta to-brand-blue">Manufacturing</span>'|safe }}
             </h2>
             <p class="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl">
@@ -347,7 +453,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-20 lg:gap-y-0 mb-20 lg:mb-0 text-center relative row-1-container"
                 style="z-index: 10;">
                 {% for step in process.steps.all|slice:":3" %}
-                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}50">
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up"
+                    data-aos-delay="{{ forloop.counter0|add:1 }}50">
                     <div class="step-icon-circle">
                         <i data-lucide="{{ step.icon }}"></i>
                     </div>
@@ -400,7 +507,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-20 lg:gap-y-0 text-center relative row-2-container"
                 style="z-index: 10;">
                 {% for step in process.steps.all|slice:"3:6" %}
-                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:4 }}50">
+                <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up"
+                    data-aos-delay="{{ forloop.counter0|add:4 }}50">
                     <div class="step-icon-circle" id="circle-{{ forloop.counter|add:3 }}" style="margin-bottom: 0;">
                         <i data-lucide="{{ step.icon }}"></i>
                     </div>
@@ -454,7 +562,8 @@
         <!-- Grid Row 2 Text (Desktop ONLY) -->
         <div class="desktop-row-2-text">
             {% for step in process.steps.all|slice:"3:6" %}
-            <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:4 }}50"
+            <div class="flex flex-col items-center step-item-wrapper" data-aos="fade-up"
+                data-aos-delay="{{ forloop.counter0|add:4 }}50"
                 onmouseenter="document.getElementById('circle-{{ forloop.counter|add:3 }}').classList.add('hover-active')"
                 onmouseleave="document.getElementById('circle-{{ forloop.counter|add:3 }}').classList.remove('hover-active')">
                 <div class="step-text-container">

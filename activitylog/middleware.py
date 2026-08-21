@@ -1,5 +1,6 @@
 import requests
 from django.utils import timezone
+from django.conf import settings
 from .models import UserSession
 
 def get_client_ip(request):
@@ -96,5 +97,14 @@ class UserSessionTrackingMiddleware:
                 session_log.is_active = True
                 session_log.last_activity = timezone.now()
                 session_log.save()
+
+            # Deactivate other sessions of the current user that have exceeded the inactivity timeout (default 30 mins)
+            inactivity_timeout = getattr(settings, 'USER_SESSION_TIMEOUT', 1800)
+            cutoff_time = timezone.now() - timezone.timedelta(seconds=inactivity_timeout)
+            UserSession.objects.filter(
+                user=request.user,
+                is_active=True,
+                last_activity__lt=cutoff_time
+            ).exclude(session_key=session_key).update(is_active=False)
 
         return response

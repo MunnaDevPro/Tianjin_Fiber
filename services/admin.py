@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import ServicesHeader, ServiceItem, ProcessSection, ProcessStep, ServicesCTA
+from .models import ServicesHeader, ServiceItem, ProcessSection, ProcessStep, ServicesCTA, BusinessModelSection, BusinessModelItem
 
 @admin.register(ServicesHeader)
 class ServicesHeaderAdmin(admin.ModelAdmin):
@@ -35,3 +35,16 @@ class ProcessStepAdmin(admin.ModelAdmin):
 @admin.register(ServicesCTA)
 class ServicesCTAAdmin(admin.ModelAdmin):
     pass
+
+class BusinessModelItemInline(admin.StackedInline):
+    model = BusinessModelItem
+    extra = 0
+
+@admin.register(BusinessModelSection)
+class BusinessModelSectionAdmin(admin.ModelAdmin):
+    inlines = [BusinessModelItemInline]
+
+@admin.register(BusinessModelItem)
+class BusinessModelItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'full_name', 'is_active', 'order')
+    list_editable = ('is_active', 'order')
