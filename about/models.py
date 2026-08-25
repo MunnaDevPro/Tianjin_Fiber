@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 class AboutHeader(SingletonModel):
     title = models.CharField(max_length=200, default="Building the Future of Global Manufacturing")
     subtitle = models.TextField()
-    bg_image = ProcessedImageField(upload_to='about/', processors=[ResizeToFill(1920, 600)], format='WEBP', null=True, blank=True)
+    bg_image = ProcessedImageField(upload_to='about/', processors=[ResizeToFill(1920, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -15,7 +15,7 @@ class AboutStory(SingletonModel):
     title = models.CharField(max_length=200, default="A Legacy of", help_text="The first part of the title (e.g. 'A Legacy of')")
     title_highlight = models.CharField(max_length=200, default="Strength", help_text="The word that will be colored differently (e.g. 'Strength')")
     description = models.TextField()
-    image = ProcessedImageField(upload_to='about/', processors=[ResizeToFill(800, 600)], format='WEBP', null=True, blank=True)
+    image = ProcessedImageField(upload_to='about/', processors=[ResizeToFill(800, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} {self.title_highlight}"
@@ -59,7 +59,7 @@ class AboutExcellenceCard(BaseSection):
 class TeamMember(BaseSection):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
-    image = ProcessedImageField(upload_to='about/team/', processors=[ResizeToFill(400, 500)], format='WEBP')
+    image = ProcessedImageField(upload_to='about/team/', processors=[ResizeToFill(400, 500)], format='WEBP', options={'quality': 80})
     email = models.EmailField(blank=True)
     twitter = models.URLField(blank=True)
     linkedin = models.URLField(blank=True)
@@ -70,7 +70,7 @@ class TeamMember(BaseSection):
 class Testimonial(BaseSection):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
-    image = ProcessedImageField(upload_to='about/testimonials/', processors=[ResizeToFill(150, 150)], format='WEBP', null=True, blank=True)
+    image = ProcessedImageField(upload_to='about/testimonials/', processors=[ResizeToFill(150, 150)], format='WEBP', options={'quality': 80}, null=True, blank=True)
     text = models.TextField()
 
     def __str__(self):

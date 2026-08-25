@@ -5,15 +5,15 @@
 <div class="container-fluid animate-fade-in px-2">
 
     <!-- Premium Dashboard Hero Welcome Banner -->
-    <div class="custom-welcome-banner mb-4">
-        <div class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+    <div class="custom-welcome-banner mb-3">
+        <div class="card-body py-2 px-3 d-flex flex-column flex-md-row align-items-md-center justify-content-between">
             <div>
-                <span class="welcome-badge"><i class="fas fa-sparkles mr-1"></i> Quick Overview</span>
-                <h1 class="welcome-title text-white m-0">Welcome back to UK Portfolio CMS</h1>
-                <p class="welcome-text text-white-50 m-0 mt-1">Easily update your website contents, blog posts, factory specifications, certificates, and check active contact inquiries.</p>
+                <span class="welcome-badge" style="padding: 0.2rem 0.6rem; font-size: 0.7rem;"><i class="fas fa-sparkles mr-1"></i> Quick Overview</span>
+                <h1 class="welcome-title text-white m-0" style="font-size: 1.4rem;">Welcome back to UK Portfolio CMS</h1>
+                <p class="welcome-text text-white-50 m-0 mt-1" style="font-size: 0.85rem;">Easily update your website contents, blog posts, factory specifications, certificates, and check active contact inquiries.</p>
             </div>
             <div class="welcome-actions mt-3 mt-md-0">
-                <a href="/" target="_blank" class="btn btn-light btn-view-site text-primary font-weight-bold shadow-sm">
+                <a href="/" target="_blank" class="btn btn-sm btn-light btn-view-site text-primary font-weight-bold shadow-sm">
                     <i class="fas fa-external-link-alt mr-1"></i> View Live Site
                 </a>
             </div>
@@ -97,9 +97,9 @@
                 <div class="custom-card-header py-2 px-3" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
                     <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-chart-pie text-primary mr-1"></i> Products Category Distribution</h5>
                 </div>
-                <div class="custom-card-body d-flex align-items-center justify-content-center p-3" style="min-height: 230px; height: 230px;">
+                <div class="custom-card-body d-flex align-items-center justify-content-center p-2" style="min-height: 180px; height: 180px;">
                     {% if admin_metrics.category_data %}
-                    <canvas id="categoryChart" style="max-height: 200px; width: 100%;"></canvas>
+                    <canvas id="categoryChart" style="max-height: 160px; width: 100%;"></canvas>
                     {% else %}
                     <div class="text-center text-muted py-4">
                         <i class="fas fa-chart-pie fa-2x mb-2 text-gray-300"></i>
@@ -116,8 +116,8 @@
                 <div class="custom-card-header py-2 px-3" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
                     <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-chart-bar text-success mr-1"></i> Database Contents Summary</h5>
                 </div>
-                <div class="custom-card-body d-flex align-items-center justify-content-center p-3" style="min-height: 230px; height: 230px;">
-                    <canvas id="metricsSummaryChart" style="max-height: 200px; width: 100%;"></canvas>
+                <div class="custom-card-body d-flex align-items-center justify-content-center p-2" style="min-height: 180px; height: 180px;">
+                    <canvas id="metricsSummaryChart" style="max-height: 160px; width: 100%;"></canvas>
                 </div>
             </div>
         </div>
@@ -129,32 +129,32 @@
         <div class="col-lg-8 col-md-12">
             <!-- Recent Contact Messages -->
             <div class="card custom-card shadow-sm border-0 mb-4 animate-fade-in" style="border-radius: 0.75rem !important;">
-                <div class="custom-card-header py-3 px-3 d-flex justify-content-between align-items-center" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
-                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-comment-alt text-success mr-1"></i> Recent Contact Messages</h5>
-                    <a href="{% url 'admin:contactapp_contactmessage_changelist' %}" class="btn btn-xs btn-outline-primary rounded-pill py-1 px-3" style="font-size: 0.75rem;">View All</a>
+                <div class="custom-card-header py-2 px-3 d-flex justify-content-between align-items-center" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title m-0" style="font-size: 0.90rem !important;"><i class="fas fa-comment-alt text-success mr-1"></i> Recent Contact Messages</h5>
+                    <a href="{% url 'admin:contactapp_contactmessage_changelist' %}" class="btn btn-xs btn-outline-primary rounded-pill py-0 px-2" style="font-size: 0.70rem;">View All</a>
                 </div>
                 <div class="custom-card-body p-0">
                     <div class="custom-table-container">
                         <table class="custom-table table-sm mb-0">
                             <thead>
                                 <tr>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Sender</th>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Subject</th>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Date</th>
-                                    <th class="text-right" style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Action</th>
+                                    <th style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Sender</th>
+                                    <th style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Subject</th>
+                                    <th style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Date</th>
+                                    <th class="text-right" style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for msg in admin_metrics.recent_messages %}
                                 <tr class="hover-row">
-                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
+                                    <td style="padding: 0.3rem 0.6rem !important; font-size: 0.80rem !important;">
                                         <span class="font-weight-bold" style="color: #1e293b;">{{ msg.name }}</span>
-                                        <div class="text-muted" style="font-size: 0.75rem;">{{ msg.email }}</div>
+                                        <div class="text-muted" style="font-size: 0.70rem;">{{ msg.email }}</div>
                                     </td>
-                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #475569;">{{ msg.subject|truncatechars:45 }}</td>
-                                    <td class="text-muted" style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">{{ msg.created_at|date:"M d, Y" }}</td>
-                                    <td class="text-right" style="padding: 0.6rem 1rem !important;">
-                                        <a href="{% url 'admin:contactapp_contactmessage_change' msg.id %}" class="btn btn-xs btn-primary rounded-pill px-3 py-1" style="font-size: 0.72rem; background: #1a4674 !important; border: none !important; box-shadow: 0 2px 4px rgba(26, 70, 116, 0.15);">View Details</a>
+                                    <td style="padding: 0.3rem 0.6rem !important; font-size: 0.80rem !important; color: #475569;">{{ msg.subject|truncatechars:45 }}</td>
+                                    <td class="text-muted" style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">{{ msg.created_at|date:"M d, Y" }}</td>
+                                    <td class="text-right" style="padding: 0.3rem 0.6rem !important;">
+                                        <a href="{% url 'admin:contactapp_contactmessage_change' msg.id %}" class="btn btn-xs btn-primary rounded-pill px-2 py-0" style="font-size: 0.60rem; text-transform: capitalize; font-weight: normal; background: #1a4674 !important; border: none !important; box-shadow: 0 1px 2px rgba(26, 70, 116, 0.15);">View Details</a>
                                     </td>
                                 </tr>
                                 {% empty %}
@@ -226,8 +226,8 @@
                                             {{ customer.status }}
                                         </span>
                                     </td>
-                                    <td class="text-right" style="padding: 0.6rem 1rem !important;">
-                                        <a href="{% url 'admin:customers_customer_change' customer.id %}" class="btn btn-xs btn-primary rounded-pill px-3 py-1" style="font-size: 0.72rem; background: #1a4674 !important; border: none !important; box-shadow: 0 2px 4px rgba(26, 70, 116, 0.15);">Edit</a>
+                                    <td class="text-right" style="padding: 0.3rem 0.6rem !important;">
+                                        <a href="{% url 'admin:customers_customer_change' customer.id %}" class="btn btn-xs btn-primary rounded-pill px-2 py-0" style="font-size: 0.60rem; text-transform: capitalize; font-weight: normal; background: #1a4674 !important; border: none !important; box-shadow: 0 1px 2px rgba(26, 70, 116, 0.15);">Edit</a>
                                     </td>
                                 </tr>
                                 {% empty %}
@@ -250,35 +250,35 @@
         <div class="col-lg-4 col-md-12">
             <!-- Quick Actions Card -->
             <div class="card custom-card shadow-sm border-0 mb-4 animate-fade-in" style="border-radius: 0.75rem !important;">
-                <div class="custom-card-header py-3 px-3" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
-                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-rocket text-indigo mr-1"></i> Quick Admin Actions</h5>
+                <div class="custom-card-header py-2 px-3" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title m-0" style="font-size: 0.90rem !important;"><i class="fas fa-rocket text-indigo mr-1"></i> Quick Admin Actions</h5>
                 </div>
-                <div class="custom-card-body p-3">
-                    <div class="quick-actions-grid" style="grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem !important;">
-                        <a href="{% url 'admin:products_product_add' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
-                            <i class="fas fa-plus-circle mb-1" style="font-size: 1.1rem !important;"></i>
-                            <span style="font-size: 0.75rem !important;">Add Product</span>
+                <div class="custom-card-body p-2">
+                    <div class="quick-actions-grid" style="grid-template-columns: repeat(2, 1fr) !important; gap: 0.4rem !important;">
+                        <a href="{% url 'admin:products_product_add' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
+                            <i class="fas fa-plus-circle mb-0" style="font-size: 0.95rem !important;"></i>
+                            <span style="font-size: 0.70rem !important;">Add Product</span>
                         </a>
 
-                        <a href="{% url 'admin:certificates_certificate_add' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
-                            <i class="fas fa-certificate mb-1" style="font-size: 1.1rem !important;"></i>
-                            <span style="font-size: 0.75rem !important;">Add Certificate</span>
+                        <a href="{% url 'admin:certificates_certificate_add' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
+                            <i class="fas fa-certificate mb-0" style="font-size: 0.95rem !important;"></i>
+                            <span style="font-size: 0.70rem !important;">Add Certificate</span>
                         </a>
-                        <a href="{% url 'admin:home_homehero_changelist' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
-                            <i class="fas fa-home mb-1" style="font-size: 1.1rem !important;"></i>
-                            <span style="font-size: 0.75rem !important;">Hero Settings</span>
+                        <a href="{% url 'admin:home_homehero_changelist' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
+                            <i class="fas fa-home mb-0" style="font-size: 0.95rem !important;"></i>
+                            <span style="font-size: 0.70rem !important;">Hero Settings</span>
                         </a>
-                        <a href="{% url 'admin:navigation_navbar_changelist' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
-                            <i class="fas fa-compass mb-1" style="font-size: 1.1rem !important;"></i>
-                            <span style="font-size: 0.75rem !important;">Edit Navbar</span>
+                        <a href="{% url 'admin:navigation_navbar_changelist' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
+                            <i class="fas fa-compass mb-0" style="font-size: 0.95rem !important;"></i>
+                            <span style="font-size: 0.70rem !important;">Edit Navbar</span>
                         </a>
-                        <a href="{% url 'admin:navigation_footer_changelist' %}" class="quick-action-btn p-2" style="border-radius: 0.5rem !important;">
-                            <i class="fas fa-shoe-prints mb-1" style="font-size: 1.1rem !important;"></i>
-                            <span style="font-size: 0.75rem !important;">Edit Footer</span>
+                        <a href="{% url 'admin:navigation_footer_changelist' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
+                            <i class="fas fa-shoe-prints mb-0" style="font-size: 0.95rem !important;"></i>
+                            <span style="font-size: 0.70rem !important;">Edit Footer</span>
                         </a>
-                        <button type="button" class="quick-action-btn p-2 border-0 bg-transparent w-100" style="border-radius: 0.5rem !important; outline: none;" data-toggle="modal" data-target="#addCustomerModal">
-                            <i class="fas fa-user-plus mb-1" style="font-size: 1.1rem !important; color: #f59e0b;"></i>
-                            <span style="font-size: 0.75rem !important; display: block; line-height: 1;">Add Customer</span>
+                        <button type="button" class="quick-action-btn p-1 border-0 bg-transparent w-100" style="border-radius: 0.4rem !important; outline: none;" data-toggle="modal" data-target="#addCustomerModal">
+                            <i class="fas fa-user-plus mb-0" style="font-size: 0.95rem !important; color: #f59e0b;"></i>
+                            <span style="font-size: 0.70rem !important; display: block; line-height: 1;">Add Customer</span>
                         </button>
                     </div>
                 </div>

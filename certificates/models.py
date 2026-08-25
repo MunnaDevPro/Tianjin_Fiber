@@ -6,14 +6,14 @@ from imagekit.processors import ResizeToFill
 class CertificatesHeader(SingletonModel):
     title = models.CharField(max_length=200, default="Certified Excellence")
     subtitle = models.TextField()
-    bg_image = ProcessedImageField(upload_to='certificates/', processors=[ResizeToFill(1920, 1080)], format='WEBP', null=True, blank=True)
+    bg_image = ProcessedImageField(upload_to='certificates/', processors=[ResizeToFill(1920, 1080)], format='WEBP', options={'quality': 80}, null=True, blank=True)
 
     def __str__(self):
         return self.title
 
 class Certificate(BaseSection):
     title = models.CharField(max_length=100)
-    image = ProcessedImageField(upload_to='certificates/gallery/', processors=[ResizeToFill(800, 1200)], format='WEBP')
+    image = ProcessedImageField(upload_to='certificates/gallery/', processors=[ResizeToFill(800, 1200)], format='WEBP', options={'quality': 80})
 
     def __str__(self):
         return self.title

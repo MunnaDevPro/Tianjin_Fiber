@@ -21,7 +21,7 @@ class Post(SEOFields, BaseSection):
     category = models.ForeignKey(BlogCategory, related_name='posts', on_delete=models.CASCADE)
     author = models.CharField(max_length=100, default="Admin")
     content = RichTextField()
-    featured_image = ProcessedImageField(upload_to='blog/', processors=[ResizeToFill(800, 500)], format='WEBP', null=True, blank=True)
+    featured_image = ProcessedImageField(upload_to='blog/', processors=[ResizeToFill(800, 500)], format='WEBP', options={'quality': 80}, null=True, blank=True)
     published_date = models.DateField(auto_now_add=True)
 
     class Meta:

@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 class ServicesHeader(SingletonModel):
     title = models.CharField(max_length=200, default="Manufacturing Services")
     subtitle = models.TextField()
-    bg_image = ProcessedImageField(upload_to='services/', processors=[ResizeToFill(1920, 600)], format='WEBP', null=True, blank=True)
+    bg_image = ProcessedImageField(upload_to='services/', processors=[ResizeToFill(1920, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -14,7 +14,7 @@ class ServicesHeader(SingletonModel):
 class ServiceItem(BaseSection):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = ProcessedImageField(upload_to='services/items/', processors=[ResizeToFill(800, 600)], format='WEBP')
+    image = ProcessedImageField(upload_to='services/items/', processors=[ResizeToFill(800, 600)], format='WEBP', options={'quality': 80})
 
     def __str__(self):
         return self.title

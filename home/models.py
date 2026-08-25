@@ -37,9 +37,9 @@ class HomeFactory(SingletonModel):
     title = models.CharField(max_length=200, default="State-of-the-art Production Facilities")
     description = models.TextField()
     
-    img_top_left = ProcessedImageField(upload_to='home/factory/', processors=[ResizeToFill(800, 600)], format='WEBP', null=True, blank=True)
-    img_top_right = ProcessedImageField(upload_to='home/factory/', processors=[ResizeToFill(400, 600)], format='WEBP', null=True, blank=True)
-    img_bottom_left = ProcessedImageField(upload_to='home/factory/', processors=[ResizeToFill(400, 600)], format='WEBP', null=True, blank=True)
+    img_top_left = ProcessedImageField(upload_to='home/factory/', processors=[ResizeToFill(800, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
+    img_top_right = ProcessedImageField(upload_to='home/factory/', processors=[ResizeToFill(400, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
+    img_bottom_left = ProcessedImageField(upload_to='home/factory/', processors=[ResizeToFill(400, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
     
     box_percentage = models.CharField(max_length=10, default="100%")
     box_text = models.CharField(max_length=100, default="Quality Inspected Before Shipping")
@@ -63,7 +63,7 @@ class HomeFactoryFeature(BaseSection):
 class HomeValues(SingletonModel):
     title = models.CharField(max_length=200, default="Our Core Values")
     description = models.TextField()
-    image = ProcessedImageField(upload_to='home/values/', processors=[ResizeToFill(800, 600)], format='WEBP', null=True, blank=True)
+    image = ProcessedImageField(upload_to='home/values/', processors=[ResizeToFill(800, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
 
     class Meta:
         verbose_name = "Home Values Section"
@@ -84,7 +84,7 @@ class HomeValueItem(BaseSection):
 class HomeMission(SingletonModel):
     title = models.CharField(max_length=200, default="Forging the strongest connections worldwide.")
     description = models.TextField()
-    image = ProcessedImageField(upload_to='home/mission/', processors=[ResizeToFill(1200, 800)], format='WEBP', null=True, blank=True)
+    image = ProcessedImageField(upload_to='home/mission/', processors=[ResizeToFill(1200, 800)], format='WEBP', options={'quality': 80}, null=True, blank=True)
 
     stat1_number = models.CharField(max_length=20, default="20+")
     stat1_text = models.CharField(max_length=50, default="Years Experience")

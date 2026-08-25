@@ -1,0 +1,33 @@
+/* Move the Add Customer button to the right side */
+#changelist-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Ensure the search form doesn't take full width if we want tools on right */
+#changelist-search > div {
+    flex-grow: 1;
+}
+
+/* The object-tools ul usually contains the add button */
+.object-tools {
+    margin-left: auto !important;
+    float: right !important;
+    display: flex;
+    margin-bottom: 0 !important;
+}
+
+/* Jazzmin specific wrapper */
+.row > .col-12 > form#changelist-search,
+#changelist-form > .row > .col-12 {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Fallback for the button itself if the container isn't flex */
+.object-tools a.btn {
+    margin-left: auto;
+}

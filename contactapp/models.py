@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 class ContactPageSettings(SingletonModel):
     title = models.CharField(max_length=200, default="Contact Us")
     subtitle = models.TextField(default="Get in touch with our team.")
-    bg_image = ProcessedImageField(upload_to='contact/', processors=[ResizeToFill(1920, 600)], format='WEBP', null=True, blank=True)
+    bg_image = ProcessedImageField(upload_to='contact/', processors=[ResizeToFill(1920, 600)], format='WEBP', options={'quality': 80}, null=True, blank=True)
     
     address = models.TextField(default="123 Industrial Ave, Tianjin, China")
     email = models.EmailField(default="info@tianjinfibernet.com")

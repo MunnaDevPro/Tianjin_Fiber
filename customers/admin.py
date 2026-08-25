@@ -1,16 +1,33 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from import_export.admin import ImportExportModelAdmin
+from import_export import resources
 from .models import Customer
 from .forms import CustomerForm
 
+class CustomerResource(resources.ModelResource):
+    class Meta:
+        model = Customer
+        import_id_fields = ('id',)
+        skip_unchanged = True
+        report_skipped = True
+
 @admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
+class CustomerAdmin(ImportExportModelAdmin):
+    resource_classes = [CustomerResource]
+    export_template_name = 'admin/customers/customer/export.html'
+    
     form = CustomerForm
-    list_display = ('customer_id', 'company_info', 'contact_info', 'location_info', 'customer_type_badge', 'status_badge', 'next_followup_display')
-    list_display_links = ('customer_id', 'company_info')
+    list_display = ('customer_id_display', 'company_info', 'contact_info', 'location_info', 'customer_type_badge', 'status_badge', 'next_followup_display')
+    list_display_links = ('customer_id_display', 'company_info')
     search_fields = ('customer_id', 'company_name', 'contact_person', 'email', 'phone', 'city', 'country')
     list_filter = ('customer_type', 'status', 'lead_source', 'first_contact_date', 'next_followup_date')
     ordering = ('-created_at',)
+
+    class Media:
+        css = {
+            'all': ('css/customer_admin.css', 'css/import_export.css')
+        }
 
     fieldsets = (
         ('Basic Information', {
@@ -30,20 +47,22 @@ class CustomerAdmin(admin.ModelAdmin):
         }),
     )
 
+    def customer_id_display(self, obj):
+        return format_html('<span style="white-space: nowrap; font-size: 0.75rem; font-weight: 600; color: #334155;">{}</span>', obj.customer_id)
+    customer_id_display.short_description = 'ID'
+    customer_id_display.admin_order_field = 'customer_id'
+
     def company_info(self, obj):
         return format_html(
-            '<div style="font-weight: 600; color: #0f172a; font-size: 0.85rem; line-height: 1.2;">{}</div>'
-            '<div style="color: #64748b; font-size: 0.72rem; margin-top: 1px;">{}</div>',
-            obj.company_name, obj.position or 'No Position'
+            '<div style="font-weight: 600; color: #0f172a; font-size: 0.80rem; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;" title="{}">{}</div>'
+            '<div style="color: #64748b; font-size: 0.70rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;" title="{}">{}</div>',
+            obj.company_name, obj.company_name, obj.position or 'No Position', obj.position or 'No Position'
         )
     company_info.short_description = 'Company / Position'
 
     def contact_info(self, obj):
-        email_str = f'<div style="font-size: 0.75rem; color: #475569;"><i class="fas fa-envelope" style="margin-right: 4px; color: #94a3b8;"></i>{obj.email}</div>' if obj.email else ''
-        phone_str = f'<div style="font-size: 0.75rem; color: #475569; margin-top: 2px;"><i class="fas fa-phone-alt" style="margin-right: 4px; color: #94a3b8;"></i>{obj.phone}</div>' if obj.phone else ''
-        whatsapp_str = f'<div style="font-size: 0.75rem; color: #128c7e; margin-top: 2px;"><i class="fab fa-whatsapp" style="margin-right: 4px;"></i>{obj.whatsapp}</div>' if obj.whatsapp else ''
-        
-        info = f'<div style="font-weight: 500; color: #1e293b;">{obj.contact_person}</div>' + email_str + phone_str + whatsapp_str
+        email_str = f'<div style="font-size: 0.70rem; color: #475569; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;" title="{obj.email}"><i class="fas fa-envelope" style="margin-right: 4px; color: #94a3b8; font-size: 0.65rem;"></i>{obj.email.lower()}</div>' if obj.email else ''
+        info = f'<div style="font-weight: 600; color: #1e293b; font-size: 0.80rem; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;" title="{obj.contact_person}">{obj.contact_person}</div>' + email_str
         return format_html(info)
     contact_info.short_description = 'Contact Person'
 
@@ -53,7 +72,7 @@ class CustomerAdmin(admin.ModelAdmin):
             loc.append(obj.city)
         if obj.country:
             loc.append(obj.country)
-        return ", ".join(loc) if loc else "-"
+        return format_html('<div style="white-space: nowrap; font-size: 0.75rem;">{}</div>', ", ".join(loc) if loc else "-")
     location_info.short_description = 'Location'
 
     def customer_type_badge(self, obj):
@@ -72,8 +91,8 @@ class CustomerAdmin(admin.ModelAdmin):
         bg = bg_colors.get(obj.customer_type, '#f1f5f9')
         text = text_colors.get(obj.customer_type, '#475569')
         return format_html(
-            '<span style="background: {}; color: {}; padding: 4px 10px; border-radius: 12px; '
-            'font-weight: 600; font-size: 0.75rem; border: 1px solid rgba(0,0,0,0.03);">{}</span>',
+            '<span style="background: {}; color: {}; padding: 3px 8px; border-radius: 12px; '
+            'font-weight: 600; font-size: 0.70rem; border: 1px solid rgba(0,0,0,0.03); white-space: nowrap;">{}</span>',
             bg, text, obj.customer_type
         )
     customer_type_badge.short_description = 'Type'
@@ -98,8 +117,8 @@ class CustomerAdmin(admin.ModelAdmin):
         bg = bg_colors.get(obj.status, '#f1f5f9')
         text = text_colors.get(obj.status, '#475569')
         return format_html(
-            '<span style="background: {}; color: {}; padding: 4px 10px; border-radius: 12px; '
-            'font-weight: 600; font-size: 0.75rem; border: 1px solid rgba(0,0,0,0.03);">{}</span>',
+            '<span style="background: {}; color: {}; padding: 3px 8px; border-radius: 12px; '
+            'font-weight: 600; font-size: 0.70rem; border: 1px solid rgba(0,0,0,0.03); white-space: nowrap;">{}</span>',
             bg, text, obj.status
         )
     status_badge.short_description = 'Status'

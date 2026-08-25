@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView
 from django.views import View
@@ -23,14 +24,67 @@ class HomeView(TemplateView):
         context['values_section'] = HomeValues.objects.first()
         context['mission'] = HomeMission.objects.first()
         
-        # We need products for the carousel, let's just get active ones
-        context['products'] = Product.objects.filter(is_active=True)
+        # Get all active products sorted by category with Sun Shade weighted more
+        all_products = list(Product.objects.filter(is_active=True).select_related('category'))
+
+        shade_products = [p for p in all_products if 'sun shade' in p.category.name.lower()]
+        rope_products  = [p for p in all_products if 'rope' in p.category.name.lower() or 'twine' in p.category.name.lower()]
+        hw_products    = [p for p in all_products if 'hardware' in p.category.name.lower() or 'ladder' in p.category.name.lower()]
+
+        # Shuffle each category internally
+        random.shuffle(shade_products)
+        random.shuffle(rope_products)
+        random.shuffle(hw_products)
+
+        # Interleave: Sun Shade 2 → Rope 1 → Shade 2 → Hardware 1 → repeat
+        # This gives Sun Shade ~50% presence without duplicating any product
+        interleaved = []
+        si, ri, hi = 0, 0, 0  # indices for shade, rope, hardware
+        pattern = [2, 1, 2, 1]   # shade, rope, shade, hardware
+        sources = [shade_products, rope_products, shade_products, hw_products]
+        idxs    = [si, ri, si, hi]
+
+        while si < len(shade_products) or ri < len(rope_products) or hi < len(hw_products):
+            for take, src in zip(pattern, sources):
+                if src is shade_products:
+                    for _ in range(take):
+                        if si < len(shade_products):
+                            interleaved.append(shade_products[si]); si += 1
+                elif src is rope_products:
+                    for _ in range(take):
+                        if ri < len(rope_products):
+                            interleaved.append(rope_products[ri]); ri += 1
+                else:
+                    for _ in range(take):
+                        if hi < len(hw_products):
+                            interleaved.append(hw_products[hi]); hi += 1
+            # Break if all exhausted
+            if si >= len(shade_products) and ri >= len(rope_products) and hi >= len(hw_products):
+                break
+
+        context['products'] = interleaved
         return context
 
-class CategoryDetailView(DetailView):
-    model = Category
+class CategoryDetailView(View):
     template_name = 'core/category_detail.html'
-    context_object_name = 'category'
+
+    def get(self, request, slug):
+        from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+        category = Category.objects.get(slug=slug)
+        all_products = category.products.filter(is_active=True).order_by('order', 'name')
+        paginator = Paginator(all_products, 20)  # 20 products per page
+        page_number = request.GET.get('page', 1)
+        try:
+            page_obj = paginator.page(page_number)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        return render(request, self.template_name, {
+            'category': category,
+            'page_obj': page_obj,
+            'paginator': paginator,
+        })
 
 class ProductDetailView(DetailView):
     model = Product
