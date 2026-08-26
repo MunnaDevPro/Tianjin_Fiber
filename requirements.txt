@@ -9,6 +9,7 @@ backports.functools-lru-cache==2.0.0
 certifi==2025.1.31
 charset-normalizer==3.4.3
 click==8.3.0
+cloudinary
 colorama==0.4.6
 crispy-bootstrap5==2024.10
 distlib==0.3.9
@@ -45,7 +46,6 @@ imageio_ffmpeg
 indic_transliteration==2.3.79
 inflection==0.5.1
 joblib==1.5.1
-cloudinary
 markdown-it-py==4.0.0
 mdurl==0.1.2
 multidict==6.6.4
