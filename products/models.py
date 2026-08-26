@@ -7,7 +7,7 @@ from core.models import BaseSection
 
 class Category(SEOFields, BaseSection):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=200)
     hero_text = models.CharField(max_length=255, help_text="Text to display in the hero section for this category.")
     hero_image = ProcessedImageField(upload_to='categories/', processors=[ResizeToFill(1920, 1080)], format='WEBP', options={'quality': 80}, blank=True, null=True)
     hero_image_alt = models.CharField(max_length=255, default="Category Hero Image", help_text="Alt text for SEO.")
@@ -22,7 +22,7 @@ class Category(SEOFields, BaseSection):
 class Product(SEOFields, BaseSection):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=200)
     description = RichTextField()
     
     main_image = ProcessedImageField(upload_to='products/main/', processors=[ResizeToFill(800, 800)], format='WEBP', options={'quality': 85})
