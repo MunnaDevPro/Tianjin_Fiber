@@ -6,18 +6,19 @@ from imagekit.processors import ResizeToFill
 
 def _get_video_storage():
     """Return the appropriate storage backend for video files.
-    Uses Cloudinary RawMediaCloudinaryStorage in production,
+    Uses Cloudinary VideoMediaCloudinaryStorage in production (enables streaming),
     and default FileSystemStorage locally.
     """
     try:
         from django.conf import settings
         if getattr(settings, 'CLOUDINARY_CLOUD_NAME', None):
-            from cloudinary_storage.storage import RawMediaCloudinaryStorage
-            return RawMediaCloudinaryStorage()
+            from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+            return VideoMediaCloudinaryStorage()
     except Exception:
         pass
     from django.core.files.storage import FileSystemStorage
     return FileSystemStorage()
+
 
 
 class FactoryHeader(SingletonModel):
