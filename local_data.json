@@ -15,7 +15,7 @@
     "fields": {
         "logo": "navigation/logo_CplahHD.webp",
         "about_text": "Premium industrial-grade natural hemp rope and netting solutions. Manufactured for maximum durability in harsh environments, trusted by global industries since 1995.",
-        "copyright_text": "Â© 2026 Tianjin Fiber Net. All Rights Reserved.",
+        "copyright_text": "© 2026 Tianjin Fiber Net. All Rights Reserved.",
         "address": "",
         "email": "info@tianjinfibernet.com",
         "phone": "+86 123 4567 8900"
@@ -309,7 +309,7 @@
         "description": "<p>Engineered for extreme environments, this Kevlar/Aramid rope offers unparalleled heat resistance and tensile strength. It will not melt or support combustion, making it the ultimate choice for fire rescue, high-temperature industrial applications, and extreme sports.</p>",
         "main_image": "products/main/mmexport1787206289171.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "Extreme heat and fire resistance (up to 400Â°C/752Â°F)\nIncredible tensile strength to weight ratio\nLow elongation and zero creep\nHighly resistant to cuts and abrasions\nEssential for rescue operations and aerospace applications"
+        "features": "Extreme heat and fire resistance (up to 400°C/752°F)\nIncredible tensile strength to weight ratio\nLow elongation and zero creep\nHighly resistant to cuts and abrasions\nEssential for rescue operations and aerospace applications"
     }
 },
 {
@@ -858,7 +858,7 @@
         "category": 24,
         "name": "Heavy-Duty Aluminium Telescopic Extension Ladder 1",
         "slug": "heavy-duty-aluminium-telescopic-extension-ladder-1",
-        "description": "<p>Our <strong>Heavy-Duty Aluminium Telescopic Extension Ladder</strong> is manufactured from premium aerospace-grade aluminum alloy, delivering an exceptional strength-to-weight ratio. Designed for professional contractors, maintenance crews, and serious DIY enthusiasts, this ladder telescopes smoothly to reach heights up to 4â€“7 meters while folding down to a compact, portable form. Each rung is precisely machined with anti-slip serrated grooves, and the locking mechanism engages with a confident click to prevent accidental collapse.</p>",
+        "description": "<p>Our <strong>Heavy-Duty Aluminium Telescopic Extension Ladder</strong> is manufactured from premium aerospace-grade aluminum alloy, delivering an exceptional strength-to-weight ratio. Designed for professional contractors, maintenance crews, and serious DIY enthusiasts, this ladder telescopes smoothly to reach heights up to 4–7 meters while folding down to a compact, portable form. Each rung is precisely machined with anti-slip serrated grooves, and the locking mechanism engages with a confident click to prevent accidental collapse.</p>",
         "main_image": "products/main/mmexport1787549066837_wOj6tTr.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "Aerospace-grade 6061-T6 aluminum alloy construction\nNon-slip D-shaped rungs with anti-skid serrated surface\nOne-touch push-button telescopic locking mechanism\nWide outrigger feet with non-slip rubber base pads\nCompact folded length for easy transport and storage\nMaximum load capacity: 150 kg (330 lbs)\nComplies with EN131 and ANSI safety standards"
@@ -1146,7 +1146,7 @@
         "category": 24,
         "name": "Heavy-Duty 5-Section Aluminium Combination Ladder 13",
         "slug": "heavy-duty-5-section-aluminium-combination-ladder-13",
-        "description": "<p>The <strong>5-Section Combination Ladder</strong> extends our multi-function range to provide even greater reach in extension ladder mode â€” up to 8 meters â€” while still folding down to a compact and manageable carry size. Five individually adjustable sections offer unmatched flexibility for construction sites, high-ceiling maintenance, and professional building services.</p>",
+        "description": "<p>The <strong>5-Section Combination Ladder</strong> extends our multi-function range to provide even greater reach in extension ladder mode — up to 8 meters — while still folding down to a compact and manageable carry size. Five individually adjustable sections offer unmatched flexibility for construction sites, high-ceiling maintenance, and professional building services.</p>",
         "main_image": "products/main/mmexport1787549373638.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "5 individually adjustable sections for 8m reach\nCompact folded size despite extended reach\nHeavy-duty hinge joints rated for continuous professional use\nAnti-slip serrated rungs throughout\nMaximum load: 150 kg\nBuilt-in carry handle\nEN131 and AS/NZS 1892 certified"
@@ -1194,7 +1194,7 @@
         "category": 24,
         "name": "Articulating Multi-Position Access Ladder 15",
         "slug": "articulating-multi-position-access-ladder-15",
-        "description": "<p>The <strong>Articulating Multi-Position Access Ladder</strong> provides unmatched flexibility with four independently adjustable sections and multiple locking hinge joints. It can be configured as a standard A-frame, a straight extension, an angled staircase ladder, or a 90-degree wall brace â€” adapting instantly to complex access challenges on construction sites and complex architectural environments.</p>",
+        "description": "<p>The <strong>Articulating Multi-Position Access Ladder</strong> provides unmatched flexibility with four independently adjustable sections and multiple locking hinge joints. It can be configured as a standard A-frame, a straight extension, an angled staircase ladder, or a 90-degree wall brace — adapting instantly to complex access challenges on construction sites and complex architectural environments.</p>",
         "main_image": "products/main/mmexport1787549432933.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "Four independently adjustable sections\nMultiple hinge joints at independent positions\nStaircase mode for safe use on stairs\n90-degree wall brace configuration\nHeavy-duty anodized aluminum\nMaximum load: 150 kg\nAll positions EN131 certified"
@@ -1408,7 +1408,7 @@
         "is_active": true,
         "order": 24,
         "category": 24,
-        "name": "Fibreglass Step Ladder â€“ Electrician Safe 24",
+        "name": "Fibreglass Step Ladder – Electrician Safe 24",
         "slug": "fibreglass-step-ladder-electrician-safe-24",
         "description": "<p>The <strong>Fibreglass Step Ladder</strong> is the essential safety tool for electricians, linemen, and anyone working near live electrical equipment. The non-conductive fibreglass side rails and rungs provide full electrical insulation, protecting the user from accidental contact with live conductors. Rated to 1000V AC for complete peace of mind during electrical work.</p>",
         "main_image": "products/main/mmexport1787549772411.jpg.webp",
@@ -1504,12 +1504,12 @@
         "is_active": true,
         "order": 28,
         "category": 24,
-        "name": "Folding Step Stool â€“ Slim Design 28",
+        "name": "Folding Step Stool – Slim Design 28",
         "slug": "folding-step-stool-slim-design-28",
         "description": "<p>The <strong>Folding Step Stool Slim Design</strong> brings clever engineering to a simple everyday need. At just 4cm folded thickness, it slides between appliances, behind doors, and under beds for truly out-of-sight storage. The lightweight aluminum frame and anti-slip rubber feet provide safe and stable assistance for reaching high cupboards, shelves, and overhead storage.</p>",
         "main_image": "products/main/mmexport1787549894602.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "Ultra-slim: folds to just 4cm thickness\nSlides between appliances and behind doors\nLightweight aluminum frame â€” just 2.8 kg\nAnti-slip rubber feet prevent sliding\nNon-slip top step surface\nMaximum load: 100 kg\nIdeal for kitchens, bathrooms, and offices"
+        "features": "Ultra-slim: folds to just 4cm thickness\nSlides between appliances and behind doors\nLightweight aluminum frame — just 2.8 kg\nAnti-slip rubber feet prevent sliding\nNon-slip top step surface\nMaximum load: 100 kg\nIdeal for kitchens, bathrooms, and offices"
     }
 },
 {
@@ -1557,7 +1557,7 @@
         "description": "<p>The <strong>Compact Folding 2-Step Aluminium Stool</strong> is the ultimate minimalist step stool for domestic use. Opening and closing in one single motion, it provides a stable two-rung boost for kitchen, bathroom, and bedroom access needs. The all-aluminum construction will never rust or rot, making it the last step stool you will ever need to buy.</p>",
         "main_image": "products/main/mmexport1787549930473.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "One-motion open and close mechanism\nUltra-compact folded footprint\nAll-aluminum construction â€” rust and rot free\nAnti-slip rubber feet and top surface\nMaximum load: 100 kg\nAvailable in 2 and 3-step heights\nLifetime structural warranty"
+        "features": "One-motion open and close mechanism\nUltra-compact folded footprint\nAll-aluminum construction — rust and rot free\nAnti-slip rubber feet and top surface\nMaximum load: 100 kg\nAvailable in 2 and 3-step heights\nLifetime structural warranty"
     }
 },
 {
@@ -1629,7 +1629,7 @@
         "description": "<p>The <strong>Aluminium Ladder Hinge Joint Connector Set</strong> is a premium hardware replacement and upgrade kit for multi-function combination ladders. Each hinge joint is precision-forged from high-tensile aluminum alloy with a durable powder-coat finish for maximum corrosion resistance. The multi-position locking mechanism engages at multiple angles.</p>",
         "main_image": "products/main/mmexport1787550014436.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "Precision-forged high-tensile aluminum alloy\nMulti-position locking at 90Â°, 135Â°, and 180Â°\nHardened steel pivot pin with anti-corrosion treatment\nFits standard 30mm and 35mm side rails\nIncludes mounting hardware and guide\nCompatible with most aluminum combination ladders\nDurable powder-coat finish"
+        "features": "Precision-forged high-tensile aluminum alloy\nMulti-position locking at 90°, 135°, and 180°\nHardened steel pivot pin with anti-corrosion treatment\nFits standard 30mm and 35mm side rails\nIncludes mounting hardware and guide\nCompatible with most aluminum combination ladders\nDurable powder-coat finish"
     }
 },
 {
@@ -1720,9 +1720,9 @@
         "is_active": true,
         "order": 37,
         "category": 24,
-        "name": "Aluminium Ladder Side Rail Profile â€“ Square Section 37",
+        "name": "Aluminium Ladder Side Rail Profile – Square Section 37",
         "slug": "aluminium-ladder-side-rail-profile-square-section-37",
-        "description": "<p>The <strong>Aluminium Ladder Side Rail Profile â€“ Square Section</strong> is the structural backbone of heavy-duty aluminium ladders. Precision-extruded from 6061-T6 alloy with a square tubular cross-section for maximum torsional rigidity, it is available in standard and custom dimensions for ladder manufacturers, professional repair workshops, and prototype fabricators.</p>",
+        "description": "<p>The <strong>Aluminium Ladder Side Rail Profile – Square Section</strong> is the structural backbone of heavy-duty aluminium ladders. Precision-extruded from 6061-T6 alloy with a square tubular cross-section for maximum torsional rigidity, it is available in standard and custom dimensions for ladder manufacturers, professional repair workshops, and prototype fabricators.</p>",
         "main_image": "products/main/mmexport1787550130219.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "6061-T6 aluminum alloy square tubular extrusion\nMaximum torsional rigidity for ladder side rails\nPrecision anodized surface finish\nStandard cross-section: 35mm x 35mm x 2.5mm wall\nAvailable in lengths from 1m to 6m\nUsed in manufacturing and repairing professional ladders\nCustom dimensions available on request"
@@ -1744,7 +1744,7 @@
         "is_active": true,
         "order": 38,
         "category": 24,
-        "name": "Aluminium Ladder Side Rail Profile â€“ Rectangular Section 38",
+        "name": "Aluminium Ladder Side Rail Profile – Rectangular Section 38",
         "slug": "aluminium-ladder-side-rail-profile-rectangular-section-38",
         "description": "<p>The <strong>Rectangular Section Side Rail Profile</strong> offers superior bending resistance in the vertical loading plane for ladder side rails. The asymmetric rectangular cross-section concentrates material where it provides the most structural benefit under typical ladder loads, delivering a higher safety factor for the same weight compared to square sections.</p>",
         "main_image": "products/main/mmexport1787550154493.jpg.webp",
@@ -1768,7 +1768,7 @@
         "is_active": true,
         "order": 39,
         "category": 24,
-        "name": "Anti-Slip Rubber Ladder Feet Set â€“ Standard Size 39",
+        "name": "Anti-Slip Rubber Ladder Feet Set – Standard Size 39",
         "slug": "anti-slip-rubber-ladder-feet-set-standard-size-39",
         "description": "<p>Our <strong>Anti-Slip Rubber Ladder Feet Set</strong> is the essential safety upgrade for any aluminium ladder. Moulded from premium natural rubber with a deep tread pattern, these feet dramatically increase friction on all surfaces including smooth tiles, polished concrete, and outdoor ground. The precision-fit design ensures a snug, non-twisting fit on standard aluminium side rail ends.</p>",
         "main_image": "products/main/mmexport1787550188225.jpg.webp",
@@ -1794,7 +1794,7 @@
         "category": 24,
         "name": "Extra-Large Heavy-Duty Rubber Ladder Feet Set 40",
         "slug": "extra-large-heavy-duty-rubber-ladder-feet-set-40",
-        "description": "<p>The <strong>Extra-Large Heavy-Duty Rubber Ladder Feet Set</strong> provides even greater ground contact area for maximum friction on slippery surfaces. The enlarged footprint is particularly effective on loose gravel, wet grass, smooth tiles, and polished stone â€” surfaces where standard ladder feet may be inadequate. Includes a ground spike insert for use on soft outdoor ground.</p>",
+        "description": "<p>The <strong>Extra-Large Heavy-Duty Rubber Ladder Feet Set</strong> provides even greater ground contact area for maximum friction on slippery surfaces. The enlarged footprint is particularly effective on loose gravel, wet grass, smooth tiles, and polished stone — surfaces where standard ladder feet may be inadequate. Includes a ground spike insert for use on soft outdoor ground.</p>",
         "main_image": "products/main/mmexport1787550230466.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "Extra-large footprint for maximum surface contact\nHigh-friction compound for slippery surfaces\nOptional ground spike insert for soft outdoor use\nFits standard and oversized aluminum side rails\nHeavy-duty construction for industrial use\nEasy tool-free installation\nSet of 4 oversized feet"
@@ -1816,7 +1816,7 @@
         "is_active": true,
         "order": 41,
         "category": 24,
-        "name": "Ladder Wall Protection Bumpers â€“ Rubber 41",
+        "name": "Ladder Wall Protection Bumpers – Rubber 41",
         "slug": "ladder-wall-protection-bumpers-rubber-41",
         "description": "<p>The <strong>Ladder Wall Protection Bumpers</strong> are soft rubber caps designed to protect walls, window frames, and rendered surfaces from damage caused by the top of an aluminium ladder leaning against them. The large contact area spreads the ladder's load across a wider surface and the soft rubber compound eliminates scratching, gouging, and paint damage.</p>",
         "main_image": "products/main/mmexport1787550257731.jpg.webp",
@@ -1989,7 +1989,7 @@
         "description": "<p>Our <strong>Polyester Flat Woven Lashing Webbing Roll</strong> is sold by the metre for fabricating custom tie-down assemblies, slings, and cargo securing equipment. Woven from high-tenacity polyester yarns to a consistent 50mm width and 2mm thickness, it maintains its rated tensile strength across the full roll with no join points or weak spots.</p>",
         "main_image": "products/main/mmexport1787550502792.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "High-tenacity polyester, 50mm width, 2mm thickness\nNo joins â€” full length consistent strength\nBreak strength: 2500 kg per 50mm width\nUV, moisture, and abrasion resistant\nIdeal for custom tie-down and sling fabrication\nSold per metre or in 100m rolls\nAvailable in multiple colors"
+        "features": "High-tenacity polyester, 50mm width, 2mm thickness\nNo joins — full length consistent strength\nBreak strength: 2500 kg per 50mm width\nUV, moisture, and abrasion resistant\nIdeal for custom tie-down and sling fabrication\nSold per metre or in 100m rolls\nAvailable in multiple colors"
     }
 },
 {
@@ -2008,7 +2008,7 @@
         "is_active": true,
         "order": 49,
         "category": 24,
-        "name": "Bungee Cord Cargo Net â€“ Heavy Duty 49",
+        "name": "Bungee Cord Cargo Net – Heavy Duty 49",
         "slug": "bungee-cord-cargo-net-heavy-duty-49",
         "description": "<p>Our <strong>Bungee Cord Cargo Net</strong> provides flexible, stretch-fit cargo retention for motorcycles, bicycles, lightweight luggage, and small items on open trailers and pickup beds. The heavy-duty bungee cords and stainless steel hooks stretch to accommodate irregularly shaped loads while maintaining consistent tension throughout the journey.</p>",
         "main_image": "products/main/mmexport1787550563804.jpg.webp",
@@ -2082,7 +2082,7 @@
         "category": 24,
         "name": "Heavy-Duty Twisted Polyester Anchor Rope 12mm 52",
         "slug": "heavy-duty-twisted-polyester-anchor-rope-12mm-52",
-        "description": "<p>The <strong>12mm Twisted Polyester Anchor Rope</strong> combines high tensile strength with very low stretch â€” a critical requirement for anchor lines, mooring, rigging, and load control applications where dimensional stability under load is essential. Unlike nylon, polyester retains its full strength when wet and in extended submersion.</p>",
+        "description": "<p>The <strong>12mm Twisted Polyester Anchor Rope</strong> combines high tensile strength with very low stretch — a critical requirement for anchor lines, mooring, rigging, and load control applications where dimensional stability under load is essential. Unlike nylon, polyester retains its full strength when wet and in extended submersion.</p>",
         "main_image": "products/main/mmexport1787550736478.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "3-strand twisted polyester construction, 12mm diameter\nVery low stretch for precise load control\nRetains full strength when wet and submerged\nHigh UV and abrasion resistance\nBreak strength: ~1500 kg\nSmooth surface for pulley and winch use\nAvailable in various colors and lengths"
@@ -2133,7 +2133,7 @@
         "description": "<p>Our <strong>6mm Polypropylene Multi-Purpose Rope</strong> is the lightweight, economical general-purpose rope for everyday bundling, tying, and securing tasks. It floats on water, is resistant to most common acids and alkalis, and its bright colors ensure high visibility in any setting. Available in bulk rolls for trade buyers and shorter lengths for retail.</p>",
         "main_image": "products/main/mmexport1787550811166.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "Floats on water â€” ideal for marine and poolside use\nBright colors for high visibility\nResistant to most acids, alkalis, and chemicals\n6mm diameter; break strength: ~350 kg\nLightweight and easy to handle and store\nAvailable in bulk rolls or cut lengths\nIdeal for bundling, tying, and general securing"
+        "features": "Floats on water — ideal for marine and poolside use\nBright colors for high visibility\nResistant to most acids, alkalis, and chemicals\n6mm diameter; break strength: ~350 kg\nLightweight and easy to handle and store\nAvailable in bulk rolls or cut lengths\nIdeal for bundling, tying, and general securing"
     }
 },
 {
@@ -2202,10 +2202,10 @@
         "category": 24,
         "name": "Colorful Braided Nylon Decoration & Craft Rope 5mm 57",
         "slug": "colorful-braided-nylon-decoration-craft-rope-5mm-57",
-        "description": "<p>Our <strong>5mm Braided Nylon Decoration & Craft Rope</strong> is available in a wide range of vibrant colors for macramÃ©, craft projects, home decor, pet accessories, and novelty applications. The smooth, tightly braided construction holds knots securely, takes dye evenly, and resists fraying at cut ends. Sold in convenient cut lengths or bulk rolls.</p>",
+        "description": "<p>Our <strong>5mm Braided Nylon Decoration & Craft Rope</strong> is available in a wide range of vibrant colors for macramé, craft projects, home decor, pet accessories, and novelty applications. The smooth, tightly braided construction holds knots securely, takes dye evenly, and resists fraying at cut ends. Sold in convenient cut lengths or bulk rolls.</p>",
         "main_image": "products/main/mmexport1787550915520.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "Available in 20+ vibrant colors\nSmooth tight braid for crafts and macramÃ©\nHolds knots securely and resists fraying\nTakes dye evenly for custom color projects\n5mm diameter; break strength: ~200 kg\nIdeal for macramÃ©, pet toys, and home decor\nSold in cut lengths or bulk rolls"
+        "features": "Available in 20+ vibrant colors\nSmooth tight braid for crafts and macramé\nHolds knots securely and resists fraying\nTakes dye evenly for custom color projects\n5mm diameter; break strength: ~200 kg\nIdeal for macramé, pet toys, and home decor\nSold in cut lengths or bulk rolls"
     }
 },
 {
@@ -2248,9 +2248,9 @@
         "is_active": true,
         "order": 59,
         "category": 24,
-        "name": "Flat Elastic Cargo Net â€“ 6-Hook Universal 59",
+        "name": "Flat Elastic Cargo Net – 6-Hook Universal 59",
         "slug": "flat-elastic-cargo-net-6-hook-universal-59",
-        "description": "<p>The <strong>Flat Elastic Cargo Net â€“ 6-Hook Universal</strong> uses a flat grid of elastic bungee cords with 6 hook attachment points for secure, flexible load retention on motorcycles, bicycles, scooters, and small trailers. The flat design lies flush over luggage and cargo, providing 360-degree retention without bunching or rolling away from the load.</p>",
+        "description": "<p>The <strong>Flat Elastic Cargo Net – 6-Hook Universal</strong> uses a flat grid of elastic bungee cords with 6 hook attachment points for secure, flexible load retention on motorcycles, bicycles, scooters, and small trailers. The flat design lies flush over luggage and cargo, providing 360-degree retention without bunching or rolling away from the load.</p>",
         "main_image": "products/main/mmexport1787550981152.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "Flat elastic bungee cord grid design\n6 hook attachment points for secure retention\nFlush, 360-degree cargo retention\nIdeal for motorcycles, bicycles, and scooters\nWeather resistant and UV stabilized\nOne-size-fits-most design stretches to fit\nSet of 2 nets included"
@@ -2296,9 +2296,9 @@
         "is_active": true,
         "order": 61,
         "category": 24,
-        "name": "Fall Protection Safety Net â€“ Industrial Grade 61",
+        "name": "Fall Protection Safety Net – Industrial Grade 61",
         "slug": "fall-protection-safety-net-industrial-grade-61",
-        "description": "<p>The <strong>Fall Protection Safety Net â€“ Industrial Grade</strong> meets the requirements of EN1263 for personnel fall arrest at construction sites. Designed to be rigged below working platforms, scaffold edges, and open stairwells, it arrests the fall of a worker or falling object and absorbs the energy without damaging rebound. Includes all rigging hardware and border ropes.</p>",
+        "description": "<p>The <strong>Fall Protection Safety Net – Industrial Grade</strong> meets the requirements of EN1263 for personnel fall arrest at construction sites. Designed to be rigged below working platforms, scaffold edges, and open stairwells, it arrests the fall of a worker or falling object and absorbs the energy without damaging rebound. Includes all rigging hardware and border ropes.</p>",
         "main_image": "products/main/mmexport1787551024051.jpg.webp",
         "main_image_alt": "Product Image",
         "features": "EN1263-1 personnel fall arrest certification\nHigh-tenacity polyamide mesh\nAbsorbs fall energy without rebound\nIncludes all rigging hardware and border ropes\nFire-retardant treatment available\nInstall under platforms, scaffold edges, stairwells\nFull inspection and certification service available"
@@ -2397,7 +2397,7 @@
         "description": "<p>Our <strong>Low-Profile Silent TPR Furniture Caster Wheel Set</strong> is engineered for kick-plate and base-mounted furniture applications. The twin-wheel low-profile design provides exceptional stability under furniture bases while the thermoplastic rubber (TPR) wheels roll silently and leave zero marks on hardwood, laminate, tile, and marble floors.</p>",
         "main_image": "products/main/mmexport1787551256436.jpg.webp",
         "main_image_alt": "Product Image",
-        "features": "Twin-wheel low-profile design for furniture bases\nSilent-rolling TPR wheels â€” no floor marks\nPrecision ball-bearing 360Â° swivel bracket\nTop plate and stem mount options included\nRated load: 50 kg per caster\nWheel diameter: 38mm; Height: 45mm\nSilent and scratch-resistant compound"
+        "features": "Twin-wheel low-profile design for furniture bases\nSilent-rolling TPR wheels — no floor marks\nPrecision ball-bearing 360° swivel bracket\nTop plate and stem mount options included\nRated load: 50 kg per caster\nWheel diameter: 38mm; Height: 45mm\nSilent and scratch-resistant compound"
     }
 },
 {
@@ -2416,7 +2416,7 @@
         "is_active": true,
         "order": 66,
         "category": 24,
-        "name": "Heavy-Duty Locking Swivel Caster Wheels â€“ Industrial 66",
+        "name": "Heavy-Duty Locking Swivel Caster Wheels – Industrial 66",
         "slug": "heavy-duty-locking-swivel-caster-wheels-industrial-66",
         "description": "<p>The <strong>Heavy-Duty Locking Swivel Caster Wheels</strong> are designed for industrial trolleys, workbench bases, and heavy equipment stands that must be easily repositioned and then locked firmly in place. The dual-action brake locks both the wheel rotation and the swivel plate simultaneously, ensuring absolute stability when locked.</p>",
         "main_image": "products/main/mmexport1787551281851.jpg.webp",
@@ -2440,7 +2440,7 @@
         "is_active": true,
         "order": 67,
         "category": 24,
-        "name": "Polyester Binding Webbing Strip â€“ Packing & Strapping 67",
+        "name": "Polyester Binding Webbing Strip – Packing & Strapping 67",
         "slug": "polyester-binding-webbing-strip-packing-strapping-67",
         "description": "<p>Our <strong>Polyester Binding Webbing Strip</strong> is the industrial standard for securing pallets, bales, and boxed cargo for transport. Woven from high-tenacity polyester yarns to a precise width and tensile specification, it integrates perfectly with standard metal and plastic buckle tensioners. Available in natural white and a range of standard colors for color-coded load identification.</p>",
         "main_image": "products/main/mmexport1787551318119.jpg.webp",
@@ -2464,7 +2464,7 @@
         "is_active": true,
         "order": 68,
         "category": 24,
-        "name": "Aluminium Telescopic Pole â€“ Reach Extension Tool 68",
+        "name": "Aluminium Telescopic Pole – Reach Extension Tool 68",
         "slug": "aluminium-telescopic-pole-reach-extension-tool-68",
         "description": "<p>The <strong>Aluminium Telescopic Reach Extension Pole</strong> works with standard tool adapters to extend the reach of paint rollers, squeegees, window cleaners, and fruit pickers without the need for a ladder. Multiple twist-lock sections extend the pole to 6 meters while the compact collapsed length of 1.2 meters makes it manageable for transport and storage.</p>",
         "main_image": "products/main/mmexport1787551354476.jpg.webp",
@@ -2488,7 +2488,7 @@
         "is_active": true,
         "order": 69,
         "category": 24,
-        "name": "Professional Scaffold Plank â€“ Aluminium Hatch Platform 69",
+        "name": "Professional Scaffold Plank – Aluminium Hatch Platform 69",
         "slug": "professional-scaffold-plank-aluminium-hatch-platform-69",
         "description": "<p>The <strong>Aluminium Scaffold Plank</strong> is a lightweight, high-strength work platform designed for use between scaffold frames, combination ladder legs, and trestle bases. Extruded from 6061-T6 aluminum with a ribbed anti-slip top surface, it provides a firm, non-flex working platform that is dramatically lighter than traditional timber scaffold boards.</p>",
         "main_image": "products/main/mmexport1787551380394.jpg.webp",
@@ -2512,7 +2512,7 @@
         "is_active": true,
         "order": 70,
         "category": 24,
-        "name": "Round Wire Sunshade Net â€“ Greenhouse Shade Cloth 70",
+        "name": "Round Wire Sunshade Net – Greenhouse Shade Cloth 70",
         "slug": "round-wire-sunshade-net-greenhouse-shade-cloth-70",
         "description": "<p>Our <strong>Round Wire Sunshade Net</strong> is manufactured using advanced round-wire knitting technology for superior structural integrity and dimensional stability compared to flat-tape shade cloth. Ideal for large commercial greenhouse installations, nurseries, and agricultural shading, it provides consistent shade percentage across the full width with zero sagging even in heavy rain and wind.</p>",
         "main_image": "products/main/mmexport1787551450213.jpg.webp",
@@ -8025,10 +8025,10 @@
         "is_active": true,
         "order": 0,
         "gallery": 1,
-        "title": "High-Speed Weaving Looms",
-        "description": "Our state-of-the-art weaving looms operate around the clock to produce robust and consistent netting patterns with high precision and anti-fray weave.",
-        "image": "factory/gallery/gallery_thumb_0_6hP4CrA.webp",
-        "image_full": "factory/gallery/full/gallery_full_0_Klb7ilw.webp"
+        "title": "High-Speed Net Weaving Looms",
+        "description": "Our state-of-the-art computerized weaving looms operate continuously to produce robust, consistent shade netting and industrial net patterns with micron-level precision. Running 24/7, each loom is calibrated to deliver uniform mesh density, ensuring every roll meets our strict tensile strength and UV-resistance standards.",
+        "image": "factory/gallery/gallery_13_ps4apk",
+        "image_full": "factory/gallery/full/gallery_13_full_knree9"
     }
 },
 {
@@ -8038,10 +8038,10 @@
         "is_active": true,
         "order": 1,
         "gallery": 1,
-        "title": "Automated Monofilament Extrusion",
-        "description": "Raw polymers are melted, blended with UV stabilizers, and extruded into extremely fine, high-strength monofilaments that form the base of our products.",
-        "image": "factory/gallery/gallery_thumb_1_rChGFY5.webp",
-        "image_full": "factory/gallery/full/gallery_full_1_EAlaiQK.webp"
+        "title": "Monofilament Extrusion Lines",
+        "description": "Virgin HDPE polymer pellets are precision-melted and extruded into ultra-fine, high-strength monofilaments through our multi-zone extrusion lines. Each filament undergoes simultaneous UV stabilization and color integration, ensuring deep-dye consistency and long-term outdoor durability across all our netting and rope products.",
+        "image": "factory/gallery/gallery_14_u3gdib",
+        "image_full": "factory/gallery/full/gallery_14_full_f8sx0c"
     }
 },
 {
@@ -8051,10 +8051,10 @@
         "is_active": true,
         "order": 2,
         "gallery": 1,
-        "title": "Tensile Strength Testing Lab",
-        "description": "Every production batch undergoes strict load testing in our laboratory to certify break strength, elasticity, and compliance with safety standards.",
-        "image": "factory/gallery/gallery_thumb_2_2A2rYs2.webp",
-        "image_full": "factory/gallery/full/gallery_full_2_CU1wMqt.webp"
+        "title": "Quality Control & Testing Lab",
+        "description": "Every production batch is rigorously tested in our in-house QC laboratory using calibrated Instron tensile testing machines. Our QA engineers measure breaking force, elongation, UV degradation, and mesh aperture consistency — ensuring every product meets or exceeds international standards before it leaves our facility.",
+        "image": "factory/gallery/gallery_15_b8re4y",
+        "image_full": "factory/gallery/full/gallery_15_full_fdidse"
     }
 },
 {
@@ -8064,10 +8064,10 @@
         "is_active": true,
         "order": 3,
         "gallery": 1,
-        "title": "Raw Materials Warehouse",
-        "description": "We store premium quality virgin HDPE and high-grade fibers in our climate-controlled warehouse to ensure absolute consistency in our raw supplies.",
-        "image": "factory/gallery/gallery_thumb_3_tZS4H9e.webp",
-        "image_full": "factory/gallery/full/gallery_full_3_GO7fHZg.webp"
+        "title": "HDPE Raw Materials Warehouse",
+        "description": "We maintain a 2,000+ metric ton inventory of premium virgin HDPE and polypropylene polymer pellets, stored in our climate-controlled warehouse. Our dedicated procurement team ensures a continuous, uninterrupted raw material supply chain — enabling us to fulfill large bulk orders and meet urgent delivery timelines reliably.",
+        "image": "factory/gallery/gallery_16_har10o",
+        "image_full": "factory/gallery/full/gallery_16_full_sunafo"
     }
 },
 {
@@ -8077,10 +8077,10 @@
         "is_active": true,
         "order": 4,
         "gallery": 1,
-        "title": "Precision Heat Sealing Lines",
-        "description": "Heavy-duty tarpaulins and custom agriculture netting sizes are heat-sealed and bordered with reinforced grommets for maximum longevity.",
-        "image": "factory/gallery/gallery_thumb_4_AUiXwqS.webp",
-        "image_full": "factory/gallery/full/gallery_full_4_y6JifM4.webp"
+        "title": "Edge Finishing & Heat Sealing",
+        "description": "Finished shade nets and industrial netting pass through our precision heat-sealing production lines where edges are thermally bonded, reinforced with rope edging, and fitted with rust-resistant aluminum grommets. This critical finishing stage guarantees structural integrity under high-tension installation and harsh outdoor conditions.",
+        "image": "factory/gallery/gallery_17_o6xgvf",
+        "image_full": "factory/gallery/full/gallery_17_full_lqgguv"
     }
 },
 {
@@ -8090,10 +8090,10 @@
         "is_active": true,
         "order": 5,
         "gallery": 1,
-        "title": "Global Logistics & Packaging",
-        "description": "Finished netting and rope rolls are compressed, shrink-wrapped, and securely palletized for container shipping to our partners worldwide.",
-        "image": "factory/gallery/gallery_thumb_5_DvQe5jT.webp",
-        "image_full": "factory/gallery/full/gallery_full_5_NIWn0ji.webp"
+        "title": "Export Packaging & Logistics",
+        "description": "Finished products are compressed, shrink-wrapped, and securely palletized in our dedicated export packaging zone. Each consignment is barcoded, weighed, and documented with full compliance certificates before container loading. We ship to 30+ countries, ensuring every order arrives on time and in perfect condition.",
+        "image": "factory/gallery/gallery_18_ayzanl",
+        "image_full": "factory/gallery/full/gallery_18_full_vwcvmn"
     }
 },
 {
@@ -8115,20 +8115,6 @@
         "description": "Raw polymers are melted and extruded into high-strength monofilaments. This critical step ensures the foundational durability of all our netting products.",
         "youtube_url": "https://www.youtube.com/embed/T07Ib_nTPoE",
         "video_file": "factory/videos/WhatsApp_Video_2026-08-18_at_4.32.21_PM.mp4",
-        "thumbnail": ""
-    }
-},
-{
-    "model": "factory.factoryvideo",
-    "pk": 10,
-    "fields": {
-        "is_active": true,
-        "order": 1,
-        "video_section": 1,
-        "title": "Automated Net Weaving Technology",
-        "description": "Watch our heavy-duty German knitting machines weave thousands of fibers simultaneously into robust agricultural and safety nets.",
-        "youtube_url": "https://www.youtube.com/embed/V6vCae7P9t0",
-        "video_file": "factory/videos/WhatsApp_Video_2026-08-18_at_4.33.20_PM.mp4",
         "thumbnail": ""
     }
 },
@@ -8185,20 +8171,6 @@
         "description": "Raw polymers are melted and extruded into high-strength monofilaments. This critical step ensures the foundational durability of all our netting products.",
         "youtube_url": null,
         "video_file": "factory/videos/WhatsApp_Video_2026-08-18_at_4.33.23_PM.mp4",
-        "thumbnail": ""
-    }
-},
-{
-    "model": "factory.factoryvideo",
-    "pk": 15,
-    "fields": {
-        "is_active": true,
-        "order": 0,
-        "video_section": 1,
-        "title": "Automated Net Weaving Technology",
-        "description": "Automated Net Weaving TechnologyAutomated Net Weaving TechnologyAutomated Net Weaving Technology",
-        "youtube_url": null,
-        "video_file": "factory/videos/WhatsApp_Video_2026-08-18_at_4.33.23_PM_1.mp4",
         "thumbnail": ""
     }
 },
@@ -8501,7 +8473,7 @@
         "browser_info": "Chrome",
         "location": "Localhost / Development",
         "login_time": "2026-08-20T14:05:10.291Z",
-        "last_activity": "2026-08-26T10:03:21.347Z",
+        "last_activity": "2026-08-26T15:51:39.773Z",
         "logout_time": null,
         "is_active": true
     }
