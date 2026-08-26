@@ -3,6 +3,23 @@ from core.models import SingletonModel, BaseSection
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
+
+def _get_video_storage():
+    """Return the appropriate storage backend for video files.
+    Uses Cloudinary RawMediaCloudinaryStorage in production,
+    and default FileSystemStorage locally.
+    """
+    try:
+        from django.conf import settings
+        if getattr(settings, 'CLOUDINARY_CLOUD_NAME', None):
+            from cloudinary_storage.storage import RawMediaCloudinaryStorage
+            return RawMediaCloudinaryStorage()
+    except Exception:
+        pass
+    from django.core.files.storage import FileSystemStorage
+    return FileSystemStorage()
+
+
 class FactoryHeader(SingletonModel):
     title = models.CharField(max_length=200, default="State-of-the-Art Manufacturing")
     subtitle = models.TextField()
@@ -40,7 +57,12 @@ class FactoryVideo(BaseSection):
     title = models.CharField(max_length=100)
     description = models.TextField()
     youtube_url = models.URLField(null=True, blank=True)
-    video_file = models.FileField(upload_to='factory/videos/', null=True, blank=True)
+    video_file = models.FileField(
+        upload_to='factory/videos/',
+        null=True,
+        blank=True,
+        storage=_get_video_storage,
+    )
     thumbnail = ProcessedImageField(upload_to='factory/videos/thumbnails/', processors=[ResizeToFill(800, 450)], format='WEBP', options={'quality': 80}, null=True, blank=True, help_text="Cover thumbnail image for the video player")
 
     def __str__(self):
