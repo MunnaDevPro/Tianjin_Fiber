@@ -207,6 +207,8 @@ if CLOUDINARY_CLOUD_NAME:
         'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
         'API_KEY': CLOUDINARY_API_KEY,
         'API_SECRET': CLOUDINARY_API_SECRET,
+        'MEDIA_TAG': 'media',
+        'PREFIX': '',  # no extra prefix — files uploaded as products/main/... directly
     }
     STORAGES = {
         "default": {
