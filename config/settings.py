@@ -202,6 +202,12 @@ if CLOUDINARY_CLOUD_NAME:
         api_secret=CLOUDINARY_API_SECRET,
         secure=True,
     )
+    # Required by django-cloudinary-storage
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+        'API_KEY': CLOUDINARY_API_KEY,
+        'API_SECRET': CLOUDINARY_API_SECRET,
+    }
     STORAGES = {
         "default": {
             "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
