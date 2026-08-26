@@ -194,22 +194,29 @@ CLOUDINARY_CLOUD_NAME = env('CLOUDINARY_CLOUD_NAME', default=None)
 CLOUDINARY_API_KEY = env('CLOUDINARY_API_KEY', default=None)
 CLOUDINARY_API_SECRET = env('CLOUDINARY_API_SECRET', default=None)
 
+_cloudinary_ready = False
 if CLOUDINARY_CLOUD_NAME:
-    import cloudinary
-    cloudinary.config(
-        cloud_name=CLOUDINARY_CLOUD_NAME,
-        api_key=CLOUDINARY_API_KEY,
-        api_secret=CLOUDINARY_API_SECRET,
-        secure=True,
-    )
-    # Required by django-cloudinary-storage
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
-        'API_KEY': CLOUDINARY_API_KEY,
-        'API_SECRET': CLOUDINARY_API_SECRET,
-        'MEDIA_TAG': 'media',
-        'PREFIX': '',  # no extra prefix — files uploaded as products/main/... directly
-    }
+    try:
+        import cloudinary
+        cloudinary.config(
+            cloud_name=CLOUDINARY_CLOUD_NAME,
+            api_key=CLOUDINARY_API_KEY,
+            api_secret=CLOUDINARY_API_SECRET,
+            secure=True,
+        )
+        # Required by django-cloudinary-storage
+        CLOUDINARY_STORAGE = {
+            'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+            'API_KEY': CLOUDINARY_API_KEY,
+            'API_SECRET': CLOUDINARY_API_SECRET,
+            'MEDIA_TAG': 'media',
+            'PREFIX': '',  # files uploaded as products/main/... directly
+        }
+        _cloudinary_ready = True
+    except ImportError:
+        pass  # cloudinary not installed — fall back to local storage
+
+if _cloudinary_ready:
     STORAGES = {
         "default": {
             "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
