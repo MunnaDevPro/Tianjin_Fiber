@@ -54,9 +54,15 @@ for host in ALLOWED_HOSTS:
             CSRF_TRUSTED_ORIGINS.append(f"https://*.{host}")
 
 # Explicitly add the known production domain
-CSRF_TRUSTED_ORIGINS.append("https://tianjin-fiber.onrender.com")
+CSRF_TRUSTED_ORIGINS.extend([
+    "https://tjropenet.com",
+    "https://www.tjropenet.com",
+    "http://tjropenet.com",
+    "http://www.tjropenet.com",
+    "https://tianjin-fiber.onrender.com",
+])
 
-# Trust the X-Forwarded-Proto header from the reverse proxy (Render)
+# Trust the X-Forwarded-Proto header from the reverse proxy (Render / LiteSpeed / Nginx)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
@@ -190,9 +196,9 @@ STATICFILES_DIRS = [
 ]
 
 # Cloudinary Configuration
-CLOUDINARY_CLOUD_NAME = env('CLOUDINARY_CLOUD_NAME', default=None)
-CLOUDINARY_API_KEY = env('CLOUDINARY_API_KEY', default=None)
-CLOUDINARY_API_SECRET = env('CLOUDINARY_API_SECRET', default=None)
+CLOUDINARY_CLOUD_NAME = env('CLOUDINARY_CLOUD_NAME', default='dr6jg7a8z')
+CLOUDINARY_API_KEY = env('CLOUDINARY_API_KEY', default='667893846918177')
+CLOUDINARY_API_SECRET = env('CLOUDINARY_API_SECRET', default='6QUDWNLmopkDLanNs03pVSTZFqI')
 
 _cloudinary_ready = False
 if CLOUDINARY_CLOUD_NAME:
