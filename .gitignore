@@ -19,7 +19,7 @@ __pycache__/
 *$py.class
 
 # Django media & static files
-media/
+# media/
 staticfiles/
 static_collected/
 
