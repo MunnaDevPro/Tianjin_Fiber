@@ -2,6 +2,348 @@
 {% load i18n static %}
 
 {% block content %}
+<style>
+    /* Table & Card Modernization */
+    .custom-card {
+        border-radius: 0.85rem !important;
+        background: #ffffff;
+        box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+        border: 1px solid #edf2f7 !important;
+        overflow: hidden;
+    }
+    .custom-card-header {
+        background: #ffffff !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+    }
+    .custom-table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .custom-table {
+        width: 100% !important;
+        table-layout: fixed !important;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+    @media (max-width: 991px) {
+        .custom-table {
+            min-width: 580px;
+        }
+    }
+    .custom-table thead th {
+        background: #f8fafc !important;
+        color: #475569 !important;
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0.55rem 0.5rem !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        border-top: none !important;
+        white-space: nowrap;
+    }
+    .custom-table tbody tr {
+        transition: all 0.15s ease-in-out;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .custom-table tbody tr:hover {
+        background-color: #f8fafc !important;
+    }
+    .custom-table tbody td {
+        padding: 0.55rem 0.5rem !important;
+        vertical-align: middle !important;
+        border-top: none !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        overflow: hidden;
+    }
+    .custom-table tbody tr:last-child td {
+        border-bottom: none !important;
+    }
+
+    /* Monogram Avatar */
+    .company-avatar-box {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.70rem;
+        letter-spacing: -0.2px;
+        color: #1a4674;
+        background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+        border: 1px solid #bfdbfe;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        text-transform: uppercase;
+        flex-shrink: 0;
+    }
+    .company-avatar-lead {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        color: #1d4ed8;
+        border-color: #bfdbfe;
+    }
+    .company-avatar-prospect {
+        background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+        color: #7e22ce;
+        border-color: #e9d5ff;
+    }
+    .company-avatar-customer {
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        color: #15803d;
+        border-color: #bbf7d0;
+    }
+    .company-avatar-partner {
+        background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+        color: #0f766e;
+        border-color: #99f6e4;
+    }
+
+    /* Customer ID Chip - strictly no wrap */
+    .cust-id-chip {
+        display: inline-block;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap !important;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.64rem;
+        font-weight: 600;
+        color: #334155;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 0.10rem 0.35rem;
+        border-radius: 4px;
+        letter-spacing: 0.1px;
+        line-height: 1.3;
+        vertical-align: middle;
+    }
+
+    /* Type Pill Badges */
+    .type-badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 0.62rem;
+        font-weight: 600;
+        padding: 0.10rem 0.40rem;
+        border-radius: 9999px;
+        letter-spacing: 0.2px;
+        white-space: nowrap;
+    }
+    .type-badge-lead {
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #dbeafe;
+    }
+    .type-badge-prospect {
+        background-color: #faf5ff;
+        color: #7e22ce;
+        border: 1px solid #f3e8ff;
+    }
+    .type-badge-customer {
+        background-color: #f0fdf4;
+        color: #15803d;
+        border: 1px solid #dcfce7;
+    }
+    .type-badge-partner {
+        background-color: #f0fdfa;
+        color: #0f766e;
+        border: 1px solid #ccfbf1;
+    }
+
+    /* Contact Links */
+    .contact-item-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.71rem;
+        color: #334155;
+        white-space: nowrap;
+        min-width: 0;
+    }
+    .contact-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: #334155;
+        text-decoration: none !important;
+        font-size: 0.71rem;
+        transition: color 0.15s ease;
+        min-width: 0;
+    }
+    .contact-link:hover {
+        color: #1a4674 !important;
+    }
+    .contact-icon-inline {
+        width: 12px;
+        text-align: center;
+        font-size: 0.62rem;
+        flex-shrink: 0;
+    }
+
+    /* Status Pill with indicator dot */
+    .status-pill-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.64rem;
+        font-weight: 600;
+        padding: 0.14rem 0.45rem;
+        border-radius: 9999px;
+        white-space: nowrap;
+    }
+    .status-dot-indicator {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+    }
+    .status-chip-active {
+        background: #ecfdf5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+    }
+    .status-chip-active .status-dot-indicator {
+        background: #10b981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+    }
+    .status-chip-pending {
+        background: #fffbeb;
+        color: #92400e;
+        border: 1px solid #fef3c7;
+    }
+    .status-chip-pending .status-dot-indicator {
+        background: #f59e0b;
+        box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+    }
+    .status-chip-hot {
+        background: #fff1f2;
+        color: #be123c;
+        border: 1px solid #fecdd3;
+    }
+    .status-chip-hot .status-dot-indicator {
+        background: #f43f5e;
+        box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.25);
+    }
+    .status-chip-warm {
+        background: #fff7ed;
+        color: #c2410c;
+        border: 1px solid #ffedd5;
+    }
+    .status-chip-warm .status-dot-indicator {
+        background: #f97316;
+        box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.25);
+    }
+    .status-chip-inactive {
+        background: #f8fafc;
+        color: #64748b;
+        border: 1px solid #e2e8f0;
+    }
+    .status-chip-inactive .status-dot-indicator {
+        background: #94a3b8;
+    }
+    .status-chip-cold {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #cbd5e1;
+    }
+    .status-chip-cold .status-dot-indicator {
+        background: #64748b;
+    }
+
+    /* Action Buttons */
+    .btn-action-edit {
+        font-size: 0.65rem !important;
+        font-weight: 600 !important;
+        background: #1a4674 !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 0.2rem 0.48rem !important;
+        box-shadow: 0 1px 2px rgba(26, 70, 116, 0.15) !important;
+        text-transform: capitalize !important;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        transition: all 0.15s ease-in-out !important;
+        text-decoration: none !important;
+        white-space: nowrap;
+    }
+    .btn-action-edit:hover {
+        background: #133457 !important;
+        color: #ffffff !important;
+        transform: translateY(-1px);
+    }
+    .btn-action-view {
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 24px !important;
+        font-size: 0.65rem !important;
+        background: #ffffff !important;
+        color: #64748b !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0 !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s ease-in-out !important;
+        outline: none !important;
+        white-space: nowrap;
+    }
+    .btn-action-view:hover {
+        background: #f8fafc !important;
+        color: #1a4674 !important;
+        border-color: #cbd5e1 !important;
+        transform: translateY(-1px);
+    }
+
+    /* Activity Timeline */
+    .activity-timeline {
+        position: relative;
+    }
+    .activity-item {
+        position: relative;
+        padding-bottom: 0.70rem;
+        margin-bottom: 0.70rem;
+        border-bottom: 1px dashed #f1f5f9;
+    }
+    .activity-item:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+    .activity-item::before {
+        content: '';
+        position: absolute;
+        top: 24px;
+        bottom: -6px;
+        left: 11px;
+        width: 2px;
+        background: #f1f5f9;
+    }
+    .activity-item:last-child::before {
+        display: none;
+    }
+    .activity-icon-bubble {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.62rem;
+        z-index: 2;
+        position: relative;
+        border: 2px solid #ffffff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+</style>
 <div class="container-fluid animate-fade-in px-2">
 
     <!-- Premium Dashboard Hero Welcome Banner -->
@@ -87,6 +429,17 @@
                 <i class="fas fa-users"></i>
             </div>
         </a>
+
+        <!-- Unread Hostinger Emails -->
+        <a href="/dashboard/email/inbox/" class="metric-card py-2 px-3 animate-slide-up" style="animation-delay: 0.4s; min-height: auto !important; border-radius: 0.75rem !important; border-left: 4px solid #7c3aed !important;" title="View Hostinger Webmail Inbox">
+            <div class="metric-content">
+                <span class="metric-label" style="font-size: 0.7rem !important; color: #475569;">Unread Inbox</span>
+                <span id="metricUnreadEmails" class="metric-value" style="font-size: 1.4rem !important; color: #7c3aed;">{{ admin_metrics.unread_inbox_count|default:"0" }}</span>
+            </div>
+            <div class="metric-icon-wrapper" style="width: 2.2rem; height: 2.2rem; font-size: 1rem; background: #f5f3ff !important; color: #7c3aed !important;">
+                <i class="fas fa-inbox"></i>
+            </div>
+        </a>
     </div>
 
     <!-- Analytics Charts Row -->
@@ -138,23 +491,27 @@
                         <table class="custom-table table-sm mb-0">
                             <thead>
                                 <tr>
-                                    <th style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Sender</th>
-                                    <th style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Subject</th>
-                                    <th style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Date</th>
-                                    <th class="text-right" style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">Action</th>
+                                    <th style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 30%;">Sender</th>
+                                    <th style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 40%;">Subject</th>
+                                    <th style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 16%;">Date</th>
+                                    <th class="text-right" style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 14%;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for msg in admin_metrics.recent_messages %}
                                 <tr class="hover-row">
-                                    <td style="padding: 0.3rem 0.6rem !important; font-size: 0.80rem !important;">
-                                        <span class="font-weight-bold" style="color: #1e293b;">{{ msg.name }}</span>
-                                        <div class="text-muted" style="font-size: 0.70rem;">{{ msg.email }}</div>
+                                    <td style="padding: 0.55rem 0.5rem !important; font-size: 0.78rem !important;">
+                                        <div class="font-weight-bold text-truncate" style="color: #1e293b; max-width: 140px;">{{ msg.name }}</div>
+                                        <div class="text-muted text-truncate" style="font-size: 0.68rem; max-width: 140px;">{{ msg.email }}</div>
                                     </td>
-                                    <td style="padding: 0.3rem 0.6rem !important; font-size: 0.80rem !important; color: #475569;">{{ msg.subject|truncatechars:45 }}</td>
-                                    <td class="text-muted" style="padding: 0.3rem 0.6rem !important; font-size: 0.70rem !important;">{{ msg.created_at|date:"M d, Y" }}</td>
-                                    <td class="text-right" style="padding: 0.3rem 0.6rem !important;">
-                                        <a href="{% url 'admin:contactapp_contactmessage_change' msg.id %}" class="btn btn-xs btn-primary rounded-pill px-2 py-0" style="font-size: 0.60rem; text-transform: capitalize; font-weight: normal; background: #1a4674 !important; border: none !important; box-shadow: 0 1px 2px rgba(26, 70, 116, 0.15);">View Details</a>
+                                    <td style="padding: 0.55rem 0.5rem !important; font-size: 0.76rem !important; color: #475569;">
+                                        <div class="text-truncate" style="max-width: 220px;" title="{{ msg.subject }}">{{ msg.subject }}</div>
+                                    </td>
+                                    <td class="text-muted" style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; white-space: nowrap;">
+                                        <i class="fas fa-calendar-alt text-muted mr-1" style="font-size: 0.58rem;"></i>{{ msg.created_at|date:"M d, Y" }}
+                                    </td>
+                                    <td class="text-right" style="padding: 0.55rem 0.5rem !important; white-space: nowrap;">
+                                        <a href="{% url 'admin:contactapp_contactmessage_change' msg.id %}" class="btn-action-edit" style="font-size: 0.62rem !important; padding: 0.2rem 0.5rem !important;">View Details</a>
                                     </td>
                                 </tr>
                                 {% empty %}
@@ -171,15 +528,22 @@
                 </div>
             </div>
 
-            <!-- Recent Customers -->
+            <!-- Recent Customers & Activity -->
             <div class="card custom-card shadow-sm border-0 mb-4 animate-fade-in" style="border-radius: 0.75rem !important;">
-                <div class="custom-card-header py-3 px-3 d-flex justify-content-between align-items-center" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
-                    <h5 class="custom-card-title" style="font-size: 0.95rem !important;"><i class="fas fa-users text-warning mr-1"></i> Recent Customers</h5>
-                    <div>
-                        <button type="button" class="btn btn-xs btn-primary rounded-pill py-1 px-3 mr-2" style="font-size: 0.75rem; background: #1a4674 !important; border: none !important;" data-toggle="modal" data-target="#addCustomerModal">
+                <div class="custom-card-header py-3 px-3 d-flex flex-wrap justify-content-between align-items-center" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important; gap: 10px;">
+                    <div class="d-flex align-items-center">
+                        <h5 class="custom-card-title m-0" style="font-size: 0.95rem !important;">
+                            <i class="fas fa-users-cog text-warning mr-1"></i> Recent Customers & Leads
+                        </h5>
+                        <span class="badge badge-light border text-muted ml-2 px-2 py-0.5" style="font-size: 0.70rem; font-weight: 500;">
+                            {{ admin_metrics.total_customers|default:"0" }} Total
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button type="button" class="btn btn-xs btn-primary rounded-pill py-1.5 px-3 mr-2 shadow-sm font-weight-bold" style="font-size: 0.75rem; background: #1a4674 !important; border: none !important;" data-toggle="modal" data-target="#addCustomerModal">
                             <i class="fas fa-plus mr-1"></i> Add Customer
                         </button>
-                        <a href="{% url 'admin:customers_customer_changelist' %}" class="btn btn-xs btn-outline-primary rounded-pill py-1 px-3" style="font-size: 0.75rem;">View All</a>
+                        <a href="{% url 'admin:customers_customer_changelist' %}" class="btn btn-xs btn-outline-primary rounded-pill py-1.5 px-3" style="font-size: 0.75rem; font-weight: 600;">View All</a>
                     </div>
                 </div>
                 <div class="custom-card-body p-0">
@@ -187,47 +551,129 @@
                         <table class="custom-table table-sm mb-0">
                             <thead>
                                 <tr>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">ID / Type</th>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Company & Contact</th>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Contact Details</th>
-                                    <th style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Status</th>
-                                    <th class="text-right" style="padding: 0.6rem 1rem !important; font-size: 0.75rem !important;">Action</th>
+                                    <th style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 29%;">Company & Client</th>
+                                    <th style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 17%;">ID & Type</th>
+                                    <th style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 23%;">Contact Details</th>
+                                    <th style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 16%;">Status & Date</th>
+                                    <th class="text-right" style="padding: 0.55rem 0.5rem !important; font-size: 0.68rem !important; width: 15%;">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="customersTableBody">
                                 {% for customer in admin_metrics.recent_customers %}
                                 <tr class="hover-row">
-                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
-                                        <div class="font-weight-bold" style="color: #0f172a;">{{ customer.customer_id }}</div>
-                                        <span class="badge badge-pill font-weight-bold px-2 py-1 mt-1" style="font-size: 0.7rem; 
-                                        {% if customer.customer_type == 'Lead' %}background-color: #eff6ff; color: #1e40af; border: 1px solid #dbeafe;
-                                        {% elif customer.customer_type == 'Prospect' %}background-color: #faf5ff; color: #6b21a8; border: 1px solid #f3e8ff;
-                                        {% elif customer.customer_type == 'Customer' %}background-color: #f0fdf4; color: #166534; border: 1px solid #dcfce7;
-                                        {% else %}background-color: #f0fdfa; color: #0f766e; border: 1px solid #ccfbf1;{% endif %}">
-                                            {{ customer.customer_type }}
-                                        </span>
+                                    <td style="padding: 0.55rem 0.5rem !important;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="company-avatar-box mr-2 
+                                                {% if customer.customer_type == 'Lead' %}company-avatar-lead
+                                                {% elif customer.customer_type == 'Prospect' %}company-avatar-prospect
+                                                {% elif customer.customer_type == 'Customer' %}company-avatar-customer
+                                                {% else %}company-avatar-partner{% endif %}">
+                                                {{ customer.company_name|slice:":2"|upper }}
+                                            </div>
+                                            <div style="min-width: 0; flex: 1;">
+                                                <div class="font-weight-bold text-truncate" style="color: #0f172a; font-size: 0.80rem; line-height: 1.25; max-width: 140px;" title="{{ customer.company_name }}">
+                                                    {{ customer.company_name }}
+                                                </div>
+                                                <div class="text-muted d-flex align-items-center text-truncate mt-0.5" style="font-size: 0.70rem; line-height: 1.2; max-width: 140px;">
+                                                    <i class="fas fa-user text-muted mr-1" style="font-size: 0.58rem;"></i>
+                                                    <span class="text-truncate">{{ customer.contact_person }}</span>
+                                                    {% if customer.position %}
+                                                    <span class="badge badge-light border text-muted ml-1 py-0 px-1 text-truncate" style="font-size: 0.58rem; font-weight: normal; max-width: 60px;">{{ customer.position }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                {% if customer.country or customer.city %}
+                                                <div class="text-muted text-truncate mt-0.5" style="font-size: 0.65rem; color: #94a3b8; max-width: 140px;">
+                                                    <i class="fas fa-map-marker-alt text-muted mr-0.5" style="font-size: 0.56rem;"></i>{{ customer.city }}{% if customer.city and customer.country %}, {% endif %}{{ customer.country }}
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
                                     </td>
-                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
-                                        <span class="font-weight-bold" style="color: #1e293b;">{{ customer.company_name }}</span>
-                                        <div class="text-muted" style="font-size: 0.75rem;">{{ customer.contact_person }}{% if customer.position %} ({{ customer.position }}){% endif %}</div>
+                                    <td style="padding: 0.55rem 0.5rem !important; vertical-align: middle; white-space: nowrap;">
+                                        <div>
+                                            <span class="cust-id-chip text-truncate" title="{{ customer.customer_id }}">
+                                                <i class="fas fa-hashtag text-muted mr-0.5" style="font-size: 0.56rem;"></i>{{ customer.customer_id }}
+                                            </span>
+                                        </div>
+                                        <div class="mt-1">
+                                            <span class="type-badge-pill 
+                                                {% if customer.customer_type == 'Lead' %}type-badge-lead
+                                                {% elif customer.customer_type == 'Prospect' %}type-badge-prospect
+                                                {% elif customer.customer_type == 'Customer' %}type-badge-customer
+                                                {% else %}type-badge-partner{% endif %}">
+                                                <i class="fas {% if customer.customer_type == 'Customer' %}fa-check-circle{% elif customer.customer_type == 'Lead' %}fa-bullseye{% elif customer.customer_type == 'Prospect' %}fa-user-clock{% else %}fa-handshake{% endif %} mr-0.5" style="font-size: 0.54rem;"></i>
+                                                {{ customer.customer_type }}
+                                            </span>
+                                        </div>
                                     </td>
-                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #475569;">
-                                        <div><i class="fas fa-envelope mr-1 text-muted" style="font-size: 0.75rem;"></i>{{ customer.email|default:"-" }}</div>
-                                        <div class="mt-1"><i class="fas fa-phone-alt mr-1 text-muted" style="font-size: 0.75rem;"></i>{{ customer.phone|default:"-" }}</div>
+                                    <td style="padding: 0.55rem 0.5rem !important; vertical-align: middle;">
+                                        {% if customer.email %}
+                                        <div class="contact-item-row">
+                                            <a href="/dashboard/email/compose/?to={{ customer.email|urlencode }}" class="contact-link text-truncate" style="max-width: 125px;" title="Send email via Hostinger to: {{ customer.email }}">
+                                                <i class="fas fa-envelope text-primary contact-icon-inline"></i>
+                                                <span class="contact-text text-truncate">{{ customer.email }}</span>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                        {% if customer.phone %}
+                                        <div class="contact-item-row {% if customer.email %}mt-1{% endif %}">
+                                            <a href="tel:{{ customer.phone }}" class="contact-link text-truncate" style="max-width: 100px;" title="{{ customer.phone }}">
+                                                <i class="fas fa-phone-alt text-success contact-icon-inline"></i>
+                                                <span class="contact-text" style="font-family: ui-monospace, monospace; font-size: 0.69rem;">{{ customer.phone }}</span>
+                                            </a>
+                                            {% if customer.whatsapp %}
+                                            <a href="https://wa.me/{{ customer.whatsapp|cut:' '|cut:'+'|cut:'-' }}" target="_blank" class="text-success ml-1 flex-shrink-0" title="WhatsApp: {{ customer.whatsapp }}" style="font-size: 0.74rem;">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                        {% endif %}
+                                        {% if not customer.email and not customer.phone %}
+                                        <span class="text-muted small" style="font-size: 0.68rem;">No details</span>
+                                        {% endif %}
                                     </td>
-                                    <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
-                                        <span class="badge badge-pill font-weight-bold px-2 py-1" style="font-size: 0.7rem; 
-                                        {% if customer.status == 'Active' %}background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;
-                                        {% elif customer.status == 'Inactive' %}background-color: #fef2f2; color: #991b1b; border: 1px solid #fee2e2;
-                                        {% elif customer.status == 'Pending' %}background-color: #fffbeb; color: #92400e; border: 1px solid #fef3c7;
-                                        {% elif customer.status == 'Hot' %}background-color: #fff5f5; color: #e11d48; border: 1px solid #ffe4e6;
-                                        {% elif customer.status == 'Warm' %}background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;
-                                        {% else %}background-color: #eff6ff; color: #1e40af; border: 1px solid #dbeafe;{% endif %}">
-                                            {{ customer.status }}
-                                        </span>
+                                    <td style="padding: 0.55rem 0.5rem !important; vertical-align: middle; white-space: nowrap;">
+                                        <div>
+                                            <span class="status-pill-chip 
+                                                {% if customer.status == 'Active' %}status-chip-active
+                                                {% elif customer.status == 'Pending' %}status-chip-pending
+                                                {% elif customer.status == 'Hot' %}status-chip-hot
+                                                {% elif customer.status == 'Warm' %}status-chip-warm
+                                                {% elif customer.status == 'Inactive' %}status-chip-inactive
+                                                {% else %}status-chip-cold{% endif %}">
+                                                <span class="status-dot-indicator"></span>
+                                                <span>{{ customer.status }}</span>
+                                            </span>
+                                        </div>
+                                        <div class="text-muted mt-1 text-truncate" style="font-size: 0.66rem; white-space: nowrap;" title="{{ customer.created_at|timesince }} ago">
+                                            <i class="fas fa-calendar-alt text-muted mr-1" style="font-size: 0.58rem;"></i>{{ customer.created_at|date:"M d, Y" }}
+                                        </div>
                                     </td>
-                                    <td class="text-right" style="padding: 0.3rem 0.6rem !important;">
-                                        <a href="{% url 'admin:customers_customer_change' customer.id %}" class="btn btn-xs btn-primary rounded-pill px-2 py-0" style="font-size: 0.60rem; text-transform: capitalize; font-weight: normal; background: #1a4674 !important; border: none !important; box-shadow: 0 1px 2px rgba(26, 70, 116, 0.15);">Edit</a>
+                                    <td class="text-right" style="padding: 0.55rem 0.5rem !important; vertical-align: middle; white-space: nowrap;">
+                                        <div class="d-inline-flex align-items-center justify-content-end" style="gap: 3px;">
+                                            <a href="{% url 'admin:customers_customer_change' customer.id %}" class="btn btn-action-edit" title="Edit Customer">
+                                                <i class="fas fa-pen" style="font-size: 0.55rem;"></i> Edit
+                                            </a>
+                                            <button type="button" class="btn btn-action-view open-customer-modal-btn" title="Quick View" 
+                                                data-customer-id="{{ customer.customer_id }}" 
+                                                data-company="{{ customer.company_name|escape }}" 
+                                                data-contact="{{ customer.contact_person|escape }}" 
+                                                data-position="{{ customer.position|default:''|escape }}" 
+                                                data-type="{{ customer.customer_type }}" 
+                                                data-status="{{ customer.status }}" 
+                                                data-email="{{ customer.email|default:'' }}" 
+                                                data-phone="{{ customer.phone|default:'' }}" 
+                                                data-whatsapp="{{ customer.whatsapp|default:'' }}" 
+                                                data-source="{{ customer.lead_source|default:'Website' }}" 
+                                                data-city="{{ customer.city|default:'' }}" 
+                                                data-country="{{ customer.country|default:'' }}" 
+                                                data-created="{{ customer.created_at|date:'M d, Y' }}" 
+                                                data-interest="{{ customer.product_interest|default:''|escape }}" 
+                                                data-notes="{{ customer.notes|default:''|escape }}" 
+                                                data-edit-url="{% url 'admin:customers_customer_change' customer.id %}">
+                                                <i class="fas fa-eye" style="font-size: 0.65rem;"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 {% empty %}
@@ -255,6 +701,26 @@
                 </div>
                 <div class="custom-card-body p-2">
                     <div class="quick-actions-grid" style="grid-template-columns: repeat(2, 1fr) !important; gap: 0.4rem !important;">
+                        <a href="/dashboard/email/compose/" class="quick-action-btn p-1" style="border-radius: 0.4rem !important; outline: none; background: #faf5ff !important; border: 1px solid #e9d5ff !important;">
+                            <i class="fas fa-paper-plane mb-0" style="font-size: 0.95rem !important; color: #7c3aed;"></i>
+                            <span style="font-size: 0.70rem !important; display: block; line-height: 1; font-weight: 700; color: #6d28d9;">Send Email</span>
+                        </a>
+
+                        <a href="/dashboard/contactapp/hostingeremailsettings/1/change/" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
+                            <i class="fas fa-cog mb-0" style="font-size: 0.95rem !important; color: #6366f1;"></i>
+                            <span style="font-size: 0.70rem !important;">Mail Config</span>
+                        </a>
+
+                        <a href="{% url 'admin:contactapp_sentemaillog_changelist' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
+                            <i class="fas fa-history mb-0" style="font-size: 0.95rem !important; color: #059669;"></i>
+                            <span style="font-size: 0.70rem !important;">Sent Mails</span>
+                        </a>
+
+                        <button type="button" class="quick-action-btn p-1 border-0 bg-transparent w-100" style="border-radius: 0.4rem !important; outline: none;" data-toggle="modal" data-target="#addCustomerModal">
+                            <i class="fas fa-user-plus mb-0" style="font-size: 0.95rem !important; color: #f59e0b;"></i>
+                            <span style="font-size: 0.70rem !important; display: block; line-height: 1;">Add Customer</span>
+                        </button>
+
                         <a href="{% url 'admin:products_product_add' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
                             <i class="fas fa-plus-circle mb-0" style="font-size: 0.95rem !important;"></i>
                             <span style="font-size: 0.70rem !important;">Add Product</span>
@@ -264,22 +730,61 @@
                             <i class="fas fa-certificate mb-0" style="font-size: 0.95rem !important;"></i>
                             <span style="font-size: 0.70rem !important;">Add Certificate</span>
                         </a>
-                        <a href="{% url 'admin:home_homehero_changelist' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
-                            <i class="fas fa-home mb-0" style="font-size: 0.95rem !important;"></i>
-                            <span style="font-size: 0.70rem !important;">Hero Settings</span>
-                        </a>
-                        <a href="{% url 'admin:navigation_navbar_changelist' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
-                            <i class="fas fa-compass mb-0" style="font-size: 0.95rem !important;"></i>
-                            <span style="font-size: 0.70rem !important;">Edit Navbar</span>
-                        </a>
-                        <a href="{% url 'admin:navigation_footer_changelist' %}" class="quick-action-btn p-1" style="border-radius: 0.4rem !important;">
-                            <i class="fas fa-shoe-prints mb-0" style="font-size: 0.95rem !important;"></i>
-                            <span style="font-size: 0.70rem !important;">Edit Footer</span>
-                        </a>
-                        <button type="button" class="quick-action-btn p-1 border-0 bg-transparent w-100" style="border-radius: 0.4rem !important; outline: none;" data-toggle="modal" data-target="#addCustomerModal">
-                            <i class="fas fa-user-plus mb-0" style="font-size: 0.95rem !important; color: #f59e0b;"></i>
-                            <span style="font-size: 0.70rem !important; display: block; line-height: 1;">Add Customer</span>
-                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent System Activity Log -->
+            <div class="card custom-card shadow-sm border-0 mb-4 animate-fade-in" style="border-radius: 0.75rem !important;">
+                <div class="custom-card-header py-2.5 px-3 d-flex justify-content-between align-items-center" style="background: transparent !important; border-bottom: 1px solid #f1f5f9 !important;">
+                    <h5 class="custom-card-title m-0" style="font-size: 0.90rem !important;">
+                        <i class="fas fa-bolt text-warning mr-1"></i> Recent Activity Log
+                    </h5>
+                    <span class="badge badge-light border text-muted px-2 py-0.5" style="font-size: 0.65rem; font-weight: 500;">Audit Trail</span>
+                </div>
+                <div class="custom-card-body p-3">
+                    <div class="activity-timeline">
+                        {% for act in admin_metrics.recent_activities %}
+                        <div class="activity-item d-flex align-items-start">
+                            <div class="activity-icon-bubble mr-2 
+                                {% if act.is_addition %}bg-success text-white
+                                {% elif act.is_change %}bg-primary text-white
+                                {% elif act.is_deletion %}bg-danger text-white
+                                {% else %}bg-secondary text-white{% endif %}">
+                                {% if act.is_addition %}<i class="fas fa-plus"></i>
+                                {% elif act.is_change %}<i class="fas fa-pen"></i>
+                                {% elif act.is_deletion %}<i class="fas fa-trash-alt"></i>
+                                {% else %}<i class="fas fa-history"></i>{% endif %}
+                            </div>
+                            <div class="activity-body flex-grow-1" style="font-size: 0.76rem; line-height: 1.3; min-width: 0;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    {% if act.is_deletion %}
+                                        <span class="font-weight-bold text-dark text-truncate" style="max-width: 135px; font-size: 0.76rem;" title="{{ act.object_repr }}">
+                                            {{ act.object_repr|truncatechars:18 }}
+                                        </span>
+                                    {% else %}
+                                        <a href="{{ act.get_admin_url|default:'#' }}" class="font-weight-bold text-dark text-truncate text-decoration-none" style="max-width: 135px; font-size: 0.76rem;" title="{{ act.object_repr }}">
+                                            {{ act.object_repr|truncatechars:18 }}
+                                        </a>
+                                    {% endif %}
+                                    <span class="text-muted small ml-1" style="font-size: 0.65rem; white-space: nowrap;">
+                                        {{ act.action_time|timesince }} ago
+                                    </span>
+                                </div>
+                                <div class="text-muted d-flex align-items-center mt-1" style="font-size: 0.67rem;">
+                                    <span class="badge badge-light border mr-1.5 px-1.5 py-0.5" style="font-size: 0.62rem; color: #475569; font-weight: 600;">
+                                        {{ act.content_type.model|capfirst }}
+                                    </span>
+                                    <span>by <strong>{{ act.user.username }}</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center text-muted py-3">
+                            <i class="fas fa-history fa-2x mb-1 text-gray-300"></i>
+                            <p class="small mb-0">No recent activity logged yet.</p>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -547,6 +1052,237 @@
     </div>
 </div>
 
+<!-- Quick View Customer Modal -->
+<div class="modal fade" id="viewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="viewCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 1rem !important; overflow: hidden;">
+            <div class="modal-header border-0 text-white p-3" style="background: linear-gradient(135deg, #1a4674 0%, #1e293b 100%);">
+                <div class="d-flex align-items-center">
+                    <div id="vmAvatar" class="company-avatar-box mr-2.5" style="border: 2px solid rgba(255,255,255,0.2); color: #1a4674; background: #ffffff;">CU</div>
+                    <div>
+                        <h5 class="modal-title font-weight-bold text-white mb-0" id="vmCompany" style="font-size: 1.05rem;">Company Name</h5>
+                        <div class="d-flex align-items-center mt-1" style="gap: 6px;">
+                            <span id="vmIdChip" class="badge badge-light text-monospace px-1.5 py-0.5" style="font-size: 0.68rem; font-weight: 600;">#ID</span>
+                            <span id="vmTypeBadge" class="badge badge-pill px-2 py-0.5" style="font-size: 0.68rem;">Type</span>
+                            <span id="vmStatusBadge" class="badge badge-pill px-2 py-0.5" style="font-size: 0.68rem;">Status</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-3 bg-light">
+                <!-- Contact & Role Card -->
+                <div class="card border-0 shadow-sm p-3 mb-2.5 bg-white" style="border-radius: 0.75rem;">
+                    <div class="d-flex justify-content-between align-items-center mb-2 pb-2" style="border-bottom: 1px solid #f1f5f9;">
+                        <div>
+                            <span class="text-muted small d-block">Contact Person</span>
+                            <strong id="vmContact" class="text-dark" style="font-size: 0.88rem;">-</strong>
+                            <span id="vmPosition" class="text-muted small ml-1">(-)</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-muted small d-block">Location</span>
+                            <span id="vmLocation" class="text-dark small font-weight-bold"><i class="fas fa-map-marker-alt text-danger mr-1"></i>-</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mb-2">
+                            <span class="text-muted small d-block"><i class="fas fa-envelope text-primary mr-1"></i>Email</span>
+                            <a id="vmEmailLink" href="#" class="font-weight-600 text-dark small text-truncate d-block">-</a>
+                        </div>
+                        <div class="col-sm-6 mb-2">
+                            <span class="text-muted small d-block"><i class="fas fa-phone-alt text-success mr-1"></i>Phone</span>
+                            <a id="vmPhoneLink" href="#" class="font-weight-600 text-dark small d-block">-</a>
+                        </div>
+                    </div>
+                    <div id="vmWhatsappWrap" class="mt-1 d-none">
+                        <a id="vmWhatsappLink" href="#" target="_blank" class="btn btn-xs btn-success rounded-pill px-2 py-1 font-weight-bold" style="font-size: 0.70rem;">
+                            <i class="fab fa-whatsapp mr-1"></i> Open in WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Details & Timeline Card -->
+                <div class="card border-0 shadow-sm p-3 bg-white" style="border-radius: 0.75rem;">
+                    <div class="d-flex justify-content-between align-items-center mb-2 pb-2" style="border-bottom: 1px solid #f1f5f9;">
+                        <div>
+                            <span class="text-muted small">Lead Source:</span>
+                            <span id="vmSource" class="badge badge-light border text-muted ml-1" style="font-size: 0.70rem;">-</span>
+                        </div>
+                        <div>
+                            <span class="text-muted small">Registered:</span>
+                            <span id="vmCreated" class="font-weight-bold text-dark small ml-1">-</span>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-muted small d-block font-weight-bold">Product Interest:</span>
+                        <p id="vmInterest" class="small text-muted mb-0 p-2 bg-light rounded" style="font-size: 0.75rem;">No specified interest.</p>
+                    </div>
+                    <div>
+                        <span class="text-muted small d-block font-weight-bold">Notes & Summary:</span>
+                        <p id="vmNotes" class="small text-muted mb-0 p-2 bg-light rounded" style="font-size: 0.75rem;">No notes recorded.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 bg-white py-2 px-3 d-flex justify-content-between">
+                <button type="button" class="btn btn-sm btn-light rounded-pill px-3" data-dismiss="modal">Close</button>
+                <div class="d-flex align-items-center">
+                    <button type="button" id="vmSendEmailBtn" class="btn btn-sm rounded-pill px-3 mr-2 font-weight-bold" style="background: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe;">
+                        <i class="fas fa-paper-plane mr-1"></i> Send Email
+                    </button>
+                    <a id="vmEditBtn" href="#" class="btn btn-sm btn-primary rounded-pill px-3 shadow-sm font-weight-bold" style="background: #1a4674 !important; border: none !important;">
+                        <i class="fas fa-edit mr-1"></i> Edit Full Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hostinger Email Compose Modal -->
+<div class="modal fade" id="composeEmailModal" tabindex="-1" role="dialog" aria-labelledby="composeEmailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 1rem !important; overflow: hidden;">
+            <div class="modal-header border-0 text-white p-3" style="background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);">
+                <div class="d-flex align-items-center">
+                    <div style="background: rgba(255,255,255,0.2); width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                        <i class="fas fa-paper-plane text-white" style="font-size: 1rem;"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title font-weight-bold m-0" id="composeEmailModalLabel" style="font-size: 1.05rem;">Compose Message</h5>
+                        <small class="text-white-50" style="font-size: 0.72rem;"><i class="fas fa-bolt text-warning mr-1"></i>Hostinger Mail Live Sync</small>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-xs btn-outline-light rounded-pill px-2.5 py-1 mr-2" id="btnTestHostingerConn" title="Test SMTP Connection with Hostinger">
+                        <i class="fas fa-plug mr-1"></i> Test Connection
+                    </button>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="outline: none;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            
+            <form id="composeEmailForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body p-4 bg-light" style="max-height: 75vh; overflow-y: auto;">
+                    <!-- Notification Banner for status -->
+                    <div id="composeStatusBanner" class="alert d-none shadow-sm mb-3" style="border-radius: 0.5rem; font-size: 0.82rem;"></div>
+
+                    <!-- Sender Info Bar -->
+                    <div class="d-flex justify-content-between align-items-center bg-white p-2.5 px-3 rounded border mb-3 shadow-xs">
+                        <div class="d-flex align-items-center">
+                            <span class="badge mr-2 py-1 px-2" style="background: #ede9fe; color: #6d28d9; font-size: 0.70rem; font-weight: 600;">
+                                <i class="fas fa-server mr-1"></i> HOSTINGER SMTP
+                            </span>
+                            <span class="small text-muted font-weight-bold" style="font-size: 0.78rem;">From:</span>
+                            <span id="composeSenderDisplay" class="font-weight-bold ml-1" style="font-size: 0.82rem; color: #1e293b;">Loading account...</span>
+                        </div>
+                        <a href="/dashboard/contactapp/hostingeremailsettings/1/change/" target="_blank" class="small text-primary font-weight-bold text-decoration-none" style="font-size: 0.72rem;">
+                            <i class="fas fa-cog mr-1"></i>Settings
+                        </a>
+                    </div>
+
+                    <!-- To Field with CC/BCC toggle -->
+                    <div class="form-group mb-2">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="small text-muted font-weight-bold mb-0" for="composeToEmail">To (Recipient) *</label>
+                            <button type="button" class="btn btn-link text-muted p-0 small" id="toggleCcBccBtn" style="font-size: 0.72rem; text-decoration: none;">
+                                + Cc / Bcc
+                            </button>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white border-right-0"><i class="fas fa-envelope text-muted"></i></span>
+                            </div>
+                            <input type="text" class="form-control border-left-0" id="composeToEmail" name="to" placeholder="recipient@example.com (comma separated for multiple)" required>
+                        </div>
+                    </div>
+
+                    <!-- CC / BCC collapsible container -->
+                    <div id="ccBccContainer" class="d-none mb-2">
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label class="small text-muted font-weight-bold mb-1" for="composeCcEmail">Cc</label>
+                                <input type="text" class="form-control form-control-sm" id="composeCcEmail" name="cc" placeholder="cc@example.com">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="small text-muted font-weight-bold mb-1" for="composeBccEmail">Bcc</label>
+                                <input type="text" class="form-control form-control-sm" id="composeBccEmail" name="bcc" placeholder="bcc@example.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Template Selector & Subject -->
+                    <div class="row mb-2">
+                        <div class="col-md-5 mb-2 mb-md-0">
+                            <label class="small text-muted font-weight-bold mb-1" for="composeTemplateSelect">Quick Template</label>
+                            <select class="form-control form-control-sm custom-select custom-select-sm" id="composeTemplateSelect">
+                                <option value="">-- Custom / Blank Message --</option>
+                                <option value="proposal">Long-Term Rope Supply Proposal</option>
+                                <option value="quote">Product Pricing & Catalog Inquiry</option>
+                                <option value="followup">Client Follow-Up & Order Check</option>
+                                <option value="shipment">Production & Shipment Update</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <label class="small text-muted font-weight-bold mb-1" for="composeSubject">Subject *</label>
+                            <input type="text" class="form-control form-control-sm" id="composeSubject" name="subject" placeholder="e.g. Long-Term Rope Supply Partnership Proposal" required>
+                        </div>
+                    </div>
+
+                    <!-- Message Body -->
+                    <div class="form-group mb-2">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="small text-muted font-weight-bold mb-0" for="composeMessage">Message Body *</label>
+                            <span class="text-muted" style="font-size: 0.70rem;"><i class="fas fa-check-circle text-success mr-1"></i>Hostinger SMTP Delivery</span>
+                        </div>
+                        <textarea class="form-control" id="composeMessage" name="message" rows="8" placeholder="Write your professional email message here..." style="font-size: 0.84rem; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;" required></textarea>
+                    </div>
+
+                    <!-- Attachment & Signature Options -->
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <div class="form-group mb-0">
+                                <label class="small text-muted font-weight-bold mb-1" for="composeAttachment">
+                                    <i class="fas fa-paperclip mr-1 text-primary"></i>Attach Document / Catalog (PDF, DOCX, ZIP, IMG)
+                                </label>
+                                <input type="file" class="form-control-file" id="composeAttachment" name="attachment" style="font-size: 0.78rem;">
+                            </div>
+                        </div>
+                        <div class="col-md-5 text-md-right mt-2 mt-md-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="includeSignatureCheck" checked>
+                                <label class="custom-control-label small text-muted font-weight-bold" for="includeSignatureCheck" style="font-size: 0.74rem;">
+                                    Include Hostinger Signature
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-white border-top py-2 px-3 d-flex justify-content-between">
+                    <div>
+                        <a href="/dashboard/contactapp/sentemaillog/" target="_blank" class="btn btn-xs btn-outline-secondary rounded-pill py-1 px-2.5" style="font-size: 0.72rem;">
+                            <i class="fas fa-history mr-1"></i> View Sent Log
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button type="button" class="btn btn-sm btn-light rounded-pill px-3 mr-2 font-weight-bold text-muted" data-dismiss="modal" style="font-size: 0.78rem;">
+                            Discard
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-primary rounded-pill px-4 shadow font-weight-bold" id="btnSubmitSendEmail" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important; border: none !important; font-size: 0.82rem;">
+                            <span class="spinner-border spinner-border-sm mr-1 d-none" id="sendEmailSpinner" role="status" aria-hidden="true"></span>
+                            <i class="fas fa-paper-plane mr-1" id="sendEmailIcon"></i> Send with Hostinger
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Chart.js and Custom Script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -751,59 +1487,133 @@
                         }
                         
                         // Select colors for customer type badge
-                        let typeStyle = '';
-                        if (data.customer.customer_type === 'Lead') {
-                            typeStyle = 'background-color: #eff6ff; color: #1e40af; border: 1px solid #dbeafe;';
-                        } else if (data.customer.customer_type === 'Prospect') {
-                            typeStyle = 'background-color: #faf5ff; color: #6b21a8; border: 1px solid #f3e8ff;';
+                        let typeClass = 'type-badge-lead';
+                        let typeIcon = 'fa-bullseye';
+                        let avatarClass = 'company-avatar-lead';
+                        if (data.customer.customer_type === 'Prospect') {
+                            typeClass = 'type-badge-prospect';
+                            typeIcon = 'fa-user-clock';
+                            avatarClass = 'company-avatar-prospect';
                         } else if (data.customer.customer_type === 'Customer') {
-                            typeStyle = 'background-color: #f0fdf4; color: #166534; border: 1px solid #dcfce7;';
-                        } else {
-                            typeStyle = 'background-color: #f0fdfa; color: #0f766e; border: 1px solid #ccfbf1;';
+                            typeClass = 'type-badge-customer';
+                            typeIcon = 'fa-check-circle';
+                            avatarClass = 'company-avatar-customer';
+                        } else if (data.customer.customer_type === 'Partner') {
+                            typeClass = 'type-badge-partner';
+                            typeIcon = 'fa-handshake';
+                            avatarClass = 'company-avatar-partner';
                         }
 
                         // Select colors for status badge
-                        let statusStyle = '';
-                        if (data.customer.status === 'Active') {
-                            statusStyle = 'background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;';
-                        } else if (data.customer.status === 'Inactive') {
-                            statusStyle = 'background-color: #fef2f2; color: #991b1b; border: 1px solid #fee2e2;';
+                        let statusClass = 'status-chip-active';
+                        if (data.customer.status === 'Inactive') {
+                            statusClass = 'status-chip-inactive';
                         } else if (data.customer.status === 'Pending') {
-                            statusStyle = 'background-color: #fffbeb; color: #92400e; border: 1px solid #fef3c7;';
+                            statusClass = 'status-chip-pending';
                         } else if (data.customer.status === 'Hot') {
-                            statusStyle = 'background-color: #fff5f5; color: #e11d48; border: 1px solid #ffe4e6;';
+                            statusClass = 'status-chip-hot';
                         } else if (data.customer.status === 'Warm') {
-                            statusStyle = 'background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;';
-                        } else {
-                            statusStyle = 'background-color: #eff6ff; color: #1e40af; border: 1px solid #dbeafe;';
+                            statusClass = 'status-chip-warm';
+                        } else if (data.customer.status === 'Cold') {
+                            statusClass = 'status-chip-cold';
                         }
                         
                         const editUrl = `/dashboard/customers/customer/${data.customer.id}/change/`;
+                        const initials = (data.customer.company_name || 'CU').substring(0, 2).toUpperCase();
                         
                         const tr = document.createElement('tr');
                         tr.className = 'hover-row animate-fade-in';
                         tr.innerHTML = `
-                            <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
-                                <div class="font-weight-bold" style="color: #0f172a;">${data.customer.customer_id}</div>
-                                <span class="badge badge-pill font-weight-bold px-2 py-1 mt-1" style="font-size: 0.7rem; ${typeStyle}">
-                                    ${data.customer.customer_type}
-                                </span>
+                            <td style="padding: 0.55rem 0.5rem !important;">
+                                <div class="d-flex align-items-center">
+                                    <div class="company-avatar-box mr-2 ${avatarClass}">
+                                        ${initials}
+                                    </div>
+                                    <div style="min-width: 0; flex: 1;">
+                                        <div class="font-weight-bold text-truncate" style="color: #0f172a; font-size: 0.80rem; line-height: 1.25; max-width: 140px;" title="${data.customer.company_name}">
+                                            ${data.customer.company_name}
+                                        </div>
+                                        <div class="text-muted d-flex align-items-center text-truncate mt-0.5" style="font-size: 0.70rem; line-height: 1.2; max-width: 140px;">
+                                            <i class="fas fa-user text-muted mr-1" style="font-size: 0.58rem;"></i>
+                                            <span class="text-truncate">${data.customer.contact_person}</span>
+                                            ${data.customer.position ? `<span class="badge badge-light border text-muted ml-1 py-0 px-1 text-truncate" style="font-size: 0.58rem; font-weight: normal; max-width: 60px;">${data.customer.position}</span>` : ''}
+                                        </div>
+                                        ${data.customer.city || data.customer.country ? `
+                                        <div class="text-muted text-truncate mt-0.5" style="font-size: 0.65rem; color: #94a3b8; max-width: 140px;">
+                                            <i class="fas fa-map-marker-alt text-muted mr-0.5" style="font-size: 0.56rem;"></i>${data.customer.city || ''} ${data.customer.country || ''}
+                                        </div>` : ''}
+                                    </div>
+                                </div>
                             </td>
-                            <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
-                                <span class="font-weight-bold" style="color: #1e293b;">${data.customer.company_name}</span>
-                                <div class="text-muted" style="font-size: 0.75rem;">${data.customer.contact_person}</div>
+                            <td style="padding: 0.55rem 0.5rem !important; vertical-align: middle; white-space: nowrap;">
+                                <div>
+                                    <span class="cust-id-chip text-truncate" title="${data.customer.customer_id}">
+                                        <i class="fas fa-hashtag text-muted mr-0.5" style="font-size: 0.56rem;"></i>${data.customer.customer_id}
+                                    </span>
+                                </div>
+                                <div class="mt-1">
+                                    <span class="type-badge-pill ${typeClass}">
+                                        <i class="fas ${typeIcon} mr-0.5" style="font-size: 0.54rem;"></i>
+                                        ${data.customer.customer_type}
+                                    </span>
+                                </div>
                             </td>
-                            <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important; color: #475569;">
-                                <div><i class="fas fa-envelope mr-1 text-muted" style="font-size: 0.75rem;"></i>${data.customer.email || '-'}</div>
-                                <div class="mt-1"><i class="fas fa-phone-alt mr-1 text-muted" style="font-size: 0.75rem;"></i>${data.customer.phone || '-'}</div>
+                            <td style="padding: 0.55rem 0.5rem !important; vertical-align: middle;">
+                                ${data.customer.email ? `
+                                <div class="contact-item-row">
+                                    <a href="/dashboard/email/compose/?to=${encodeURIComponent(data.customer.email)}" class="contact-link text-truncate" style="max-width: 125px;" title="Send email via Hostinger: ${data.customer.email}">
+                                        <i class="fas fa-envelope text-primary contact-icon-inline"></i>
+                                        <span class="contact-text text-truncate">${data.customer.email}</span>
+                                    </a>
+                                </div>` : ''}
+                                ${data.customer.phone ? `
+                                <div class="contact-item-row ${data.customer.email ? 'mt-1' : ''}">
+                                    <a href="tel:${data.customer.phone}" class="contact-link text-truncate" style="max-width: 100px;" title="${data.customer.phone}">
+                                        <i class="fas fa-phone-alt text-success contact-icon-inline"></i>
+                                        <span class="contact-text" style="font-family: ui-monospace, monospace; font-size: 0.69rem;">${data.customer.phone}</span>
+                                    </a>
+                                    ${data.customer.whatsapp ? `
+                                    <a href="https://wa.me/${(data.customer.whatsapp || '').replace(/[^0-9]/g, '')}" target="_blank" class="text-success ml-1 flex-shrink-0" title="WhatsApp: ${data.customer.whatsapp}" style="font-size: 0.74rem;">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>` : ''}
+                                </div>` : ''}
+                                ${!data.customer.email && !data.customer.phone ? '<span class="text-muted small" style="font-size: 0.68rem;">No details</span>' : ''}
                             </td>
-                            <td style="padding: 0.6rem 1rem !important; font-size: 0.85rem !important;">
-                                <span class="badge badge-pill font-weight-bold px-2 py-1" style="font-size: 0.7rem; ${statusStyle}">
-                                    ${data.customer.status}
-                                </span>
+                            <td style="padding: 0.55rem 0.5rem !important; vertical-align: middle; white-space: nowrap;">
+                                <div>
+                                    <span class="status-pill-chip ${statusClass}">
+                                        <span class="status-dot-indicator"></span>
+                                        <span>${data.customer.status}</span>
+                                    </span>
+                                </div>
+                                <div class="text-muted mt-1 text-truncate" style="font-size: 0.66rem; white-space: nowrap;">
+                                    <i class="fas fa-calendar-alt text-muted mr-1" style="font-size: 0.58rem;"></i>Just now
+                                </div>
                             </td>
-                            <td class="text-right" style="padding: 0.6rem 1rem !important;">
-                                <a href="${editUrl}" class="btn btn-xs btn-primary rounded-pill px-3 py-1" style="font-size: 0.72rem; background: #1a4674 !important; border: none !important; box-shadow: 0 2px 4px rgba(26, 70, 116, 0.15);">Edit</a>
+                            <td class="text-right" style="padding: 0.55rem 0.5rem !important; vertical-align: middle; white-space: nowrap;">
+                                <div class="d-inline-flex align-items-center justify-content-end" style="gap: 3px;">
+                                    <a href="${editUrl}" class="btn btn-action-edit" title="Edit Customer">
+                                        <i class="fas fa-pen" style="font-size: 0.55rem;"></i> Edit
+                                    </a>
+                                    <button type="button" class="btn btn-action-view open-customer-modal-btn" title="Quick View" 
+                                        data-customer-id="${data.customer.customer_id}" 
+                                        data-company="${data.customer.company_name}" 
+                                        data-contact="${data.customer.contact_person}" 
+                                        data-position="${data.customer.position || ''}" 
+                                        data-type="${data.customer.customer_type}" 
+                                        data-status="${data.customer.status}" 
+                                        data-email="${data.customer.email || ''}" 
+                                        data-phone="${data.customer.phone || ''}" 
+                                        data-whatsapp="${data.customer.whatsapp || ''}" 
+                                        data-source="${data.customer.lead_source || 'Website'}" 
+                                        data-city="${data.customer.city || ''}" 
+                                        data-country="${data.customer.country || ''}" 
+                                        data-created="${data.customer.created_at}" 
+                                        data-notes="${data.customer.notes || ''}" 
+                                        data-edit-url="${editUrl}">
+                                        <i class="fas fa-eye" style="font-size: 0.65rem;"></i>
+                                    </button>
+                                </div>
                             </td>
                         `;
                         
@@ -820,6 +1630,264 @@
                     }
                     errorDiv.innerHTML = errorMsg;
                     errorDiv.classList.remove('d-none');
+                });
+            });
+        }
+
+        // Quick View Customer Modal Handler
+        document.addEventListener("click", function(e) {
+            const btn = e.target.closest('.open-customer-modal-btn');
+            if (btn) {
+                e.preventDefault();
+                const d = btn.dataset;
+                document.getElementById('vmCompany').textContent = d.company || 'Customer Details';
+                document.getElementById('vmAvatar').textContent = (d.company || 'CU').substring(0, 2).toUpperCase();
+                document.getElementById('vmIdChip').textContent = '#' + (d.customerId || '-');
+                document.getElementById('vmTypeBadge').textContent = d.type || 'Lead';
+                document.getElementById('vmStatusBadge').textContent = d.status || 'Active';
+                document.getElementById('vmContact').textContent = d.contact || '-';
+                document.getElementById('vmPosition').textContent = d.position ? `(${d.position})` : '';
+                
+                let locationStr = '';
+                if (d.city && d.country) {
+                    locationStr = `${d.city}, ${d.country}`;
+                } else if (d.city || d.country) {
+                    locationStr = d.city || d.country;
+                } else {
+                    locationStr = 'Not Specified';
+                }
+                document.getElementById('vmLocation').innerHTML = `<i class="fas fa-map-marker-alt text-danger mr-1"></i>${locationStr}`;
+                
+                const emailLink = document.getElementById('vmEmailLink');
+                if (d.email) {
+                    emailLink.textContent = d.email;
+                    emailLink.href = 'mailto:' + d.email;
+                } else {
+                    emailLink.textContent = 'None';
+                    emailLink.href = '#';
+                }
+
+                const phoneLink = document.getElementById('vmPhoneLink');
+                if (d.phone) {
+                    phoneLink.textContent = d.phone;
+                    phoneLink.href = 'tel:' + d.phone;
+                } else {
+                    phoneLink.textContent = 'None';
+                    phoneLink.href = '#';
+                }
+
+                const waWrap = document.getElementById('vmWhatsappWrap');
+                const waLink = document.getElementById('vmWhatsappLink');
+                if (d.whatsapp) {
+                    waWrap.classList.remove('d-none');
+                    const cleanPhone = d.whatsapp.replace(/[^0-9]/g, '');
+                    waLink.href = `https://wa.me/${cleanPhone}`;
+                } else {
+                    waWrap.classList.add('d-none');
+                }
+
+                document.getElementById('vmSource').textContent = d.source || 'Website';
+                document.getElementById('vmCreated').textContent = d.created || '-';
+                document.getElementById('vmInterest').textContent = d.interest || 'No specified interest.';
+                document.getElementById('vmNotes').textContent = d.notes || 'No notes recorded.';
+                document.getElementById('vmEditBtn').href = d.editUrl || '#';
+
+                $('#viewCustomerModal').modal('show');
+            }
+        });
+
+        // ==========================================
+        // HOSTINGER MAIL INTEGRATION JAVASCRIPT
+        // ==========================================
+        let currentHostingerConfig = null;
+
+        function loadHostingerStatus() {
+            fetch('/dashboard/email/status/')
+                .then(res => res.json())
+                .then(data => {
+                    currentHostingerConfig = data;
+                    const displayEl = document.getElementById('composeSenderDisplay');
+                    if (displayEl) {
+                        if (data.is_configured) {
+                            displayEl.innerHTML = `<span class="text-success"><i class="fas fa-check-circle mr-1"></i>${data.sender_email}</span> (${data.sender_name || 'Tianbao Group'})`;
+                        } else {
+                            displayEl.innerHTML = `<span class="text-warning"><i class="fas fa-exclamation-triangle mr-1"></i>Not Configured</span> (<a href="/dashboard/contactapp/hostingeremailsettings/1/change/" target="_blank" class="text-primary font-weight-bold">Configure Now</a>)`;
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to load Hostinger status:', err);
+                });
+        }
+
+        // Open compose modal from any .open-compose-modal-btn
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.open-compose-modal-btn');
+            if (btn) {
+                e.preventDefault();
+                const recipient = btn.dataset.recipient || '';
+                const subject = btn.dataset.subject || '';
+                
+                const toInput = document.getElementById('composeToEmail');
+                const subjectInput = document.getElementById('composeSubject');
+                const banner = document.getElementById('composeStatusBanner');
+                if (banner) banner.classList.add('d-none');
+                
+                if (toInput && recipient) toInput.value = recipient;
+                if (subjectInput && subject) subjectInput.value = subject;
+                
+                loadHostingerStatus();
+                $('#composeEmailModal').modal('show');
+            }
+        });
+
+        // Send Email button inside Quick View modal
+        const vmSendEmailBtn = document.getElementById('vmSendEmailBtn');
+        if (vmSendEmailBtn) {
+            vmSendEmailBtn.addEventListener('click', function() {
+                const emailLink = document.getElementById('vmEmailLink');
+                const recipient = emailLink && emailLink.textContent !== 'None' ? emailLink.textContent.trim() : '';
+                const company = document.getElementById('vmCompany').textContent.trim();
+                const subj = company ? `Partnership Proposal - ${company}` : '';
+                window.location.href = `/dashboard/email/compose/?to=${encodeURIComponent(recipient)}&subject=${encodeURIComponent(subj)}`;
+            });
+        }
+
+        // Toggle CC/BCC
+        const toggleCcBccBtn = document.getElementById('toggleCcBccBtn');
+        if (toggleCcBccBtn) {
+            toggleCcBccBtn.addEventListener('click', function() {
+                const wrap = document.getElementById('ccBccContainer');
+                if (wrap) {
+                    wrap.classList.toggle('d-none');
+                    toggleCcBccBtn.textContent = wrap.classList.contains('d-none') ? '+ Cc / Bcc' : '- Hide Cc / Bcc';
+                }
+            });
+        }
+
+        // Quick Templates Selector
+        const templateSelect = document.getElementById('composeTemplateSelect');
+        if (templateSelect) {
+            templateSelect.addEventListener('change', function() {
+                const val = this.value;
+                const subj = document.getElementById('composeSubject');
+                const msg = document.getElementById('composeMessage');
+                const sig = currentHostingerConfig ? currentHostingerConfig.default_signature : "Best Regards,\nTianbao Group";
+                
+                if (val === 'proposal') {
+                    subj.value = "Long-Term Rope Supply Partnership Proposal - Tianbao Group";
+                    msg.value = `Dear Partner,\n\nI hope this email finds you well.\n\nWe are pleased to introduce Tianbao Group as a premier manufacturer of high-performance technical ropes, safety nets, and site consumables. We have reviewed your business requirements and are keen to propose a long-term supply partnership tailored to your specifications.\n\nPlease find attached our technical catalog and credentials for your review.\n\nWe look forward to scheduling a brief introductory discussion.\n\n${sig}`;
+                } else if (val === 'quote') {
+                    subj.value = "Product Pricing & Catalog Inquiry - Tianbao Group";
+                    msg.value = `Dear Client,\n\nThank you for reaching out to Tianbao Group regarding our product range.\n\nAttached is our latest price list and catalog detailing our fiber ropes, hardware accessories, and industrial netting specifications.\n\nPlease let us know if you require any specific customization or samples for testing.\n\n${sig}`;
+                } else if (val === 'followup') {
+                    subj.value = "Following up on our recent conversation - Tianbao Group";
+                    msg.value = `Dear Sir/Madam,\n\nI am writing to follow up on our previous correspondence regarding your recent inquiry. Please let us know if you have any questions or require additional details from our engineering team.\n\nWe are ready to assist you anytime.\n\n${sig}`;
+                } else if (val === 'shipment') {
+                    subj.value = "Order Production & Factory Dispatch Update";
+                    msg.value = `Dear Customer,\n\nWe are pleased to notify you that your order has completed quality inspection at our factory and is prepared for dispatch.\n\nTracking and export documentation will be provided shortly.\n\n${sig}`;
+                }
+            });
+        }
+
+        // Test Connection Button
+        const testConnBtn = document.getElementById('btnTestHostingerConn');
+        if (testConnBtn) {
+            testConnBtn.addEventListener('click', function() {
+                const banner = document.getElementById('composeStatusBanner');
+                testConnBtn.disabled = true;
+                testConnBtn.innerHTML = `<span class="spinner-border spinner-border-sm mr-1"></span> Testing...`;
+                
+                fetch('/dashboard/email/test-connection/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(res => res.json().then(data => ({ ok: res.ok, data })))
+                .then(({ ok, data }) => {
+                    testConnBtn.disabled = false;
+                    testConnBtn.innerHTML = `<i class="fas fa-plug mr-1"></i> Test Connection`;
+                    banner.classList.remove('d-none', 'alert-success', 'alert-danger');
+                    if (ok) {
+                        banner.classList.add('alert-success');
+                        banner.innerHTML = `<i class="fas fa-check-circle mr-1"></i> <strong>Hostinger SMTP Connected:</strong> ${data.message}`;
+                    } else {
+                        banner.classList.add('alert-danger');
+                        banner.innerHTML = `<i class="fas fa-times-circle mr-1"></i> <strong>Hostinger Connection Failed:</strong> ${data.message} <br><a href="/dashboard/contactapp/hostingeremailsettings/1/change/" target="_blank" class="alert-link font-weight-bold mt-1 d-inline-block">Click here to enter your Hostinger credentials</a>`;
+                    }
+                })
+                .catch(err => {
+                    testConnBtn.disabled = false;
+                    testConnBtn.innerHTML = `<i class="fas fa-plug mr-1"></i> Test Connection`;
+                    banner.classList.remove('d-none', 'alert-success');
+                    banner.classList.add('alert-danger');
+                    banner.innerHTML = `<i class="fas fa-times-circle mr-1"></i> Error testing connection: ${err}`;
+                });
+            });
+        }
+
+        // Submit Compose Form
+        const composeForm = document.getElementById('composeEmailForm');
+        if (composeForm) {
+            composeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const submitBtn = document.getElementById('btnSubmitSendEmail');
+                const spinner = document.getElementById('sendEmailSpinner');
+                const icon = document.getElementById('sendEmailIcon');
+                const banner = document.getElementById('composeStatusBanner');
+                
+                submitBtn.disabled = true;
+                spinner.classList.remove('d-none');
+                icon.classList.add('d-none');
+                banner.classList.add('d-none');
+                
+                const formData = new FormData(composeForm);
+                
+                // Append signature if checked and not already in message
+                const includeSig = document.getElementById('includeSignatureCheck');
+                if (includeSig && includeSig.checked && currentHostingerConfig && currentHostingerConfig.default_signature) {
+                    const rawMsg = formData.get('message');
+                    if (!rawMsg.includes(currentHostingerConfig.default_signature)) {
+                        formData.set('message', rawMsg + "\n\n--\n" + currentHostingerConfig.default_signature);
+                    }
+                }
+                
+                fetch('/dashboard/email/send/', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(res => res.json().then(data => ({ ok: res.ok, data })))
+                .then(({ ok, data }) => {
+                    submitBtn.disabled = false;
+                    spinner.classList.add('d-none');
+                    icon.classList.remove('d-none');
+                    banner.classList.remove('d-none', 'alert-success', 'alert-danger');
+                    
+                    if (ok) {
+                        banner.classList.add('alert-success');
+                        banner.innerHTML = `<i class="fas fa-check-circle mr-1"></i> <strong>Success:</strong> ${data.message}`;
+                        setTimeout(() => {
+                            composeForm.reset();
+                            $('#composeEmailModal').modal('hide');
+                            banner.classList.add('d-none');
+                        }, 2000);
+                    } else {
+                        banner.classList.add('alert-danger');
+                        banner.innerHTML = `<i class="fas fa-times-circle mr-1"></i> <strong>Sending Failed:</strong> ${data.message} <br><small>If you haven't entered your Hostinger email password yet, please <a href="/dashboard/contactapp/hostingeremailsettings/1/change/" target="_blank" class="alert-link font-weight-bold">configure it here</a>.</small>`;
+                    }
+                })
+                .catch(err => {
+                    submitBtn.disabled = false;
+                    spinner.classList.add('d-none');
+                    icon.classList.remove('d-none');
+                    banner.classList.remove('d-none', 'alert-success');
+                    banner.classList.add('alert-danger');
+                    banner.innerHTML = `<i class="fas fa-times-circle mr-1"></i> Network or server error: ${err}`;
                 });
             });
         }

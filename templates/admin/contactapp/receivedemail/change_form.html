@@ -1,0 +1,693 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}{{ original.subject|default:"Email Detail" }} | Hostinger Webmail{% endblock %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb float-sm-right shadow-xs border-0 bg-white" style="border-radius: 9999px; padding: 0.4rem 1.1rem; font-size: 0.80rem;">
+    <li class="breadcrumb-item"><a href="{% url 'admin:index' %}" class="text-primary font-weight-600"><i class="fas fa-home mr-1"></i> Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'admin:contactapp_receivedemail_changelist' %}" class="text-muted">Received Emails</a></li>
+    <li class="breadcrumb-item active text-dark font-weight-600">Email Details</li>
+</ol>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Executive Email Detail Container */
+    .email-detail-container {
+        max-width: 1040px;
+        margin: 0.5rem auto 3rem auto;
+    }
+
+    /* Top Action Bar */
+    .email-action-toolbar {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.85rem;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .btn-email-action {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+        padding: 0.45rem 1rem !important;
+        border-radius: 0.6rem !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        text-decoration: none !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        line-height: 1.4 !important;
+        cursor: pointer;
+    }
+
+    .btn-email-secondary {
+        background: #ffffff !important;
+        color: #334155 !important;
+        border: 1px solid #cbd5e1 !important;
+    }
+    .btn-email-secondary:hover {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border-color: #94a3b8 !important;
+    }
+
+    .btn-email-blue {
+        background: #eff6ff !important;
+        color: #1d4ed8 !important;
+        border: 1px solid #bfdbfe !important;
+    }
+    .btn-email-blue:hover {
+        background: #dbeafe !important;
+        color: #1e40af !important;
+    }
+
+    .btn-email-primary {
+        background: linear-gradient(135deg, #1a4674 0%, #0d233a 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        box-shadow: 0 2px 6px rgba(26, 70, 116, 0.25) !important;
+    }
+    .btn-email-primary:hover {
+        background: linear-gradient(135deg, #15385d 0%, #081625 100%) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(26, 70, 116, 0.35) !important;
+    }
+
+    .btn-email-danger {
+        background: #fef2f2 !important;
+        color: #dc2626 !important;
+        border: 1px solid #fecaca !important;
+    }
+    .btn-email-danger:hover {
+        background: #fee2e2 !important;
+        color: #b91c1c !important;
+    }
+
+    /* Modern Segmented Control for Format View Switcher */
+    .view-toggle-segmented {
+        display: inline-flex;
+        background: #f1f5f9;
+        padding: 3px;
+        border-radius: 9999px;
+        border: 1px solid #e2e8f0;
+        gap: 2px;
+    }
+    .view-toggle-segmented .btn {
+        border-radius: 9999px !important;
+        padding: 4px 14px !important;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        border: none !important;
+        color: #64748b !important;
+        background: transparent !important;
+        transition: all 0.2s ease !important;
+        box-shadow: none !important;
+    }
+    .view-toggle-segmented .btn.active {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Main Email Card */
+    .email-main-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+    }
+
+    .email-header-section {
+        padding: 1.5rem 1.75rem 1.25rem 1.75rem;
+        border-bottom: 1px solid #f1f5f9;
+        background: #fafcff;
+    }
+
+    .email-subject-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.35;
+        margin-bottom: 1rem;
+        letter-spacing: -0.2px;
+    }
+
+    .email-meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .email-sender-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .email-sender-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+        color: #6d28d9;
+        font-size: 17px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 8px rgba(109, 40, 217, 0.16);
+    }
+
+    .email-sender-name {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 2px;
+    }
+
+    .email-sender-address {
+        font-size: 0.82rem;
+        color: #64748b;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .copy-chip-btn {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        padding: 1px 6px;
+        font-size: 0.72rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        transition: background 0.15s ease;
+    }
+    .copy-chip-btn:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+    }
+
+    .email-date-badge {
+        background: #f1f5f9;
+        color: #475569;
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 0.35rem 0.80rem;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Attachment Banner */
+    .email-attachment-box {
+        background: #f8fafc;
+        border-top: 1px solid #f1f5f9;
+        border-bottom: 1px solid #f1f5f9;
+        padding: 0.75rem 1.75rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .attachment-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        padding: 0.35rem 0.80rem;
+        border-radius: 0.5rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #1e293b;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Email Body Viewport */
+    .email-body-section {
+        padding: 1.75rem;
+        background: #ffffff;
+        min-height: 250px;
+    }
+
+    .email-plain-text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: #1e293b;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    /* Auto-resizing iframe for rich HTML email */
+    .email-html-frame {
+        width: 100%;
+        border: none;
+        min-height: 350px;
+        display: block;
+    }
+
+    /* Quick Reply Card */
+    .quick-reply-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+        overflow: hidden;
+    }
+
+    .quick-reply-header {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border-bottom: 1px solid #e2e8f0;
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .quick-reply-body {
+        padding: 1.5rem;
+    }
+
+    .status-pill-unread {
+        background: #fee2e2;
+        color: #dc2626;
+        border: 1px solid #fecaca;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .status-pill-read {
+        background: #dcfce7;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="email-detail-container">
+
+    <!-- Top Action Toolbar -->
+    <div class="email-action-toolbar">
+        <div class="d-flex align-items-center gap-2">
+            <a href="{% url 'admin:contactapp_receivedemail_changelist' %}" class="btn-email-action btn-email-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <a href="/dashboard/email/inbox/?id={{ original.id }}" class="btn-email-action btn-email-blue" title="Open inside full Webmail 2-pane reader">
+                <i class="fas fa-columns"></i> 2-Pane Webmail
+            </a>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <a href="#quickReplySection" class="btn-email-action btn-email-primary text-white shadow-xs">
+                <i class="fas fa-reply"></i> Reply to Sender
+            </a>
+            <button type="button" class="btn-email-action btn-email-secondary" id="btnToggleReadStatus">
+                <i class="fas {% if original.is_read %}fa-envelope{% else %}fa-envelope-open{% endif %}" id="readStatusIcon"></i>
+                <span id="readStatusText">{% if original.is_read %}Mark as Unread{% else %}Mark as Read{% endif %}</span>
+            </button>
+            {% if has_delete_permission %}
+            <a href="delete/" class="btn-email-action btn-email-danger" title="Delete Email">
+                <i class="fas fa-trash-alt"></i> Delete
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Alert Banner Container for Feedback -->
+    <div id="alertContainer" style="display: none;" class="mb-3"></div>
+
+    <!-- Main Email View Card -->
+    <div class="email-main-card">
+        
+        <!-- Header & Sender Section -->
+        <div class="email-header-section">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle" style="font-size: 0.72rem; padding: 3px 8px; border-radius: 6px;">
+                        <i class="fas fa-inbox me-1"></i> {{ original.folder|default:"INBOX" }}
+                    </span>
+                    <span id="headerReadBadge" class="{% if original.is_read %}status-pill-read{% else %}status-pill-unread{% endif %}">
+                        <i class="fas fa-circle" style="font-size: 6px;"></i>
+                        <span id="headerReadText">{% if original.is_read %}Read{% else %}Unread{% endif %}</span>
+                    </span>
+                </div>
+                <div class="email-date-badge">
+                    <i class="fas fa-calendar-alt text-primary"></i>
+                    <span>{{ original.received_at|date:"M d, Y • h:i A" }}</span>
+                    <span class="text-muted">({{ original.received_at|timesince }} ago)</span>
+                </div>
+            </div>
+
+            <!-- Subject -->
+            <h1 class="email-subject-title">
+                {{ original.subject|default:"(No Subject)" }}
+            </h1>
+
+            <!-- Sender & Recipient Details -->
+            <div class="email-meta-row">
+                <div class="email-sender-profile">
+                    <div class="email-sender-avatar">
+                        {{ original.sender_name|default:original.sender_email|slice:":1"|upper }}
+                    </div>
+                    <div>
+                        <div class="email-sender-name">
+                            {{ original.sender_name|default:original.sender_email }}
+                        </div>
+                        <div class="email-sender-address">
+                            <span>&lt;{{ original.sender_email }}&gt;</span>
+                            <button type="button" class="copy-chip-btn" id="btnCopyEmail" title="Copy email address">
+                                <i class="far fa-copy"></i>
+                                <span>Copy</span>
+                            </button>
+                            <span class="mx-1 text-muted">•</span>
+                            <span class="text-secondary">To: <strong>{{ original.recipient|default:"sales@tjropenet.com" }}</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab switcher if HTML body exists -->
+                {% if original.body_html and original.body_text %}
+                <div class="view-toggle-segmented" role="group" aria-label="View format">
+                    <button type="button" class="btn active" id="btnViewHtml"><i class="fas fa-magic me-1"></i> Rich HTML</button>
+                    <button type="button" class="btn" id="btnViewText"><i class="fas fa-align-left me-1"></i> Plain Text</button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Attachment Bar (if has attachment) -->
+        {% if original.has_attachment %}
+        <div class="email-attachment-box">
+            <span class="text-muted small fw-bold"><i class="fas fa-paperclip text-primary me-1"></i> Attachments:</span>
+            <div class="attachment-pill">
+                <i class="far fa-file-alt text-primary"></i>
+                <span>{{ original.attachment_names|default:"Attached Document" }}</span>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Body Section -->
+        <div class="email-body-section">
+            {% if original.body_html %}
+            <div id="htmlBodyContainer">
+                <iframe id="emailIframe" class="email-html-frame" sandbox="allow-same-origin allow-popups" srcdoc="{{ original.body_html|escape }}"></iframe>
+            </div>
+            {% endif %}
+
+            <div id="textBodyContainer" class="email-plain-text" {% if original.body_html %}style="display: none;"{% endif %}>
+{{ original.body_text|default:original.snippet }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Inline Reply Section -->
+    <div class="quick-reply-card" id="quickReplySection">
+        <div class="quick-reply-header">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-reply text-primary"></i>
+                <h5 class="mb-0 fw-bold text-dark" style="font-size: 0.95rem;">Quick Reply via Hostinger SMTP</h5>
+            </div>
+            <span class="badge bg-light text-secondary border" style="font-size: 0.72rem;">
+                From: sales@tjropenet.com
+            </span>
+        </div>
+        <div class="quick-reply-body">
+            <form id="quickReplyForm" method="post" action="/dashboard/email/send/">
+                {% csrf_token %}
+                <input type="hidden" name="to" value="{{ original.sender_email }}">
+                <input type="hidden" name="subject" value="Re: {{ original.subject }}">
+
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-muted mb-1">To Recipient</label>
+                        <input type="text" class="form-control form-control-sm bg-light" value="{{ original.sender_email }}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-muted mb-1">Subject</label>
+                        <input type="text" class="form-control form-control-sm" name="subject_display" value="Re: {{ original.subject }}" readonly>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-muted mb-1">Reply Message</label>
+                    <textarea class="form-control" name="message" id="replyMessageText" rows="6" placeholder="Write your professional reply here..." required style="font-size: 0.90rem; line-height: 1.5;"></textarea>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div class="text-muted small">
+                        <i class="fas fa-shield-alt me-1 text-primary"></i> Delivery verified through Hostinger SMTP SSL servers.
+                    </div>
+                    <button type="submit" class="btn btn-primary d-flex align-items-center gap-2 px-4 shadow-sm" id="btnSubmitReply" style="text-transform: none !important; font-weight: 600; border-radius: 0.6rem; background: linear-gradient(135deg, #1a4674 0%, #0d233a 100%);">
+                        <i class="fas fa-paper-plane" id="replySendIcon"></i>
+                        <span id="replySendText">Send Reply Now</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const emailId = {{ original.id|default:0 }};
+
+    // Copy Email button
+    const btnCopyEmail = document.getElementById("btnCopyEmail");
+    if (btnCopyEmail) {
+        btnCopyEmail.addEventListener("click", function() {
+            navigator.clipboard.writeText("{{ original.sender_email }}")
+                .then(() => {
+                    const span = btnCopyEmail.querySelector("span");
+                    if (span) span.textContent = "Copied!";
+                    setTimeout(() => { if (span) span.textContent = "Copy"; }, 2000);
+                });
+        });
+    }
+
+    // Auto-resize iframe for HTML content and hide broken external images
+    const iframe = document.getElementById("emailIframe");
+    if (iframe) {
+        iframe.onload = function() {
+            try {
+                const iDoc = iframe.contentWindow.document;
+
+                // Inject clean base styling into iframe so font matches
+                const style = iDoc.createElement('style');
+                style.textContent = `
+                    body {
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+                        font-size: 15px !important;
+                        line-height: 1.6 !important;
+                        color: #1e293b !important;
+                        margin: 0 !important;
+                        padding: 8px 0 !important;
+                        word-break: break-word;
+                    }
+                    img {
+                        max-width: 100% !important;
+                        height: auto !important;
+                    }
+                    a {
+                        color: #2563eb !important;
+                    }
+                    blockquote {
+                        border-left: 3px solid #cbd5e1 !important;
+                        margin: 12px 0 !important;
+                        padding-left: 14px !important;
+                        color: #64748b !important;
+                    }
+                `;
+                iDoc.head.appendChild(style);
+
+                // Hide broken images (social icon broken boxes, blocked tracking pixels)
+                iDoc.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('error', function() {
+                        this.style.display = 'none';
+                    });
+                    if (img.complete && img.naturalWidth === 0 && img.src) {
+                        img.style.display = 'none';
+                    }
+                });
+
+                // Auto adjust iframe height
+                const body = iDoc.body;
+                const html = iDoc.documentElement;
+                const height = Math.max(
+                    body.scrollHeight, body.offsetHeight,
+                    html.clientHeight, html.scrollHeight, html.offsetHeight
+                );
+                iframe.style.height = (height + 35) + 'px';
+            } catch(e) {
+                iframe.style.height = '480px';
+            }
+        };
+    }
+
+    // Toggle HTML / Plain Text view switcher
+    const btnViewHtml = document.getElementById("btnViewHtml");
+    const btnViewText = document.getElementById("btnViewText");
+    const htmlContainer = document.getElementById("htmlBodyContainer");
+    const textContainer = document.getElementById("textBodyContainer");
+
+    if (btnViewHtml && btnViewText && htmlContainer && textContainer) {
+        btnViewHtml.addEventListener("click", function() {
+            btnViewHtml.classList.add("active");
+            btnViewText.classList.remove("active");
+            htmlContainer.style.display = "block";
+            textContainer.style.display = "none";
+        });
+
+        btnViewText.addEventListener("click", function() {
+            btnViewText.classList.add("active");
+            btnViewHtml.classList.remove("active");
+            htmlContainer.style.display = "none";
+            textContainer.style.display = "block";
+        });
+    }
+
+    // Alert display helper
+    function showAlert(type, htmlMsg) {
+        const container = document.getElementById("alertContainer");
+        container.className = `alert alert-${type} alert-dismissible fade show shadow-xs border-0`;
+        container.innerHTML = `
+            ${htmlMsg}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        container.style.display = "block";
+        window.scrollTo({ top: container.offsetTop - 30, behavior: 'smooth' });
+    }
+
+    // Toggle Read / Unread Status via AJAX
+    const btnToggleRead = document.getElementById("btnToggleReadStatus");
+    const readStatusText = document.getElementById("readStatusText");
+    const readStatusIcon = document.getElementById("readStatusIcon");
+    const headerReadBadge = document.getElementById("headerReadBadge");
+    const headerReadText = document.getElementById("headerReadText");
+
+    if (btnToggleRead && emailId) {
+        btnToggleRead.addEventListener("click", function() {
+            btnToggleRead.disabled = true;
+            fetch(`/dashboard/email/inbox/${emailId}/toggle-read/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                btnToggleRead.disabled = false;
+                if (data.success) {
+                    if (data.is_read) {
+                        readStatusText.textContent = "Mark as Unread";
+                        readStatusIcon.className = "fas fa-envelope";
+                        headerReadBadge.className = "status-pill-read";
+                        headerReadText.textContent = "Read";
+                    } else {
+                        readStatusText.textContent = "Mark as Read";
+                        readStatusIcon.className = "fas fa-envelope-open";
+                        headerReadBadge.className = "status-pill-unread";
+                        headerReadText.textContent = "Unread";
+                    }
+                    showAlert('info', `<i class="fas fa-check-circle me-1"></i> Email marked as <strong>${data.is_read ? 'Read' : 'Unread'}</strong>.`);
+                }
+            })
+            .catch(err => {
+                btnToggleRead.disabled = false;
+                showAlert('danger', `Network error: ${err}`);
+            });
+        });
+    }
+
+    // Quick Reply AJAX Form Handler
+    const quickReplyForm = document.getElementById("quickReplyForm");
+    const btnSubmitReply = document.getElementById("btnSubmitReply");
+    const replySendIcon = document.getElementById("replySendIcon");
+    const replySendText = document.getElementById("replySendText");
+    const replyMessageText = document.getElementById("replyMessageText");
+
+    if (quickReplyForm) {
+        quickReplyForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const message = replyMessageText.value.trim();
+            if (!message) {
+                alert("Please write your reply message.");
+                return;
+            }
+
+            btnSubmitReply.disabled = true;
+            replySendIcon.className = "fas fa-spinner fa-spin";
+            replySendText.textContent = "Sending via Hostinger...";
+
+            const formData = new FormData(quickReplyForm);
+
+            fetch("/dashboard/email/send/", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json().then(data => ({ ok: res.ok, data })))
+            .then(({ ok, data }) => {
+                btnSubmitReply.disabled = false;
+                replySendIcon.className = "fas fa-paper-plane";
+                replySendText.textContent = "Send Reply Now";
+
+                if (ok && data.success) {
+                    showAlert('success', `<strong><i class="fas fa-check-circle me-1"></i> Reply Sent Successfully!</strong> Delivery confirmed through Hostinger SMTP to <em>{{ original.sender_email }}</em>.`);
+                    replyMessageText.value = "";
+                } else {
+                    showAlert('danger', `<strong><i class="fas fa-times-circle me-1"></i> Delivery Failed:</strong> ${data.message || 'Error sending reply.'}`);
+                }
+            })
+            .catch(err => {
+                btnSubmitReply.disabled = false;
+                replySendIcon.className = "fas fa-paper-plane";
+                replySendText.textContent = "Send Reply Now";
+                showAlert('danger', `<strong>Network error:</strong> ${err}`);
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

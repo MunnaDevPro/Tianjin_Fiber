@@ -48,7 +48,7 @@ def admin_dashboard_metrics(request):
         from django.conf import settings
         from django.contrib.auth.models import User
         from products.models import Product, Category
-        from contactapp.models import ContactMessage
+        from contactapp.models import ContactMessage, ReceivedEmail
         from certificates.models import Certificate
         from activitylog.models import UserSession
         from customers.models import Customer
@@ -68,12 +68,15 @@ def admin_dashboard_metrics(request):
  
         total_products = Product.objects.count()
         total_messages = ContactMessage.objects.count()
+        unread_inbox_count = ReceivedEmail.objects.filter(is_read=False).count()
         total_certificates = Certificate.objects.count()
         total_users = User.objects.count()
         total_customers = Customer.objects.count()
  
         recent_messages = list(ContactMessage.objects.order_by('-created_at')[:5])
         recent_customers = list(Customer.objects.order_by('-created_at')[:5])
+        from django.contrib.admin.models import LogEntry
+        recent_activities = list(LogEntry.objects.select_related('user', 'content_type').order_by('-action_time')[:5])
  
         category_data = []
         for cat in Category.objects.all():
@@ -101,8 +104,10 @@ def admin_dashboard_metrics(request):
                 'total_services': total_services,
                 'total_team_members': total_team_members,
                 'total_customers': total_customers,
+                'unread_inbox_count': unread_inbox_count,
                 'recent_messages': recent_messages,
                 'recent_customers': recent_customers,
+                'recent_activities': recent_activities,
                 'category_data': category_data,
                 'system_info': system_info,
             }

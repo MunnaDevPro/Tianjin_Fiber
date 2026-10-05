@@ -35,6 +35,9 @@ JAZZMIN_SETTINGS = {
 
         "contactapp.ContactMessage": "fas fa-envelope",
         "contactapp.ContactPageSettings": "fas fa-cog",
+        "contactapp.ReceivedEmail": "fas fa-inbox",
+        "contactapp.HostingerEmailSettings": "fas fa-mail-bulk",
+        "contactapp.SentEmailLog": "fas fa-history",
         
         # Services
         "services.ServicesHeader": "fas fa-heading",
@@ -67,9 +70,27 @@ JAZZMIN_SETTINGS = {
             "name": "Homepage Settings", 
             "url": "admin:home_homehero_changelist", 
             "icon": "fas fa-home"
-        }]
+        }],
+        "contactapp": [
+            {
+                "name": "Inbox", 
+                "url": "/dashboard/email/inbox/", 
+                "icon": "fas fa-inbox",
+                "permissions": ["auth.view_user"]
+            },
+            {
+                "name": "Send Email", 
+                "url": "/dashboard/email/compose/", 
+                "icon": "fas fa-paper-plane",
+                "permissions": ["auth.view_user"]
+            }
+        ]
     },
-    "order_with_respect_to": ["navigation", "home", "about", "products", "services", "factory", "certificates", "customers", "contactapp", "activitylog", "seo", "auth"],
+    "order_with_respect_to": [
+        "navigation", "home", "about", "products", "services", "factory", "certificates", "customers",
+        "inbox", "send email", "contactapp.receivedemail", "contactapp.hostingeremailsettings", "contactapp.sentemaillog", "contactapp.contactmessage", "contactapp.contactpagesettings",
+        "contactapp", "activitylog", "seo", "auth"
+    ],
     "custom_css": "core/css/custom_admin.css",
     "custom_js": "core/js/custom_admin.js",
 }

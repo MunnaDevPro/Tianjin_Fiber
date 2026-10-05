@@ -1,0 +1,61 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static %}
+
+{% block page_actions %}
+<div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+    <button type="button" class="btn btn-sm btn-primary shadow-xs d-flex align-items-center gap-1.5" id="btnSyncChangelist" title="Fetch new emails from Hostinger IMAP" style="font-weight: 600; text-transform: none !important; border-radius: 0.55rem; background: linear-gradient(135deg, #1a4674 0%, #0d233a 100%); border: none; padding: 6px 12px;">
+        <i class="fas fa-sync-alt" id="syncChangelistIcon"></i>
+        <span id="syncChangelistText">Sync Hostinger IMAP</span>
+    </button>
+    <a href="/dashboard/email/inbox/" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1.5" style="font-weight: 600; text-transform: none !important; border-radius: 0.55rem; padding: 6px 12px; background: #ffffff; color: #334155; border-color: #cbd5e1;">
+        <i class="fas fa-columns text-primary"></i>
+        <span>2-Pane Webmail</span>
+    </a>
+    <a href="/dashboard/email/compose/" class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1.5" style="font-weight: 600; text-transform: none !important; border-radius: 0.55rem; padding: 6px 12px; background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe;">
+        <i class="fas fa-paper-plane"></i>
+        <span>Send Email</span>
+    </a>
+</div>
+{{ block.super }}
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const btnSync = document.getElementById("btnSyncChangelist");
+    const syncIcon = document.getElementById("syncChangelistIcon");
+    const syncText = document.getElementById("syncChangelistText");
+
+    if (btnSync) {
+        btnSync.addEventListener("click", function() {
+            btnSync.disabled = true;
+            syncIcon.classList.add("fa-spin");
+            syncText.textContent = "Checking Hostinger...";
+
+            fetch("/dashboard/email/notifications/?sync=1", {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                btnSync.disabled = false;
+                syncIcon.classList.remove("fa-spin");
+                syncText.textContent = "Sync Hostinger IMAP";
+                if (data && data.synced_new > 0) {
+                    alert(`Sync Complete: Received ${data.synced_new} new email(s) from Hostinger.`);
+                    window.location.reload();
+                } else {
+                    alert("Mailbox is up to date. No new incoming emails found.");
+                }
+            })
+            .catch(err => {
+                btnSync.disabled = false;
+                syncIcon.classList.remove("fa-spin");
+                syncText.textContent = "Sync Hostinger IMAP";
+                alert("Error connecting to Hostinger: " + err);
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

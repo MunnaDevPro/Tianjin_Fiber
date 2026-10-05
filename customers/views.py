@@ -19,10 +19,15 @@ def add_customer_ajax(request):
                 'customer_id': customer.customer_id,
                 'company_name': customer.company_name,
                 'contact_person': customer.contact_person,
+                'position': customer.position or '',
+                'city': customer.city or '',
+                'country': customer.country or '',
                 'email': customer.email or '',
                 'phone': customer.phone or '',
                 'customer_type': customer.customer_type,
+                'lead_source': customer.lead_source,
                 'status': customer.status,
+                'notes': customer.notes or '',
                 'created_at': customer.created_at.strftime('%b %d, %Y'),
             }
         })

@@ -1,0 +1,609 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Hostinger Webmail Inbox | {{ site_title }}{% endblock %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb float-sm-right shadow-xs border-0 bg-white" style="border-radius: 9999px; padding: 0.4rem 1.1rem;">
+    <li class="breadcrumb-item"><a href="{% url 'admin:index' %}" class="text-primary font-weight-600"><i class="fas fa-home mr-1"></i> Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'admin:app_list' app_label='contactapp' %}" class="text-muted">Hostinger Email & Contacts</a></li>
+    <li class="breadcrumb-item active text-dark font-weight-600">Inbox</li>
+</ol>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Executive Inbox Hero Banner */
+    .inbox-hero-banner {
+        background: linear-gradient(135deg, #0d233a 0%, #1a4674 55%, #3b1d60 100%);
+        border-radius: 1rem;
+        color: #ffffff;
+        padding: 1.5rem 1.85rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 10px 25px -5px rgba(26, 70, 116, 0.35);
+        position: relative;
+        overflow: hidden;
+    }
+    .inbox-hero-banner::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -40px;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(124, 58, 237, 0.15) 50%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .inbox-hero-badge {
+        font-size: 0.70rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Webmail Container Card */
+    .webmail-box {
+        background: #ffffff;
+        border-radius: 1rem;
+        border: none;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+    }
+
+    /* Left Pane Email List Scrollbar */
+    #emailListPane {
+        max-height: 700px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 #f8fafc;
+    }
+    #emailListPane::-webkit-scrollbar {
+        width: 5px;
+    }
+    #emailListPane::-webkit-scrollbar-track {
+        background: #f8fafc;
+    }
+    #emailListPane::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+    #emailListPane::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    /* Email Item Card */
+    .inbox-mail-item {
+        border-bottom: 1px solid #f1f5f9;
+        padding: 0.85rem 1rem;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+        position: relative;
+        background: #ffffff;
+    }
+    .inbox-mail-item:hover {
+        background: #f8fafc;
+    }
+    .inbox-mail-item.selected {
+        background: #f5f3ff !important;
+        border-left: 4px solid #7c3aed !important;
+    }
+    .inbox-mail-item.unread {
+        background: #fafafa;
+        font-weight: 600;
+    }
+    .inbox-mail-item.unread .mail-subject {
+        color: #0f172a !important;
+        font-weight: 700 !important;
+    }
+    .unread-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #7c3aed;
+        display: inline-block;
+        flex-shrink: 0;
+    }
+
+    .sender-avatar-circle {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        background: #ede9fe;
+        color: #6d28d9;
+        border: 1px solid #ddd6fe;
+        flex-shrink: 0;
+    }
+
+    /* Right Reader Pane */
+    #emailReaderPane {
+        min-height: 700px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+    }
+    .reader-body-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+        overflow-y: auto;
+        max-height: 540px;
+        line-height: 1.65;
+        font-size: 0.90rem;
+        color: #334155;
+    }
+    .reader-body-content img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Filter Buttons */
+    .inbox-filter-tab {
+        border-radius: 9999px;
+        padding: 0.35rem 0.85rem;
+        font-size: 0.76rem;
+        font-weight: 600;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        color: #475569;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none !important;
+    }
+    .inbox-filter-tab:hover,
+    .inbox-filter-tab.active {
+        background: #7c3aed;
+        border-color: #7c3aed;
+        color: #ffffff;
+    }
+
+    /* Spinning sync animation */
+    .spin-sync {
+        animation: spinAnim 1s linear infinite;
+    }
+    @keyframes spinAnim {
+        100% { transform: rotate(360deg); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-0">
+
+    <!-- Executive Header Banner -->
+    <div class="inbox-hero-banner d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+        <div>
+            <div class="d-flex flex-wrap align-items-center mb-2" style="gap: 8px;">
+                <span class="inbox-hero-badge" style="background: rgba(16, 185, 129, 0.25); color: #a7f3d0; border: 1px solid rgba(52, 211, 153, 0.3);">
+                    <i class="fas fa-inbox"></i> Hostinger Webmail IMAP
+                </span>
+                <span class="inbox-hero-badge" style="background: rgba(14, 165, 233, 0.25); color: #bae6fd; border: 1px solid rgba(56, 189, 248, 0.3);">
+                    <i class="fas fa-lock"></i> Port 993 (SSL)
+                </span>
+                <span class="inbox-hero-badge" style="background: rgba(124, 58, 237, 0.3); color: #e9d5ff; border: 1px solid rgba(167, 139, 250, 0.3);">
+                    <span id="bannerUnreadCount">{{ unread_count }}</span> Unread
+                </span>
+            </div>
+            
+            <h2 class="font-weight-bold mb-1 text-white" style="font-size: 1.55rem; letter-spacing: -0.02em;">
+                <i class="fas fa-envelope-open-text mr-2 text-warning"></i> Hostinger Webmail Inbox
+            </h2>
+            <p class="text-white-50 mb-0" style="font-size: 0.84rem;">
+                Connected Mailbox: <strong class="text-white font-weight-bold">{{ config.user|default:"sales@tjropenet.com" }}</strong> 
+                <span class="mx-1 text-white-50">·</span> Syncing live with mail.hostinger.com
+            </p>
+        </div>
+
+        <div class="mt-3 mt-md-0 d-flex flex-wrap align-items-center" style="gap: 8px;">
+            <button type="button" class="btn btn-sm btn-light rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold" id="btnSyncInbox" style="color: #0d233a; font-size: 0.82rem;">
+                <i class="fas fa-sync-alt mr-1.5" id="syncIcon"></i> <span id="syncText">Sync Now</span>
+            </button>
+            <a href="{% url 'hostinger_mail:compose_page' %}" class="btn btn-sm rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold text-white" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border: none; font-size: 0.82rem;">
+                <i class="fas fa-paper-plane mr-1.5"></i> Compose Mail
+            </a>
+            <a href="{% url 'admin:contactapp_hostingeremailsettings_change' 1 %}" class="btn btn-sm btn-outline-light rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold" style="font-size: 0.82rem;">
+                <i class="fas fa-cog mr-1.5"></i> Settings
+            </a>
+        </div>
+    </div>
+
+    <!-- Alert / Toast Banner -->
+    <div id="inboxAlertBanner" class="alert d-none shadow-sm mb-3.5" style="border-radius: 0.75rem; font-size: 0.88rem;"></div>
+
+    <!-- Dual Pane Webmail Box -->
+    <div class="webmail-box">
+        <div class="row no-gutters">
+            
+            <!-- Left Pane: Email List (5 cols) -->
+            <div class="col-lg-5 col-md-12" style="border-right: 1px solid #f1f5f9;">
+                
+                <!-- Search & Filters Toolbar -->
+                <div class="p-3 bg-white" style="border-bottom: 1px solid #f1f5f9;">
+                    <form method="get" class="mb-2.5">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light border-0"><i class="fas fa-search text-muted"></i></span>
+                            </div>
+                            <input type="text" name="q" value="{{ search_query }}" class="form-control border-0 bg-light" placeholder="Search sender, subject or body..." style="border-radius: 0 0.5rem 0.5rem 0; font-size: 0.82rem;">
+                        </div>
+                    </form>
+
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="gap: 5px;">
+                            <a href="?{% if search_query %}q={{ search_query }}&{% endif %}filter=all" class="inbox-filter-tab {% if active_filter == 'all' %}active{% endif %}">
+                                All ({{ total_count }})
+                            </a>
+                            <a href="?{% if search_query %}q={{ search_query }}&{% endif %}filter=unread" class="inbox-filter-tab {% if active_filter == 'unread' %}active{% endif %}">
+                                Unread (<span id="unreadTabCount">{{ unread_count }}</span>)
+                            </a>
+                            <a href="?{% if search_query %}q={{ search_query }}&{% endif %}filter=attachment" class="inbox-filter-tab {% if active_filter == 'attachment' %}active{% endif %}">
+                                <i class="fas fa-paperclip mr-1"></i> Files
+                            </a>
+                        </div>
+                        <span class="small text-muted font-weight-bold" style="font-size: 0.70rem;">
+                            Showing {{ emails|length }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Messages List -->
+                <div id="emailListPane">
+                    {% for mail in emails %}
+                    <div class="inbox-mail-item {% if not mail.is_read %}unread{% endif %} {% if forloop.first %}selected{% endif %}" data-email-id="{{ mail.id }}" data-sender="{{ mail.sender_name|default:mail.sender_email }}" data-email="{{ mail.sender_email }}" data-subject="{{ mail.subject }}">
+                        <div class="d-flex align-items-start">
+                            <div class="mr-2 pt-1">
+                                {% if not mail.is_read %}
+                                <span class="unread-dot" title="Unread Message"></span>
+                                {% else %}
+                                <span style="width: 8px; display: inline-block;"></span>
+                                {% endif %}
+                            </div>
+
+                            <div class="sender-avatar-circle mr-2.5">
+                                {{ mail.sender_name|slice:":2"|upper }}
+                            </div>
+
+                            <div class="flex-grow-1" style="min-width: 0;">
+                                <div class="d-flex justify-content-between align-items-baseline mb-0.5">
+                                    <strong class="text-dark text-truncate" style="font-size: 0.84rem; max-width: 170px;" title="{{ mail.sender_name|default:mail.sender_email }}">
+                                        {{ mail.sender_name|default:mail.sender_email }}
+                                    </strong>
+                                    <span class="text-muted small" style="font-size: 0.68rem; white-space: nowrap;">
+                                        {{ mail.received_at|timesince }} ago
+                                    </span>
+                                </div>
+
+                                <div class="mail-subject text-truncate" style="font-size: 0.80rem; color: #334155; line-height: 1.25;" title="{{ mail.subject }}">
+                                    {{ mail.subject|default:"(No Subject)" }}
+                                </div>
+
+                                <div class="text-muted text-truncate mt-1" style="font-size: 0.73rem; line-height: 1.3;">
+                                    {{ mail.snippet }}
+                                </div>
+
+                                {% if mail.has_attachment %}
+                                <div class="mt-1">
+                                    <span class="badge badge-light border text-primary" style="font-size: 0.65rem; font-weight: 600;">
+                                        <i class="fas fa-paperclip mr-1"></i> Attachment
+                                    </span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="text-center text-muted py-5 px-3">
+                        <i class="fas fa-inbox fa-3x mb-2 text-gray-300"></i>
+                        <h6 class="font-weight-bold text-dark">No messages in inbox</h6>
+                        <p class="small text-muted mb-3">Click 'Sync Now' above to fetch emails from your Hostinger account.</p>
+                        <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 shadow-xs" onclick="document.getElementById('btnSyncInbox').click();">
+                            <i class="fas fa-sync-alt mr-1"></i> Sync from Hostinger
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <!-- Right Pane: Email Detail Reader (7 cols) -->
+            <div class="col-lg-7 col-md-12">
+                <div id="emailReaderPane">
+                    
+                    <!-- Top Action Toolbar -->
+                    <div class="p-3 bg-white d-flex justify-content-between align-items-center" style="border-bottom: 1px solid #f1f5f9;">
+                        <div class="d-flex align-items-center" style="gap: 8px;">
+                            <a id="btnReplyTop" href="#" class="btn btn-sm rounded-pill px-3.5 font-weight-bold text-white shadow-xs" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); font-size: 0.78rem;">
+                                <i class="fas fa-reply mr-1"></i> Reply
+                            </a>
+                            <button type="button" class="btn btn-sm btn-light rounded-pill px-3 text-muted font-weight-600" id="btnToggleRead" style="font-size: 0.78rem; border: 1px solid #e2e8f0;">
+                                <i class="fas fa-envelope mr-1"></i> Mark Unread
+                            </button>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="badge badge-light border text-muted py-1 px-2" style="font-size: 0.70rem;">
+                                <i class="fas fa-shield-alt text-success mr-1"></i> Authenticated IMAP
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Email Header Details -->
+                    <div class="p-3.5 bg-white" style="border-bottom: 1px solid #f1f5f9;">
+                        <h4 class="font-weight-bold text-dark mb-2.5" id="readerSubject" style="font-size: 1.25rem; letter-spacing: -0.01em;">
+                            Select an email from the left to read
+                        </h4>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="sender-avatar-circle mr-2.5" id="readerAvatar" style="width: 38px; height: 38px; font-size: 14px;">
+                                    --
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center">
+                                        <strong class="text-dark" id="readerSenderName" style="font-size: 0.90rem;">-</strong>
+                                        <span class="text-muted ml-2 small" id="readerSenderEmail" style="font-size: 0.80rem;">&lt;-&gt;</span>
+                                    </div>
+                                    <div class="text-muted small mt-0.5" style="font-size: 0.72rem;">
+                                        To: <span id="readerRecipient" class="font-weight-600 text-dark">{{ config.user|default:"sales@tjropenet.com" }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="badge badge-light border text-muted px-2 py-1 font-weight-500" id="readerDate" style="font-size: 0.74rem;">
+                                    <i class="fas fa-clock text-muted mr-1"></i> -
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Attachment Bar (hidden if none) -->
+                        <div id="readerAttachmentBar" class="d-none mt-3 p-2 px-3 rounded bg-light border d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-paperclip text-primary mr-2" style="font-size: 0.95rem;"></i>
+                                <span class="small font-weight-bold text-dark" style="font-size: 0.78rem;">Attachments:</span>
+                                <span id="readerAttachmentNames" class="small text-muted ml-2 font-weight-500" style="font-size: 0.78rem;">-</span>
+                            </div>
+                            <span class="badge badge-primary px-2 py-0.5" style="font-size: 0.65rem;">File Included</span>
+                        </div>
+                    </div>
+
+                    <!-- Email Body Container -->
+                    <div class="reader-body-content" id="readerBody">
+                        <div class="text-center text-muted py-5 my-5">
+                            <i class="fas fa-spinner fa-spin fa-2x mb-2 text-primary"></i>
+                            <p class="small mb-0">Loading message content...</p>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Quick Reply Bar -->
+                    <div class="p-3 bg-light d-flex justify-content-between align-items-center border-top">
+                        <span class="small text-muted font-weight-500" style="font-size: 0.75rem;">
+                            Direct correspondence via Hostinger SMTP (sales@tjropenet.com)
+                        </span>
+                        <a id="btnReplyBottom" href="#" class="btn btn-sm rounded-pill px-4 font-weight-bold text-white shadow-xs" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); font-size: 0.82rem;">
+                            <i class="fas fa-reply mr-1.5"></i> Reply via Hostinger
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let currentEmailId = null;
+    let currentSenderEmail = '';
+    let currentSubject = '';
+
+    const alertBanner = document.getElementById('inboxAlertBanner');
+
+    function showAlert(type, html) {
+        alertBanner.classList.remove('d-none', 'alert-success', 'alert-danger', 'alert-warning');
+        alertBanner.classList.add('alert-' + type);
+        alertBanner.innerHTML = html;
+        alertBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Load Email Detail Function
+    function loadEmailDetail(emailId) {
+        currentEmailId = emailId;
+        const readerBody = document.getElementById('readerBody');
+        readerBody.innerHTML = `
+            <div class="text-center text-muted py-5 my-4">
+                <div class="spinner-border spinner-border-sm text-primary mb-2" role="status"></div>
+                <p class="small mb-0">Fetching message from Hostinger database...</p>
+            </div>
+        `;
+
+        fetch(`/dashboard/email/inbox/${emailId}/`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) {
+                    readerBody.innerHTML = `<div class="alert alert-danger">${data.message || 'Error loading email.'}</div>`;
+                    return;
+                }
+
+                currentSenderEmail = data.sender_email;
+                currentSubject = data.subject;
+
+                document.getElementById('readerSubject').textContent = data.subject || '(No Subject)';
+                document.getElementById('readerSenderName').textContent = data.sender_name || data.sender_email;
+                document.getElementById('readerSenderEmail').textContent = `<${data.sender_email}>`;
+                document.getElementById('readerDate').innerHTML = `<i class="fas fa-calendar-alt text-primary mr-1"></i> ${data.received_at}`;
+                document.getElementById('readerAvatar').textContent = (data.sender_name || data.sender_email || 'U').substring(0, 2).toUpperCase();
+
+                // Attachment
+                const attachBar = document.getElementById('readerAttachmentBar');
+                const attachNames = document.getElementById('readerAttachmentNames');
+                if (data.has_attachment && data.attachment_names) {
+                    attachBar.classList.remove('d-none');
+                    attachNames.textContent = data.attachment_names;
+                } else {
+                    attachBar.classList.add('d-none');
+                }
+
+                // Render Body (HTML preferred with safe styling, fallback to plain text)
+                if (data.body_html) {
+                    // Create sandboxed sanitized display
+                    readerBody.innerHTML = `<div class="mail-html-wrapper" style="overflow-x: auto;">${data.body_html}</div>`;
+                } else if (data.body_text) {
+                    readerBody.innerHTML = `<pre style="white-space: pre-wrap; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 0.90rem; line-height: 1.6; color: #1e293b;">${escapeHtml(data.body_text)}</pre>`;
+                } else {
+                    readerBody.innerHTML = `<p class="text-muted italic">This message contains no text content.</p>`;
+                }
+
+                // Update Reply Links
+                const replySubject = data.subject.toLowerCase().startsWith('re:') ? data.subject : `Re: ${data.subject}`;
+                const replyUrl = `/dashboard/email/compose/?to=${encodeURIComponent(data.sender_email)}&subject=${encodeURIComponent(replySubject)}`;
+                document.getElementById('btnReplyTop').href = replyUrl;
+                document.getElementById('btnReplyBottom').href = replyUrl;
+
+                // Update unread count badges
+                const unreadBadges = [document.getElementById('bannerUnreadCount'), document.getElementById('unreadTabCount')];
+                unreadBadges.forEach(b => {
+                    if (b) b.textContent = data.unread_count;
+                });
+
+                // Remove unread dot from item in list
+                const item = document.querySelector(`.inbox-mail-item[data-email-id="${emailId}"]`);
+                if (item) {
+                    item.classList.remove('unread');
+                    const dot = item.querySelector('.unread-dot');
+                    if (dot) dot.remove();
+                }
+            })
+            .catch(err => {
+                readerBody.innerHTML = `<div class="alert alert-danger"><i class="fas fa-times-circle mr-1"></i> Failed to load message: ${err}</div>`;
+            });
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Click handler for email list items
+    const mailItems = document.querySelectorAll('.inbox-mail-item');
+    mailItems.forEach(item => {
+        item.addEventListener('click', function() {
+            mailItems.forEach(i => i.classList.remove('selected'));
+            this.classList.add('selected');
+            const emailId = this.dataset.emailId;
+            if (emailId) {
+                loadEmailDetail(emailId);
+            }
+        });
+    });
+
+    // Auto load email specified by URL query ?id= or first item
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetEmailId = urlParams.get('id');
+    let loadedInitial = false;
+    if (targetEmailId) {
+        const targetItem = document.querySelector(`.inbox-mail-item[data-email-id="${targetEmailId}"]`);
+        if (targetItem) {
+            mailItems.forEach(i => i.classList.remove('selected'));
+            targetItem.classList.add('selected');
+            targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            loadEmailDetail(targetEmailId);
+            loadedInitial = true;
+        }
+    }
+    if (!loadedInitial) {
+        const firstSelected = document.querySelector('.inbox-mail-item.selected');
+        if (firstSelected && firstSelected.dataset.emailId) {
+            loadEmailDetail(firstSelected.dataset.emailId);
+        }
+    }
+
+    // Sync Now Button
+    const btnSync = document.getElementById('btnSyncInbox');
+    const syncIcon = document.getElementById('syncIcon');
+    const syncText = document.getElementById('syncText');
+
+    if (btnSync) {
+        btnSync.addEventListener('click', function() {
+            btnSync.disabled = true;
+            syncIcon.classList.add('spin-sync');
+            syncText.textContent = 'Syncing...';
+
+            fetch('/dashboard/email/inbox/sync/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json().then(data => ({ ok: res.ok, data })))
+            .then(({ ok, data }) => {
+                btnSync.disabled = false;
+                syncIcon.classList.remove('spin-sync');
+                syncText.textContent = 'Sync Now';
+
+                if (ok && data.success) {
+                    showAlert('success', `<i class="fas fa-check-circle mr-1.5 text-success"></i> <strong>Hostinger Sync Complete:</strong> ${data.message}`);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1200);
+                } else {
+                    showAlert('danger', `<i class="fas fa-times-circle mr-1.5 text-danger"></i> <strong>Sync Failed:</strong> ${data.message}`);
+                }
+            })
+            .catch(err => {
+                btnSync.disabled = false;
+                syncIcon.classList.remove('spin-sync');
+                syncText.textContent = 'Sync Now';
+                showAlert('danger', `<i class="fas fa-times-circle mr-1.5 text-danger"></i> Network error: ${err}`);
+            });
+        });
+    }
+
+    // Toggle Read Button
+    const btnToggleRead = document.getElementById('btnToggleRead');
+    if (btnToggleRead) {
+        btnToggleRead.addEventListener('click', function() {
+            if (!currentEmailId) return;
+            fetch(`/dashboard/email/inbox/${currentEmailId}/toggle-read/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const item = document.querySelector(`.inbox-mail-item[data-email-id="${currentEmailId}"]`);
+                    if (item) {
+                        if (data.is_read) {
+                            item.classList.remove('unread');
+                        } else {
+                            item.classList.add('unread');
+                        }
+                    }
+                    const unreadBadges = [document.getElementById('bannerUnreadCount'), document.getElementById('unreadTabCount')];
+                    unreadBadges.forEach(b => {
+                        if (b) b.textContent = data.unread_count;
+                    });
+                }
+            });
+        });
+    }
+});
+</script>
+{% endblock %}
