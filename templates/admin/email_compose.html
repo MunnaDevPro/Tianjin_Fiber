@@ -121,6 +121,11 @@
         box-shadow: 0 2px 8px rgba(109, 40, 217, 0.08);
         transform: translateY(-1px);
     }
+    .customer-item-card.is-selected {
+        background: #f5f3ff !important;
+        border-color: #7c3aed !important;
+        box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.25) !important;
+    }
     .customer-item-avatar {
         width: 28px;
         height: 28px;
@@ -227,16 +232,16 @@
 
         <div class="mt-3 mt-md-0 d-flex flex-wrap align-items-center" style="gap: 8px;">
             <a href="{% url 'hostinger_mail:inbox' %}" class="btn btn-sm btn-light rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold" style="color: #0d233a; font-size: 0.82rem;">
-                <i class="fas fa-inbox mr-1.5 text-primary"></i> Inbox <span class="badge badge-primary rounded-pill ml-1" style="background: #7c3aed; color: #fff; font-size: 0.70rem;">{{ unread_inbox_count|default:"0" }}</span>
+                <i class="fas fa-inbox mr-1.5 text-primary"></i> Inbox <span class="badge badge-primary rounded-pill ml-1" style="background: #7c3aed; color: #fff; font-size: 0.70rem;">{{ unread_inbox_count|default:unread_count|default:"0" }}</span>
+            </a>
+            <a href="{% url 'hostinger_mail:inbox' %}?folder=sent" class="btn btn-sm btn-outline-light rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold" style="font-size: 0.82rem;">
+                <i class="fas fa-paper-plane mr-1.5"></i> Sent Mail
             </a>
             <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold" id="pageBtnTestConn" style="font-size: 0.82rem;">
                 <i class="fas fa-plug mr-1.5"></i> Test Connection
             </button>
             <a href="{% url 'admin:contactapp_hostingeremailsettings_change' 1 %}" class="btn btn-sm btn-outline-light rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold" style="font-size: 0.82rem;">
                 <i class="fas fa-cog mr-1.5"></i> Settings
-            </a>
-            <a href="{% url 'admin:contactapp_sentemaillog_changelist' %}" class="btn btn-sm btn-outline-light rounded-pill px-3.5 py-1.5 shadow-sm font-weight-bold" style="font-size: 0.82rem;">
-                <i class="fas fa-history mr-1.5"></i> Sent Logs
             </a>
         </div>
     </div>
@@ -310,12 +315,18 @@
                                     <div class="customer-item-avatar mr-2">
                                         {{ cust.company_name|slice:":2"|upper }}
                                     </div>
-                                    <strong class="text-dark text-truncate" style="font-size: 0.80rem; max-width: 145px;" title="{{ cust.company_name }}">
+                                    <strong class="text-dark text-truncate" style="font-size: 0.82rem; max-width: 140px;" title="{{ cust.company_name }}">
                                         {{ cust.company_name }}
                                     </strong>
                                 </div>
                                 <span class="badge badge-light border text-muted" style="font-size: 0.65rem; font-weight: 600;">{{ cust.customer_type }}</span>
                             </div>
+                            {% if cust.contact_person or cust.country %}
+                            <div class="d-flex align-items-center text-muted text-truncate mb-1" style="font-size: 0.70rem; padding-left: 36px;">
+                                {% if cust.contact_person %}<span class="text-truncate mr-2"><i class="fas fa-user-circle mr-1 text-muted"></i>{{ cust.contact_person }}</span>{% endif %}
+                                {% if cust.country %}<span><i class="fas fa-globe-americas mr-1 text-muted"></i>{{ cust.country }}</span>{% endif %}
+                            </div>
+                            {% endif %}
                             <div class="d-flex justify-content-between align-items-center mt-1 pl-4.5" style="padding-left: 36px;">
                                 <span class="text-primary text-truncate small font-weight-500" style="font-size: 0.74rem; max-width: 170px;" title="{{ cust.email }}">
                                     {{ cust.email }}
@@ -442,6 +453,29 @@
 
                 <form id="dedicatedEmailForm" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <input type="hidden" name="in_reply_to" id="idInReplyTo" value="{{ in_reply_to|default:'' }}">
+
+                    {% if mode == 'reply' %}
+                    <div class="alert alert-info py-2 px-3 mb-3 d-flex align-items-center justify-content-between" style="border-radius: 0.6rem; font-size: 0.82rem; background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af;">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-reply mr-2 text-primary"></i>
+                            <span>Replying to <strong>{{ initial_to }}</strong>. Message thread context is preserved.</span>
+                        </div>
+                        <a href="{% url 'hostinger_mail:compose_page' %}" class="btn btn-xs btn-outline-primary font-weight-bold" style="font-size: 0.70rem; border-radius: 9999px; padding: 2px 8px;">
+                            New Blank Email
+                        </a>
+                    </div>
+                    {% elif mode == 'forward' %}
+                    <div class="alert alert-primary py-2 px-3 mb-3 d-flex align-items-center justify-content-between" style="border-radius: 0.6rem; font-size: 0.82rem; background: #f5f3ff; border: 1px solid #ddd6fe; color: #5b21b6;">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-share mr-2 text-purple" style="color: #7c3aed;"></i>
+                            <span>Forwarding email with message history. Specify recipient below.</span>
+                        </div>
+                        <a href="{% url 'hostinger_mail:compose_page' %}" class="btn btn-xs btn-outline-secondary font-weight-bold" style="font-size: 0.70rem; border-radius: 9999px; padding: 2px 8px;">
+                            New Blank Email
+                        </a>
+                    </div>
+                    {% endif %}
 
                     <!-- From Bar -->
                     <div class="p-2.5 px-3 rounded mb-3 d-flex justify-content-between align-items-center" style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #7c3aed;">
@@ -515,7 +549,7 @@
                     <!-- Message Body -->
                     <div class="form-group mb-3">
                         <label class="composer-label" for="idMessage">Message Body *</label>
-                        <textarea class="form-control form-control-modern p-3" id="idMessage" name="message" rows="13" placeholder="Write your professional correspondence or quotation details here..." required style="line-height: 1.6; font-size: 0.88rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;"></textarea>
+                        <textarea class="form-control form-control-modern p-3" id="idMessage" name="message" rows="13" placeholder="Write your professional correspondence or quotation details here..." required style="line-height: 1.6; font-size: 0.88rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">{{ initial_body }}</textarea>
                     </div>
 
                     <!-- Attachment & Signature Options -->
@@ -644,6 +678,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const customerItems = document.querySelectorAll('.cust-selectable-item');
     customerItems.forEach(item => {
         item.addEventListener('click', function() {
+            customerItems.forEach(c => c.classList.remove('is-selected'));
+            this.classList.add('is-selected');
+
             const email = this.dataset.email;
             const name = this.dataset.name;
             const toInput = document.getElementById('idTo');
@@ -655,6 +692,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (subjInput && !subjInput.value && name) {
                 subjInput.value = `Partnership Proposal - ${name}`;
             }
+            showAlert('info', `<i class="fas fa-user-check mr-1 text-primary"></i> Recipient selected: <strong>${name}</strong> &lt;${email}&gt;`);
+            setTimeout(() => {
+                if (alertBanner && alertBanner.classList.contains('alert-info')) {
+                    alertBanner.classList.add('d-none');
+                }
+            }, 3500);
         });
     });
 
@@ -666,8 +709,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const q = this.value.toLowerCase().trim();
             let visibleCount = 0;
             customerItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                const matches = text.includes(q);
+                const searchHaystack = (
+                    (item.dataset.name || '') + ' ' +
+                    (item.dataset.email || '') + ' ' +
+                    (item.dataset.contact || '') + ' ' +
+                    item.textContent
+                ).toLowerCase();
+                const matches = searchHaystack.includes(q);
                 item.style.display = matches ? 'block' : 'none';
                 if (matches) visibleCount++;
             });
@@ -685,6 +733,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (confirm('Are you sure you want to clear this message form?')) {
                 dedicatedForm.reset();
                 templateChips.forEach(c => c.classList.remove('active'));
+                customerItems.forEach(c => c.classList.remove('is-selected'));
             }
         });
     }
@@ -703,11 +752,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const formData = new FormData(dedicatedForm);
 
-            // Append signature if checked and not already present
+            // Append signature if checked and not already present (normalized to prevent double signature)
             const inclSig = document.getElementById('idIncludeSignature');
             if (inclSig && inclSig.checked && configSignature) {
-                const raw = formData.get('message');
-                if (!raw.includes(configSignature)) {
+                const raw = formData.get('message') || '';
+                const normRaw = raw.replace(/\r\n/g, '\n').trim();
+                const normSig = configSignature.replace(/\r\n/g, '\n').trim();
+                if (!normRaw.includes(normSig)) {
                     formData.set('message', raw + "\n\n--\n" + configSignature);
                 }
             }

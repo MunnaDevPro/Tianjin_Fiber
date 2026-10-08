@@ -82,19 +82,36 @@ def test_hostinger_smtp_connection():
         return False, f"Hostinger SMTP Connection Error: {str(e)}"
 
 
-def send_hostinger_email(recipient, subject, message, cc=None, bcc=None, attachment=None, user=None):
+def _split_addresses(value):
+    if not value:
+        return []
+    return [a.strip() for a in value.replace(';', ',').split(',') if a.strip()]
+
+
+def send_hostinger_email(recipient, subject, message, cc=None, bcc=None, attachment=None,
+                         user=None, attachments=None, in_reply_to=None):
     """
     Sends an email via Hostinger's SMTP server and logs the transaction.
+
+    `attachment` (single file) is kept for backward compatibility;
+    `attachments` accepts a list of uploaded files.
+    `in_reply_to` (original Message-ID) threads the reply in the recipient's mail client.
     """
+    files = list(attachments or [])
+    if attachment:
+        files.insert(0, attachment)
+    attachment_label = ', '.join(f.name for f in files)[:255]
+
     config = get_hostinger_config()
     if not config['user'] or not config['password']:
         error_msg = "Hostinger email username or password is missing. Please configure Hostinger Email Settings first."
         SentEmailLog.objects.create(
-            recipient=recipient,
-            cc=cc or '',
-            bcc=bcc or '',
-            subject=subject,
+            recipient=(recipient or '')[:255],
+            cc=(cc or '')[:255],
+            bcc=(bcc or '')[:255],
+            subject=(subject or '')[:255],
             message=message,
+            attachment_name=attachment_label,
             status='Failed',
             error_message=error_msg,
             sent_by=user
@@ -112,12 +129,25 @@ def send_hostinger_email(recipient, subject, message, cc=None, bcc=None, attachm
     from_header = f"{sender_name} <{user_email}>" if sender_name else user_email
 
     # Parse recipients
-    to_list = [r.strip() for r in recipient.replace(';', ',').split(',') if r.strip()]
-    cc_list = [c.strip() for c in cc.replace(';', ',').split(',') if c.strip()] if cc else []
-    bcc_list = [b.strip() for b in bcc.replace(';', ',').split(',') if b.strip()] if bcc else []
+    to_list = _split_addresses(recipient)
+    cc_list = _split_addresses(cc)
+    bcc_list = _split_addresses(bcc)
 
     if not to_list:
         return False, "Recipient email address is required."
+
+    def _log(status, error_message=None):
+        SentEmailLog.objects.create(
+            recipient=', '.join(to_list)[:255],
+            cc=', '.join(cc_list)[:255],
+            bcc=', '.join(bcc_list)[:255],
+            subject=(subject or '')[:255],
+            message=message,
+            attachment_name=attachment_label,
+            status=status,
+            error_message=error_message,
+            sent_by=user
+        )
 
     try:
         backend = EmailBackend(
@@ -131,48 +161,30 @@ def send_hostinger_email(recipient, subject, message, cc=None, bcc=None, attachm
             timeout=15
         )
 
+        headers = {}
+        if in_reply_to:
+            headers['In-Reply-To'] = in_reply_to
+            headers['References'] = in_reply_to
+
         email = EmailMultiAlternatives(
             subject=subject,
             body=message,
             from_email=from_header,
             to=to_list,
-            cc=cc_list if cc_list else None,
-            bcc=bcc_list if bcc_list else None,
+            cc=cc_list or None,
+            bcc=bcc_list or None,
+            headers=headers or None,
             connection=backend
         )
 
-        attachment_name = ''
-        if attachment:
-            attachment_name = attachment.name
-            email.attach(attachment.name, attachment.read(), attachment.content_type)
+        for f in files:
+            email.attach(f.name, f.read(), getattr(f, 'content_type', None))
 
         email.send(fail_silently=False)
-
-        # Log success
-        SentEmailLog.objects.create(
-            recipient=', '.join(to_list),
-            cc=', '.join(cc_list),
-            bcc=', '.join(bcc_list),
-            subject=subject,
-            message=message,
-            attachment_name=attachment_name,
-            status='Sent',
-            sent_by=user
-        )
-
-        return True, f"Email successfully sent to {', '.join(to_list)} via Hostinger Mail!"
+        _log('Sent')
+        return True, f"Email sent to {', '.join(to_list)}."
 
     except Exception as e:
         error_details = str(e)
-        SentEmailLog.objects.create(
-            recipient=', '.join(to_list),
-            cc=', '.join(cc_list) if cc_list else '',
-            bcc=', '.join(bcc_list) if bcc_list else '',
-            subject=subject,
-            message=message,
-            attachment_name=attachment.name if attachment else '',
-            status='Failed',
-            error_message=error_details,
-            sent_by=user
-        )
-        return False, f"Failed to send email via Hostinger: {error_details}"
+        _log('Failed', error_details)
+        return False, f"Failed to send email: {error_details}"

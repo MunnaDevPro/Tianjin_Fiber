@@ -9,6 +9,7 @@ urlpatterns = [
     path('inbox/sync/', email_views.sync_inbox_ajax, name='sync_inbox'),
     path('inbox/<int:email_id>/', email_views.get_email_detail_ajax, name='email_detail'),
     path('inbox/<int:email_id>/toggle-read/', email_views.toggle_email_read_ajax, name='toggle_read'),
+    path('sent/<int:log_id>/', email_views.get_sent_detail_ajax, name='sent_detail'),
     path('compose/', email_views.email_compose_page, name='compose_page'),
     path('send/', email_views.send_dashboard_email_ajax, name='send_email'),
     path('test-connection/', email_views.test_hostinger_connection_ajax, name='test_connection'),

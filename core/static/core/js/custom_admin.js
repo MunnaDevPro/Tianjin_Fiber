@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const toast = document.createElement("div");
         toast.className = "email-live-toast";
         const initial = getInitial(msg.sender_name || msg.sender_email);
-        const viewUrl = `/dashboard/contactapp/receivedemail/${msg.id}/change/`;
+        const viewUrl = `/dashboard/email/inbox/?id=${msg.id}`;
 
         toast.innerHTML = `
             <div class="toast-avatar-bubble">${initial}</div>
@@ -117,10 +117,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 <div class="toast-action-row">
                     <a href="${viewUrl}" class="toast-view-btn">
-                        <i class="fas fa-envelope-open-text me-1"></i> Read Email
+                        <i class="fas fa-envelope-open-text me-1"></i> Read in Inbox
                     </a>
-                    <a href="/dashboard/email/inbox/?id=${msg.id}" class="btn btn-xs btn-outline-secondary py-0 px-2" style="font-size: 0.70rem; border-radius: 5px;">
-                        Webmail
+                    <a href="/dashboard/contactapp/receivedemail/${msg.id}/change/" class="btn btn-xs btn-outline-secondary py-0 px-2" style="font-size: 0.70rem; border-radius: 5px;">
+                        Raw Log
                     </a>
                 </div>
             </div>
@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let itemsHtml = '';
                     data.notifications.forEach(item => {
                         const initial = getInitial(item.sender_name || item.sender_email);
-                        const detailUrl = `/dashboard/contactapp/receivedemail/${item.id}/change/`;
+                        const detailUrl = `/dashboard/email/inbox/?id=${item.id}`;
                         const cleanSnippet = (item.snippet || '').replace(/\[image:[^\]]*\]/gi, '').trim();
                         itemsHtml += `
                             <a href="${detailUrl}" class="notification-item-card">

@@ -170,8 +170,8 @@ def sync_hostinger_inbox(limit=30, folder='INBOX'):
             except Exception:
                 pass
             
-            # Fetch full message headers and body for new messages
-            res_status, msg_data = mail.fetch(msg_id_bytes, '(RFC822)')
+            # Fetch full message (PEEK keeps the message unread on the Hostinger server)
+            res_status, msg_data = mail.fetch(msg_id_bytes, '(BODY.PEEK[])')
             if res_status != 'OK' or not msg_data:
                 continue
 

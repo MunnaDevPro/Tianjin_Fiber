@@ -1,0 +1,298 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}{{ title }} · Mail | {{ site_title|default:"Admin" }}{% endblock %}
+
+{% block content_title %}Mail{% endblock %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'hostinger_mail:inbox' %}">Mail</a></li>
+    <li class="breadcrumb-item active">{{ title }}</li>
+</ol>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* ===== Mail module (all rules scoped to .hm-mail) ===== */
+    .hm-mail {
+        --hm-accent: #4f46e5;
+        --hm-accent-600: #4338ca;
+        --hm-accent-50: #eef2ff;
+        --hm-accent-100: #e0e7ff;
+        --hm-text: #0f172a;
+        --hm-text-2: #334155;
+        --hm-muted: #64748b;
+        --hm-faint: #94a3b8;
+        --hm-border: #e5e7eb;
+        --hm-soft: #f8fafc;
+        --hm-danger: #dc2626;
+        --hm-success: #059669;
+        display: flex;
+        gap: 16px;
+        height: calc(100vh - 190px);
+        min-height: 580px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        color: var(--hm-text);
+        font-size: 14px;
+    }
+    .hm-mail *, .hm-mail *::before, .hm-mail *::after { box-sizing: border-box; }
+    .hm-mail a { text-decoration: none; }
+    .hm-mail button, .hm-mail .hm-btn { text-transform: none !important; letter-spacing: normal; }
+
+    /* ---------- Left navigation ---------- */
+    .hm-nav {
+        width: 232px;
+        flex-shrink: 0;
+        background: #fff;
+        border: 1px solid var(--hm-border);
+        border-radius: 14px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+    }
+    .hm-compose-btn {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 10px;
+        background: var(--hm-accent);
+        color: #fff !important;
+        font-weight: 600;
+        font-size: 14px;
+        box-shadow: 0 4px 12px -2px rgba(79, 70, 229, .35);
+        transition: background .15s, transform .15s, box-shadow .15s;
+    }
+    .hm-compose-btn:hover { background: var(--hm-accent-600); transform: translateY(-1px); box-shadow: 0 8px 18px -4px rgba(79, 70, 229, .45); }
+    .hm-folders { margin-top: 14px; display: flex; flex-direction: column; gap: 2px; }
+    .hm-folder {
+        display: flex; align-items: center; gap: 11px;
+        padding: 9px 12px;
+        border-radius: 9px;
+        color: var(--hm-text-2) !important;
+        font-weight: 500;
+        transition: background .12s, color .12s;
+    }
+    .hm-folder i { width: 16px; text-align: center; color: var(--hm-muted); }
+    .hm-folder:hover { background: var(--hm-soft); }
+    .hm-folder.active { background: var(--hm-accent-50); color: var(--hm-accent-600) !important; font-weight: 600; }
+    .hm-folder.active i { color: var(--hm-accent); }
+    .hm-folder .hm-count { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--hm-muted); }
+    .hm-folder .hm-count.is-unread {
+        background: var(--hm-accent); color: #fff; border-radius: 999px; padding: 1px 8px; min-width: 22px; text-align: center;
+    }
+    .hm-nav-footer { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--hm-border); }
+    .hm-account { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .hm-account-avatar {
+        width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #fff; font-weight: 700; font-size: 13px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .hm-account-name { font-weight: 600; font-size: 13px; color: var(--hm-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hm-account-mail { font-size: 12px; color: var(--hm-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hm-status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; margin-top: 10px; color: var(--hm-muted); }
+    .hm-status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hm-success); box-shadow: 0 0 0 3px rgba(5, 150, 105, .15); }
+    .hm-status.is-off .hm-status-dot { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, .18); }
+    .hm-nav-links { display: flex; gap: 6px; margin-top: 10px; }
+    .hm-nav-link {
+        flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+        font-size: 12px; font-weight: 500; padding: 7px 8px; border-radius: 8px;
+        border: 1px solid var(--hm-border); background: #fff; color: var(--hm-text-2) !important; cursor: pointer;
+        transition: background .12s, border-color .12s;
+    }
+    .hm-nav-link:hover { background: var(--hm-soft); border-color: #d1d5db; }
+    .hm-nav-link:disabled { opacity: .6; cursor: wait; }
+
+    /* ---------- Main area ---------- */
+    .hm-main {
+        flex: 1; min-width: 0;
+        background: #fff;
+        border: 1px solid var(--hm-border);
+        border-radius: 14px;
+        overflow: hidden;
+        display: flex; flex-direction: column;
+    }
+    .hm-notice {
+        display: flex; align-items: center; gap: 10px;
+        padding: 10px 16px; font-size: 13px;
+        background: #fffbeb; color: #92400e; border-bottom: 1px solid #fde68a;
+    }
+    .hm-notice a { color: #92400e !important; font-weight: 600; text-decoration: underline; }
+
+    /* ---------- Shared controls ---------- */
+    .hm-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+        padding: 7px 13px; border-radius: 8px;
+        font-size: 13px; font-weight: 500; line-height: 1.2;
+        border: 1px solid var(--hm-border); background: #fff; color: var(--hm-text-2) !important;
+        cursor: pointer; transition: background .12s, border-color .12s, color .12s; white-space: nowrap;
+    }
+    .hm-btn:hover { background: var(--hm-soft); border-color: #d1d5db; }
+    .hm-btn:disabled { opacity: .6; cursor: not-allowed; }
+    .hm-btn-primary { background: var(--hm-accent); border-color: var(--hm-accent); color: #fff !important; }
+    .hm-btn-primary:hover { background: var(--hm-accent-600); border-color: var(--hm-accent-600); }
+    .hm-btn-icon { padding: 7px 9px; }
+    .hm-spin { animation: hmSpin .8s linear infinite; }
+    @keyframes hmSpin { to { transform: rotate(360deg); } }
+
+    .hm-avatar {
+        width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 600; font-size: 13px; color: #fff;
+    }
+
+    /* ---------- Toast ---------- */
+    .hm-toast-wrap { position: fixed; right: 24px; bottom: 24px; z-index: 2000; display: flex; flex-direction: column; gap: 8px; }
+    .hm-toast {
+        display: flex; align-items: flex-start; gap: 10px;
+        min-width: 280px; max-width: 420px;
+        padding: 12px 14px; border-radius: 10px;
+        background: #0f172a; color: #f8fafc; font-size: 13px; line-height: 1.45;
+        box-shadow: 0 12px 30px -8px rgba(15, 23, 42, .45);
+        animation: hmToastIn .22s ease-out;
+    }
+    .hm-toast i { margin-top: 2px; }
+    .hm-toast.is-success i { color: #34d399; }
+    .hm-toast.is-error i { color: #f87171; }
+    .hm-toast.is-hiding { opacity: 0; transform: translateY(6px); transition: all .25s; }
+    @keyframes hmToastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    @media (max-width: 991.98px) {
+        .hm-mail { flex-direction: column; height: auto; }
+        .hm-nav { width: 100%; }
+        .hm-folders { flex-direction: row; }
+        .hm-folder { flex: 1; justify-content: center; }
+        .hm-folder .hm-count { margin-left: 6px; }
+        .hm-nav-footer { display: none; }
+    }
+</style>
+{% block mail_style %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+<div class="hm-mail" id="hmMail">
+    <aside class="hm-nav" aria-label="Mail folders">
+        <a href="{% url 'hostinger_mail:compose_page' %}" class="hm-compose-btn" id="hmComposeBtn">
+            <i class="fas fa-pen"></i> Compose
+        </a>
+
+        <nav class="hm-folders">
+            <a href="{% url 'hostinger_mail:inbox' %}" class="hm-folder {% if folder == 'inbox' %}active{% endif %}" id="hmFolderInbox">
+                <i class="fas fa-inbox"></i> Inbox
+                <span class="hm-count {% if unread_count %}is-unread{% endif %}" id="hmNavUnread">{% if unread_count %}{{ unread_count }}{% else %}{{ inbox_count }}{% endif %}</span>
+            </a>
+            <a href="{% url 'hostinger_mail:inbox' %}?folder=sent" class="hm-folder {% if folder == 'sent' %}active{% endif %}" id="hmFolderSent">
+                <i class="fas fa-paper-plane"></i> Sent
+                <span class="hm-count">{{ sent_count }}</span>
+            </a>
+        </nav>
+
+        <div class="hm-nav-footer">
+            <div class="hm-account">
+                <div class="hm-account-avatar">{{ config.sender_name|default:config.user|default:"M"|slice:":1"|upper }}</div>
+                <div style="min-width:0;">
+                    <div class="hm-account-name">{{ config.sender_name|default:"Mailbox" }}</div>
+                    <div class="hm-account-mail" title="{{ config.user }}">{{ config.user|default:"Not configured" }}</div>
+                </div>
+            </div>
+            <div class="hm-status {% if not is_ready %}is-off{% endif %}">
+                <span class="hm-status-dot"></span>
+                {% if is_ready %}Connected to {{ config.host }}{% else %}Not configured{% endif %}
+            </div>
+            <div class="hm-nav-links">
+                <a href="{% url 'admin:contactapp_hostingeremailsettings_changelist' %}" class="hm-nav-link" id="hmSettingsLink" title="Mail settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <button type="button" class="hm-nav-link" id="hmTestConnBtn" title="Test SMTP connection">
+                    <i class="fas fa-plug"></i> Test
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <section class="hm-main">
+        {% if not is_ready %}
+        <div class="hm-notice">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Your mailbox isn't connected yet. Add your Hostinger email and password in
+                <a href="{% url 'admin:contactapp_hostingeremailsettings_changelist' %}">Mail settings</a> to send and receive email.</span>
+        </div>
+        {% endif %}
+        {% block mail_content %}{% endblock %}
+    </section>
+</div>
+
+<form id="hmCsrfForm" class="d-none">{% csrf_token %}</form>
+<div class="hm-toast-wrap" id="hmToastWrap" aria-live="polite"></div>
+{% endblock %}
+
+{% block extrajs %}
+{{ block.super }}
+<script>
+window.HM = (function () {
+    function csrf() {
+        const input = document.querySelector('#hmCsrfForm [name=csrfmiddlewaretoken]');
+        if (input) return input.value;
+        const m = document.cookie.match(/(?:^|;\s*)csrftoken=([^;]+)/);
+        return m ? decodeURIComponent(m[1]) : '';
+    }
+    function escape(text) {
+        const d = document.createElement('div');
+        d.textContent = text == null ? '' : String(text);
+        return d.innerHTML;
+    }
+    function toast(type, message) {
+        const wrap = document.getElementById('hmToastWrap');
+        const el = document.createElement('div');
+        el.className = 'hm-toast ' + (type === 'error' ? 'is-error' : 'is-success');
+        el.innerHTML = '<i class="fas ' + (type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle') + '"></i><div>' + escape(message) + '</div>';
+        wrap.appendChild(el);
+        setTimeout(() => { el.classList.add('is-hiding'); setTimeout(() => el.remove(), 260); }, type === 'error' ? 7000 : 4000);
+    }
+    const palette = ['#4f46e5', '#0891b2', '#059669', '#d97706', '#db2777', '#7c3aed', '#2563eb', '#dc2626'];
+    function avatarColor(seed) {
+        let h = 0;
+        for (const ch of String(seed || '')) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+        return palette[h % palette.length];
+    }
+    function initials(name) {
+        const parts = String(name || '?').replace(/[<>"]/g, '').trim().split(/[\s@._-]+/).filter(Boolean);
+        return ((parts[0] || '?')[0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+    }
+    function post(url, body) {
+        return fetch(url, {
+            method: 'POST',
+            body: body,
+            headers: { 'X-CSRFToken': csrf(), 'X-Requested-With': 'XMLHttpRequest' },
+            credentials: 'same-origin'
+        }).then(res => res.json().catch(() => ({ success: false, message: 'Unexpected server response (' + res.status + ').' }))
+            .then(data => ({ ok: res.ok, data })));
+    }
+    return { csrf, escape, toast, avatarColor, initials, post };
+})();
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Colour any server-rendered avatars
+    document.querySelectorAll('[data-avatar-seed]').forEach(el => {
+        el.style.background = HM.avatarColor(el.dataset.avatarSeed);
+    });
+
+    const testBtn = document.getElementById('hmTestConnBtn');
+    if (testBtn) {
+        testBtn.addEventListener('click', function () {
+            testBtn.disabled = true;
+            const original = testBtn.innerHTML;
+            testBtn.innerHTML = '<i class="fas fa-circle-notch hm-spin"></i> Testing';
+            HM.post('{% url "hostinger_mail:test_connection" %}')
+                .then(({ ok, data }) => HM.toast(ok ? 'success' : 'error', data.message))
+                .catch(err => HM.toast('error', 'Network error: ' + err))
+                .finally(() => { testBtn.disabled = false; testBtn.innerHTML = original; });
+        });
+    }
+});
+</script>
+{% block mail_js %}{% endblock %}
+{% endblock %}
